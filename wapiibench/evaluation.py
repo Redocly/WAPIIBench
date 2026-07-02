@@ -8,38 +8,41 @@ import subprocess
 import sys
 from collections import Counter
 from enum import auto
+from functools import cache
 
 import regex as re
 from openapi_parser.enumeration import ParameterLocation
 from openapi_parser.specification import Path, Specification
 from strenum import StrEnum
 from tqdm.auto import tqdm
-from transformers import GenerationConfig
+from transformers import GenerationConfig, PreTrainedTokenizer
 
 from logits_processor import OpenApiDecoder
 from model_utils import ModelWrapper
-from openapi_utils import find_path_in_spec, find_operation_in_path, validate_argument, AxiosSyntax, parse_spec
-from rag_utils import Retriever
+from openapi_utils import find_path_in_spec, find_operation_in_path, validate_argument, parse_spec
+from rag.retriever import Retriever, RetrieverOutputFormat
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-MODELS = [
+MODELS = (
     "bigcode/starcoder2-3b",
     "bigcode/starcoder2-7b",
     "bigcode/starcoder2-15b",
+    "bigcode/starcoderbase-1b",
+    "bigcode/starcoderbase-3b",
+    "bigcode/starcoderbase-7b",
     "bigcode/starcoderbase",
     "deepseek-ai/deepseek-coder-1.3b-base",
     "deepseek-ai/deepseek-coder-6.7b-base",
-    "deepseek-ai/deepseek-coder-7b-base-v1.5",
+    "deepseek-ai/deepseek-coder-7b-base-v1.5",  # continued pre-training from deepseek-llm-7b-base, no native code model
     "deepseek-ai/deepseek-coder-33b-base",
-    "deepseek-ai/deepseek-coder-33b-instruct",
-    "deepseek-ai/DeepSeek-Coder-V2-Lite-Base",
-    "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct",
+    "deepseek-ai/DeepSeek-Coder-V2-Lite-Base",  # dependency issues
     "google/gemini-pro-1.5",
     "meta-llama/CodeLlama-7b-hf",
     "meta-llama/CodeLlama-13b-hf",
+    "meta-llama/CodeLlama-34b-hf",  # crashes with constrained decoding
     "meta-llama/CodeLlama-70b-hf",
     "meta-llama/Llama-3.1-8B",
     "meta-llama/Llama-3.1-70B",
@@ -51,26 +54,24 @@ MODELS = [
     "Qwen/Qwen2.5-Coder-7B",
     "Qwen/Qwen2.5-Coder-14B",
     "Qwen/Qwen2.5-Coder-32B",
+    "Salesforce/codet5-base",
+    "Salesforce/codet5-large",
+    "Salesforce/codet5p-220m",
+    "Salesforce/codet5p-770m",
+    "Salesforce/codet5p-2b",  # always crashes
+    "Salesforce/codet5p-6b",
     "Salesforce/codet5p-16b",
     "Salesforce/instructcodet5p-16b",
-]
+)
 
 APIS = {
     'asana': "Asana",
-    'google_calendar_v3': "Google Calendar",
-    'google_sheet_v4': "Google Sheets",
+    'google_calendar_v3': "Google Calendar v3",
+    'google_sheet_v4': "Google Sheets v4",
     'slack': "Slack Web",
 }
 
-SETUPS = ['import', 'invocation', 'endpoint']
-SETTINGS = ['vanilla', 'rag', 'constrained', 'constrained-rag']
-
-STARTER_CODES = {
-    'import': """\
-// {task}
-const axios = require('axios');
-""",
-
+SETUPS = {
     'invocation': """\
 // {task}
 const axios = require('axios');
@@ -86,8 +87,10 @@ axios.{method}('{url}',\
 """
 }
 
-FIELD_KEYS = ['headers', 'params', 'path_params', 'data']
-SPECIAL_KEYS = ['Accept', 'Content-Type']
+SETTINGS = ('vanilla', 'spec', 'rag', 'constrained', 'constrained-rag')
+
+FIELD_KEYS = ('headers', 'params', 'path_params', 'data')
+SPECIAL_KEYS = ('Accept', 'Content-Type')
 
 
 class Verdict(StrEnum):
@@ -105,18 +108,20 @@ class Verdict(StrEnum):
     CORRECT = auto()
 
 
-def generate(model_name: str, api_name: str, spec_file: str, test_data_file: str, output_dir: str,
-             starter_code_template: str, setting: str, num_outputs: int = 1, openai_batch: bool = False,
-             **kwargs) -> None:
+_loaded_model = None
+
+
+def generate(model_name: str, setup: str, setting: str, prompt_file: str, test_data_file: str, output_dir: str,
+             api: str | None = None, num_outputs: int = 1, openai_batch: bool = True, **kwargs) -> None:
     """
     Run the previously generated prompts with the given decoding setting.
-    :param model_name: The name of the model to be used
-    :param api_name: The name of the API
-    :param spec_file: Path to the OpenAPI specification
+    :param model_name: The name of the model to use
+    :param setup: The starter code setup to use
+    :param setting: The decoding setting to use
+    :param prompt_file: Path to the text or Markdown file that contains the prompt template.
     :param test_data_file: Path to the JSON file that contains the task descriptions
     :param output_dir: Path to the directory where the output should be stored
-    :param starter_code_template: Code given as part of the prompt to steer the generation in a certain direction
-    :param setting: The decoding setting to use
+    :param api: The name of the API's spec file; only needed if the tasks don't have an individual API annotation
     :param num_outputs: How many outputs to generate per task
     :param openai_batch: Whether to use OpenAI's Batch API to generate the code asynchronously
     :param kwargs: Additional arguments for the generation config
@@ -129,75 +134,81 @@ def generate(model_name: str, api_name: str, spec_file: str, test_data_file: str
     kwargs.setdefault('top_k', 50)
     kwargs.setdefault('top_p', 1.0)
 
-    use_cd = 'constrained' in setting
+    use_spec = 'spec' in setting
     use_rag = 'rag' in setting
+    use_cd = 'constrained' in setting
 
-    with open("resources/code_generation_prompt.md", 'r') as file:
+    # Load the prompt and dump it for later reference
+    with open(prompt_file, 'r') as file:
         prompt_template = file.read()
-    syntax = "axios.method(url[, config])"  # the alternative syntax would be "axios.request(config)"
-    prompt = prompt_template.format(
-        syntax=syntax, api=api_name,
-        extra_instructions="without any explanations" if "-instruct" in model_name.lower() else "")
 
-    # Dump the prompt for later reference
     if num_outputs == 1:
         os.makedirs(output_dir, exist_ok=True)
     else:
         for i in range(num_outputs):
             os.makedirs(os.path.join(output_dir, str(i)), exist_ok=True)
+
     with open(os.path.join(output_dir, "model.in"), 'w') as file:
-        file.write(prompt + starter_code_template)
+        # Instantiate the parts of the prompt that we know already and leave the rest as placeholders
+        file.write(instantiate_prompt(prompt_template, {
+            'api': "{api}", 'task': None, 'config': {'url': None, 'method': "{method}"},
+            'starter_code': "{starter_code}", 'template_url': "{url}"
+        } if test_data_file.startswith("validation_data") else {
+            'api': api, 'task': "{task}", 'config': {'url': "{url}", 'method': "{method}"}
+        }, setup, setting, spec="{spec}" if use_spec or use_rag else "", model_name=model_name)[0])
 
-    # Load the task descriptions
-    with open(test_data_file, 'r') as file:
-        test_data = json.load(file)['samples']
-
-    # Load the model
-    model = ModelWrapper(model_name)
+    # Load the model or reuse the currently loaded model
+    global _loaded_model
+    if _loaded_model is None or _loaded_model.model_name != model_name:
+        _loaded_model = ModelWrapper(model_name)
+    model = _loaded_model
     generation_config = GenerationConfig(
         stop_strings="\n```\n", num_return_sequences=num_outputs,
         pad_token_id=model.tokenizer.eos_token_id if model.tokenizer is not None else None, **kwargs)
 
-    if model.provider == 'OpenAI' and openai_batch:
+    if openai_batch and model.provider == 'OpenAI':
         can_continue = model.batch_init(output_dir)
         if not can_continue:
             logger.warning("Batch results not yet available - exiting generation method")
             return
 
-    logits_processor = OpenApiDecoder(generation_config, model.tokenizer, spec_file,
-                                      AxiosSyntax.METHOD_AS_FUNCTION) if use_cd else None
-
-    retriever = Retriever(spec_file) if use_rag else None
+    # Load the task descriptions
+    with open(test_data_file, 'r') as file:
+        test_data = json.load(file)
 
     # Run decoding in the given setting
     for index, task in enumerate(tqdm(test_data, leave=False)):
-
-        # Construct the full prompt
-        rag_context = retriever.retrieve_spec_for_task(
-            task['task'], num_chunks=5, truncation_threshold=30000) + "\n\n\n" if use_rag else ""
-        starter_code = starter_code_template.format(
-            task=task['task'], method=task['config']['method'], url=task['config']['url'])
-        input_text = rag_context + prompt + starter_code
 
         if num_outputs == 1 and os.path.isfile(os.path.join(output_dir, f"{index:04d}_code.js")):
             logger.warning(f"Sample {index} already exists - skipping")
             continue  # avoid recomputation (only for greedy decoding)
 
-        # Dump the retrieved information for later reference
+        # Optionally retrieve information and dump it for later reference
+        task.setdefault('api', api)
+        spec_file = os.path.join("openapi", "real_world_specs", f"{task['api']}.yaml")
+        spec = _get_full_spec(spec_file) if use_spec else \
+            _get_rag_spec(spec_file, task['api'], task['task']) if use_rag else ""
+
         if use_rag:
-            with open(os.path.join(output_dir, f"{index:04d}_retrieved.yaml"), 'w') as file:
-                file.write(rag_context)
+            with open(os.path.join(output_dir, f"{index:04d}_retrieved.ts"), 'w') as file:
+                file.write(spec)
+
+        # Construct the full prompt
+        input_text, starter_code = instantiate_prompt(prompt_template, task, setup, setting, spec, model_name)
 
         # Reset the ConstrainedDecoder's state
         if use_cd:
+            logits_processor = _get_logits_processor(generation_config, model.tokenizer, spec_file)
             logits_processor.reset(completion_prefix=starter_code)
+        else:
+            logits_processor = None
 
         # Run generation
         output_texts = model.run(
             input_text, generation_config=generation_config, logits_processor=logits_processor, batch=openai_batch,
             batch_file_dir=output_dir, sample_id=index)
 
-        if model.provider == 'OpenAI' and openai_batch and output_texts is None:
+        if openai_batch and model.provider == 'OpenAI' and output_texts is None:
             continue  # results are not available yet
 
         # Postprocess and store each generated sample
@@ -212,14 +223,7 @@ def generate(model_name: str, api_name: str, spec_file: str, test_data_file: str
             if model.is_chat_model:
                 # Chat models create very different outputs that we need to convert to a unified format.
                 # The output may include speaking role markers, natural language text, and/or parts of the starter code.
-                if model.provider == 'OpenAI':
-                    try:
-                        generated_code = \
-                            starter_code[:starter_code.rindex("\n") + 1] + output_text[output_text.index("axios."):]
-                    except ValueError:
-                        logger.error(f"Please manually check and correct sample {index} ({i})")
-                        generated_code = starter_code + output_text.removeprefix("```javascript\n")
-                else:
+                if model.provider == 'HuggingFace':
                     generated_code = output_text[output_text.index(starter_code):]
                     last_line = starter_code[starter_code.rindex("\n") + 1:]
                     first_index = generated_code.index(last_line)
@@ -230,8 +234,16 @@ def generate(model_name: str, api_name: str, spec_file: str, test_data_file: str
                     else:
                         # Cut out the role marker and surrounding whitespace
                         generated_code = re.sub(r"\s*(?:#+ )?(?:Assistant|Response):\s*", "", generated_code, count=1)
+
+                else:  # OpenAI and OpenRouter models
+                    if match := re.search(r"^\s*.*?axios\.", output_text, re.MULTILINE):
+                        generated_code = starter_code[:starter_code.rindex("\n") + 1] + output_text[match.start():]
+                    else:
+                        generated_code = starter_code + output_text.removeprefix("```javascript")
+
             else:
-                generated_code = output_text[output_text.rindex(starter_code):]
+                # Sometimes the tokenizer removes random spaces from the input text. That's why `output_text[output_text.index(starter_code):]` doesn't always work.
+                generated_code = output_text[output_text.index("\n```javascript\n") + len("\n```javascript\n"):]
 
             if generated_code.endswith("```\n"):
                 generated_code = generated_code[:-1]  # remove trailing blank line
@@ -239,18 +251,128 @@ def generate(model_name: str, api_name: str, spec_file: str, test_data_file: str
             with open(os.path.join(output_dir, str(i) if num_outputs > 1 else "", f"{index:04d}_code.js"), 'w') as file:
                 file.write(generated_code)
 
-    if model.provider == 'OpenAI' and openai_batch:
+    if openai_batch and model.provider == 'OpenAI':
         model.submit_batch(output_dir)
 
 
-def execute(code_dir: str, node: str) -> None:
+@cache
+def _get_full_spec(spec_file: str) -> str:
+    """
+    Wrapper for loading the contents of a specification file with caching.
+    :param spec_file: Path to the OpenAPI specification
+    :return: The contents of the given spec
+    """
+    with open(spec_file, 'r') as file:
+        return file.read()
+
+
+def _get_rag_spec(spec_file: str, api: str, task: str) -> str:
+    """
+    Wrapper for running retrieval on a specification file using a cached retriever.
+    :param spec_file: Path to the OpenAPI specification
+    :param api: The API keyword
+    :param task: The task description
+    :return: Retrieved parts of the given spec for the given task
+    """
+    retriever = _get_retriever(spec_file, api)
+    return retriever.retrieve_spec_for_task(
+        task, num_chunks=5, truncation_threshold=8000, output_format=RetrieverOutputFormat.TYPESCRIPT)
+
+
+@cache
+def _get_retriever(spec_file: str, api: str) -> Retriever:
+    """
+    Wrapper for instantiating a retriever with caching.
+    :param spec_file: Path to the OpenAPI specification
+    :param api: The API keyword
+    :return: A retriever instance
+    """
+    return Retriever(spec_file, persist_directory=os.path.join("vector_dbs", f"eval_db_{api}"))
+
+
+@cache
+def _get_logits_processor(generation_config: GenerationConfig, tokenizer: PreTrainedTokenizer,
+                          spec_file: str) -> OpenApiDecoder:
+    """
+    Wrapper for instantiating an OpenApiDecoder with caching.
+    :param generation_config: The GenerationConfig to use
+    :param tokenizer: The tokenizer to use
+    :param spec_file: Path to the OpenAPI specification
+    :return: An OpenApiDecoder instance
+    """
+    return OpenApiDecoder(generation_config, tokenizer, spec_file)
+
+
+def instantiate_prompt(prompt_template: str, task: dict[str, object], setup: str, setting: str, spec: str = "",
+                       model_name: str = "") -> tuple[str, str]:
+    """
+    Instantiate the given prompt template with the provided model-, API-, setup-, and task-specific information. 
+    :param prompt_template: Prompt with placeholders
+    :param task: Task object
+    :param setup: Setup keyword
+    :param setting: Setting keyword
+    :param spec: Optional retrieved specification to augment the prompt with
+    :param model_name: Name of the model, only used to identify chat models
+    :return: The complete prompt and the starter code part of it
+    """
+    if 'starter_code' in task:
+        # Escape curly braces in the starter code so we can safely perform string formatting later
+        starter_code_template = task['starter_code'].replace("{", "{{").replace("}", "}}").replace("{{task}}", "{task}")
+        if setup == 'endpoint':
+            # If the task involves string interpolation in the URL, use backtick quotes, otherwise single quotes
+            starter_code_template += "{method}(`{url}`" if 'template_url' in task else "{method}('{url}'"
+            # We don't append a comma after the URL here because not all validation tasks require (non-path) parameters
+    else:
+        starter_code_template = SETUPS[setup]
+
+    starter_code = starter_code_template.format(
+        task=task['task'], method=task['config']['method'], url=task.get('template_url', task['config']['url']))
+
+    if "-instruct" in model_name.lower() or model_name.startswith("openai/") or model_name.startswith("google/"):
+        extra_instructions = " without any explanations"
+    else:
+        extra_instructions = ""
+
+    if 'spec' in setting:
+        assert spec, f"`spec` must not be empty for {setting = }"
+        spec = f"OpenAPI specification of the {_get_api_name(task['api'])} API:\n\n```yaml\n{spec}\n```\n\n"
+    elif 'rag' in setting:
+        assert spec, f"`spec` must not be empty for {setting = }"
+        spec = f"Useful endpoints of the OpenAPI specification of the {_get_api_name(task['api'])} API, given as TypeScript types:\n\n```typescript\n{spec}\n```\n\n"
+    else:
+        spec = ""
+
+    prompt = prompt_template.format(
+        spec=spec, api=_get_api_name(task['api']), extra_instructions=extra_instructions, starter_code=starter_code)
+
+    return prompt, starter_code
+
+
+def _get_api_name(api: str) -> str:
+    """
+    Look up the actual name of an API, given the keyword used for file names, dictionary keys, etc.
+    :param api: The API keyword
+    :return: The API name
+    """
+    from validation import EXTRA_APIS
+    return APIS.get(api) or EXTRA_APIS.get(api) or api
+
+
+def execute(code_dir: str, node: str, test_data_file: str | None = None) -> None:
     """
     Execute the generated codes and store the resulting request configs in JSON files.
     :param code_dir: Path to the generated codes; configs are stored there as well
     :param node: The path to the node binary to execute the JS code in the shell
+    :param test_data_file: Path to the test data in case variables need to be defined before execution
     """
-    with open("wapiibench/mock.js", 'r') as file:
+    with open(os.path.join("wapiibench", "mock.js"), 'r') as file:
         mock_code_template = file.read()
+
+    if test_data_file is not None:
+        with open(test_data_file, 'r') as file:
+            test_data = json.load(file)
+    else:
+        test_data = None
 
     with (open(os.path.join(code_dir, "execution.out"), 'w') as out_file,
           open(os.path.join(code_dir, "execution.err"), 'w') as err_file):
@@ -285,7 +407,8 @@ def execute(code_dir: str, node: str) -> None:
                 continue
 
             mock_code = mock_code_template % config_log_file
-            executable_code = f"{mock_code}\n{axios_call}"
+            variable_definitions = "" if test_data is None else _create_variable_definitions(test_data[int(index)])
+            executable_code = f"{mock_code}\n{variable_definitions}\n{axios_call}"
 
             # Run the code and log the request config as a side effect
             proc = subprocess.run([node, "-"], stdout=out_file, stderr=err_file, input=executable_code, text=True)
@@ -309,44 +432,57 @@ def _extract_axios_call(code: str) -> tuple[str | None, Verdict, str]:
     if code.endswith(Verdict.UNSATISFIABLE_CONSTRAINTS):
         return None, Verdict.UNSATISFIABLE_CONSTRAINTS, f"Incomplete code due to unsatisfiable constraints:\n{code}\n"
 
-    start_index = code.find("axios.")
-    if start_index == -1:
+    match = re.search(r"^(?:\n|\s*// .+\n(\s*).*?)(axios\.[a-z]+\()", code, flags=re.MULTILINE)
+    if not match:
         return None, Verdict.ABSENT_REQUEST, f"Code does not contain an axios call:\n{code}\n"
 
-    # Prioritize cutoff points that are less likely to break the code
-    offset = start_index + len("axios.")
-    for cutoff_point in [".then", ".catch", ".finally", "});", "}\n);", ");", ";", "\naxios.", "```"]:
-        cutoff_index = code.find(cutoff_point, offset)
-        if cutoff_index != -1:
+    open_parentheses = 1
+    for i, char in enumerate(code[match.end(2):]):
+        if open_parentheses == 0:
+            cutoff_index = match.end(2) + i
             break
+        elif char == "(":
+            open_parentheses += 1
+        elif char == ")":
+            open_parentheses -= 1
 
-    if cutoff_index == -1:
+    else:
         return None, Verdict.INCOMPLETE_REQUEST, f"Unable to extract axios call from code:\n{code}\n"
 
-    if cutoff_point in [".then", ".catch", ".finally"]:
-        replacement = ";\n"
-    elif cutoff_point in ["});", "}\n);", ");", ";"]:
-        replacement = cutoff_point + "\n"
-    else:
-        replacement = ""
-
-    axios_call = code[start_index:cutoff_index] + replacement
+    indent = match[1] or ''
+    axios_call = code[match.start(2):cutoff_index].replace("\n" + indent, "\n") + ";"
     return axios_call, Verdict.CORRECT, f"Axios call extracted successfully:\n{axios_call}"
 
 
-def compare(test_data_file: str, spec_file: str, code_dir: str) -> None:
+def _create_variable_definitions(task: dict[str, object]) -> str:
+    """
+    Create a code snippet that contains all variable definitions required for executing the code generated for a task.
+    :param task: The current task object
+    :return: All variable definitions in a string
+    """
+    definitions = task.get('definitions')
+    if definitions is None:
+        return ""
+
+    definitions_str = ""
+    for name, value in definitions.items():
+        definitions_str += f"const {name} = {json.dumps(value, indent=2)};\n"
+
+    return definitions_str
+
+
+def compare(test_data_file: str, code_dir: str, api: str | None = None) -> None:
     """
     Compare the logged configurations against the expected ones and write all keys, values, and comparison results into
     a JSON file (separate for each setting).
     :param test_data_file: File that contains the expected configs
-    :param spec_file: OpenAPI specification of the tested API
     :param code_dir: Directory that contains the logged configs
+    :param api: The name of the API's spec file; only needed if the tasks don't have an individual API annotation
     """
     test_results = {}
-    spec = parse_spec(spec_file)
 
     with open(test_data_file, 'r') as file:
-        test_data = json.load(file)['samples']
+        test_data = json.load(file)
 
     # Go through all logged configs (and ignore all other files)
     for file_name in os.listdir(code_dir):
@@ -357,14 +493,18 @@ def compare(test_data_file: str, spec_file: str, code_dir: str) -> None:
 
         index, _ = root.split(sep="_", maxsplit=2)
 
-        expected_config = test_data[int(index)]['config']
+        current_task = test_data[int(index)]
+        current_task.setdefault('api', api)
 
+        spec = parse_spec(os.path.join("openapi", "real_world_specs", f"{current_task['api']}.yaml"))
+
+        expected_config = current_task['config']
         with open(file_path, 'r') as file:
             logged_config = json.load(file)
 
         expected_paths = _add_path_params(expected_config, spec)
-        logged_paths = _add_path_params(logged_config, spec)
-        assert expected_paths  # the logged paths may be empty
+        logged_paths = _add_path_params(logged_config, spec)  # logged paths may be empty
+        assert expected_paths, "Expected paths must not be empty"
 
         test_results[index] = _compare_configs(expected_config, logged_config, expected_paths[0], logged_paths, spec)
 
@@ -373,7 +513,7 @@ def compare(test_data_file: str, spec_file: str, code_dir: str) -> None:
         json.dump(test_results, file, indent=2, sort_keys=True)
 
 
-def _add_path_params(config: dict[str, any], spec: Specification) -> list[Path]:
+def _add_path_params(config: dict[str, object], spec: Specification) -> list[Path]:
     """
     Add an entry ``path_params`` to the given config which contains keys and values for all path parameters in the URL.
     If there are multiple candidate paths, the most likely one is used for this.
@@ -384,27 +524,47 @@ def _add_path_params(config: dict[str, any], spec: Specification) -> list[Path]:
     if not config or 'ERROR' in config:
         return []
 
-    paths = find_path_in_spec(config['url'], spec)
-    if not paths:
-        return paths
+    # Special treatment for some API specs
+    url = config['url']
+    if ".etherscan.io/" in url:
+        # The Etherscan API has the module and action query parameters baked into the path
+        if "module=" in url and "action=" in url:
+            pass  # this must be the expected path, which already has module and action in the URL
+        elif (params := config.get('params')) is not None and 'module' in params and 'action' in params:
+            url += f"{'' if url.endswith('/') else '/'}?module={params['module']}&action={params['action']}"
+            config['url'] = url  # update the config, so we can use the correct URL later in _compare_configs
+        else:
+            logger.warning(f"Module and/or action are missing in {config = }")
+            return []
+    elif "api.telegram.org/" in url:
+        # The Telegram Bot API has the bot token as part of the server address.
+        # We need to "normalize" it so we can find the path in the spec, but later we use the original URL again.
+        url = re.sub(r"/bot[^/]+/", "/bot{token}/", url)
+
+    paths, server = find_path_in_spec(url, spec)
+    if paths is None or server is None:
+        return []
     path = paths[0]
 
     path_param_names = \
         [param.name for op in path.operations for param in op.parameters if param.location is ParameterLocation.PATH]
-    pattern = path.url
+    if server.variables is not None:
+        path_param_names.extend(server.variables.keys())
+    pattern = re.escape(server.url + path.url)
     for name in path_param_names:
-        pattern = pattern.replace(f"{{{name}}}", fr"(?P<{name}>[^/]+)")
+        # Hyphens are not allowed in capture group names, so we need to temporarily replace them with something else
+        pattern = pattern.replace(fr"\{{{re.escape(name)}\}}", fr"(?P<{name.replace('-', '_')}>[^/]+)")
 
     match = re.search(pattern, config['url'])
-    path_params = match.groupdict()
+    path_params = {name.replace("_", "-"): value for name, value in match.groupdict().items()}
     if path_params:
         config['path_params'] = path_params
 
     return paths
 
 
-def _compare_configs(expected: dict[str, any], actual: dict[str, any], expected_path: Path, actual_paths: list[Path],
-                     spec: Specification) -> dict[str, any]:
+def _compare_configs(expected: dict[str, object], actual: dict[str, object], expected_path: Path,
+                     actual_paths: list[Path], spec: Specification) -> dict[str, object]:
     """
     Perform a deep comparison between the expected and actual configuration objects.
     :param expected: The expected config
@@ -427,13 +587,16 @@ def _compare_configs(expected: dict[str, any], actual: dict[str, any], expected_
     results = {}
 
     # Are all expected parameters actually present?
-    for (field_key, field_value) in expected.items():
+    for field_key, field_value in expected.items():
 
         if field_key == 'url':
             if expected_path in actual_paths:
                 verdict = Verdict.CORRECT
             elif not actual_paths:
                 verdict = Verdict.NONEXISTENT_ENDPOINT
+            elif expected_path.url == "/v1/emoticons" and any(path.url == "/v1/emotes" for path in actual_paths):
+                # Special case for an endpoint alias in the FrankerFaceZ API
+                verdict = Verdict.CORRECT
             else:
                 verdict = Verdict.WRONG_ENDPOINT
             results['url'] = {'expected': field_value, 'actual': actual['url'], 'verdict': verdict}
@@ -452,12 +615,18 @@ def _compare_configs(expected: dict[str, any], actual: dict[str, any], expected_
             assert field_key in FIELD_KEYS
             field_results = {}
 
-            for (expected_key, expected_value) in field_value.items():
+            for expected_key, expected_value in field_value.items():
                 field_results[expected_key] = {'expected': expected_value}
 
                 if field_key in actual and actual[field_key] is not None and expected_key in actual[field_key]:
                     actual_value = actual[field_key][expected_key]
                     field_results[expected_key]['actual'] = actual_value
+                    if field_key != 'data':
+                        # Plain values are equivalent to single-element arrays
+                        if isinstance(expected_value, list) and len(expected_value) == 1:
+                            expected_value = expected_value[0]
+                        if isinstance(actual_value, list) and len(actual_value) == 1:
+                            actual_value = actual_value[0]
                     field_results[expected_key]['verdict'] = \
                         Verdict.CORRECT if actual_value == expected_value else Verdict.INCORRECT_VALUE
 
@@ -468,7 +637,7 @@ def _compare_configs(expected: dict[str, any], actual: dict[str, any], expected_
             results[field_key] = field_results
 
     # Are there any parameters present that are not expected?
-    for (field_key, field_value) in actual.items():
+    for field_key, field_value in actual.items():
         if field_value is None:
             # Sometimes the model generates a field and sets its value to null
             continue
@@ -483,7 +652,7 @@ def _compare_configs(expected: dict[str, any], actual: dict[str, any], expected_
             expected[field_key] = {}
             results[field_key] = {}
 
-        for (actual_key, actual_value) in field_value.items():
+        for actual_key, actual_value in field_value.items():
             if actual_key not in expected[field_key]:
                 arg_exists = validate_argument(
                     actual_key, field_key, expected['method'], expected_path, spec.security_schemas)
@@ -494,7 +663,7 @@ def _compare_configs(expected: dict[str, any], actual: dict[str, any], expected_
     return results
 
 
-def evaluate(output_dir: str, keep_comparison: bool = True) -> None:
+def analyze(output_dir: str, keep_comparison: bool = True) -> None:
     """
     Calculate some statistics about the test results and add them to the file.
     :param output_dir: Directory where the results are stored
@@ -565,8 +734,8 @@ def evaluate(output_dir: str, keep_comparison: bool = True) -> None:
         test_results = json.load(file)
     test_results.pop('statistics', None)  # in case we re-evaluate a file, temporarily remove the statistics field
 
-    for (index, sample) in test_results.items():
-        stats = _evaluate_sample(sample)
+    for index, sample in test_results.items():
+        stats = _analyze_sample(sample)
         test_results[index]['statistics'] = stats
 
         samples_total += 1
@@ -838,10 +1007,10 @@ def evaluate(output_dir: str, keep_comparison: bool = True) -> None:
                   allow_nan=False, indent=2, sort_keys=True)
 
 
-def _evaluate_sample(sample: dict[str, any]) -> dict[str, any]:
+def _analyze_sample(sample: dict[str, object]) -> dict[str, object]:
     """
-    Evaluate a single sample and return the resulting statistics about it.
-    :param sample: The sample to evaluate
+    Analyze a single sample and return the resulting statistics about it.
+    :param sample: The sample to analyze
     :return: A dict of statistical values
     """
     if 'ERROR' in sample:
@@ -921,10 +1090,10 @@ def _evaluate_sample(sample: dict[str, any]) -> dict[str, any]:
     else:
         endpoint_verdict = 'wrong'
 
-    for (field_key, field_value) in sample.items():
+    for field_key, field_value in sample.items():
         if field_key in FIELD_KEYS:
 
-            for (key, value) in field_value.items():
+            for key, value in field_value.items():
                 if field_key == 'headers' and key in SPECIAL_KEYS:
                     continue  # ignore these header args as they are always present and correct
 
@@ -952,8 +1121,8 @@ def _evaluate_sample(sample: dict[str, any]) -> dict[str, any]:
     assert arguments_expected == arguments_correct_name + arguments_missing
     assert arguments_unexpected == arguments_unnecessary + arguments_illegal
 
-    for counter in [arguments_all, arguments_expected, arguments_unexpected, arguments_correct_name,
-                    arguments_correct_value, arguments_missing, arguments_unnecessary, arguments_illegal]:
+    for counter in (arguments_all, arguments_expected, arguments_unexpected, arguments_correct_name,
+                    arguments_correct_value, arguments_missing, arguments_unnecessary, arguments_illegal):
         if counter:  # skip empty counters
             counter['all'] = counter.total()
 
@@ -992,7 +1161,7 @@ def _evaluate_sample(sample: dict[str, any]) -> dict[str, any]:
     }
 
 
-def _divide_counters(numerator: dict[any, float], denominator: dict[any, float]) -> dict[any, float]:
+def _divide_counters(numerator: dict[object, float], denominator: dict[object, float]) -> dict[object, float]:
     """
     Element-wise division of two Counters or dicts. Missing elements are treated as having zero counts.
     :param numerator: Counter in the numerator
@@ -1006,9 +1175,9 @@ def _divide_counters(numerator: dict[any, float], denominator: dict[any, float])
         raise
 
 
-def evaluate_all(data_root: str, apis: list[str], setup: str, setting: str) -> None:
+def analyze_all(data_root: str, apis: list[str], setup: str, setting: str) -> None:
     """
-    Merge all test results into one file (stored in the folder "all") and evaluate them collectively.
+    Merge all test results into one file (stored in the folder "all") and analyze them collectively.
     :param data_root: The place where the folders with the results for each API are located
     :param apis: All APIs to merge
     :param setup: The setup, i.e., starter code variation
@@ -1029,24 +1198,24 @@ def evaluate_all(data_root: str, apis: list[str], setup: str, setting: str) -> N
     with open(os.path.join(output_dir, "results.json"), 'w') as file:
         json.dump(all_test_results, file, indent=2)
 
-    evaluate(output_dir, keep_comparison=False)
+    analyze(output_dir, keep_comparison=False)
 
 
 def _run_evaluation() -> None:
     """Entry point for running the evaluation. Controlled via command line arguments."""
 
     default_node = os.path.join(
-        os.environ.get("NVM_SYMLINK", os.path.expanduser("~/.nvm/versions/node/v22.20.0/bin")), "node")
+        os.environ.get("NVM_SYMLINK", os.path.expanduser("~/.nvm/versions/node/v24.16.0/bin")), "node")
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--models", default=MODELS, nargs='+', help="the models to evaluate")
-    parser.add_argument("--skip-models", default=[], nargs='+', help="the models to skip")
+    parser.add_argument("--skip-models", default=(), nargs='+', help="the models to skip")
     parser.add_argument("--apis", default=APIS.keys(), nargs='+', help="the APIs to evaluate")
-    parser.add_argument("--skip-apis", default=[], nargs='+', help="the APIs to skip")
-    parser.add_argument("--setups", default=SETUPS, nargs='+', help="the setups to evaluate")
-    parser.add_argument("--skip-setups", default=[], nargs='+', help="the setups to skip")
+    parser.add_argument("--skip-apis", default=(), nargs='+', help="the APIs to skip")
+    parser.add_argument("--setups", default=SETUPS.keys(), nargs='+', help="the setups to evaluate")
+    parser.add_argument("--skip-setups", default=(), nargs='+', help="the setups to skip")
     parser.add_argument("--settings", default=SETTINGS, nargs='+', help="the settings to evaluate")
-    parser.add_argument("--skip-settings", default=[], nargs='+', help="the settings to skip")
+    parser.add_argument("--skip-settings", default=(), nargs='+', help="the settings to skip")
     parser.add_argument("--node", default=default_node, type=str, help="the node version to use")
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--generate-only", action="store_true", help="only generate the code, then stop")
@@ -1066,54 +1235,40 @@ def _run_evaluation() -> None:
     assert set(setups).issubset(SETUPS), f"Unsupported setup(s): {set(setups).difference(SETUPS)}"
     assert set(settings).issubset(SETTINGS), f"Unsupported setting(s): {set(settings).difference(SETTINGS)}"
 
+    prompt_file = os.path.join("resources", "code_generation_prompt.md")
+
     for model in models:
 
-        data_root = f"data/generated/{model.split('/', 1)[1]}/"
+        data_root = os.path.join("data", "generated", model.split("/", 1)[1])
 
         for api in apis:
 
-            api_name = APIS.get(api, None)
-            if api_name is None:
-                logger.error(f"Unknown API '{api}'")
-                continue
-
-            spec_file = f"openapi/real_world_specs/{api}.yaml"
-            test_data_file = f"data/synthetic/{api}/test_data_corrected.json"
+            test_data_file = os.path.join("data", "synthetic", api, "test_data_final.json")
             if not os.path.isfile(test_data_file):
-                logger.warning(f"{api}'s test_data_corrected.json does not exists, falling back to test_data.json")
-                test_data_file = f"data/synthetic/{api}/test_data.json"
+                logger.warning(f"{api}'s test_data_final.json does not exists, falling back to test_data.json")
+                test_data_file = os.path.join("data", "synthetic", api, "test_data.json")
 
             for setup in setups:
 
-                starter_code = STARTER_CODES.get(setup, None)
-                if starter_code is None:
-                    logger.error(f"Unknown setup '{setup}'")
-                    continue
-
                 for setting in settings:
-
-                    if setting not in SETTINGS:
-                        logger.error(f"Unknown setting '{setting}'")
-                        continue
 
                     logger.info(f"Running evaluation pipeline with {model = }, {api = }, {setup = }, {setting = } ...")
                     output_dir = os.path.join(data_root, api, setup, setting)
 
                     if not evaluate_only:
-                        generate(model, api_name, spec_file, test_data_file, output_dir, starter_code, setting,
-                                 openai_batch=False)
+                        generate(model, setup, setting, prompt_file, test_data_file, output_dir, api=api)
 
                     if not generate_only:
-                        execute(output_dir, node=node)
-                        compare(test_data_file, spec_file, output_dir)
-                        evaluate(output_dir)
+                        execute(output_dir, node)
+                        compare(test_data_file, output_dir, api=api)
+                        analyze(output_dir)
 
         if not generate_only:
             for setup in setups:
                 for setting in settings:
                     logger.info(
                         f"Running evaluation pipeline with {model = }, api = 'all', {setup = }, {setting = } ...")
-                    evaluate_all(data_root, apis, setup, setting)
+                    analyze_all(data_root, apis, setup, setting)
 
 
 if __name__ == "__main__":

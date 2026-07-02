@@ -1,0 +1,180 @@
+openapi: 3.0.0
+info:
+  title: Salesforce CRM APIs
+  version: 1.0.0
+servers:
+  - url: https://instance.salesforce.com
+paths:
+  /services/data/v52.0/sobjects/Contact:
+    get:
+      summary: List Contacts
+      operationId: listContacts
+      parameters:
+        - name: q
+          in: query
+          description: SOQL query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactList'
+    post:
+      summary: Create Contact
+      operationId: createContact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactInput'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+  /services/data/v52.0/sobjects/Account:
+    post:
+      summary: Create Account
+      operationId: createAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountInput'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  /services/data/v52.0/sobjects/Opportunity:
+    post:
+      summary: Create Opportunity
+      operationId: createOpportunity
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityInput'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Opportunity'
+    get:
+      summary: Query Opportunities
+      operationId: queryOpportunities
+      parameters:
+        - name: q
+          in: query
+          description: SOQL query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityList'
+components:
+  schemas:
+    ContactList:
+      type: object
+      properties:
+        totalSize:
+          type: integer
+        done:
+          type: boolean
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+    ContactInput:
+      type: object
+      properties:
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Email:
+          type: string
+    Contact:
+      type: object
+      properties:
+        Id:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Email:
+          type: string
+    AccountInput:
+      type: object
+      properties:
+        Name:
+          type: string
+        BillingStreet:
+          type: string 
+        BillingCity:
+          type: string
+        # etc
+    Account:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        BillingStreet:
+          type: string
+        BillingCity:
+          type: string
+    OpportunityInput:
+      type: object
+      properties:
+        Name:
+          type: string
+        StageName:
+          type: string 
+        CloseDate:
+          type: string 
+        Amount:
+          type: number
+        # other properties
+    Opportunity:
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        StageName:
+          type: string
+        CloseDate:
+          type: string
+        Amount:
+          type: number
+        # other properties
+    OpportunityList:
+      type: object
+      properties:
+        totalSize:
+          type: integer
+        done:
+          type: boolean
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/Opportunity'

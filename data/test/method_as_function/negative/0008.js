@@ -1,8 +1,8 @@
-// This tests for invalid data type as array element
+// Test wrong data type in array
 const axios = require('axios');
 axios.get('https://petstore.swagger.io/v2/pets', {
     params: {
-        tags: [1],
+        tags: [[]],
         limit: 10
     }
 });

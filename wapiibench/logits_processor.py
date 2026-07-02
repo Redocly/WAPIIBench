@@ -12,7 +12,7 @@ from transformers import CodeLlamaTokenizer, CodeLlamaTokenizerFast, GenerationC
     LlamaTokenizerFast, LogitsProcessor, PreTrainedTokenizer, RobertaTokenizer, RobertaTokenizerFast
 
 from generation_rules import GenerationRule, GenerationRuleset
-from openapi_utils import spec_to_ruleset, AxiosSyntax
+from openapi_utils import spec_to_ruleset
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
@@ -64,14 +64,15 @@ class ConstrainedDecoder(LogitsProcessor):
 
         self._states = []  # to handle multiple parallel generations, we store multiple instances of internal state
 
+        self._ruleset_template.reset()  # just in case the ruleset was cached and has been used before
         self._ruleset_template.update(self._completion_prefix)  # fast-forward the internal state of the ruleset
 
     def reset(self, completion_prefix: str | None = None) -> None:
         """
         Reset the internal state of this ConstrainedDecoder and its GenerationRuleset.
-        :param completion_prefix: Optional *new* completion_prefix
+        :param completion_prefix: Optional *new* completion prefix (otherwise the previous prefix is retained)
         """
-        if completion_prefix is not None:
+        if completion_prefix is not None and completion_prefix != self._completion_prefix:
             self._completion_prefix = completion_prefix
             self._ruleset_template.reset()
             self._ruleset_template.update(self._completion_prefix)
@@ -146,7 +147,7 @@ class ConstrainedDecoder(LogitsProcessor):
         state = self._get_state(batch_id)
 
         state.generation_step += 1
-        logger.info(f"Batch #{batch_id}, step #{state.generation_step}")
+        logger.debug(f"Batch #{batch_id}, step #{state.generation_step}")
 
         if state.generation_step == 1:
             state.start_time = time.process_time()
@@ -287,11 +288,10 @@ class OpenApiDecoder(ConstrainedDecoder):
     :param generation_config: The GenerationConfig used
     :param tokenizer: The tokenizer used
     :param spec_path: Path to the OpenAPI specification
-    :param axios_syntax: The syntax to use for Axios calls
     """
 
     def __init__(self, generation_config: GenerationConfig, tokenizer: PreTrainedTokenizer, spec_path: str,
-                 axios_syntax: AxiosSyntax = AxiosSyntax.METHOD_AS_FUNCTION, **kwargs) -> None:
-        super().__init__(generation_config, tokenizer, spec_to_ruleset(spec_path, axios_syntax=axios_syntax), **kwargs)
+                 **kwargs) -> None:
+        super().__init__(generation_config, tokenizer, spec_to_ruleset(spec_path), **kwargs)
 
         self._spec_path = spec_path

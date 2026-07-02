@@ -1,4 +1,4 @@
-// This tests objects as attributes, with duplicate attributes
+// Test objects as attributes with duplicate attributes
 const axios = require('axios');
 axios.post('https://petstore.swagger.io/v2/foods', {
     name: 'name',
@@ -8,5 +8,5 @@ axios.post('https://petstore.swagger.io/v2/foods', {
         carbs: 30,
         calories: 40,
         fat: 30
-     },
+    }
 });

@@ -1,0 +1,736 @@
+[
+  {
+    "api": "etherscan_v1",
+    "task": "Get the Ether balance (according to the most recently mined block) for the account with the address given in `address`. Use the Ethereum Mainnet endpoint and authenticate with the API key in `apiKey`.",
+    "config": {
+      "url": "https://api.etherscan.io/api/?module=account&action=balance",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "module": "account",
+        "action": "balance",
+        "apikey": "353b53ef",
+        "address": "0xcEDaB97DcB102D87C8ca9A74D3C92B87ea9df055",
+        "tag": "latest"
+      }
+    },
+    "repo_name": "sebs/etherscan-api",
+    "path": "dist/bundle.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2015 these people",
+    "starter_code": "const axios = require('axios');\nmodule.exports = function(apiKey) {\n  return {\n    /**\n     * Returns the balance of a specific account\n     * @param {string} address - Address\n     * @example\n     * var balance = api.account.balance('0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae');\n     * @returns {Promise.<object>}\n     */\n    balance(address) {\n      return new Promise(function(resolve, reject) {\n        // {task}\n        axios.",
+    "definitions": {
+      "apiKey": "353b53ef",
+      "address": "0xcEDaB97DcB102D87C8ca9A74D3C92B87ea9df055"
+    }
+  },
+  {
+    "api": "etherscan_v1",
+    "task": "Get the latest price for 1 ETH. Use the Ethereum Mainnet endpoint and authenticate with the API key in `apiKey`.",
+    "config": {
+      "url": "https://api.etherscan.io/api/?module=stats&action=ethprice",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "module": "stats",
+        "action": "ethprice",
+        "apikey": "52e17520"
+      }
+    },
+    "repo_name": "sebs/etherscan-api",
+    "path": "dist/bundle.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2015 these people",
+    "starter_code": "const axios = require('axios');\nmodule.exports = function(apiKey) {\n  return {\n    /**\n     * Returns the price of ether now\n     * @example\n     * var price = api.stats.ethprice();\n     * @returns {Promise.<integer>}\n     */\n    ethprice() {\n      return new Promise(function(resolve, reject) {\n        // {task}\n        axios.",
+    "definitions": {
+      "apiKey": "52e17520"
+    }
+  },
+  {
+    "api": "etherscan_v1",
+    "task": "Get the status code of the contract execution with the transaction hash given in `txhash`. Use the Ethereum Mainnet endpoint and authenticate with the API key in `apiKey`.",
+    "config": {
+      "url": "https://api.etherscan.io/api/?module=transaction&action=getstatus",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "module": "transaction",
+        "action": "getstatus",
+        "apikey": "0ae429ec",
+        "txhash": "0x45a7EC9b75c01207eab5FBd740ba06ECdDA7f651AD7cEDadd99A811DC95ADFcc"
+      }
+    },
+    "repo_name": "sebs/etherscan-api",
+    "path": "dist/bundle.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2015 these people",
+    "starter_code": "const axios = require('axios');\nmodule.exports = function(apiKey) {\n  return {\n    /**\n     * returns the status of a specific transaction hash\n     * @param {string} txhash - Transaction hash\n     * @returns {Promise.<object>}\n     */\n    getstatus(txhash) {\n      return new Promise(function(resolve, reject) {\n        // {task}\n        axios.",
+    "definitions": {
+      "apiKey": "0ae429ec",
+      "txhash": "0x45a7EC9b75c01207eab5FBd740ba06ECdDA7f651AD7cEDadd99A811DC95ADFcc"
+    }
+  },
+  {
+    "api": "frankerfacez_v1",
+    "task": "Search for emotes, including private ones (keyword 'on'), matching the string in `args.emoteName` and return page 1 of the results.",
+    "config": {
+      "url": "https://api.frankerfacez.com/v1/emoticons",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "q": "fa4ab018",
+        "page": 1,
+        "private": "on"
+      }
+    },
+    "repo_name": "robflop/motiful",
+    "path": "src/commands/addfav.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2018 Robin B. aka robflop",
+    "starter_code": "const Command = require('../structures/Command');\nconst axios = require('axios');\n// const subEmotes = require('../data/twitchemotes/subscriber.json');\nconst bttv = require('../data/twitchemotes/bttv.json');\n\nclass AddFavCommand extends Command {\n\tconstructor() {\n\t\tsuper({\n\t\t\tname: 'addfav',\n\t\t\tdescription: 'Add an emote to the favorites list',\n\t\t\taliases: ['af'],\n\t\t\targs: [\n\t\t\t\t{\n\t\t\t\t\ttype: 'string',\n\t\t\t\t\tname: 'channelName'\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\ttype: 'string',\n\t\t\t\t\tname: 'emoteName'\n\t\t\t\t}\n\t\t\t]\n\t\t});\n\t}\n\n\tasync run(message, args, userData) {\n\t\tconst { favoriteEmotes } = userData;\n\t\tif (favoriteEmotes.hasOwnProperty(args.emoteName)) {\n\t\t\treturn message.edit(`Emote \\`${args.emoteName}\\` is already on the favorites list!`).then(msg => msg.delete({ timeout: 3000 }));\n\t\t}\n\t\tlet emote, emoteID; // placeholder\n\t\targs.channelName = args.channelName.toLowerCase();\n\n\t\t/* if (subEmotes.channels[args.channelName]) {\n\t\t\temote = subEmotes.channels[args.channelName].emotes.filter(emote => emote.code === args.emoteName)[0] || '';\n\t\t\tif (!emote) {\n\t\t\t\treturn message.edit(`Emote \\`${args.emoteName}\\` not found on the \\`${args.channelName}\\` channel!`)\n\t\t\t\t\t.then(msg => msg.delete({ timeout: 3000 }));\n\t\t\t}\n\t\t\temoteID = emote.image_id;\n\t\t} // twitchemotes.com subscriber emotes disabled until a search endpoint is implemented\n\t\telse */if (args.channelName === 'bttv') {\n\t\t\temote = bttv.emotes.filter(emote => emote.code === args.emoteName)[0] || '';\n\t\t\tif (!emote) {\n\t\t\t\treturn message.edit(`Emote \\`${args.emoteName}\\` not found on BetterTwitchTV!`).then(msg => msg.delete({ timeout: 3000 }));\n\t\t\t}\n\t\t\temoteID = emote.id;\n\t\t}\n\t\telse if (args.channelName === 'ffz') {\n\t\t\ttry {\n\t\t\t\t// {task}\n\t\t\t\tconst ffzEmotes = await axios.",
+    "definitions": {
+      "args": {
+        "emoteName": "fa4ab018"
+      },
+      "userData": {
+        "favoriteEmotes": {}
+      }
+    }
+  },
+  {
+    "api": "frankerfacez_v1",
+    "task": "Search for emotes matching the string in `args.emoteName` and return the first result page. Include private emotes in the search (keyword 'on').",
+    "config": {
+      "url": "https://api.frankerfacez.com/v1/emoticons",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "q": "960ce947",
+        "page": 1,
+        "private": "on"
+      }
+    },
+    "repo_name": "robflop/motiful",
+    "path": "src/commands/emote.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2018 Robin B. aka robflop",
+    "starter_code": "const Command = require('../structures/Command');\nconst { MessageAttachment } = require('discord.js');\nconst axios = require('axios');\nconst { join } = require('path');\nconst { readdirSync } = require('fs');\nconst globalEmotes = require('../data/twitchemotes/global.json');\n// const subEmotes = require('../data/twitchemotes/subscriber.json');\nconst bttv = require('../data/twitchemotes/bttv.json');\n\nclass EmoteCommand extends Command {\n\tconstructor() {\n\t\tsuper({\n\t\t\tname: 'emote',\n\t\t\tdescription: 'Post a twitch (global or subscriber [sub disabled]), FrankerFaceZ, BetterTwitchTV or custom emote into chat',\n\t\t\taliases: ['em'],\n\t\t\targs: [\n\t\t\t\t{\n\t\t\t\t\ttype: 'string',\n\t\t\t\t\tname: 'channelName'\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\ttype: 'string',\n\t\t\t\t\tname: 'emoteName',\n\t\t\t\t\tdefaultVal: ''\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\ttype: 'string',\n\t\t\t\t\tname: 'emoteSize',\n\t\t\t\t\tdefaultVal: 'small'\n\t\t\t\t}\n\t\t\t]\n\t\t});\n\t}\n\n\tasync run(message, args, userData) { // eslint-disable-line complexity\n\t\tconst { favoriteEmotes } = userData;\n\t\tconst customEmoteFolder = join(__dirname, '..', 'data', 'customemotes');\n\t\tconst emoteSizes = {\n\t\t\tglobalAndSub: { small: '1.0', medium: '2.0', big: '3.0' },\n\t\t\tffz: { small: 1, medium: 2, big: 4 },\n\t\t\tbttv: { small: 1, medium: 2, big: 3 }\n\t\t};\n\n\t\tmessage.delete();\n\t\targs.emoteSize ? args.emoteSize = args.emoteSize.toLowerCase() : null;\n\n\t\tif (globalEmotes[args.channelName] /* || subEmotes.channels[args.channelName] */) {\n\t\t\tlet emote, actualChannel;\n\t\t\tif (globalEmotes[args.channelName]) {\n\t\t\t\targs.emoteSize = emoteSizes.globalAndSub[args.emoteName] || emoteSizes.globalAndSub.small;\n\t\t\t\targs.emoteName = args.channelName;\n\t\t\t\tdelete args.channelName;\n\t\t\t\t// shift arguments because global doesn't take channel name\n\t\t\t\temote = globalEmotes[args.emoteName];\n\t\t\t}\n\t\t\t// else if (subEmotes.channels[args.channelName]) {\n\t\t\t// \tactualChannel = true;\n\t\t\t// \temote = subEmotes.channels[args.channelName.toLowerCase()].emotes.filter(emote => emote.code === args.emoteName)[0] || '';\n\t\t\t// \targs.emoteSize = emoteSizes.globalAndSub[args.emoteSize] || emoteSizes.globalAndSub.small;\n\t\t\t// }\n\t\t\tconst wasActualChannel = actualChannel ? ` on the \\`${args.channelName}\\` channel` : '';\n\t\t\tif (!emote) {\n\t\t\t\treturn message.channel.send(`Emote \\`${args.emoteName}\\` not found${wasActualChannel}!`).then(msg => msg.delete({ timeout: 3000 }));\n\t\t\t}\n\t\t\tconst emoteID = emote.id;\n\t\t\tconst emoteURL = `https://static-cdn.jtvnw.net/emoticons/v1/${emoteID}/${args.emoteSize}`;\n\t\t\treturn message.channel.send(new MessageAttachment(emoteURL, `${args.emoteName}.png`));\n\t\t}\n\t\t// twitchemotes.com subscriber emotes disabled until a search endpoint is implemented\n\t\telse if (args.channelName === 'ffz') {\n\t\t\ttry {\n\t\t\t\targs.emoteSize = emoteSizes.ffz[args.emoteSize] || emoteSizes.ffz.small;\n\t\t\t\t// {task}\n\t\t\t\tconst ffzEmotes = await axios.",
+    "definitions": {
+      "args": {
+        "emoteName": "960ce947"
+      }
+    }
+  },
+  {
+    "api": "github_v3",
+    "task": "Get the public information about the user whose username is passed in `username`.",
+    "config": {
+      "url": "https://api.github.com/users/5b086371",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "Jaudat/github-notetaker",
+    "path": "app/utils/GithubUtils.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2014 Tyler McGinnis",
+    "starter_code": "var appConstants = require('../constants/appConstants');\nvar axios = require('axios');\n\nvar githubUtils = {\n  getBio: function(username){\n    // {task}\n    return axios.",
+    "template_url": "https://api.github.com/users/${username}",
+    "definitions": {
+      "appConstants": {},
+      "username": "5b086371"
+    }
+  },
+  {
+    "api": "github_v3",
+    "task": "Get the repositories owned by the user whose username is passed in `username`",
+    "config": {
+      "url": "https://api.github.com/users/c006949a/repos",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "Jaudat/github-notetaker",
+    "path": "app/utils/GithubUtils.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2014 Tyler McGinnis",
+    "starter_code": "var appConstants = require('../constants/appConstants');\nvar axios = require('axios');\n\nvar githubUtils = {\n  getRepos: function(username){\n    // {task}\n    return axios.",
+    "template_url": "https://api.github.com/users/${username}/repos",
+    "definitions": {
+      "appConstants": {},
+      "username": "c006949a"
+    }
+  },
+  {
+    "api": "github_v3",
+    "task": "Get a list of releases for the repository 'themis-web-interface' owned by 'natsukagami'.",
+    "config": {
+      "url": "https://api.github.com/repos/natsukagami/themis-web-interface/releases",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "natsukagami/themis-web-interface",
+    "path": "index.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2016 Natsu Kagami",
+    "starter_code": "/**\n * One should be noted that this project does not use any form of outside DB.\n * Instead for session-based data we use LokiJS, and for contests and submit logs\n * (yes we have submit logs) we have persistent NeDB for that.\n */\nconst fs = require('fs');\nconst compression = require('compression');\nconst express = require('express');\nconst bodyParser = require('body-parser');\nconst cookieParser = require('cookie-parser');\nconst expressLogger = require('morgan');\nconst path = require('path');\nconst debug = require('debug');\nconst http = require('http');\nconst passport = require('passport');\nconst codefunPassport = require('./controls/passport');\nconst session = require('express-session');\nconst lokiStore = require('connect-loki')(session);\nconst axios = require('axios');\n\ntry {\n\trequire('./config');\n} catch (e) {\n\tthrow new Error('Please configure your config.js file!');\n}\nglobal.Config = require('./config');\n\nconst PORT = global.Config.port || process.env.PORT || 8088;\n\nlet app = express();\n\n// Settings\napp.set('trust proxy', 1);\n\n// Public static directory\n// It should bypass all parsers.\napp.use(require('serve-favicon')(path.join(process.cwd(), 'public', 'img', 'favicon.ico')));\napp.use(compression());\napp.use(/\\/public\\/js\\/(index|scoreboard)\\.js$/, (req, res, next) => {\n\tif (app.get('env') !== 'development') {\n\t\t// Use the gzipped versions\n\t\treq.url = req.url + '.gz';\n\t\tres.set('Content-Encoding', 'gzip');\n\t\tnext();\n\t} else next();\n});\napp.use('/public', express.static(path.join(__dirname, 'public')));\n\n// Parsers\napp.use(expressLogger('dev', {\n\tskip: (req, res) => {\n\t\treturn (req.baseUrl === '/log' || req.baseUrl === '/queue') &&\n\t\t\t\t\t\t(res.statusCode === 200 || res.statusCode === 429);\n\t}\n}));\napp.use(bodyParser.urlencoded({\n\textended: false\n}));\napp.use(bodyParser.json());\napp.use(cookieParser());\napp.use(session({\n\tstore: new lokiStore({\n\t\tpath: path.join(process.cwd(), 'data', '.sessions.db'),\n\t\tlogErrors: debug('kjudge-contest:server:session')\n\t}),\n\tsecret: global.Config.sessionSecret,\n\tsaveUninitialized: false,\n\tresave: false\n}));\npassport.use(codefunPassport);\napp.use(passport.initialize());\napp.use(passport.session());\n\n// View engine\napp.set('views', path.join(__dirname, 'views'));\napp.set('view engine', 'pug');\nif (app.get('env') === 'development') {\n\tapp.use((req, res, next) => {\n\t\tres.locals.pretty = true;\n\t\tnext();\n\t});\n}\n\n// Declare global constants\ntry {\n\tconst version = fs.readFileSync('twi.version', 'utf-8');\n\tapp.use((req, res, next) => {\n\t\tres.locals.TWIVersion = version;\n\t\tnext();\n\t});\n} catch (e) {\n\tapp.use((req, res, next) => {\n\t\tres.locals.TWIVersion = (process.env.npm_package_version ? `v${process.env.npm_package_version} (git)` : 'unknown version');\n\t\tnext();\n\t});\n}\n\n// Routes\napp.use('/', require('./routes/index'));\n\napp.use((req, res, next) => {\n\tlet err = new Error('Kh\u00f4ng t\u00ecm th\u1ea5y trang');\n\terr.status = 404;\n\tnext(err);\n});\n\n// Error handlers\n\n// A special error handler for the user deserialization failure.\napp.use((err, req, res, next) => {\n\tif (err === codefunPassport.deserializeFail) {\n\t\treq.logout(); // Immediately logs the user out.\n\t\tdebug('themis:controls:user')('Failed to identify previously logged on user, logged out. Did you change the accounts file?');\n\t\treturn res.redirect('/');\n\t}\n\t// If not the error, simply pass.\n\tnext(err);\n});\n\napp.use((err, req, res, next) => {\n\tres.status(err.status || 500);\n\tres.render('error', {\n\t\ttitle: err.message,\n\t\tmessage: err.message,\n\t\terror: (app.get('env') === 'development' ? err : {})\n\t});\n\tnext.a = null; // Dummy command\n});\n\n// Create HTTP Server\napp.set('port', PORT);\n\nlet httpServer = http.createServer(app);\n\nhttpServer.debug = debug('themis:server');\n\nhttpServer.on('error', error => {\n\tif (error.syscall !== 'listen') {\n\t\t// System-specific error, throw then\n\t\tthrow error;\n\t}\n\tlet bind = typeof port === 'string' ? 'Pipe ' + PORT : 'Port ' + PORT;\n\t// Handle specific listen errors with friendly messages\n\tswitch (error.code) {\n\tcase 'EACCES':\n\t\thttpServer.debug(bind + ' requires elevated privileges');\n\t\tprocess.exit(1);\n\t\tbreak;\n\tcase 'EADDRINUSE':\n\t\thttpServer.debug(bind + ' is already in use');\n\t\tprocess.exit(1);\n\t\tbreak;\n\tdefault:\n\t\tthrow error;\n\t}\n});\n\nhttpServer.on('listening', () => {\n\tlet addr = httpServer.address();\n\tlet bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;\n\thttpServer.debug('Listening on ' + bind + '. Ctrl-C to stop the server.');\n});\n\nif (process.env.NODE_ENV === 'production') {\n\t// {task}\n\taxios.",
+    "definitions": {
+      "app": {}
+    }
+  },
+  {
+    "api": "github_v3",
+    "task": "Return a list of members of the organization with the organization name in `name`.",
+    "config": {
+      "url": "https://api.github.com/orgs/48111c75/members",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "raphaklaus/dev-shop",
+    "path": "public/src/core/GitHubAPI.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2016 Raphael D. Pinheiro",
+    "starter_code": "const axios = require('axios');\n\nmodule.exports = class GitHubAPI{\n\n  getOrganization(name){\n    // {task}\n    return axios.",
+    "template_url": "https://api.github.com/orgs/${name}/members",
+    "definitions": {
+      "name": "48111c75"
+    }
+  },
+  {
+    "api": "github_v3",
+    "task": "Return publicly available information about the user with the username in `user`.",
+    "config": {
+      "url": "https://api.github.com/users/bba694f1",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "raphaklaus/dev-shop",
+    "path": "public/src/core/GitHubAPI.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2016 Raphael D. Pinheiro",
+    "starter_code": "const axios = require('axios');\n\nmodule.exports = class GitHubAPI{\n\n  getUser(user){\n    // {task}\n    return axios.",
+    "template_url": "https://api.github.com/users/${user}",
+    "definitions": {
+      "user": "bba694f1"
+    }
+  },
+  {
+    "api": "github_v3",
+    "task": "Return a list of repositories starred by the user with the username in `user`.",
+    "config": {
+      "url": "https://api.github.com/users/c240a1e3/starred",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "raphaklaus/dev-shop",
+    "path": "public/src/core/GitHubAPI.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2016 Raphael D. Pinheiro",
+    "starter_code": "const axios = require('axios');\n\nmodule.exports = class GitHubAPI{\n\n  getUserStars(user){\n    return new Promise((resolve, reject) => {\n      // {task}\n      axios.",
+    "template_url": "https://api.github.com/users/${user}/starred",
+    "definitions": {
+      "user": "c240a1e3"
+    }
+  },
+  {
+    "api": "github_v3",
+    "task": "Get a list of public repositories for the user specified in `username`.",
+    "config": {
+      "url": "https://api.github.com/users/8d92e35e/repos",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "UpWorks/github-notetaker",
+    "path": "app/utils/helpers.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2015 Michael Updegraff",
+    "starter_code": "var axios = require('axios');\n\nvar helpers = {\n  getGithubInfo: function(username) {\n    return axios.all([getRepos(username), getUserInfo(username)])\n      .then(function(arr){\n        return {\n          repos: arr[0].data,\n          bio: arr[1].data\n        }\n      });\n  }\n};\n\nfunction getRepos(username) {\n  // {task}\n  return axios.",
+    "template_url": "https://api.github.com/users/${username}/repos",
+    "definitions": {
+      "username": "8d92e35e"
+    }
+  },
+  {
+    "api": "github_v3",
+    "task": "Get publicly available information about the user specified in `username`.",
+    "config": {
+      "url": "https://api.github.com/users/a9c123a2",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "UpWorks/github-notetaker",
+    "path": "app/utils/helpers.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2015 Michael Updegraff",
+    "starter_code": "var axios = require('axios');\n\nvar helpers = {\n  getGithubInfo: function(username) {\n    return axios.all([getRepos(username), getUserInfo(username)])\n      .then(function(arr){\n        return {\n          repos: arr[0].data,\n          bio: arr[1].data\n        }\n      });\n  }\n};\n\nfunction getUserInfo(username) {\n  // {task}\n  return axios.",
+    "template_url": "https://api.github.com/users/${username}",
+    "definitions": {
+      "username": "a9c123a2"
+    }
+  },
+  {
+    "api": "google_maps_platform",
+    "task": "Use the Places API for a text search for 'park in boulder', using the API key 'AIzaSyB-vE7I0CRFBQ2t6uI5IFMc4Du6M-EEDQs'.",
+    "config": {
+      "url": "https://maps.googleapis.com/maps/api/place/textsearch/json",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "query": "park in boulder",
+        "key": "AIzaSyB-vE7I0CRFBQ2t6uI5IFMc4Du6M-EEDQs"
+      }
+    },
+    "repo_name": "adam-serene/serene-mvp",
+    "path": "server.js",
+    "ref": "refs/heads/master",
+    "license": "None",
+    "copyright": "Copyright 2017 Shannon Rivers & Adam Smith",
+    "starter_code": "'use strict';\n\nconst express = require('express');\nconst axios = require('axios');\nconst bcrypt = require ('bcrypt');\nconst bodyParser = require('body-parser');\nconst cookieParser = require('cookie-parser');\nconst cors = require('express-cors')\nconst knex = require('./knex');\nconst path = require('path');\nconst port = process.env.PORT || 5000;\nconst saltRounds = 10;\n\nconst app = express();\n\nrequire('dotenv').config();\n\n\nif (process.env.NODE_ENV === 'production') {\n  app.use(express.static('./client/build'));\n}\n\napp.use(cors());\n\napp.use(cookieParser());\n\napp.use(bodyParser.json());\napp.use(bodyParser.urlencoded({ extended: true }));\n\napp.use(function(req, res, next) {\n  res.header(\"Access-Control-Allow-Origin\", \"*\");\n  res.header(\"Access-Control-Allow-Headers\", \"Origin, X-Requested-With, Content-Type, Accept\");\n  next();\n});\n\napp.use(express.static(path.join(__dirname, 'client/build')));\n\napp.get('/places',(req,res,next)=>{\n  let placesArr = [];\n  // {task}\n  axios.",
+    "definitions": {
+      "req": {}
+    }
+  },
+  {
+    "api": "google_maps_platform",
+    "task": "Do a text search for 'INTERESTS in TARGET', where INTERESTS is given in `interests` and TARGET is given in `cityString`. Authenticate with the API key in `googlePlacesApiKey`.",
+    "config": {
+      "url": "https://maps.googleapis.com/maps/api/place/textsearch/json",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "query": "19dc064c in 8bce6020",
+        "key": "1b4dd47d"
+      }
+    },
+    "repo_name": "HR-TeamJoe/Away",
+    "path": "server/searchApi.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2017 HR-TeamJoe",
+    "starter_code": "// This is where the search logic happens\n// See Rob with questions\n\nconst cityModel = require('../db/models/cityModel.js');\nconst axios = require('axios');\nconst User = require('../db/models/userModel.js');\nconst { darkSkyApi, googlePlacesApiKey } = require('./config.js');\n\nconst darkSkyUrl = `https://api.darksky.net/forecast/${darkSkyApi}/`;\nconst regex = /[^a-zA-Z]+/g;\nconst tempDefinitions = {\n  hot: 90,\n  warm: 75,\n  crisp: 60,\n  cold: 45,\n  freezing: 30\n};\nconst budgetDefinitions = {\n  'college student': 'cheap',\n  'so-so': 'medium+budget',\n  'private jet': 'top'\n};\nlet interests;\nlet budget;\n\n\n// DarkSkyAPI takes lat,long,unixTimeStamp.\n// This method converts the target date from user\n// to the unix timestamp from a year before that date.\nconst getYearAgoUnixTime = (date) => {\n  const subArray = date.substring(0, 10).split('-');\n\n  // Convert year to number, subtract 1, then convert to string\n  subArray[0] = String(+subArray[0] - 1);\n  const reformattedDate = subArray.join('.');\n  const targetDate = new Date(reformattedDate);\n  const targetUnixTime = targetDate.getTime() / 1000;\n  // The below code uses a bitwise that linter doesn't like\n  // I'm not entirely sure what that bitwise does, so I commented it\n    // const targetUnixTime = targetDate.getTime() / 1000 | 0;\n\n  return targetUnixTime;\n};\n\n// Get weather data for all cities in DB\n// for one year prior to search date\n// See const getUrl below for darkSkyApi url format.\nconst getDarkSkyData = (req, res) => {\n  const { startDate } = req.body;\n  // Convert requested startDate to one year earlier.\n  // With paid api access we would access several years'\n  // weather info and average the results\n  const yearAgoUnixTime = getYearAgoUnixTime(startDate);\n  let citiesFromDb;\n  // Fetch all cities from database\n  return cityModel.getCity()\n    .then((cities) => {\n      citiesFromDb = cities;\n\n      // Map array of city lat/long values into an array\n      // of get requests wrapped in promises\n      const getPromises = cities.map((city) => {\n        const { lat, long } = city;\n        const getUrl = `${darkSkyUrl}${lat},${long},${yearAgoUnixTime}?exclude=currently,flags`;\n        return new Promise((resolve, reject) => {\n          axios.get(getUrl)\n            .then(results => resolve(results.data))\n            .catch(error => reject(error));\n        });\n      });\n\n      // Call all promise'd get requests\n        // then call compareTemps() and pass in the response\n      return Promise.all(getPromises)\n        .then((apiResponses) => {\n          const resultsObj = { apiResponses, req, res, citiesFromDb };\n          return resultsObj;\n        });\n    });\n};\n\n// First call to Google Place Web API\n// For each city, return a new object with that city object\n// and the results of a 'top destinations' search.\nconst getTourismData = (topCities) => {\n  const tourismDataPromises = topCities.map((cityObj) => {\n    const cityString = cityObj.city.replace(regex, '+');\n\n    return new Promise((resolve, reject) => {\n      // {task}\n      axios.",
+    "definitions": {
+      "googlePlacesApiKey": "1b4dd47d",
+      "budgetDefinitions": {
+        "college student": "cheap",
+        "so-so": "medium+budget",
+        "private jet": "top"
+      },
+      "interests": "19dc064c",
+      "budget": "d1a2e6ca",
+      "cityObj": {
+        "city": "4272c763"
+      },
+      "cityString": "8bce6020"
+    }
+  },
+  {
+    "api": "instagram",
+    "task": "Get the most recent media published by the owner of the API access token stored in `req.body.accessToken`.",
+    "config": {
+      "url": "https://api.instagram.com/v1/users/self/media/recent",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "access_token": "ee9740c7"
+      }
+    },
+    "repo_name": "alexko13/block-and-frame",
+    "path": "server/insta/instaController.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2016 Block-and-Frame",
+    "starter_code": "const axios = require('axios');\nconst User = require('../users/userModel').User;\n\nmodule.exports = {\n  getUserPics(req, res) {\n    // {task}\n    axios.",
+    "definitions": {
+      "req": {
+        "body": {
+          "accessToken": "ee9740c7"
+        }
+      }
+    }
+  },
+  {
+    "api": "instagram",
+    "task": "Get a list of media recently tagged with the value in `hashtag`. Authenticate with the access token in `accessToken`.",
+    "config": {
+      "url": "https://api.instagram.com/v1/tags/71abc028/media/recent",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "access_token": "b5d0c6ea"
+      }
+    },
+    "repo_name": "alexko13/block-and-frame",
+    "path": "server/insta/instaController.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2016 Block-and-Frame",
+    "starter_code": "const axios = require('axios');\nconst User = require('../users/userModel').User;\n\nmodule.exports = {\n  getUniqueTagPics(req, res) {\n    const hashtag = req.body.hashtag;\n    User.where({ id: req.body.userId })\n    .fetch()\n    .then((user) => {\n      if (!user) {\n        res.status(404).send('User not found');\n      } else {\n        const accessToken = user.get('instagram_token');\n        if (accessToken) {\n          // {task}\n          axios.",
+    "template_url": "https://api.instagram.com/v1/tags/${hashtag}/media/recent",
+    "definitions": {
+      "hashtag": "71abc028",
+      "user": {},
+      "accessToken": "b5d0c6ea"
+    }
+  },
+  {
+    "api": "jsonplaceholder",
+    "task": "Retrieve all stored posts.",
+    "config": {
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "cfraz89/moonrock-samples",
+    "path": "android-sample/app/src/main/assets/app/appmodule.js",
+    "ref": "refs/heads/master",
+    "license": "Apache-2.0",
+    "copyright": "Copyright 2015 Christopher Fraser",
+    "starter_code": "var axios = require('axios');\n\nvar Rx = require('rx');\n\nfunction toNumber(source) {\n\n    var num = parseInt(source);\n\n    return isNaN(num) ? 0 : num;\n\n}\n\nvar appModule = (function () {\n\n    function appModule() {\n\n    }\n\n    appModule.prototype.portalsGenerated = function () {\n\n        var add1Num = this.add1Text.map(toNumber);\n\n        var add2Num = this.add2Text.map(toNumber);\n\n        var sumStream = add1Num.combineLatest(add2Num, function (num1, num2) { return (num1 + num2).toString(); });\n\n        this.sum = this.addPressed.withLatestFrom(sumStream, function (ev, num) { return num; });\n\n        // {task}\n        this.posts = Rx.Observable.fromPromise(axios."
+  },
+  {
+    "api": "jsonplaceholder",
+    "task": "Get a list of all posts.",
+    "config": {
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "praveenmk4/share-a-thought",
+    "path": "server/controllers/api.controller.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2017 PraveenKumar",
+    "starter_code": "// declare axios for making http requests\nconst axios = require('axios');\n\nexports.sendHome = function(req, res) {\n    res.send('api works');\n};\n\nexports.postInFormation = function(req, res) {\n    // {task}\n    axios.",
+    "definitions": {
+      "req": {}
+    }
+  },
+  {
+    "api": "jsonplaceholder",
+    "task": "Get a list of all users.",
+    "config": {
+      "url": "https://jsonplaceholder.typicode.com/users",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "praveenmk4/share-a-thought",
+    "path": "server/controllers/api.controller.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2017 PraveenKumar",
+    "starter_code": "// declare axios for making http requests\nconst axios = require('axios');\n\nexports.sendHome = function(req, res) {\n    res.send('api works');\n};\n\nexports.usersInformation = function(req, res) {\n    // {task}\n    axios.",
+    "definitions": {
+      "req": {}
+    }
+  },
+  {
+    "api": "npm_registry",
+    "task": "Get the package metadata document for the package in `repo`. Use the 'registry.npmjs.org' server.",
+    "config": {
+      "url": "https://registry.npmjs.org/5a98346f",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "npmsize/npmsize",
+    "path": "index.js",
+    "ref": "refs/heads/master",
+    "license": "Unavailable",
+    "copyright": "Unknown",
+    "starter_code": "var express = require('express');\nvar path = require('path');\nvar app = express();\nvar http = require('http');\nvar axios = require('axios');\nvar server = http.createServer(app);\nvar env = process.env.NODE_ENV || 'development';\n\nconst defaultPackages = ['main', 'style', 'module', 'sass'];\n\nconst cache = new Map();\n\ngetFromCache = (key) => {\n\tif (cache.has(key)) {\n\t\treturn cache.get(key);\n\t}\n\treturn null;\n};\n\nsetToCache = (key, value) => {\n\tcache.set(key, value);\n};\n\n\n/**\n * Make sure we only pass data over https\n */\nvar forceSSL = function(req, res, next) {\n  if (req.headers['x-forwarded-proto'] !== 'https') {\n    return res.redirect(['https://', req.get('Host'), req.url].join(''));\n  }\n  return next();\n};\n\n// When in production, force SSL\nif (env === 'production') {\n  app.use(forceSSL);\n}\n\nconst getFilesizes = (repo, versions, path) => {\n\treturn versions.slice(-40).map(version => {\n\n\t\tconst url = 'https://unpkg.com/' + repo + '@' + version + '/' + path;\n\n\t\tconst fromCache = getFromCache(url);\n\t\tif (fromCache) {\n\t\t\treturn fromCache;\n\t\t} else {\n\t\t\treturn axios.get(url)\n\t\t\t\t.then(response => {\n\t\t\t\t\tconst output = [\n\t\t\t\t\t\tversion, +((response.headers['content-length'] / 1000).toFixed(2))\n\t\t\t\t\t];\n\t\t\t\t\tsetToCache(url, output);\n\t\t\t\t\treturn output;\n\t\t\t\t})\n\t\t\t\t.catch(error => {\n\t\t\t\t\tconst output = [version, null];\n\t\t\t\t\tsetToCache(url, output);\n\t\t\t\t\treturn output;\n\t\t\t\t});\n\t\t}\n\t});\n}\n\n// Put all API endpoints under '/api'\napp.get('/api/repo/:repo/path/', (req, res) => {\n\tconst repo = req.params.repo;\n\tconst path = req.query.path;\n\t// {task}\n\taxios.",
+    "template_url": "https://registry.npmjs.org/${repo}",
+    "definitions": {
+      "repo": "5a98346f",
+      "path": "d650232b"
+    }
+  },
+  {
+    "api": "npm_registry",
+    "task": "Get the package metadata document for the package in `repo`. Use the 'registry.npmjs.org' server.",
+    "config": {
+      "url": "https://registry.npmjs.org/4ddd778e",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      }
+    },
+    "repo_name": "npmsize/npmsize",
+    "path": "index.js",
+    "ref": "refs/heads/master",
+    "license": "Unavailable",
+    "copyright": "Unknown",
+    "starter_code": "var express = require('express');\nvar path = require('path');\nvar app = express();\nvar http = require('http');\nvar axios = require('axios');\nvar server = http.createServer(app);\nvar env = process.env.NODE_ENV || 'development';\n\nconst defaultPackages = ['main', 'style', 'module', 'sass'];\n\nconst cache = new Map();\n\ngetFromCache = (key) => {\n\tif (cache.has(key)) {\n\t\treturn cache.get(key);\n\t}\n\treturn null;\n};\n\nsetToCache = (key, value) => {\n\tcache.set(key, value);\n};\n\n\n/**\n * Make sure we only pass data over https\n */\nvar forceSSL = function(req, res, next) {\n  if (req.headers['x-forwarded-proto'] !== 'https') {\n    return res.redirect(['https://', req.get('Host'), req.url].join(''));\n  }\n  return next();\n};\n\n// When in production, force SSL\nif (env === 'production') {\n  app.use(forceSSL);\n}\n\nconst getFilesizes = (repo, versions, path) => {\n\treturn versions.slice(-40).map(version => {\n\n\t\tconst url = 'https://unpkg.com/' + repo + '@' + version + '/' + path;\n\n\t\tconst fromCache = getFromCache(url);\n\t\tif (fromCache) {\n\t\t\treturn fromCache;\n\t\t} else {\n\t\t\treturn axios.get(url)\n\t\t\t\t.then(response => {\n\t\t\t\t\tconst output = [\n\t\t\t\t\t\tversion, +((response.headers['content-length'] / 1000).toFixed(2))\n\t\t\t\t\t];\n\t\t\t\t\tsetToCache(url, output);\n\t\t\t\t\treturn output;\n\t\t\t\t})\n\t\t\t\t.catch(error => {\n\t\t\t\t\tconst output = [version, null];\n\t\t\t\t\tsetToCache(url, output);\n\t\t\t\t\treturn output;\n\t\t\t\t});\n\t\t}\n\t});\n}\n\nconst getPaths = (arr, versions) => arr.reduce(function(filePaths, version) {\n\tvar versionObj = versions[version];\n\tdefaultPackages.forEach((package) => {\n\t\tconst filePath = versionObj[package];\n\t\tif (filePath && !filePaths.includes(filePath)) {\n\t\t\tfilePaths.push(filePath);\n\t\t}\n\t});\n\n\treturn filePaths;\n}, []).sort();\n\napp.get('/api/repo/:repo/files', (req, res) => {\n\tconst repo = req.params.repo;\n\t// {task}\n\taxios.",
+    "template_url": "https://registry.npmjs.org/${repo}",
+    "definitions": {
+      "repo": "4ddd778e"
+    }
+  },
+  {
+    "api": "slack",
+    "task": "Start a Real Time Messaging session. Use the authentication token in `config.slackToken`.",
+    "config": {
+      "url": "https://slack.com/api/rtm.connect",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "token": "dcca40f6"
+      }
+    },
+    "repo_name": "ThePizar/WoTBot",
+    "path": "index.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2017 joshua-michel",
+    "starter_code": "const WebSocket = require('ws');\nconst axios = require('axios');\nconst config = require('./config');\nconst parser = require('./slack/commands');\nconst players = require('./wot/players');\n\nconst autoRestart = true;\n\nconsole.log('Version: ', config.version);\nif (config.slackToken) {\n  console.log(config.slackToken.slice(0, 4))\n}\nelse {\n  console.log('No token?!?!?!?!?!')\n}\n\nfunction connect() {\n  // {task}\n  axios.",
+    "definitions": {
+      "config": {
+        "slackToken": "dcca40f6"
+      },
+      "autoRestart": true
+    }
+  },
+  {
+    "api": "telegram_bot_v5",
+    "task": "Send the message given in `text` to the chat given in `chatId`. Ensure the message text is parsed as Markdown. The bot's authentication token (without the 'bot' prefix) is contained in `apiKey`. Use it to form the correct URL.",
+    "config": {
+      "url": "https://api.telegram.org/bot733385:e8GALYnhkJSH-szqHoLb0RqbmQ-q7EE3BFb/sendMessage",
+      "method": "post",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      },
+      "data": {
+        "chat_id": "88ca14d8",
+        "text": "0003c40e",
+        "parse_mode": "Markdown"
+      }
+    },
+    "repo_name": "suddi/knightwatcherbot",
+    "path": "lib/telegram.js",
+    "ref": "refs/heads/master",
+    "license": "Apache-2.0",
+    "copyright": "Copyright 2017 Sudharshan Ravindran",
+    "starter_code": "'use strict';\n\n/* eslint camelcase: off */\n\nconst axios = require('axios');\n\nconst Config = require('./config');\n\nfunction sendMessage(botName, chatId, text) {\n    const config = Config.get(botName);\n    const apiKey = config[`${botName.toUpperCase()}_TELEGRAM_API_KEY`];\n    // {task}\n    return axios.",
+    "template_url": "https://api.telegram.org/bot${apiKey}/sendMessage",
+    "definitions": {
+      "botName": "7e804edc",
+      "chatId": "88ca14d8",
+      "text": "0003c40e",
+      "config": {
+        "7E804EDC_TELEGRAM_API_KEY": "733385:e8GALYnhkJSH-szqHoLb0RqbmQ-q7EE3BFb"
+      },
+      "apiKey": "733385:e8GALYnhkJSH-szqHoLb0RqbmQ-q7EE3BFb"
+    }
+  },
+  {
+    "api": "youtube_data_v3",
+    "task": "Retrieve search resources with property 'snippet' for the query given in `searchTerm`. Use the API key 'AIzaSyAPs3iCpnQcI6vMxCWR2JdZa1mcSTkemfU'.",
+    "config": {
+      "url": "https://youtube.googleapis.com/youtube/v3/search",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "part": "snippet",
+        "key": "AIzaSyAPs3iCpnQcI6vMxCWR2JdZa1mcSTkemfU",
+        "q": "cc37afdf"
+      }
+    },
+    "repo_name": "DrekStyler/Moody",
+    "path": "src/server/controllers/player.js",
+    "ref": "refs/heads/master",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2016 Derek",
+    "starter_code": "var axios = require('axios');\n\nfunction searchYoutube(searchTerm){\n  // {task}\n  return axios.",
+    "definitions": {
+      "searchTerm": "cc37afdf"
+    }
+  },
+  {
+    "api": "youtube_data_v3",
+    "task": "Search for the term in `options.term` and restrict the results to only videos and only the search resource property 'snippet'. Authenticate with the API key in `options.key`.",
+    "config": {
+      "url": "https://youtube.googleapis.com/youtube/v3/search",
+      "method": "get",
+      "headers": {
+        "Accept": "application/json, text/plain, */*"
+      },
+      "params": {
+        "part": "snippet",
+        "key": "f3de0212",
+        "q": "29e72427",
+        "type": "video"
+      }
+    },
+    "repo_name": "mbestwick/medication-search",
+    "path": "node_modules/youtube-api-search/index.js",
+    "ref": "refs/heads/master",
+    "license": "MIT (repo); ISC (package)",
+    "copyright": "Copyright (c) 2016 Stephen Grider",
+    "starter_code": "var axios = require('axios');\n\nmodule.exports = function (options, callback) {\n  if (!options.key) {\n    throw new Error('Youtube Search expected key, received undefined');\n  }\n\n  // {task}\n  axios.",
+    "definitions": {
+      "options": {
+        "key": "f3de0212",
+        "q": "29e72427"
+      },
+      "callback": {}
+    }
+  },
+  {
+    "api": "zephyr_cloud_v2",
+    "task": "Create a test cycle named `${ZEPHYR_CYCLE_NAME} (${BUILD_ID}-${BRANCH})`, the description `Playwright automated test with ${BRANCH}`, and the status 'Done'. The project key is given in `JIRA_PROJECT_KEY`, the planned start and end dates for the cycle are given in `startDate` and `endDate`, and the ID of the folder to place the cycle within is given in `ZEPHYR_FOLDER_ID`. Authenticate using the access token in `ZEPHYR_API_KEY`.",
+    "config": {
+      "url": "https://api.zephyrscale.smartbear.com/v2/testcycles",
+      "method": "post",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer f4b2bb07"
+      },
+      "data": {
+        "projectKey": "MJ38SR527",
+        "name": "1d0fa29c (30844bff-c1d02227)",
+        "description": "Playwright automated test with c1d02227",
+        "plannedStartDate": "3507-09-09T00:10:12Z",
+        "plannedEndDate": "0119-12-30T01:14:09Z",
+        "statusName": "Done",
+        "folderId": 94604105
+      }
+    },
+    "repo_name": "mattermost/desktop",
+    "path": "e2e/utils/test_cases.js",
+    "ref": "refs/heads/master",
+    "license": "Apache-2.0",
+    "copyright": "Copyright (c) 2015-2016 Yuya Ochiai; Copyright (c) 2016-present Mattermost, Inc.",
+    "starter_code": "/* eslint-disable no-console */\n\n// See reference: https://support.smartbear.com/tm4j-cloud/api-docs/\n\nconst axios = require('axios');\nconst chalk = require('chalk');\n\nconst {getAllTests} = require('./report');\n\nconst status = {\n    passed: 'Pass',\n    failed: 'Fail',\n    pending: 'Pending',\n    skipped: 'Skip',\n};\n\nconst environment = {\n    chrome: 'Chrome',\n    firefox: 'Firefox',\n};\n\nfunction getStepStateResult(steps = []) {\n    return steps.reduce((acc, item) => {\n        if (acc[item.state]) {\n            acc[item.state] += 1;\n        } else {\n            acc[item.state] = 1;\n        }\n\n        return acc;\n    }, {});\n}\n\nfunction getStepStateSummary(steps = []) {\n    const result = getStepStateResult(steps);\n\n    return Object.entries(result).map(([key, value]) => `${value} ${key}`).join(',');\n}\n\nfunction getZEPHYRTestCases(report) {\n    return getAllTests(report.results).\n        filter((item) => /^(MM-T)\\w+/g.test(item.title)). // eslint-disable-line wrap-regex\n        map((item) => {\n            return {\n                title: item.title,\n                duration: item.duration,\n                incrementalDuration: item.incrementalDuration,\n                state: item.state,\n                pass: item.pass,\n                fail: item.fail,\n                pending: item.pending,\n            };\n        }).\n        reduce((acc, item) => {\n            // Extract the key to exactly match with \"MM-T[0-9]+\"\n            const key = item.title.match(/(MM-T\\d+)/)[0];\n\n            if (acc[key]) {\n                acc[key].push(item);\n            } else {\n                acc[key] = [item];\n            }\n\n            return acc;\n        }, {});\n}\n\nasync function createTestCycle(startDate, endDate) {\n    const {\n        BRANCH,\n        BUILD_ID,\n        JIRA_PROJECT_KEY,\n        ZEPHYR_CYCLE_NAME,\n        ZEPHYR_FOLDER_ID,\n        ZEPHYR_API_KEY,\n    } = process.env;\n\n    // {task}\n    const response = await axios.",
+    "definitions": {
+      "startDate": "3507-09-09T00:10:12Z",
+      "endDate": "0119-12-30T01:14:09Z",
+      "BRANCH": "c1d02227",
+      "BUILD_ID": "30844bff",
+      "JIRA_PROJECT_KEY": "MJ38SR527",
+      "ZEPHYR_CYCLE_NAME": "1d0fa29c",
+      "ZEPHYR_FOLDER_ID": 94604105,
+      "ZEPHYR_API_KEY": "f4b2bb07"
+    }
+  },
+  {
+    "api": "zephyr_cloud_v2",
+    "task": "Create a new test execution for the test case with the key given in `key` and the test cycle with the key given in `testCycle.key`. The project key is given in `JIRA_PROJECT_KEY` and the environment in `ZEPHYR_ENVIRONMENT_NAME`. It should be commented with `Playwright automated test - ${stepStateSummary}`. The results of the test execution are given in `testScriptResults` and the status in `status`. The end date is `actualEndDate` and the execution time is `executionTime`. Authenticate using the access token in `ZEPHYR_API_KEY`.",
+    "config": {
+      "url": "https://api.zephyrscale.smartbear.com/v2/testexecutions",
+      "method": "post",
+      "headers": {
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+        "Authorization": "Bearer 0b7f9a57"
+      },
+      "data": {
+        "projectKey": "PG1SMTE0N",
+        "testCaseKey": "SzB-T253",
+        "testCycleKey": "CTN-R210",
+        "statusName": "Pass",
+        "testScriptResults": [
+          {
+            "statusName": "Pass",
+            "actualEndDate": "5181-03-09T17:11:06Z",
+            "actualResult": "Playwright automated test completed"
+          }
+        ],
+        "environmentName": "446cae8b",
+        "actualEndDate": "5911-07-09T22:37:18Z",
+        "executionTime": 308145,
+        "comment": "Playwright automated test - 7c37d0f8"
+      }
+    },
+    "repo_name": "mattermost/desktop",
+    "path": "e2e/utils/test_cases.js",
+    "ref": "refs/heads/master",
+    "license": "Apache-2.0",
+    "copyright": "Copyright (c) 2015-2016 Yuya Ochiai; Copyright (c) 2016-present Mattermost, Inc.",
+    "starter_code": "/* eslint-disable no-console */\n\n// See reference: https://support.smartbear.com/tm4j-cloud/api-docs/\n\nconst axios = require('axios');\nconst chalk = require('chalk');\n\nconst {getAllTests} = require('./report');\n\nconst status = {\n    passed: 'Pass',\n    failed: 'Fail',\n    pending: 'Pending',\n    skipped: 'Skip',\n};\n\nconst environment = {\n    chrome: 'Chrome',\n    firefox: 'Firefox',\n};\n\nfunction getStepStateResult(steps = []) {\n    return steps.reduce((acc, item) => {\n        if (acc[item.state]) {\n            acc[item.state] += 1;\n        } else {\n            acc[item.state] = 1;\n        }\n\n        return acc;\n    }, {});\n}\n\nfunction getStepStateSummary(steps = []) {\n    const result = getStepStateResult(steps);\n\n    return Object.entries(result).map(([key, value]) => `${value} ${key}`).join(',');\n}\n\nfunction getZEPHYRTestCases(report) {\n    return getAllTests(report.results).\n        filter((item) => /^(MM-T)\\w+/g.test(item.title)). // eslint-disable-line wrap-regex\n        map((item) => {\n            return {\n                title: item.title,\n                duration: item.duration,\n                incrementalDuration: item.incrementalDuration,\n                state: item.state,\n                pass: item.pass,\n                fail: item.fail,\n                pending: item.pending,\n            };\n        }).\n        reduce((acc, item) => {\n            // Extract the key to exactly match with \"MM-T[0-9]+\"\n            const key = item.title.match(/(MM-T\\d+)/)[0];\n\n            if (acc[key]) {\n                acc[key].push(item);\n            } else {\n                acc[key] = [item];\n            }\n\n            return acc;\n        }, {});\n}\n\nasync function createTestExecutions(report, testCycle) {\n    const {\n        BROWSER,\n        JIRA_PROJECT_KEY,\n        ZEPHYR_ENVIRONMENT_NAME,\n        ZEPHYR_API_KEY,\n    } = process.env;\n\n    const testCases = getZEPHYRTestCases(report);\n    const startDate = new Date(report.stats.start);\n    const startTime = startDate.getTime();\n\n    const promises = [];\n    Object.entries(testCases).forEach(([key, steps], index) => {\n        const testScriptResults = steps.\n            sort((a, b) => a.title.localeCompare(b.title)).\n            map((item) => {\n                return {\n                    statusName: status[item.state],\n                    actualEndDate: new Date(startTime + item.incrementalDuration).toISOString(),\n                    actualResult: 'Playwright automated test completed',\n                };\n            });\n\n        const stateResult = getStepStateResult(steps);\n        const status = stateResult.passed && stateResult.passed === steps.length ? 'Pass' : 'Fail';\n        const actualEndDate = testScriptResults[testScriptResults.length - 1].actualEndDate;\n        const executionTime = steps.reduce((acc, prev) => {\n            acc += prev.duration; // eslint-disable-line no-param-reassign\n            return acc;\n        }, 0)\n        const stepStateSummary = getStepStateSummary(steps);\n\n        // Temporarily log to verify cases that were being saved.\n        console.log(index, key); // eslint-disable-line no-console\n\n        promises.push((async () => {\n            // {task}\n            await axios.",
+    "definitions": {
+      "environment": {
+        "chrome": "Chrome",
+        "firefox": "Firefox"
+      },
+      "testCycle": {
+        "key": "CTN-R210"
+      },
+      "BROWSER": "6ff6309c",
+      "JIRA_PROJECT_KEY": "PG1SMTE0N",
+      "ZEPHYR_ENVIRONMENT_NAME": "446cae8b",
+      "ZEPHYR_API_KEY": "0b7f9a57",
+      "startDate": {},
+      "startTime": 2057985062246,
+      "key": "SzB-T253",
+      "index": 102088,
+      "testScriptResults": [
+        {
+          "statusName": "Pass",
+          "actualEndDate": "5181-03-09T17:11:06Z",
+          "actualResult": "Playwright automated test completed"
+        }
+      ],
+      "status": "Pass",
+      "actualEndDate": "5911-07-09T22:37:18Z",
+      "executionTime": 308145,
+      "stepStateSummary": "7c37d0f8"
+    }
+  }
+]

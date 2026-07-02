@@ -123,7 +123,7 @@ paths:
       description: Returns a user based on a single ID, if the user does not have access to the VIP pet which requires a secure access
       operationId: find VIP pet by id
       security:
-        - BearerAuth: [ ]
+        - OAuth2: [ ]
       parameters:
         - name: id
           in: path
@@ -149,8 +149,11 @@ paths:
       description: Updates a single pet based on the ID supplied
       operationId: update VIP Pet
       security:
-        - ApiKeyAuth: [ ]
         - BasicAuth: [ ]
+        - BearerAuth: [ ]
+        - ApiKeyAuth: [ ]
+        - OpenID: [ ]
+        - OAuth2: [ ]
       requestBody:
         description: Pet to update
         required: true
@@ -352,9 +355,6 @@ paths:
   /emoji.list:
     get:
       description: Lists custom emoji for a team.
-      externalDocs:
-        description: API method documentation
-        url: https://api.slack.com/methods/emoji.list
       operationId: emoji_list
       parameters:
         - description: "Weird parameter 1"
@@ -415,6 +415,49 @@ paths:
           description: Typical error response
       tags:
         - Slack
+  /markdown/raw:
+    post:
+      summary: Render a Markdown document in raw mode
+      operationId: markdown/render-raw
+      tags:
+        - GitHub
+      parameters: [ ]
+      requestBody:
+        required: false
+        content:
+          text/plain:
+            schema:
+              type: string
+          text/x-markdown:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Response
+          content:
+            text/html:
+              schema:
+                type: string
+  "/users/{user-id}/media/recent":
+    get:
+      summary: Get the most recent media published by a user.
+      parameters:
+        - description: The ID of a user to get recent media of, or **self** to retrieve
+            media of authenticated user.
+          in: path
+          name: user-id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Users media entries.
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+        - Instagram
 components:
   schemas:
     Pet:
@@ -474,6 +517,20 @@ components:
             carbs:
               type: integer
               format: int32
+        category:
+          type: string
+          enum:
+            - vegetarian
+            - vegan
+            - lactose-free
+            - gluten-free
+        food-pyramid-level:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
     Customer:
       allOf:
         - $ref: '#/components/schemas/NewCustomer'

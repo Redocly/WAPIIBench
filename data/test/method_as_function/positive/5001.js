@@ -1,4 +1,4 @@
-// This tests complex objects as array elements
+// Test complex objects as array elements
 const axios = require('axios');
 axios.post('https://petstore.swagger.io/v2/customers', {
     name: 'name',

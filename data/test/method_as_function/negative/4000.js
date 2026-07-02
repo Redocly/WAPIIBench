@@ -1,4 +1,4 @@
-// This tests objects as attributes, with invalid attribute data types
+// Test objects as attributes with invalid attribute data types
 const axios = require('axios');
 axios.post('https://petstore.swagger.io/v2/foods', {
     name: 'name',
@@ -7,5 +7,5 @@ axios.post('https://petstore.swagger.io/v2/foods', {
         fat: 20,
         carbs: 30,
         calories: 40
-     },
+    }
 });

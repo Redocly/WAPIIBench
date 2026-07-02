@@ -1,4 +1,4 @@
-// This tests objects that exceed the maximum recursion depth
+// Test objects that exceed the maximum recursion depth
 const axios = require('axios');
 axios.post('https://petstore.swagger.io/v2/customers', {
     name: 'name',

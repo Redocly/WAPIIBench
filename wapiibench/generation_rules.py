@@ -7,7 +7,7 @@ import regex as re
 
 class GenerationRule:
     """
-    A generation rule defines how a generated string must look like in terms of a regular expression.
+    A generation rule defines what a generated string must look like in terms of a regular expression.
     Each rule has a starting and a stopping condition to limit the span in which the rule must be satisfied.
     :param starter: The starting condition or ``None``, if the rule should be active immediately
     :param stopper: The stopping condition or ``None``, if the rule should never be deactivated
@@ -25,8 +25,7 @@ class GenerationRule:
         self._body_compiled = re.compile(body, re.ASCII)
 
         self.active = starter is None
-        self.start_pos = 0
-        self.stop_pos = 0
+        self.position = 0
 
     def __repr__(self) -> str:
         starter = self.starter
@@ -41,17 +40,15 @@ class GenerationRule:
         stopper = self.stopper
         body = self.body
         active = self.active
-        start_pos = self.start_pos
-        end_pos = self.stop_pos
-        return f"GenerationRule {name}\n\t{starter=}\n\t{stopper=}\n\t{body[:100]=}\n\t{active=}\n\t{start_pos=}\n\t{end_pos=}"
+        position = self.position
+        return f"GenerationRule {name}\n\t{starter=}\n\t{stopper=}\n\t{body[:100]=}\n\t{active=}\n\t{position=}"
 
     def reset(self) -> None:
         """
         Reset the internal state of this rule.
         """
         self.active = self.starter is None
-        self.start_pos = 0
-        self.stop_pos = 0
+        self.position = 0
 
     def update(self, completion: str) -> bool:
         """
@@ -60,21 +57,27 @@ class GenerationRule:
         :param completion: The new completion
         :return: Whether this rule is active after this update
         """
-        if self.active:
-            # If stopper is None, stay active forever; otherwise check if the stop condition is fulfilled
-            if self.stopper is not None:
-                match = self._stopper_compiled.search(completion, pos=self.start_pos)
-                if match is not None:
-                    self.active = False
-                    self.stop_pos = match.end()
-        else:
-            # If starter is None, the rule was active in the beginning but now stays inactive forever;
-            # otherwise check if the start condition is fulfilled
-            if self.starter is not None:
-                match = self._starter_compiled.search(completion, pos=self.stop_pos)
-                if match is not None:
-                    self.active = True
-                    self.start_pos = match.end()
+        while True:
+            if self.active:
+                # If stopper is None, stay active forever; otherwise check if the stop condition is fulfilled
+                if self.stopper is None:
+                    break
+                match = self._stopper_compiled.search(completion, pos=self.position)
+                if not match:
+                    break
+                self.active = False
+                self.position = match.end()
+            else:
+                # If starter is None, the rule was active in the beginning but now stays inactive forever;
+                # otherwise check if the start condition is fulfilled
+                if self.starter is None:
+                    break
+                match = self._starter_compiled.search(completion, pos=self.position)
+                if not match:
+                    break
+                self.active = True
+                self.position = match.end()
+
         return self.active
 
     def is_valid_continuation(self, completion: str, timeout: float | None = None) -> bool:
@@ -82,11 +85,11 @@ class GenerationRule:
         Check if the given completion would be a valid continuation of the string generated so far.
         Must only be called while this generation rule is active.
         :param completion: The completion so far with a new suffix
-        :param timeout: Cancel regex matching after this amount of seconds and raise a ``TimeoutError``.
+        :param timeout: Cancel regex matching after this number of seconds and raise a ``TimeoutError``.
         :return: If completion satisfies this generation rule
         """
         assert self.active
-        match = self._body_compiled.match(completion, pos=self.start_pos, partial=True, timeout=timeout)
+        match = self._body_compiled.match(completion, pos=self.position, partial=True, timeout=timeout)
         return match is not None
 
     def match_whole_code(self, code: str, partial: bool = False) -> re.Match | None:
@@ -94,7 +97,7 @@ class GenerationRule:
         Check if this rule matches the given code.
         :param code: The code to match against
         :param partial: If a partial match is sufficient
-        :return: A ``Match`` or ``None``
+        :return: The first found ``Match`` or ``None``
         """
         starter_match = self._starter_compiled.search(code, partial=partial)
         if not starter_match or (partial and starter_match.partial):
@@ -106,6 +109,13 @@ class GenerationRule:
         if not stopper_match or (partial and stopper_match.partial):
             return stopper_match
         return body_match
+
+    def export(self) -> str:
+        """
+        Convert this rule to a regex representation that can be used in other applications.
+        :return: This generation rule as a regex string
+        """
+        return self.starter + self.body if self.starter is not None else self.body
 
 
 class GenerationRuleset(list[GenerationRule]):
@@ -135,7 +145,7 @@ class GenerationRuleset(list[GenerationRule]):
         """
         Check if the given completion would be a valid continuation of the string generated so far.
         :param completion: The completion so far with a new suffix
-        :param timeout: Cancel regex matching after this amount of seconds and raise a ``TimeoutError``
+        :param timeout: Cancel regex matching after this number of seconds and raise a ``TimeoutError``
         :return: If completion satisfies all active rules in this ruleset
         """
         for rule in iter(self):
@@ -193,20 +203,18 @@ class GenerationRuleset(list[GenerationRule]):
                 print(state)
             else:
                 logger.info(state)
+            return
 
         for rule in iter(self):
             active = rule.active
             if active_only and not active:
                 continue
-            start_pos = rule.start_pos
-            end_pos = rule.stop_pos
             name = rule.name
-            if completion is None:
-                state = f"GenerationRule {name}\n\t{active=}\n\t{start_pos=}\n\t{end_pos=}"
-            else:
-                state = (f"GenerationRule {name}\n\t{active=}\n"
-                         f"\t{start_pos=}\t=>\t{repr(completion[start_pos]) if start_pos < len(completion) else '$'}\n"
-                         f"\t{end_pos=}\t=>\t{repr(completion[end_pos]) if end_pos < len(completion) else '$'}")
+            position = rule.position
+            state = f"GenerationRule {name}\n\t{active=}\n\t{position=}"
+            if completion:
+                code_snippet = completion[max(0, position - 50):min(position + 50, len(completion))]
+                state += f"\t=>\t{repr(completion[position])}\n{repr(code_snippet)}\n"
             if logger is None:
                 print(state)
             else:
@@ -214,3 +222,13 @@ class GenerationRuleset(list[GenerationRule]):
 
     def __str__(self) -> str:
         return "\n".join([str(rule) for rule in iter(self)])
+
+    def export(self) -> str:
+        """
+        Convert this ruleset to a regex representation that can be used in other applications.
+        :return: This generation ruleset as a regex string
+        """
+        from openapi_utils import join_alternatives
+        rule_regex = join_alternatives(
+            [rule.export() for rule in iter(self) if rule.name != "funnel"], inner_parentheses=False)
+        return fr"(?:(?s:.)*?{rule_regex})+"

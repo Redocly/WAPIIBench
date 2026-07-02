@@ -1,2 +1,3 @@
+// Test wrong data type of path parameter
 const axios = require('axios');
 axios.get(`https://petstore.swagger.io/v2/pets/id`);

@@ -8,19 +8,21 @@ and all evaluation results are provided in our [artifact](https://doi.org/10.528
 
 ### Benchmark
 
-Evaluation pipeline: [wapiibench/evaluation.py](wapiibench/evaluation.py)
+* Evaluation pipeline: [wapiibench/evaluation.py](wapiibench/evaluation.py)
 
-Dataset creation: [wapiibench/dataset_generation.py](wapiibench/dataset_generation.py)
+* OpenAPI specifications: [openapi/real_world_specs/](openapi/real_world_specs)
 
-Full dataset: [data/synthetic/all/test_data_final.json](data/synthetic/all/test_data_final.json)
+* Dataset creation: [wapiibench/dataset_generation.py](wapiibench/dataset_generation.py)
 
-API-specific subsets: `data/synthetic/{api}/test_data_corrected.json`
+* Full dataset: [data/synthetic/all/test_data_final.json](data/synthetic/all/test_data_final.json)
 
-Codes, configs, logs, results: `data/generated/{model}/{api}/{setup}/{setting}/`
+* API-specific subsets: `data/synthetic/{api}/test_data_final.json`
 
-Aggregated results: `data/generated/{model}/all/{setup}/{setting}/results.json`
+* Codes, configs, logs, results: `data/generated/{model}/{api}/{setup}/{setting}/`
 
-Data visualization: [wapiibench/export_results.py](wapiibench/export_results.py)
+* Aggregated results: `data/generated/{model}/all/{setup}/{setting}/results.json`
+
+* Data visualization: [wapiibench/export_results.py](wapiibench/export_results.py)
 
 Running the evaluation pipeline:
 
@@ -36,15 +38,37 @@ python evaluation.py --models 'bigcode/starcoder2-15b' --apis 'asana' 'google_ca
 
 (Further options exist; see `python evaluation.py --help`)
 
+* Validation: [wapiibench/validation.py](wapiibench/validation.py)
+
+* Validation dataset: [validation_data/all/validation_data_final.json](validation_data/all/validation_data_final.json)
+
+* Validation codes, configs, logs, results: `validation_data/generated/{model}/all/{setup}/{setting}/`
+
+Running the validation pipeline:
+
+```commandline
+python validation.py --models MODELS --setups SETUPS --settings SETTINGS
+```
+
+Example:
+
+```commandline
+python validation.py --models 'bigcode/starcoder2-15b' --setups 'invocation' 'endpoint' --settings 'unconstrained'
+```
+
+(Further options exist; see `python validation.py --help`)
+
 ### Constrained Decoding
 
-Translation of OpenAPI specs to regex constraints: [wapiibench/openapi_utils.py](wapiibench/openapi_utils.py)
+* Translation of OpenAPI specs to regex constraints: [wapiibench/openapi_utils.py](wapiibench/openapi_utils.py)
 
-Constrained decoding implementation: [wapiibench/logits_processor.py](wapiibench/logits_processor.py)
+* Constrained decoding implementation: [wapiibench/logits_processor.py](wapiibench/logits_processor.py)
 
-### Retrieval-Augmented Generation (work in progress)
+### Retrieval-Augmented Generation
 
-Retrieval of endpoint documentation from OpenAPI specs: [wapiibench/rag_utils.py](wapiibench/rag_utils.py)
+* Retrieval of endpoint documentation from OpenAPI specs: [wapiibench/rag/retriever.py](wapiibench/rag/retriever.py)
+
+* Unused cf-idf-based implementation: [wapiibench/rag/retriever_alternative.py](wapiibench/rag/retriever_alternative.py)
 
 ## Setup
 
@@ -53,22 +77,25 @@ The minimum Python version is 3.9. We recommend using a virtual environment.
 Install/upgrade basic dependencies:
 
 ```commandline
-pip install --upgrade torch transformers accelerate numpy openapi3-parser pyyaml regex strenum tqdm
+pip install --upgrade 'transformers<5.0.0' torch accelerate numpy openapi3-parser pyyaml regex strenum tqdm
 ```
 
 Additional optional dependencies:
 
-- `openai` for running API-based models
-- `scikit-learn` for retrieval-augmented generation
-- `pandas matplotlib` for plotting results
-- `argilla` for data curation
+* `openai` for running API-based models
+* `langchain langchain-huggingface langchain-chroma chromadb sentence-transformers` for embedding-based
+  retrieval-augmented generation
+* `scikit-learn sentence-transformers` for cf-idf-based retrieval-augmented generation
+* `pandas matplotlib` for plotting results
+* `argilla` for data curation
 
 <details>
 <summary>Special dependencies for certain models</summary>
 
-- `transformers<4.50.0` for codet5p-*b, instructcodet5p-16b, codegen-*B-multi, codegen2-*B_P
-- `transformers<4.41.0 flash-attn` for DeepSeek-Coder-V2-Lite-Base, DeepSeek-Coder-V2-Lite-Instruct (to install
-  `flash-attn` with `pip`, use the flags `--use-pep517` `--no-build-isolation`)
+* `transformers<4.50.0` for codet5p-*b, instructcodet5p-16b, codegen-*B-multi, codegen2-*B_P
+* `transformers<4.41.0 flash-attn` for DeepSeek-Coder-V2-Lite-Base, DeepSeek-Coder-V2-Lite-Instruct (to install
+  `flash-attn` with `pip`, use the flags `--use-pep517` `--no-build-isolation`; if that doesn't work, try installing it
+  from source)
 
 </details>
 

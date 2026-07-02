@@ -1,0 +1,279 @@
+openapi: 3.0.3
+
+info:
+  title: JSON Placeholder
+  description: Free fake API for testing and prototyping.
+  version: 0.1.0
+
+externalDocs:
+  description: "JSON Placeholder's guide"
+  url: https://jsonplaceholder.typicode.com/guide
+
+servers:
+- url: https://jsonplaceholder.typicode.com
+  description: JSON Placeholder
+
+paths:
+  "/posts":
+    get:
+      tags: ["posts"]
+      summary: Returns all posts
+      responses:
+        "200":
+          description: All went well
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/post"
+    post:
+      tags: ["posts"]
+      summary: Create a new post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/post"
+        required: true
+      responses:
+        "200":
+          description: A post was created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/post"
+  "/posts/{id}":
+    parameters:
+    - name: id # Must be same as the value in the {}.
+      # Location of the parameter.
+      # Can be `path`, `cookie`, `query` or `header`
+      in: path
+      description: ID of the post
+      # Since this is in the path, the parameter HAS to be required
+      required: true
+      # Defining the type of the parameter
+      schema:
+        # In this case, it is just a string
+        type: string
+    get:
+      tags: ["post"]
+      summary: Get a single post
+      responses:
+        "200":
+          description: All went well
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/post"
+        # But this time, we can also get a 404 response,
+        # which is an empty JSON object.
+        "404":
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+    put:
+      tags: ["post"]
+      summary: Update a post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/post"
+        required: true
+      responses:
+        "200":
+          description: All went well
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/post"
+        "404":
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+    delete:
+      tags: ["post"]
+      summary: Delete a post
+      responses:
+        "200":
+          description: All went well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        # But this time, we can also get a 404 response,
+        # which is an empty JSON object.
+        "404":
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+  "/users":
+    get:
+      tags: ["users"]
+      summary: Returns all users
+      responses:
+        "200":
+          description: All went well
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+    post:
+      tags: ["users"]
+      summary: Create a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user"
+        required: true
+      responses:
+        "200":
+          description: A user was created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+  "/users/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: ID of the user
+        required: true
+        schema:
+          type: string
+    get:
+      tags: ["user"]
+      summary: Get a single user
+      responses:
+        "200":
+          description: All went well
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+    put:
+      tags: ["user"]
+      summary: Update a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user"
+        required: true
+      responses:
+        "200":
+          description: All went well
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+    delete:
+      tags: ["user"]
+      summary: Delete a user
+      responses:
+        "200":
+          description: All went well
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+
+components:
+  schemas:
+    post:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the post
+        title:
+          type: string
+          description: Title of the post
+        body:
+          type: string
+          description: Body of the post
+        userId:
+          type: number
+          description: ID of the user who created the post
+    user:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the user
+        name:
+          type: string
+          description: Full name of the user
+        username:
+          type: string
+          description: Username of the user
+        email:
+          type: string
+          description: Email address of the user
+        address:
+          type: object
+          description: Address of the user
+          properties: 
+            street:
+              type: string
+            suite:
+              type: string
+            city:
+              type: string
+            zipcode:
+              type: string
+            geo:
+              type: object
+              properties: 
+                lat:
+                  type: string
+                lng:
+                  type: string
+        phone:
+          type: string
+          description: Phone number of the user
+        website:
+          type: string
+          description: Website of the user
+        company:
+          type: object
+          description: Company of the user
+          properties: 
+            name:
+              type: string
+            catchPhrase:
+              type: string
+            bs:
+              type: string

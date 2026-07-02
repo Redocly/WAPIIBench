@@ -1,0 +1,192 @@
+openapi: 3.0.0
+info:
+  title: ServiceNow APIs
+  description: Specification of core REST APIs for the ServiceNow platform
+  version: 1.0.0
+servers:
+  - url: https://instance.service-now.com
+paths:
+  /api/now/table/{table}:
+    get:
+      summary: List records
+      operationId: listRecords
+      parameters:
+        - name: table
+          in: path
+          description: Table name
+          required: true
+          schema:
+            type: string
+        - name: sysparm_query
+          in: query
+          description: Encoded query string
+          required: false
+          schema:
+            type: string
+        - name: sysparm_limit
+          in: query
+          description: Maximum number of results to return
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 1000
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:    
+              schema:
+                $ref: '#/components/schemas/RecordList'
+    post:
+      summary: Create record
+      operationId: createRecord
+      parameters:
+        - name: table
+          in: path
+          description: Table name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordInput'
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+  /api/now/table/{table}/{sys_id}:
+    get:
+      summary: Get a record
+      operationId: getRecord
+      parameters:
+        - name: table
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sys_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+    put:
+      summary: Update a record
+      operationId: updateRecord
+      parameters:
+        - name: table
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sys_id  
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordInput'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+  /api/now/attachment/{sys_id}:
+    get:
+      summary: Get attachment content
+      operationId: getAttachment
+      parameters:
+        - name: sys_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /api/now/attachment:
+    post:
+      summary: Upload attachment
+      operationId: uploadAttachment
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                table_name:
+                  type: string
+                  description: Table name
+                  example: incident
+                table_sys_id:
+                  type: string
+                  description: Table record sys_id
+                  example: d826bf03710993008d66fd788144b091
+                file:
+                  type: string
+                  description: File contents
+                  format: binary
+      responses:
+        201:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+components:
+  schemas:
+    RecordList:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/Record'
+    RecordInput:
+      type: object
+      additionalProperties: true
+    Record:
+      type: object
+      properties:
+        sys_id:
+          type: string
+          readOnly: true
+        sys_created_on:
+          type: string
+          format: date-time
+          readOnly: true
+        name:
+          type: string
+        description:
+          type: string
+    Attachment:
+      type: object 
+      properties:
+        sys_id:
+          type: string
+          readOnly: true
+        file_name:
+          type: string

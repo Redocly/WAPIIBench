@@ -1,4 +1,3 @@
-// This tests if string concatenation is allowed (it shouldn't)
+// Test illegal string path parameters
 const axios = require('axios');
-const name = "johndoe"
-axios.get('https://petstore.swagger.io/v2/customers/' + name);
+axios.get('https://petstore.swagger.io/v2/customers/john?doe');

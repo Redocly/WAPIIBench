@@ -173,6 +173,13 @@ job_*.err
 batch_id.txt
 batch_input.jsonl
 batch_output.jsonl
+batch_error.jsonl
 
 # Exported plots and tables
 export/
+
+# files from RAG
+eval_db*/
+test_db*/
+*.resolved.yaml
+data/test/test_data_cleaned.json

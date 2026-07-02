@@ -11,22 +11,19 @@ mock.onAny().reply(config => {
   } else {
     config.url = url.slice(0, queryIndex);
     const query = url.slice(queryIndex + 1);
-    const keyValuePairs = query.split('&');
+    const keyValuePairs = new URLSearchParams(query);
     if (!Object.hasOwn(config, 'params')) {
       config.params = {};
     }
-    for (const pair of keyValuePairs) {
-      const valueIndex = pair.indexOf('=');
-      if (valueIndex >= 0) {
-        const key = pair.slice(0, valueIndex);
-        const value = pair.slice(valueIndex + 1);
-        if (Object.hasOwn(config.params, key)) {
-          console.warn(`Duplicate query parameter '${key}' - overwriting value '${config.params[key]}' with '${value}'`);
-        }
+    for (const [key, value] of keyValuePairs) {
+      if (Object.hasOwn(config.params, key)) {
+        console.warn(`Duplicate query parameter '${key}' - overwriting value '${config.params[key]}' with '${value}'`);
+      }
+      if (value !== '') {
         config.params[key] = value;
       } else {
-        console.warn(`Could not split keys and values in '${pair}' - assuming value 'true'`);
-        config.params[pair] = true;
+        console.warn(`No value for '${key}' - assuming value 'true'`);
+        config.params[key] = true;
       }
     }
   }
@@ -40,11 +37,8 @@ mock.onAny().reply(config => {
       } else {
         config.data = {};
         data = decodeURIComponent(data.replaceAll('+', ' '));
-        const keyValuePairs = data.split('&');
-        for (const pair of keyValuePairs) {
-          const valueIndex = pair.indexOf('=');
-          let key = pair.slice(0, valueIndex);
-          const value = pair.slice(valueIndex + 1);
+        const keyValuePairs = new URLSearchParams(data);
+        for (let [key, value] of keyValuePairs) {
           if (key.endsWith('[]')) {
             key = key.slice(0, -2);
             if (config.data[key]) {

@@ -1,16 +1,100 @@
 from types import SimpleNamespace
 
+_FULL_MODEL_SELECTION = (
+    "codet5p-6b",
+    "codet5p-16b",
+    "starcoderbase-1b",
+    "starcoderbase-3b",
+    "starcoderbase-7b",
+    "starcoderbase",
+    "starcoder2-3b",
+    "starcoder2-7b",
+    "starcoder2-15b",
+    "deepseek-coder-1.3b-base",
+    "deepseek-coder-6.7b-base",
+    "deepseek-coder-33b-base",
+    "Qwen2.5-Coder-0.5B",
+    "Qwen2.5-Coder-1.5B",
+    "Qwen2.5-Coder-3B",
+    "Qwen2.5-Coder-7B",
+    "Qwen2.5-Coder-14B",
+    "Qwen2.5-Coder-32B",
+    "Llama-3.1-8B",
+    "Llama-3.1-70B",
+    "CodeLlama-7b-hf",
+    "CodeLlama-13b-hf",
+    "CodeLlama-34b-hf",
+    "CodeLlama-70b-hf",
+    "gpt-4o-mini",
+    "gpt-4o",
+)
 
-def full_preset():
+_SMALL_MODEL_SELECTION = (
+    "starcoderbase-1b",
+    "starcoderbase-3b",
+    "starcoder2-3b",
+    "deepseek-coder-1.3b-base",
+    "Qwen2.5-Coder-0.5B",
+    "Qwen2.5-Coder-1.5B",
+    "Qwen2.5-Coder-3B",
+)
+
+_MEDIUM_MODEL_SELECTION = (
+    "codet5p-6b",
+    "codet5p-16b",
+    "starcoderbase-7b",
+    "starcoderbase",
+    "starcoder2-7b",
+    "starcoder2-15b",
+    "deepseek-coder-6.7b-base",
+    "Qwen2.5-Coder-7B",
+    "Qwen2.5-Coder-14B",
+    "Llama-3.1-8B",
+    "CodeLlama-7b-hf",
+    "CodeLlama-13b-hf",
+)
+
+_LARGE_MODEL_SELECTION = (
+    "deepseek-coder-33b-base",
+    "Qwen2.5-Coder-32B",
+    "Llama-3.1-70B",
+    "CodeLlama-34b-hf",
+    "CodeLlama-70b-hf",
+    "gpt-4o-mini",
+    "gpt-4o",
+)
+
+_MODEL_FAMILY_SELECTION = (
+    "codet5p-16b",
+    "starcoderbase",
+    "starcoder2-15b",
+    "deepseek-coder-33b-base",
+    "Qwen2.5-Coder-32B",
+    "Llama-3.1-70B",
+    "CodeLlama-70b-hf",
+    "gpt-4o",
+)
+
+
+def everything():
     args = SimpleNamespace()
-    args.outputs = [
+    args.outputs = (
         "png",
         "pdf",
         "tex",
-    ]
-    args.models = [
+    )
+    args.models = (
+        "codet5-base",
+        "codet5-large",
+        "codet5p-220m",
+        "codet5p-770m",
+        "codet5p-2b",
+        "codet5p-6b",
         "codet5p-16b",
         "instructcodet5p-16b",
+        "starcoderbase-1b",
+        "starcoderbase-3b",
+        "starcoderbase-7b",
         "starcoderbase",
         "starcoder2-3b",
         "starcoder2-7b",
@@ -30,496 +114,485 @@ def full_preset():
         "Llama-3.1-70B",
         "CodeLlama-7b-hf",
         "CodeLlama-13b-hf",
+        "CodeLlama-34b-hf",
         "CodeLlama-70b-hf",
         "gpt-4o-mini",
         "gpt-4o",
         "gemini-pro-1.5",
-    ]
-    args.apis = [
+    )
+    args.apis = (
         "all",
         "asana",
         "google_calendar_v3",
         "google_sheet_v4",
         "slack",
-    ]
-    args.setups = [
-        # "import",
+    )
+    args.setups = (
         "invocation",
         "endpoint",
-    ]
-    args.settings = [
+    )
+    args.settings = (
         "vanilla",
         "rag",
         "constrained",
         "constrained-rag",
-    ]
+    )
     args.metrics = {
-        "argument_name_mean_jaccard_wrt_executable": [
+        "argument_name_mean_jaccard_wrt_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_mean_jaccard_wrt_total": [
+        ),
+        "argument_name_mean_jaccard_wrt_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_mean_precision_wrt_executable": [
+        ),
+        "argument_name_mean_precision_wrt_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_mean_precision_wrt_total": [
+        ),
+        "argument_name_mean_precision_wrt_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_mean_recall_wrt_executable": [
+        ),
+        "argument_name_mean_recall_wrt_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_mean_recall_wrt_total": [
+        ),
+        "argument_name_mean_recall_wrt_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_sum_jaccard_wrt_executable": [
+        ),
+        "argument_name_sum_jaccard_wrt_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_sum_jaccard_wrt_total": [
+        ),
+        "argument_name_sum_jaccard_wrt_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_sum_precision_wrt_executable": [
+        ),
+        "argument_name_sum_precision_wrt_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_sum_precision_wrt_total": [
+        ),
+        "argument_name_sum_precision_wrt_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_sum_recall_wrt_executable": [
+        ),
+        "argument_name_sum_recall_wrt_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_name_sum_recall_wrt_total": [
+        ),
+        "argument_name_sum_recall_wrt_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_mean_accuracy_wrt_all_executable": [
+        ),
+        "argument_value_mean_accuracy_wrt_all_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_mean_accuracy_wrt_all_total": [
+        ),
+        "argument_value_mean_accuracy_wrt_all_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_mean_accuracy_wrt_correct_executable": [
+        ),
+        "argument_value_mean_accuracy_wrt_correct_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_mean_accuracy_wrt_correct_total": [
+        ),
+        "argument_value_mean_accuracy_wrt_correct_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_mean_accuracy_wrt_expected_executable": [
+        ),
+        "argument_value_mean_accuracy_wrt_expected_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_mean_accuracy_wrt_expected_total": [
+        ),
+        "argument_value_mean_accuracy_wrt_expected_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_sum_accuracy_wrt_all_executable": [
+        ),
+        "argument_value_sum_accuracy_wrt_all_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_sum_accuracy_wrt_all_total": [
+        ),
+        "argument_value_sum_accuracy_wrt_all_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_sum_accuracy_wrt_correct_executable": [
+        ),
+        "argument_value_sum_accuracy_wrt_correct_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_sum_accuracy_wrt_correct_total": [
+        ),
+        "argument_value_sum_accuracy_wrt_correct_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_sum_accuracy_wrt_expected_executable": [
+        ),
+        "argument_value_sum_accuracy_wrt_expected_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "argument_value_sum_accuracy_wrt_expected_total": [
+        ),
+        "argument_value_sum_accuracy_wrt_expected_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_all_executable": [
+        ),
+        "arguments_all_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_all_total": [
+        ),
+        "arguments_all_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_correct_name": [
+        ),
+        "arguments_correct_name": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_correct_name_wrt_expected_executable": [
+        ),
+        "arguments_correct_name_wrt_expected_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_correct_name_wrt_expected_total": [
+        ),
+        "arguments_correct_name_wrt_expected_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_correct_value": [
+        ),
+        "arguments_correct_value": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_correct_value_wrt_expected_executable": [
+        ),
+        "arguments_correct_value_wrt_expected_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_correct_value_wrt_expected_total": [
+        ),
+        "arguments_correct_value_wrt_expected_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_expected_executable": [
+        ),
+        "arguments_expected_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_expected_total": [
+        ),
+        "arguments_expected_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_illegal": [
+        ),
+        "arguments_illegal": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_illegal_wrt_all_executable": [
+        ),
+        "arguments_illegal_wrt_all_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_illegal_wrt_all_total": [
+        ),
+        "arguments_illegal_wrt_all_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_missing_executable": [
+        ),
+        "arguments_missing_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_missing_total": [
+        ),
+        "arguments_missing_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_missing_wrt_expected_executable": [
+        ),
+        "arguments_missing_wrt_expected_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_missing_wrt_expected_total": [
+        ),
+        "arguments_missing_wrt_expected_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_unexpected": [
+        ),
+        "arguments_unexpected": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_unexpected_wrt_all_executable": [
+        ),
+        "arguments_unexpected_wrt_all_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_unexpected_wrt_all_total": [
+        ),
+        "arguments_unexpected_wrt_all_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_unnecessary": [
+        ),
+        "arguments_unnecessary": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_unnecessary_wrt_all_executable": [
+        ),
+        "arguments_unnecessary_wrt_all_executable": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "arguments_unnecessary_wrt_all_total": [
+        ),
+        "arguments_unnecessary_wrt_all_total": (
             "all",
             "data",
             "headers",
             "params",
             "path_params",
-        ],
-        "endpoints_correct": [],
-        "endpoints_correct_wrt_executable": [],
-        "endpoints_correct_wrt_total": [],
-        "endpoints_illegal": [],
-        "endpoints_illegal_wrt_executable": [],
-        "endpoints_illegal_wrt_total": [],
-        "endpoints_wrong": [],
-        "endpoints_wrong_wrt_executable": [],
-        "endpoints_wrong_wrt_total": [],
-        "errors_incomplete_request": [],
-        "errors_incomplete_request_wrt_errors": [],
-        "errors_incomplete_request_wrt_samples": [],
-        "errors_no_request": [],
-        "errors_no_request_wrt_errors": [],
-        "errors_no_request_wrt_samples": [],
-        "errors_runtime_error": [],
-        "errors_runtime_error_wrt_errors": [],
-        "errors_runtime_error_wrt_samples": [],
-        "errors_timeout": [],
-        "errors_timeout_wrt_errors": [],
-        "errors_timeout_wrt_samples": [],
-        "errors_total": [],
-        "errors_total_wrt_samples": [],
-        "errors_unsatisfiable": [],
-        "errors_unsatisfiable_wrt_errors": [],
-        "errors_unsatisfiable_wrt_samples": [],
-        "methods_correct": [],
-        "methods_correct_wrt_executable": [],
-        "methods_correct_wrt_total": [],
-        "methods_illegal": [],
-        "methods_illegal_wrt_executable": [],
-        "methods_illegal_wrt_total": [],
-        "methods_wrong": [],
-        "methods_wrong_wrt_executable": [],
-        "methods_wrong_wrt_total": [],
-        "samples_correct": [],
-        "samples_correct_wrt_executable": [],
-        "samples_correct_wrt_total": [],
-        "samples_executable": [],
-        "samples_executable_wrt_total": [],
-        "samples_illegal": [],
-        "samples_illegal_wrt_executable": [],
-        "samples_illegal_wrt_total": [],
-        "samples_nonexecutable": [],
-        "samples_total": [],
-        "samples_wrong": [],
-        "samples_wrong_wrt_executable": [],
-        "samples_wrong_wrt_total": [],
-        "urls_correct": [],
-        "urls_correct_wrt_executable": [],
-        "urls_correct_wrt_total": [],
-        "urls_illegal": [],
-        "urls_illegal_wrt_executable": [],
-        "urls_illegal_wrt_total": [],
-        "urls_wrong": [],
-        "urls_wrong_wrt_executable": [],
-        "urls_wrong_wrt_total": [],
+        ),
+        "endpoints_correct": (),
+        "endpoints_correct_wrt_executable": (),
+        "endpoints_correct_wrt_total": (),
+        "endpoints_illegal": (),
+        "endpoints_illegal_wrt_executable": (),
+        "endpoints_illegal_wrt_total": (),
+        "endpoints_wrong": (),
+        "endpoints_wrong_wrt_executable": (),
+        "endpoints_wrong_wrt_total": (),
+        "errors_incomplete_request": (),
+        "errors_incomplete_request_wrt_errors": (),
+        "errors_incomplete_request_wrt_samples": (),
+        "errors_no_request": (),
+        "errors_no_request_wrt_errors": (),
+        "errors_no_request_wrt_samples": (),
+        "errors_runtime_error": (),
+        "errors_runtime_error_wrt_errors": (),
+        "errors_runtime_error_wrt_samples": (),
+        "errors_timeout": (),
+        "errors_timeout_wrt_errors": (),
+        "errors_timeout_wrt_samples": (),
+        "errors_total": (),
+        "errors_total_wrt_samples": (),
+        "errors_unsatisfiable": (),
+        "errors_unsatisfiable_wrt_errors": (),
+        "errors_unsatisfiable_wrt_samples": (),
+        "methods_correct": (),
+        "methods_correct_wrt_executable": (),
+        "methods_correct_wrt_total": (),
+        "methods_illegal": (),
+        "methods_illegal_wrt_executable": (),
+        "methods_illegal_wrt_total": (),
+        "methods_wrong": (),
+        "methods_wrong_wrt_executable": (),
+        "methods_wrong_wrt_total": (),
+        "samples_correct": (),
+        "samples_correct_wrt_executable": (),
+        "samples_correct_wrt_total": (),
+        "samples_executable": (),
+        "samples_executable_wrt_total": (),
+        "samples_illegal": (),
+        "samples_illegal_wrt_executable": (),
+        "samples_illegal_wrt_total": (),
+        "samples_nonexecutable": (),
+        "samples_total": (),
+        "samples_wrong": (),
+        "samples_wrong_wrt_executable": (),
+        "samples_wrong_wrt_total": (),
+        "urls_correct": (),
+        "urls_correct_wrt_executable": (),
+        "urls_correct_wrt_total": (),
+        "urls_illegal": (),
+        "urls_illegal_wrt_executable": (),
+        "urls_illegal_wrt_total": (),
+        "urls_wrong": (),
+        "urls_wrong_wrt_executable": (),
+        "urls_wrong_wrt_total": (),
     }
     args.row_renaming = _default_metric_renaming(args)
     args.column_renaming = _default_api_renaming(args)
-    args.filename = "full"
+    args.filename = "everything"
     args.delete_t_and_e = False
     args.show_legend = True
     return args
 
 
-def single_model_plot_preset(model):
+def single_model_plot(model):
     args = SimpleNamespace()
-    args.outputs = ["pdf"]
-    args.models = [model]
-    args.apis = ["all"]
-    args.setups = [
+    args.outputs = ("pdf",)
+    args.models = (model,)
+    args.apis = ("all",)
+    args.setups = (
         "invocation",
         "endpoint",
-    ]
-    args.settings = [
+    )
+    args.settings = (
         "vanilla",
         "constrained",
-    ]
+    )
     args.metrics = {
-        "samples_executable_wrt_total": [],
-        "samples_correct_wrt_executable": [],
-        "samples_wrong_wrt_executable": [],
-        "samples_illegal_wrt_executable": [],
-        "methods_correct_wrt_executable": [],
-        "methods_wrong_wrt_executable": [],
-        "methods_illegal_wrt_executable": [],
-        "urls_correct_wrt_executable": [],
-        "urls_wrong_wrt_executable": [],
-        "urls_illegal_wrt_executable": [],
-        "arguments_correct_name_wrt_expected_executable": ["all"],
-        "arguments_correct_value_wrt_expected_executable": ["all"],
-        "arguments_missing_wrt_expected_executable": ["all"],
-        "arguments_unnecessary_wrt_all_executable": ["all"],
-        "arguments_illegal_wrt_all_executable": ["all"],
-        "argument_name_mean_precision_wrt_executable": ["all"],
-        "argument_name_mean_recall_wrt_executable": ["all"],
-        "argument_name_mean_jaccard_wrt_executable": ["all"],
-        "argument_value_mean_accuracy_wrt_correct_executable": ["all"],
+        "samples_executable_wrt_total": (),
+        "samples_correct_wrt_executable": (),
+        "samples_wrong_wrt_executable": (),
+        "samples_illegal_wrt_executable": (),
+        "methods_correct_wrt_executable": (),
+        "methods_wrong_wrt_executable": (),
+        "methods_illegal_wrt_executable": (),
+        "urls_correct_wrt_executable": (),
+        "urls_wrong_wrt_executable": (),
+        "urls_illegal_wrt_executable": (),
+        "arguments_correct_name_wrt_expected_executable": ("all",),
+        "arguments_correct_value_wrt_expected_executable": ("all",),
+        "arguments_missing_wrt_expected_executable": ("all",),
+        "arguments_unnecessary_wrt_all_executable": ("all",),
+        "arguments_illegal_wrt_all_executable": ("all",),
+        "argument_name_mean_precision_wrt_executable": ("all",),
+        "argument_name_mean_recall_wrt_executable": ("all",),
+        "argument_name_mean_jaccard_wrt_executable": ("all",),
+        "argument_value_mean_accuracy_wrt_correct_executable": ("all",),
     }
     args.row_renaming = _default_metric_renaming(args)
     args.column_renaming = _setup_setting_renaming(args)
     args.filename = f"{'-'.join(args.models)}"
-    args.delete_t_and_e = True
+    args.delete_t_and_e = False
     args.show_legend = True
     return args
 
 
-def multi_model_plot_preset(setup, setting):
+def multi_model_plot(setup, setting):
     args = SimpleNamespace()
-    args.outputs = ["pdf"]
-    args.models = [
-        "codet5p-16b",
-        "starcoderbase",
-        "starcoder2-15b",
-        "deepseek-coder-6.7b-base",
-        "DeepSeek-Coder-V2-Lite-Base",
-        "Qwen2.5-Coder-14B",
-        "Llama-3.1-8B",
-        "CodeLlama-13b-hf",
-        "CodeLlama-70b-hf",
-        "gpt-4o",
-    ]
-    args.apis = ["all"]
-    args.setups = [setup]
-    args.settings = [setting]
+    args.outputs = ("pdf",)
+    args.models = _MODEL_FAMILY_SELECTION
+    args.apis = ("all",)
+    args.setups = (setup,)
+    args.settings = (setting,)
     args.metrics = {
-        "samples_correct_wrt_total": [],
-        "samples_illegal_wrt_executable": [],
-        "urls_correct_wrt_executable": [],
-        "urls_illegal_wrt_executable": [],
-        "methods_correct_wrt_executable": [],
-        "methods_illegal_wrt_executable": [],
-        "argument_name_mean_precision_wrt_executable": ["all"],
-        "argument_name_mean_recall_wrt_executable": ["all"],
-        "arguments_illegal_wrt_all_executable": ["all"],
-        "argument_value_mean_accuracy_wrt_correct_executable": ["all"],
+        "samples_correct_wrt_total": (),
+        "samples_illegal_wrt_executable": (),
+        "urls_correct_wrt_executable": (),
+        "urls_illegal_wrt_executable": (),
+        "methods_correct_wrt_executable": (),
+        "methods_illegal_wrt_executable": (),
+        "argument_name_mean_precision_wrt_executable": ("all",),
+        "argument_name_mean_recall_wrt_executable": ("all",),
+        "arguments_illegal_wrt_all_executable": ("all",),
+        "argument_value_mean_accuracy_wrt_correct_executable": ("all",),
     }
     if setup == "endpoint":
         del args.metrics["methods_correct_wrt_executable"]
@@ -530,7 +603,8 @@ def multi_model_plot_preset(setup, setting):
         del args.metrics["arguments_illegal_wrt_all_executable"]
         del args.metrics["samples_illegal_wrt_executable"]
     if "constrained" in setting:
-        args.models = [model for model in args.models if not (model.startswith("gpt-") or model.startswith("gemini-"))]
+        args.models = [model for model in args.models if
+                       not (model.startswith("gpt-") or model.startswith("gemini-") or model == "CodeLlama-34b-hf")]
     args.row_renaming = _default_metric_renaming(args)
     args.column_renaming = _default_model_renaming(args)
     args.filename = f"multi_{'-'.join(args.setups)}_{'-'.join(args.settings)}"
@@ -539,58 +613,58 @@ def multi_model_plot_preset(setup, setting):
     return args
 
 
-def single_model_table_preset(model, setup, setting):
+def single_model_table(model, setup, setting):
     args = SimpleNamespace()
-    args.outputs = ["tex"]
-    args.models = [model]
-    args.apis = [
+    args.outputs = ("tex",)
+    args.models = (model,)
+    args.apis = (
         "all",
         "asana",
         "google_calendar_v3",
         "google_sheet_v4",
         "slack",
-    ]
-    args.setups = [setup]
-    args.settings = [setting]
+    )
+    args.setups = (setup,)
+    args.settings = (setting,)
     args.metrics = {
-        "samples_executable_wrt_total": [],
-        "samples_correct_wrt_total": [],
-        "samples_correct_wrt_executable": [],
-        "samples_illegal_wrt_total": [],
-        "samples_illegal_wrt_executable": [],
-        "urls_correct_wrt_total": [],
-        "urls_correct_wrt_executable": [],
-        "urls_illegal_wrt_total": [],
-        "urls_illegal_wrt_executable": [],
-        "methods_correct_wrt_total": [],
-        "methods_correct_wrt_executable": [],
-        "methods_illegal_wrt_total": [],
-        "methods_illegal_wrt_executable": [],
-        "arguments_correct_name_wrt_expected_total": ["all"],
-        "arguments_correct_name_wrt_expected_executable": ["all"],
-        "arguments_correct_value_wrt_expected_total": ["all"],
-        "arguments_correct_value_wrt_expected_executable": ["all"],
-        "arguments_missing_wrt_expected_total": ["all"],
-        "arguments_missing_wrt_expected_executable": ["all"],
-        "arguments_unexpected_wrt_all_total": ["all"],
-        "arguments_unexpected_wrt_all_executable": ["all"],
-        "arguments_unnecessary_wrt_all_total": ["all"],
-        "arguments_unnecessary_wrt_all_executable": ["all"],
-        "arguments_illegal_wrt_all_total": ["all"],
-        "arguments_illegal_wrt_all_executable": ["all"],
-        "argument_name_mean_precision_wrt_total": ["all"],
-        "argument_name_mean_precision_wrt_executable": ["all"],
-        "argument_name_mean_recall_wrt_total": ["all"],
-        "argument_name_mean_recall_wrt_executable": ["all"],
-        "argument_name_mean_jaccard_wrt_total": ["all"],
-        "argument_name_mean_jaccard_wrt_executable": ["all"],
-        "argument_value_mean_accuracy_wrt_correct_total": ["all"],
-        "argument_value_mean_accuracy_wrt_correct_executable": ["all"],
-        "errors_total": [],
-        "errors_incomplete_request": [],
-        "errors_runtime_error": [],
-        "errors_timeout": [],
-        "errors_unsatisfiable": [],
+        "samples_executable_wrt_total": (),
+        "samples_correct_wrt_total": (),
+        "samples_correct_wrt_executable": (),
+        "samples_illegal_wrt_total": (),
+        "samples_illegal_wrt_executable": (),
+        "urls_correct_wrt_total": (),
+        "urls_correct_wrt_executable": (),
+        "urls_illegal_wrt_total": (),
+        "urls_illegal_wrt_executable": (),
+        "methods_correct_wrt_total": (),
+        "methods_correct_wrt_executable": (),
+        "methods_illegal_wrt_total": (),
+        "methods_illegal_wrt_executable": (),
+        "arguments_correct_name_wrt_expected_total": ("all",),
+        "arguments_correct_name_wrt_expected_executable": ("all",),
+        "arguments_correct_value_wrt_expected_total": ("all",),
+        "arguments_correct_value_wrt_expected_executable": ("all",),
+        "arguments_missing_wrt_expected_total": ("all",),
+        "arguments_missing_wrt_expected_executable": ("all",),
+        "arguments_unexpected_wrt_all_total": ("all",),
+        "arguments_unexpected_wrt_all_executable": ("all",),
+        "arguments_unnecessary_wrt_all_total": ("all",),
+        "arguments_unnecessary_wrt_all_executable": ("all",),
+        "arguments_illegal_wrt_all_total": ("all",),
+        "arguments_illegal_wrt_all_executable": ("all",),
+        "argument_name_mean_precision_wrt_total": ("all",),
+        "argument_name_mean_precision_wrt_executable": ("all",),
+        "argument_name_mean_recall_wrt_total": ("all",),
+        "argument_name_mean_recall_wrt_executable": ("all",),
+        "argument_name_mean_jaccard_wrt_total": ("all",),
+        "argument_name_mean_jaccard_wrt_executable": ("all",),
+        "argument_value_mean_accuracy_wrt_correct_total": ("all",),
+        "argument_value_mean_accuracy_wrt_correct_executable": ("all",),
+        "errors_total": (),
+        "errors_incomplete_request": (),
+        "errors_runtime_error": (),
+        "errors_timeout": (),
+        "errors_unsatisfiable": (),
     }
     if setup == "endpoint":
         del args.metrics["urls_correct_wrt_total"]
@@ -620,79 +694,62 @@ def single_model_table_preset(model, setup, setting):
     return args
 
 
-def multi_model_table_preset(setup, setting):
+def multi_model_table(setup, setting):
     args = SimpleNamespace()
-    args.outputs = ["tex"]
-    args.models = [
-        "codet5p-16b",
-        "starcoderbase",
-        "starcoder2-3b",
-        "starcoder2-7b",
-        "starcoder2-15b",
-        "deepseek-coder-1.3b-base",
-        "deepseek-coder-6.7b-base",
-        "deepseek-coder-7b-base-v1.5",
-        "deepseek-coder-33b-base",
-        "DeepSeek-Coder-V2-Lite-Base",
-        "Qwen2.5-Coder-0.5B",
-        "Qwen2.5-Coder-1.5B",
-        "Qwen2.5-Coder-3B",
-        "Qwen2.5-Coder-7B",
-        "Qwen2.5-Coder-14B",
-        "Qwen2.5-Coder-32B",
-        "Llama-3.1-8B",
-        "Llama-3.1-70B",
-        "CodeLlama-7b-hf",
-        "CodeLlama-13b-hf",
-        "CodeLlama-70b-hf",
-        "gemini-pro-1.5",
-        "gpt-4o-mini",
-        "gpt-4o",
-    ]
-    args.apis = ["all"]
-    args.setups = [setup]
-    args.settings = [setting]
+    args.outputs = ("tex",)
+    args.models = _FULL_MODEL_SELECTION
+    args.apis = ("all",)
+    args.setups = (setup,)
+    args.settings = (setting,)
     args.metrics = {
-        "samples_executable_wrt_total": [],
-        "samples_correct_wrt_total": [],
-        "samples_correct_wrt_executable": [],
-        "samples_illegal_wrt_total": [],
-        "samples_illegal_wrt_executable": [],
-        "urls_correct_wrt_total": [],
-        "urls_correct_wrt_executable": [],
-        "urls_illegal_wrt_total": [],
-        "urls_illegal_wrt_executable": [],
-        "methods_correct_wrt_total": [],
-        "methods_correct_wrt_executable": [],
-        "methods_illegal_wrt_total": [],
-        "methods_illegal_wrt_executable": [],
-        "arguments_correct_name_wrt_expected_total": ["all"],
-        "arguments_correct_name_wrt_expected_executable": ["all"],
-        "arguments_correct_value_wrt_expected_total": ["all"],
-        "arguments_correct_value_wrt_expected_executable": ["all"],
-        "arguments_missing_wrt_expected_total": ["all"],
-        "arguments_missing_wrt_expected_executable": ["all"],
-        "arguments_unexpected_wrt_all_total": ["all"],
-        "arguments_unexpected_wrt_all_executable": ["all"],
-        "arguments_unnecessary_wrt_all_total": ["all"],
-        "arguments_unnecessary_wrt_all_executable": ["all"],
-        "arguments_illegal_wrt_all_total": ["all"],
-        "arguments_illegal_wrt_all_executable": ["all"],
-        "argument_name_mean_precision_wrt_total": ["all"],
-        "argument_name_mean_precision_wrt_executable": ["all"],
-        "argument_name_mean_recall_wrt_total": ["all"],
-        "argument_name_mean_recall_wrt_executable": ["all"],
-        "argument_name_mean_jaccard_wrt_total": ["all"],
-        "argument_name_mean_jaccard_wrt_executable": ["all"],
-        "argument_value_mean_accuracy_wrt_correct_total": ["all"],
-        "argument_value_mean_accuracy_wrt_correct_executable": ["all"],
-        "errors_total": [],
-        "errors_incomplete_request": [],
-        "errors_runtime_error": [],
-        "errors_timeout": [],
-        "errors_unsatisfiable": [],
+        "samples_executable_wrt_total": (),
+        "samples_correct_wrt_total": (),
+        "samples_correct_wrt_executable": (),
+        "samples_illegal_wrt_total": (),
+        "samples_illegal_wrt_executable": (),
+        "endpoints_correct_wrt_total": (),
+        "endpoints_correct_wrt_executable": (),
+        "endpoints_illegal_wrt_total": (),
+        "endpoints_illegal_wrt_executable": (),
+        "urls_correct_wrt_total": (),
+        "urls_correct_wrt_executable": (),
+        "urls_illegal_wrt_total": (),
+        "urls_illegal_wrt_executable": (),
+        "methods_correct_wrt_total": (),
+        "methods_correct_wrt_executable": (),
+        "methods_illegal_wrt_total": (),
+        "methods_illegal_wrt_executable": (),
+        "arguments_correct_name_wrt_expected_total": ("all",),
+        "arguments_correct_name_wrt_expected_executable": ("all",),
+        "arguments_correct_value_wrt_expected_total": ("all",),
+        "arguments_correct_value_wrt_expected_executable": ("all",),
+        "arguments_missing_wrt_expected_total": ("all",),
+        "arguments_missing_wrt_expected_executable": ("all",),
+        "arguments_unexpected_wrt_all_total": ("all",),
+        "arguments_unexpected_wrt_all_executable": ("all",),
+        "arguments_unnecessary_wrt_all_total": ("all",),
+        "arguments_unnecessary_wrt_all_executable": ("all",),
+        "arguments_illegal_wrt_all_total": ("all",),
+        "arguments_illegal_wrt_all_executable": ("all",),
+        "argument_name_mean_precision_wrt_total": ("all",),
+        "argument_name_mean_precision_wrt_executable": ("all",),
+        "argument_name_mean_recall_wrt_total": ("all",),
+        "argument_name_mean_recall_wrt_executable": ("all",),
+        "argument_name_mean_jaccard_wrt_total": ("all",),
+        "argument_name_mean_jaccard_wrt_executable": ("all",),
+        "argument_value_mean_accuracy_wrt_correct_total": ("all",),
+        "argument_value_mean_accuracy_wrt_correct_executable": ("all",),
+        "errors_total": (),
+        "errors_incomplete_request": (),
+        "errors_runtime_error": (),
+        "errors_timeout": (),
+        "errors_unsatisfiable": (),
     }
     if setup == "endpoint":
+        del args.metrics["endpoints_correct_wrt_total"]
+        del args.metrics["endpoints_correct_wrt_executable"]
+        del args.metrics["endpoints_illegal_wrt_total"]
+        del args.metrics["endpoints_illegal_wrt_executable"]
         del args.metrics["urls_correct_wrt_total"]
         del args.metrics["urls_correct_wrt_executable"]
         del args.metrics["urls_illegal_wrt_total"]
@@ -711,7 +768,8 @@ def multi_model_table_preset(setup, setting):
         del args.metrics["arguments_illegal_wrt_all_total"]
         del args.metrics["arguments_illegal_wrt_all_executable"]
     if "constrained" in setting:
-        args.models = [model for model in args.models if not (model.startswith("gpt-") or model.startswith("gemini-"))]
+        args.models = [model for model in args.models if
+                       not (model.startswith("gpt-") or model.startswith("gemini-") or model == "CodeLlama-34b-hf")]
     else:
         del args.metrics["errors_timeout"]
         del args.metrics["errors_unsatisfiable"]
@@ -722,39 +780,14 @@ def multi_model_table_preset(setup, setting):
     return args
 
 
-def multi_model_submetric_table_preset(setup, setting):
+def multi_model_submetric_table(setup, setting):
     args = SimpleNamespace()
-    args.outputs = ["tex"]
-    args.models = [
-        "codet5p-16b",
-        "starcoderbase",
-        "starcoder2-3b",
-        "starcoder2-7b",
-        "starcoder2-15b",
-        "deepseek-coder-1.3b-base",
-        "deepseek-coder-6.7b-base",
-        "deepseek-coder-7b-base-v1.5",
-        "deepseek-coder-33b-base",
-        "DeepSeek-Coder-V2-Lite-Base",
-        "Qwen2.5-Coder-0.5B",
-        "Qwen2.5-Coder-1.5B",
-        "Qwen2.5-Coder-3B",
-        "Qwen2.5-Coder-7B",
-        "Qwen2.5-Coder-14B",
-        "Qwen2.5-Coder-32B",
-        "Llama-3.1-8B",
-        "Llama-3.1-70B",
-        "CodeLlama-7b-hf",
-        "CodeLlama-13b-hf",
-        "CodeLlama-70b-hf",
-        "gemini-pro-1.5",
-        "gpt-4o-mini",
-        "gpt-4o",
-    ]
-    args.apis = ["all"]
-    args.setups = [setup]
-    args.settings = [setting]
-    submetrics = ["all", "path_params", "params", "headers", "data"]
+    args.outputs = ("tex",)
+    args.models = _FULL_MODEL_SELECTION
+    args.apis = ("all",)
+    args.setups = (setup,)
+    args.settings = (setting,)
+    submetrics = ("all", "path_params", "params", "headers", "data")
     args.metrics = {
         "arguments_correct_name_wrt_expected_total": submetrics,
         "arguments_correct_name_wrt_expected_executable": submetrics,
@@ -786,7 +819,8 @@ def multi_model_submetric_table_preset(setup, setting):
         del args.metrics["arguments_illegal_wrt_all_total"]
         del args.metrics["arguments_illegal_wrt_all_executable"]
     if "constrained" in setting:
-        args.models = [model for model in args.models if not (model.startswith("gpt-") or model.startswith("gemini-"))]
+        args.models = [model for model in args.models if
+                       not (model.startswith("gpt-") or model.startswith("gemini-") or model == "CodeLlama-34b-hf")]
     args.row_renaming = _default_metric_renaming(args)
     args.column_renaming = _default_model_renaming(args)
     args.filename = f"multi_submetric_{'-'.join(args.setups)}_{'-'.join(args.settings)}"
@@ -794,114 +828,102 @@ def multi_model_submetric_table_preset(setup, setting):
     return args
 
 
-def compact_table_preset(model):
+def compact_table(model):
     args = SimpleNamespace()
-    args.outputs = ["tex"]
-    args.models = [model]
-    args.apis = ["all"]
-    args.setups = [
+    args.outputs = ("tex",)
+    args.models = (model,)
+    args.apis = ("all",)
+    args.setups = (
         "invocation",
         "endpoint",
-    ]
-    args.settings = [
+    )
+    args.settings = (
         "vanilla",
         "constrained",
-    ]
+    )
     args.metrics = {
-        "samples_correct_wrt_executable": [],
-        "samples_executable_wrt_total": [],
-        "samples_illegal_wrt_executable": [],
-        "urls_correct_wrt_executable": [],
-        "urls_illegal_wrt_executable": [],
-        "methods_correct_wrt_executable": [],
-        "methods_illegal_wrt_executable": [],
-        "arguments_correct_name_wrt_expected_executable": ["all"],
-        "arguments_correct_value_wrt_expected_executable": ["all"],
-        "arguments_illegal_wrt_all_executable": ["all"],
-        "argument_name_mean_precision_wrt_executable": ["all"],
-        "argument_name_mean_recall_wrt_executable": ["all"],
+        "samples_correct_wrt_executable": (),
+        "samples_executable_wrt_total": (),
+        "samples_illegal_wrt_executable": (),
+        "urls_correct_wrt_executable": (),
+        "urls_illegal_wrt_executable": (),
+        "methods_correct_wrt_executable": (),
+        "methods_illegal_wrt_executable": (),
+        "arguments_correct_name_wrt_expected_executable": ("all",),
+        "arguments_correct_value_wrt_expected_executable": ("all",),
+        "arguments_illegal_wrt_all_executable": ("all",),
+        "argument_name_mean_precision_wrt_executable": ("all",),
+        "argument_name_mean_recall_wrt_executable": ("all",),
     }
     args.row_renaming = _default_metric_renaming(args)
     args.column_renaming = _setup_setting_renaming(args)
-    args.filename = f"{'-'.join(args.models)}_compact"
+    args.filename = f"compact_{'-'.join(args.models)}"
     args.delete_t_and_e = False
     return args
 
 
-def ud_cd_comparison_preset(metric, setup):
+def settings_improvement(metric, *setups):
     args = SimpleNamespace()
-    args.outputs = ["pdf"]
+    args.outputs = ("tex",)
     args.models = [
-        "codet5p-16b",
-        "starcoderbase",
-        "starcoder2-7b",
-        "starcoder2-15b",
-        "deepseek-coder-6.7b-base",
-        "deepseek-coder-33b-base",
-        "DeepSeek-Coder-V2-Lite-Base",
-        "Qwen2.5-Coder-7B",
-        "Qwen2.5-Coder-14B",
-        "Qwen2.5-Coder-32B",
-        "Llama-3.1-8B",
-        "Llama-3.1-70B",
-        "CodeLlama-7b-hf",
-        "CodeLlama-13b-hf",
-        "CodeLlama-70b-hf",
-    ]
-    args.apis = ["all"]
-    args.setups = [setup]
-    args.settings = None
-    args.metrics = [metric]
+        model for model in _FULL_MODEL_SELECTION if not (model.startswith("gpt-") or model.startswith("gemini-"))]
+    args.apis = ("all",)
+    args.setups = setups
+    args.settings = ("vanilla", "constrained")
+    args.metrics = (metric,)
     args.row_renaming = MODEL_MAP
     args.column_renaming = None
-    args.filename = "ud-vs-cd"
-    args.delete_t_and_e = False
+    args.filename = f"improvement_{'-'.join(args.settings)}"
+    args.delete_t_and_e = True
     args.show_legend = True
     return args
 
 
-def settings_comparison_preset(metric, setup):
+def settings_comparison(metric, setup):
     args = SimpleNamespace()
-    args.outputs = ["pdf"]
-    args.models = [
-        "codet5p-16b",
-        "starcoderbase",
-        "starcoder2-15b",
-        "deepseek-coder-6.7b-base",
-        "DeepSeek-Coder-V2-Lite-Base",
-        "Qwen2.5-Coder-14B",
-        "Llama-3.1-8B",
-        "CodeLlama-13b-hf",
-        "CodeLlama-70b-hf",
-        "gpt-4o",
-    ]
-    args.apis = ["all"]
-    args.setups = [setup]
-    args.settings = [
+    args.outputs = ("pdf",)
+    args.models = _FULL_MODEL_SELECTION
+    args.apis = ("all",)
+    args.setups = (setup,)
+    args.settings = (
         "vanilla",
         "rag",
         "constrained",
         "constrained-rag",
-    ]
-    args.metrics = [metric]
+    )
+    args.metrics = (metric,)
     args.row_renaming = MODEL_MAP
     args.column_renaming = SETTING_MAP
     args.filename = "comparison"
-    args.delete_t_and_e = False
+    args.delete_t_and_e = True
     args.show_legend = True
     return args
 
 
+SETUP_MAP = {
+    "invocation": "Full completion",
+    "endpoint": "Argument completion",
+}
+
 SETTING_MAP = {
     "vanilla": "Vanilla",
     "rag": "RAG",
-    "constrained": "Constrained",
-    "constrained-rag": "Constrained + RAG",
+    "constrained": "CD",
+    "constrained-rag": "RAG + CD",
 }
 
 MODEL_MAP = {
+    "codet5-base": "CodeT5 (220M)",
+    "codet5-large": "CodeT5 (770M)",
+    "codet5p-220m": "CodeT5+ (220M)",
+    "codet5p-770m": "CodeT5+ (770M)",
+    "codet5p-2b": "CodeT5+ (2B)",
+    "codet5p-6b": "CodeT5+ (6B)",
     "codet5p-16b": "CodeT5+ (16B)",
     "instructcodet5p-16b": "InstructCodeT5+ (16B)",
+    "starcoderbase-1b": "StarCoder (1B)",
+    "starcoderbase-3b": "StarCoder (3B)",
+    "starcoderbase-7b": "StarCoder (7B)",
     "starcoderbase": "StarCoder (15.5B)",
     "starcoder2-3b": "StarCoder2 (3B)",
     "starcoder2-7b": "StarCoder2 (7B)",
@@ -919,6 +941,7 @@ MODEL_MAP = {
     "Qwen2.5-Coder-32B": "Qwen2.5-Coder (32B)",
     "CodeLlama-7b-hf": "Code Llama (7B)",
     "CodeLlama-13b-hf": "Code Llama (13B)",
+    "CodeLlama-34b-hf": "Code Llama (34B)",
     "CodeLlama-70b-hf": "Code Llama (70B)",
     "Llama-3.1-8B": "Llama 3.1 (8B)",
     "Llama-3.1-70B": "Llama 3.1 (70B)",
@@ -980,9 +1003,9 @@ METRIC_MAP = {
            "arguments_correct_value_wrt_expected_total": "Correct%s argument values (t)",
            "arguments_expected_executable": "Expected%s arguments in executable code",
            "arguments_expected_total": "Expected%s arguments in total",
-           "arguments_illegal": "Illegal%s arguments",
-           "arguments_illegal_wrt_all_executable": "Illegal%s arguments (e)",
-           "arguments_illegal_wrt_all_total": "Illegal%s arguments (t)",
+           "arguments_illegal": "Hallucinated%s arguments",
+           "arguments_illegal_wrt_all_executable": "Hallucinated%s arguments (e)",
+           "arguments_illegal_wrt_all_total": "Hallucinated%s arguments (t)",
            "arguments_missing_executable": "Missing%s arguments in executable code",
            "arguments_missing_total": "Missing%s arguments in total",
            "arguments_missing_wrt_expected_executable": "Missing%s arguments (e)",
@@ -997,9 +1020,9 @@ METRIC_MAP = {
     "endpoints_correct": "Correct endpoints",
     "endpoints_correct_wrt_executable": "Correct endpoints (e)",
     "endpoints_correct_wrt_total": "Correct endpoints (t)",
-    "endpoints_illegal": "Illegal endpoints",
-    "endpoints_illegal_wrt_executable": "Illegal endpoints (e)",
-    "endpoints_illegal_wrt_total": "Illegal endpoints (t)",
+    "endpoints_illegal": "Hallucinated endpoints",
+    "endpoints_illegal_wrt_executable": "Hallucinated endpoints (e)",
+    "endpoints_illegal_wrt_total": "Hallucinated endpoints (t)",
     "endpoints_wrong": "Wrong endpoints",
     "endpoints_wrong_wrt_executable": "Wrong endpoints (e)",
     "endpoints_wrong_wrt_total": "Wrong endpoints (t)",
@@ -1023,9 +1046,9 @@ METRIC_MAP = {
     "methods_correct": "Correct methods",
     "methods_correct_wrt_executable": "Correct methods (e)",
     "methods_correct_wrt_total": "Correct methods (t)",
-    "methods_illegal": "Illegal methods",
-    "methods_illegal_wrt_executable": "Illegal methods (e)",
-    "methods_illegal_wrt_total": "Illegal methods (t)",
+    "methods_illegal": "Hallucinated methods",
+    "methods_illegal_wrt_executable": "Hallucinated methods (e)",
+    "methods_illegal_wrt_total": "Hallucinated methods (t)",
     "methods_wrong": "Wrong methods",
     "methods_wrong_wrt_executable": "Wrong methods (e)",
     "methods_wrong_wrt_total": "Wrong methods (t)",
@@ -1034,9 +1057,9 @@ METRIC_MAP = {
     "samples_correct_wrt_total": "Correct implementations (t)",
     "samples_executable": "Executable implementations",
     "samples_executable_wrt_total": "Executable implementations (t)",
-    "samples_illegal": "Illegal implementations",
-    "samples_illegal_wrt_executable": "Illegal implementations (e)",
-    "samples_illegal_wrt_total": "Illegal implementations (t)",
+    "samples_illegal": "Hallucinated implementations",
+    "samples_illegal_wrt_executable": "Hallucinated implementations (e)",
+    "samples_illegal_wrt_total": "Hallucinated implementations (t)",
     "samples_nonexecutable": "Nonexecutable implementations",
     "samples_total": "Total implementations",
     "samples_wrong": "Wrong implementations",
@@ -1045,9 +1068,9 @@ METRIC_MAP = {
     "urls_correct": "Correct URLs",
     "urls_correct_wrt_executable": "Correct URLs (e)",
     "urls_correct_wrt_total": "Correct URLs (t)",
-    "urls_illegal": "Illegal URLs",
-    "urls_illegal_wrt_executable": "Illegal URLs (e)",
-    "urls_illegal_wrt_total": "Illegal URLs (t)",
+    "urls_illegal": "Hallucinated URLs",
+    "urls_illegal_wrt_executable": "Hallucinated URLs (e)",
+    "urls_illegal_wrt_total": "Hallucinated URLs (t)",
     "urls_wrong": "Wrong URLs",
     "urls_wrong_wrt_executable": "Wrong URLs (e)",
     "urls_wrong_wrt_total": "Wrong URLs (t)",
@@ -1070,7 +1093,7 @@ LOWER_IS_BETTER = {
     "arguments_unnecessary",
     "arguments_unnecessary_wrt_all_executable",
     "arguments_unnecessary_wrt_all_total",
-    *{f"{submetric}_{metric}" for submetric in ["all", "data", "headers", "params", "path_params"] for metric in [
+    *{f"{submetric}_{metric}" for submetric in ("all", "data", "headers", "params", "path_params") for metric in (
         "arguments_illegal",
         "arguments_illegal_wrt_all_executable",
         "arguments_illegal_wrt_all_total",
@@ -1085,7 +1108,7 @@ LOWER_IS_BETTER = {
         "arguments_unnecessary",
         "arguments_unnecessary_wrt_all_executable",
         "arguments_unnecessary_wrt_all_total",
-    ]},
+    )},
     "endpoints_illegal",
     "endpoints_illegal_wrt_executable",
     "endpoints_illegal_wrt_total",
@@ -1127,10 +1150,10 @@ LOWER_IS_BETTER = {
     "urls_illegal_wrt_total",
     "urls_wrong",
     "urls_wrong_wrt_executable",
-    "urls_wrong_wrt_total"
+    "urls_wrong_wrt_total",
 }
 
-NA_list = [
+NA_list = (
     ("samples_illegal_wrt_total", "invocation"),
     ("samples_illegal_wrt_executable", "invocation"),
     ("urls_correct_wrt_total", "endpoint"),
@@ -1144,13 +1167,22 @@ NA_list = [
     ("arguments_illegal_wrt_all_total", "invocation"),
     ("arguments_illegal_wrt_all_executable", "invocation"),
     ("errors_timeout", "vanilla"),
-    ("errors_unsatisfiable", "vanilla")
-]
+    ("errors_unsatisfiable", "vanilla"),
+)
 
-# All options: ["o", "v", "^", "<", ">", "s", "D", "X", "P", "*", "d", "p", "h", "H", "8"]
+# All options: ("o", "v", "^", "<", ">", "s", "D", "X", "P", "*", "d", "p", "h", "H", "8")
 MARKER_MAP = {
+    "codet5-base": "p",
+    "codet5-large": "p",
+    "codet5p-220m": "P",
+    "codet5p-770m": "P",
+    "codet5p-2b": "P",
+    "codet5p-6b": "P",
     "codet5p-16b": "P",
     "instructcodet5p-16b": "P",
+    "starcoderbase-1b": "*",
+    "starcoderbase-3b": "*",
+    "starcoderbase-7b": "*",
     "starcoderbase": "*",
     "starcoder2-3b": "*",
     "starcoder2-7b": "*",
@@ -1168,12 +1200,13 @@ MARKER_MAP = {
     "Qwen2.5-Coder-32B": "v",
     "CodeLlama-7b-hf": "s",
     "CodeLlama-13b-hf": "s",
+    "CodeLlama-34b-hf": "s",
     "CodeLlama-70b-hf": "s",
     "Llama-3.1-8B": "D",
     "Llama-3.1-70B": "D",
     "gpt-4o-mini": "o",
     "gpt-4o": "o",
-    "gemini-pro-1.5": "p",
+    "gemini-pro-1.5": "o",
 }
 
 

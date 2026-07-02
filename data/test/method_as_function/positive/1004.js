@@ -1,3 +1,4 @@
+// Test comma after last property
 const axios = require('axios');
 axios.post('https://petstore.swagger.io/v2/pets', {
     name: 'name',

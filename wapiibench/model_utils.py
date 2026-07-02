@@ -22,14 +22,14 @@ class ModelWrapper:
 
     def __init__(self, model_name: str, **kwargs) -> None:
         if model_name.startswith("openai/") or model_name.startswith("google/"):
-            logger.info(f"Setting up OpenAI model '{model_name}' ...")
             from openai import OpenAI
-            self.provider = 'OpenAI'
-            self.model_name = model_name.removeprefix("openai/")
+            self.provider = 'OpenAI' if model_name.startswith("openai/") else 'OpenRouter'
+            logger.info(f"Setting up {self.provider} model '{model_name}' ...")
+            self.model_name = model_name
             self.is_chat_model = True
             self.model = None
             self.tokenizer = None
-            if not model_name.startswith("openai/"):
+            if self.provider == 'OpenRouter':
                 kwargs.setdefault('base_url', "https://openrouter.ai/api/v1")
                 kwargs.setdefault('api_key', os.getenv('OPENROUTER_API_KEY'))
             self.client = OpenAI(**kwargs)
@@ -57,7 +57,8 @@ class ModelWrapper:
         kwargs.setdefault('low_cpu_mem_usage', True)
         kwargs.setdefault('device_map', 'auto')
 
-        if model_name.startswith("Salesforce/codet5-"):
+        if (model_name.startswith("Salesforce/codet5-") or
+                model_name == "Salesforce/codet5p-220m" or model_name == "Salesforce/codet5p-220m"):
             model_class = T5ForConditionalGeneration
             del kwargs['trust_remote_code']
         elif model_name.startswith("Salesforce/codet5p-") or model_name.startswith("Salesforce/instructcodet5p-"):
@@ -67,7 +68,7 @@ class ModelWrapper:
             model_class = AutoModelForCausalLM
             if model_name.startswith("meta-llama/CodeLlama-"):
                 kwargs.setdefault('dtype', torch.float16)
-            elif (model_name in ["bigcode/starcoderbase", "bigcode/starcoder", "bigcode/starcoderplus"] or
+            elif (model_name.startswith("bigcode/starcoderbase") or
                   model_name.startswith("bigcode/starcoder2-") or
                   model_name.startswith("deepseek-ai/deepseek-coder-") or
                   model_name.startswith("Qwen/Qwen2.5-Coder-") or
@@ -100,9 +101,13 @@ class ModelWrapper:
         :param kwargs: Additional arguments for the model
         :return: The text completion or None if the batch isn't completed yet
         """
-        if self.provider == 'OpenAI':
+        if self.provider == 'HuggingFace':
+            return self._run_hf_model(input_text, generation_config, logits_processor, **kwargs)
+
+        else:
             if logits_processor is not None:
-                logger.warning("OpenAI models do not support LogitsProcessors")
+                raise ValueError("API-based models do not support LogitsProcessors")
+
             if generation_config is not None:
                 kwargs.setdefault('max_completion_tokens', generation_config.max_new_tokens)
                 kwargs.setdefault('n', generation_config.num_return_sequences)
@@ -111,15 +116,12 @@ class ModelWrapper:
                     'temperature', 0 if not generation_config.do_sample else generation_config.temperature)
                 kwargs.setdefault('top_p', generation_config.top_p)
                 if generation_config.num_beams > 1:
-                    logger.warning("OpenAI models do not support beam search")
+                    logger.warning("API-based models do not support beam search")
                 if generation_config.top_k != 50:  # 50 is the default; any other number means the user explicitly set k
-                    logger.warning("OpenAI models do not support top-k sampling")
+                    logger.warning("API-based models do not support top-k sampling")
 
             return self._run_openai_model(
                 input_text, batch=batch, batch_file_dir=batch_file_dir, sample_id=sample_id, **kwargs)
-
-        else:
-            return self._run_hf_model(input_text, generation_config, logits_processor, **kwargs)
 
     def _run_hf_model(self, input_text: str, generation_config: GenerationConfig | None = None,
                       logits_processor: LogitsProcessorList | LogitsProcessor | None = None, **kwargs) -> list[str]:
@@ -167,14 +169,20 @@ class ModelWrapper:
         :param kwargs: Additional arguments for the model
         :return: The text completion or None if the batch isn't completed yet
         """
-        system_message, user_message = input_text.split(". ", 1)
-        system_message += "."
-        messages = [
+        # Split the prompt into system and user message right after the bullet point list
+        lines = input_text.splitlines(keepends=True)
+        idx = next(i for i in range(len(lines) - 1, -1, -1) if lines[i].startswith('* '))
+        system_message = "".join(lines[:idx + 1])
+        user_message = "".join(lines[idx + 1:]).lstrip()
+        messages = (
             {'role': 'system', 'content': system_message},
-            {'role': 'user', 'content': user_message}
-        ]
+            {'role': 'user', 'content': user_message},
+        )
 
         if batch:
+            if self.provider != "OpenAI":
+                raise ValueError("Batch processing is only supported for OpenAI models")
+
             if batch_file_dir is None or sample_id is None:
                 raise ValueError("For batch processing, `batch_file_dir` and `sample_id` must be provided")
 
@@ -196,7 +204,7 @@ class ModelWrapper:
                     'method': 'POST',
                     'url': "/v1/chat/completions",
                     'body': {
-                        'model': self.model_name,
+                        'model': self.model_name.removeprefix("openai/"),
                         'messages': messages,
                         **kwargs,
                     }
@@ -208,8 +216,9 @@ class ModelWrapper:
                 return None
 
         else:
-            completion = self.client.chat.completions.create(model=self.model_name, messages=messages, **kwargs)
-            logger.debug(f"Received {completion=}")
+            completion = self.client.chat.completions.create(
+                model=self.model_name.removeprefix("openai/"), messages=messages, **kwargs)
+            logger.debug(f"Received {completion = }")
             return [choice.message.content for choice in completion.choices]
 
     def batch_init(self, batch_file_dir: str) -> bool:
@@ -230,7 +239,7 @@ class ModelWrapper:
 
         elif os.path.isfile(os.path.join(batch_file_dir, "batch_output.jsonl")):
             # Avoid deleting the batch input file
-            logger.warning("Batch has already been retrieved")
+            logger.info("Batch has already been retrieved")
             return True
 
         else:
@@ -246,15 +255,25 @@ class ModelWrapper:
         :return: Whether we are **not** currently waiting for a batch to complete
         """
         batch_job = self.client.batches.retrieve(batch_id)
-        logger.debug(f"Retrieved {batch_job=}")
+        logger.debug(f"Retrieved {batch_job = }")
         status = batch_job.status
 
         if status == 'completed':
-            logger.info(f"Batch is completed - retrieving results")
-            batch_result = self.client.files.content(batch_job.output_file_id)
-            with open(os.path.join(batch_file_dir, "batch_output.jsonl"), 'wb') as file:
-                file.write(batch_result.content)
-            return True
+
+            if batch_job.error_file_id is not None:
+                logger.error(f"Batch returned with errors - see batch_error.jsonl")
+                batch_error = self.client.files.content(batch_job.error_file_id)
+                with open(os.path.join(batch_file_dir, "batch_error.jsonl"), 'wb') as file:
+                    file.write(batch_error.content)
+
+            if batch_job.output_file_id is not None:
+                logger.info(f"Batch is completed - retrieving results")
+                batch_result = self.client.files.content(batch_job.output_file_id)
+                with open(os.path.join(batch_file_dir, "batch_output.jsonl"), 'wb') as file:
+                    file.write(batch_result.content)
+                return True
+
+            return False
 
         else:
             logger.warning(f"Batch status is '{status}'")

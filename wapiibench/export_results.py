@@ -1,5 +1,6 @@
 import json
 import logging
+import math
 import os
 import sys
 import traceback
@@ -10,7 +11,10 @@ import pandas as pd
 
 from plotting_presets import *
 
-pd.set_option('future.no_silent_downcasting', True)
+# Switch between the evaluation and the validation results
+DATASET, INPUT_DIR = "eval", "data/generated"
+# DATASET, INPUT_DIR = "val", "validation_data/generated"
+OUTPUT_DIR = "export/"
 
 LOGGER_INFO = {
     'load_results': {
@@ -47,7 +51,7 @@ def _load_json_files(path, experiment_id):
 def _full_stack():
     exc = sys.exc_info()[0]
     stack = traceback.extract_stack()[:-1]  # last one would be full_stack()
-    if exc is not None:  # i.e. an exception is present
+    if exc is not None:  # i.e., an exception is present
         del stack[-1]  # remove call of full_stack, the printed exception
         # will contain the caught exception caller instead
     trc = "Traceback (most recent call last):\n"
@@ -82,12 +86,12 @@ def _results_dict_to_pandas_frames(args, results_dict, experiment_id):
     df_dict = {}
     logger = _create_logger(scope='results_to_pandas')
     error_in_step = False
-    for top_level in ['statistics']:  # list is most likely not needed as we are always interested in statistics
-        for metric in args.metrics.keys():
-            if len(args.metrics[metric]) > 0:
-                error_in_step |= add_nested_metric()
-            else:
-                error_in_step |= add_individual_metrics()
+    top_level = 'statistics'
+    for metric in args.metrics.keys():
+        if len(args.metrics[metric]) > 0:
+            error_in_step |= add_nested_metric()
+        else:
+            error_in_step |= add_individual_metrics()
     if error_in_step:
         logger.error(f"There is an error in the step: results_dict_to_pandas_frames for {experiment_id}")
     df_series = pd.Series(df_dict)
@@ -107,7 +111,7 @@ def _save_latex_table(args, df_all_results):
         NA_value = _replace_values_from_NA_list_multi(df_all_results, args)
 
     latex_string = df_all_results.to_latex(float_format="%0.2f")
-    with open(f"export/table_{args.filename}.tex", 'w') as tf:
+    with open(f"{OUTPUT_DIR}/{DATASET}_{args.filename}.tex", 'w') as tf:
         latex_string_split = latex_string.split("\n")
         for i, line in enumerate(latex_string_split):
             if not line:
@@ -118,11 +122,11 @@ def _save_latex_table(args, df_all_results):
                 line = line.replace(r"\begin{tabular}", r"\begin{tabularx}{\linewidth}")
 
             elif i == 2:
-                # Shorten and rotate column names
                 if compact:
-                    line = _stack_column_header(line)
+                    line = _shorten_and_stack_column_headers(line)
                 else:
-                    line = _shorten_column_heads_and_rotate(line)
+                    # Remember to manually remove the \toprule if column headers are rotated
+                    line = _shorten_and_rotate_column_headers(line)
 
             elif i > 3 and "&" in line:
                 line = _bold_face_best_values(NA_value, line)
@@ -173,7 +177,7 @@ def _abbreviate_metric_names(line):
     return line
 
 
-def _shorten_column_heads_and_rotate(line):
+def _shorten_and_rotate_column_headers(line):
     line = line.replace("Invocation", "inv.")
     line = line.replace("Endpoint", "endp.")
     line = line.replace("vanilla", "UD")
@@ -187,7 +191,7 @@ def _shorten_column_heads_and_rotate(line):
     return line
 
 
-def _stack_column_header(line):
+def _shorten_and_stack_column_headers(line):
     num_invocation = line.count("Invocation")
     num_endpoint = line.count("Endpoint")
     line = line.replace("Invocation", "")
@@ -227,13 +231,13 @@ def _replace_values_from_NA_list_multi(df_all_results, args):
     return NA_value
 
 
-def run(args):
+def export(args):
     dict_with_pandas_frames = {}
     for model in args.models:
         for api in args.apis:
             for setup in args.setups:
                 for setting in args.settings:
-                    path_to_results = f"data/generated/{model}/{api}/{setup}/{setting}/results.json"
+                    path_to_results = os.path.join(INPUT_DIR, model, api, setup, setting, "results.json")
                     experiment_id = f"{model}_{api}_{setup}_{setting}"
                     results_dict = _load_json_files(path_to_results, experiment_id)
                     if results_dict:
@@ -268,7 +272,8 @@ def _plot_results(args, df, format):
             for setup in args.setups:
                 for setting in args.settings:
                     key = f'{model}_{api}_{setup}_{setting}'
-                    values = [1 - value if label in LOWER_IS_BETTER else value for (label, value) in df[key].items()]
+                    values = [
+                        1 - value if label in LOWER_IS_BETTER else value for label, value in df.loc[:, key].items()]
                     ax.plot(labels, values, label=args.column_renaming[key], marker=MARKER_MAP[model], markersize=5,
                             linestyle='-')
             ax.set_ylim(ymin=0, ymax=1)  # this assumes that we are only plotting relative values, otherwise remove it
@@ -282,7 +287,7 @@ def _plot_results(args, df, format):
         fig.legend(handles, labels, loc='upper right', bbox_to_anchor=(1.01, 1.01), ncol=2)
 
     fig.tight_layout(pad=0.01, rect=(0, 0, 1, scale if legend else 1))
-    fig.savefig(f"export/plot_{args.filename}{'' if legend else '_no_legend'}.{format}")
+    fig.savefig(f"{OUTPUT_DIR}/{DATASET}_{args.filename}{'' if legend else '_no_legend'}.{format}")
     plt.show()
 
 
@@ -292,76 +297,97 @@ def _break_labels(labels, threshold):
             else l for l in labels]
 
 
-def compare_ud_vs_cd(args):
+def export_settings_improvement(args):
+    assert len(args.settings) == 2
     assert len(args.metrics) == 1
     metric = args.metrics[0]
 
-    models = [*args.models, "Average"]
-    dfs = {setup: pd.DataFrame(index=models, columns=['UD', 'CD', 'Gain']) for setup in args.setups}
+    models = (*args.models, "Average", "Minimum", "Maximum")
+    dfs = {setup: pd.DataFrame(index=models, columns=('S0', 'S1', 'Gain')) for setup in args.setups}
 
-    buffer = f"Metric: '{metric}'\n"
+    buffer = [f"Metric: '{metric}'\n"]
     for api in args.apis:
-        buffer += f"\tAPI: '{api}'\n"
+        buffer.append(f"\tAPI: '{api}'\n")
         for index, model in enumerate(models):
-            buffer += f"\t\tModel: '{model}'\n"
+            buffer.append(f"\t\tModel: '{model}'\n")
             for setup in args.setups:
                 df = dfs[setup]
                 if model == "Average":
-                    df.iloc[index, :] = df.mean(skipna=True)
-                    df.replace(np.nan, np.inf, inplace=True)
-                    metric_ud, metric_cd, gain = df.iloc[index]
+                    df.iloc[index, :] = df.mean(skipna=True)  # infinite gains are excluded from the average
+                    metric_0, metric_1, gain = df.iloc[index]
+
+                elif model == "Minimum":
+                    df.iloc[index, :] = df.min(skipna=True)
+                    metric_0, metric_1, gain = df.iloc[index]
+
+                elif model == "Maximum":
+                    df.iloc[index, :] = df.max(skipna=True)
+                    metric_0, metric_1, gain = df.iloc[index]
 
                 else:
-                    ud_file = os.path.join("data/generated/", model, api, setup, "vanilla", "results.json")
-                    cd_file = os.path.join("data/generated/", model, api, setup, "constrained", "results.json")
+                    file_0 = os.path.join(INPUT_DIR, model, api, setup, args.settings[0], "results.json")
+                    file_1 = os.path.join(INPUT_DIR, model, api, setup, args.settings[1], "results.json")
 
-                    if not os.path.isfile(ud_file) or not os.path.isfile(cd_file):
-                        buffer += f"\t\t\t{setup}:\tN/A\n"
+                    if not os.path.isfile(file_0) or not os.path.isfile(file_1):
+                        print(f"Results not available:\t{file_0}\tand/or\t{file_1}", file=sys.stderr)
+                        buffer.append(f"\t\t\t{setup}:\tN/A\n")
                         continue
 
-                    with open(ud_file, 'r') as file:
-                        metric_ud = json.load(file)['statistics'][metric]
+                    with open(file_0, 'r') as file:
+                        metric_0 = json.load(file)['statistics'][metric]
 
-                    with open(cd_file, 'r') as file:
-                        metric_cd = json.load(file)['statistics'][metric]
+                    with open(file_1, 'r') as file:
+                        metric_1 = json.load(file)['statistics'][metric]
 
-                    gain = (metric_cd - metric_ud) / metric_ud if metric_ud > 0 else np.nan
-                    df.iloc[index, :] = (metric_ud, metric_cd, gain)
+                    # Uncomment to ignore models with zero values
+                    # if metric_0 == 0 or metric_1 == 0:
+                    #     df.iloc[index, :] = (np.nan, np.nan, np.nan)
+                    #     buffer.append("\t\t\tskipped\n")
+                    #     continue
 
-                buffer += f"\t\t\t{setup}:\t{gain:+.0%}\t({metric_ud:.2f} -> {metric_cd:.2f})\n"
+                    gain = (metric_1 - metric_0) / metric_0 if metric_0 > 0 else np.nan
+                    df.iloc[index, :] = (metric_0, metric_1, gain)
+
+                buffer.append(f"\t\t\t{setup}:\t{gain:+.0%}\t({metric_0:.2f} -> {metric_1:.2f})\n")
 
         if 'print' in args.outputs:
-            print(buffer)
+            print("".join(buffer))
 
         for setup in args.setups:
             df = dfs[setup]
             df.rename(index=args.row_renaming, inplace=True)
-            df = df.dropna(how='all')
+            df.dropna(how='all', inplace=True)
+            df.replace(np.nan, np.inf, inplace=True)
             for format in args.outputs:
                 if format == 'tex':
-                    df.to_latex(f"export/table_{args.filename}_{metric}_{api}_{setup}.tex",
-                                formatters={'UD': '{:.2f}'.format, 'CD': '{:.2f}'.format,
-                                            'Gain': lambda num: f"{num:+.0%}".replace("%", r"\%")})
+                    # Remember to manually add a \midrule before the Average row
+                    df.to_latex(
+                        f"{OUTPUT_DIR}/{DATASET}_{args.filename}_{metric}_{api}_{setup}.tex",
+                        header=[SETTING_MAP[args.settings[0]], SETTING_MAP[args.settings[1]], "Gain"],
+                        formatters={
+                            'S0': '{:.2f}'.format, 'S1': '{:.2f}'.format,
+                            'Gain': lambda num: f"{num:+.0%}".replace("%", r"\%") if math.isfinite(num) else "N/A"
+                        })
                 elif format != 'print':
                     _create_improvement_plot(args, df, api, setup, format)
 
 
 def _create_improvement_plot(args, df, api, setup, format):
-    df = df.iloc[:-1]
+    df.drop(index=["Average", "Minimum", "Maximum"], inplace=True)
     metric = args.metrics[0]
     # Position of bars
     x = np.arange(len(df.index))
     # Plot the stacked bars
     height = 5  # adapt depending on available vertical space
-    scale = 0.94  # adapt depending on figsize
+    scale = 0.95  # adapt depending on figsize
     legend = args.show_legend
-    fig, ax = plt.subplots(figsize=(5, height if legend else height * scale), dpi=600)
+    fig, ax = plt.subplots(figsize=(max(5, 0.4 * len(args.models)), height if legend else height * scale), dpi=600)
     # ax.scatter([], [], s=250, c='k', marker=r"$ {} $".format('x\%'), edgecolors='none', label='Gain')
-    ax.bar(x, df.loc[:, 'CD'], label='CD', color='tab:olive')
-    ax.bar(x, df.loc[:, 'UD'], label='UD', color='tab:blue')
+    ax.bar(x, df.loc[:, 'S1'], label='S1', color='tab:olive')
+    ax.bar(x, df.loc[:, 'S0'], label='S0', color='tab:blue')
     # Add text labels on top of the bars
     for i, inc in enumerate(df.loc[:, 'Gain']):
-        ax.text(float(x[i]), df.iloc[i].loc['CD'] + 0.01, f"{inc:+.0%}", ha='center', va='bottom')
+        ax.text(float(x[i]), df.iloc[i].loc['S1'] + 0.01, f"{inc:+.0%}", ha='center', va='bottom')
     ylabel = METRIC_MAP[metric]
     if args.delete_t_and_e:
         ylabel = ylabel.removesuffix(" (t)").removesuffix(" (e)")
@@ -370,21 +396,22 @@ def _create_improvement_plot(args, df, api, setup, format):
     # Add a line break to long labels
     xticklabels = _break_labels(df.index, 25)
     ax.set_xticklabels(xticklabels, rotation=45, ha='right')
-    ax.set_ylim(ymin=0, ymax=round(df.loc[:, ['UD', 'CD']].max(axis=None) + 0.05, ndigits=1))
+    ax.set_ylim(ymin=0, ymax=round(df.loc[:, ['S0', 'S1']].replace(np.inf, np.nan).max(axis=None) + 0.05, ndigits=1))
     if legend:
         # Add a legend
         handles, labels = ax.get_legend_handles_labels()
         handles.reverse()
-        labels = ["Baseline", "Gain through constrained decoding"]
-        fig.legend(handles, labels, loc='upper right', bbox_to_anchor=(1.01, 1.01), ncol=2)
-    # ax.set_title(f"Setup: {setup}", loc='left', x=0.01, y=0.92)  # optional
+        labels = (f"{SETTING_MAP[args.settings[0]]} baseline", f"Gain through {SETTING_MAP[args.settings[1]]}")
+        fig.legend(handles, labels, loc='upper right', bbox_to_anchor=(1.0066, 1.0123), ncol=2)
+    # ax.set_title(SETUP_MAP[setup], loc='left', x=0.01, y=0.92)  # optional
     fig.tight_layout(pad=0.01, rect=(0, 0, 1, scale if legend else 1))
-    fig.savefig(f"export/plot_{args.filename}_{metric}_{api}_{setup}{'' if legend else '_no_legend'}.{format}")
+    fig.savefig(
+        f"{OUTPUT_DIR}/{DATASET}_{args.filename}_{metric}_{api}_{setup}{'' if legend else '_no_legend'}.{format}")
     # Show the plot
     plt.show()
 
 
-def compare_settings(args):
+def export_settings_comparison(args):
     assert len(args.apis) == 1
     assert len(args.setups) == 1
     assert len(args.metrics) == 1
@@ -392,30 +419,34 @@ def compare_settings(args):
     api = args.apis[0]
     setup = args.setups[0]
     metric = args.metrics[0]
+    submetric = next((submetric for submetric in SUBMETRIC_MAP if metric.startswith(submetric)), None)
 
     # Collect all data in a dataframe
     df = pd.DataFrame(index=args.models, columns=args.settings)
     for model in args.models:
         for setting in args.settings:
-            file_path = os.path.join("data/generated/", model, api, setup, setting, "results.json")
+            file_path = os.path.join(INPUT_DIR, model, api, setup, setting, "results.json")
             if not os.path.isfile(file_path):
                 continue
             with open(file_path, 'r') as file:
-                value = json.load(file)['statistics'][metric]
+                if submetric is None:
+                    value = json.load(file)['statistics'][metric]
+                else:
+                    value = json.load(file)['statistics'][metric.removeprefix(submetric + "_")].get(submetric, 0)
             df.at[model, setting] = value
 
     df.rename(index=args.row_renaming, columns=args.column_renaming, inplace=True)
 
     for format in args.outputs:
         if format == 'tex':
-            df.to_latex(f"export/table_{args.filename}_{metric}_{api}_{setup}.tex", float_format="%.2f")
+            df.to_latex(f"{OUTPUT_DIR}/{DATASET}_{args.filename}_{metric}_{api}_{setup}.tex", float_format="%.2f")
 
         else:
             # Create grouped bar chart
+            width = max(5, 0.4 * len(args.models))  # adapt depending on available horizontal space
             height = 5  # adapt depending on available vertical space
-            scale = 0.89  # adapt depending on figsize
             legend = args.show_legend
-            fig, ax = plt.subplots(figsize=(5, height if legend else height * scale), dpi=600)
+            fig, ax = plt.subplots(figsize=(width, height), dpi=600)
 
             # Get the number of models and settings
             n_models = len(df.index)
@@ -426,10 +457,10 @@ def compare_settings(args):
             x = np.arange(n_models)
 
             # Create bars for each setting
-            colors = ['tab:olive', 'tab:cyan', 'tab:green', 'tab:blue']
+            colors = ('tab:olive', 'tab:green', 'tab:cyan', 'tab:blue')
             for i, setting in enumerate(df.columns):
                 positions = x + (i - n_settings / 2 + 0.5) * bar_width
-                values = df[setting].values
+                values = df.loc[:, setting]
                 ax.bar(positions, values, bar_width, label=setting, color=colors[i])
 
             # Customize the plot
@@ -439,51 +470,67 @@ def compare_settings(args):
             ax.set_ylabel(ylabel)
             ax.set_xticks(x)
             ax.set_xticklabels(df.index, rotation=45, ha='right')
-            # ax.set_title(f"Setup: {setup}", loc='left', x=0.01, y=0.92)  # optional
+            ax.set_title(SETUP_MAP[setup], loc='left', y=1.04)  # optional
 
             if legend:
-                fig.legend(loc='upper right', bbox_to_anchor=(1.01, 1.01), ncol=n_settings // 2)
+                fig.legend(loc='upper right', ncol=n_settings)
 
             # Set y-axis to start from 0
             ax.set_ylim(bottom=0)
 
-            fig.tight_layout(pad=0.01, rect=(0, 0, 1, scale if legend else 1))
-            fig.savefig(f"export/plot_{args.filename}_{metric}_{api}_{setup}{'' if legend else '_no_legend'}.{format}")
+            fig.tight_layout(pad=0.01)
+            fig.savefig(
+                f"{OUTPUT_DIR}/{DATASET}_{args.filename}_{metric}_{api}_{setup}{'' if legend else '_no_legend'}.{format}")
             plt.show()
 
 
 def _export_results():
     """Entry point for exporting the evaluation results as plots or tables."""
-    # run(multi_model_plot_preset('invocation', 'vanilla'))
-    # run(multi_model_plot_preset('endpoint', 'vanilla'))
-    # run(multi_model_plot_preset('invocation', 'constrained'))
-    # run(multi_model_plot_preset('endpoint', 'constrained'))
-    # run(multi_model_table_preset('invocation', 'vanilla'))
-    # run(multi_model_table_preset('endpoint', 'vanilla'))
-    # run(multi_model_table_preset('invocation', 'constrained'))
-    # run(multi_model_table_preset('endpoint', 'constrained'))
-    # run(multi_model_submetric_table_preset('invocation', 'vanilla'))
-    # run(multi_model_submetric_table_preset('endpoint', 'vanilla'))
-    # run(multi_model_submetric_table_preset('invocation', 'constrained'))
-    # run(multi_model_submetric_table_preset('endpoint', 'constrained'))
-    # run(single_model_table_preset('starcoder2-15b', 'invocation', 'vanilla'))
-    # run(single_model_table_preset('starcoder2-15b', 'endpoint', 'vanilla'))
-    # run(single_model_table_preset('starcoder2-15b', 'invocation', 'constrained'))
-    # run(single_model_table_preset('starcoder2-15b', 'endpoint', 'constrained'))
-    # run(single_model_table_preset('gpt-4o', 'invocation', 'vanilla'))
-    # run(single_model_table_preset('gpt-4o', 'endpoint', 'vanilla'))
-    # compare_ud_vs_cd(ud_cd_comparison_preset('samples_correct_wrt_total', 'invocation'))
-    # compare_ud_vs_cd(ud_cd_comparison_preset('samples_correct_wrt_total', 'endpoint'))
-    # compare_ud_vs_cd(ud_cd_comparison_preset('samples_correct_wrt_executable', 'invocation'))
-    # compare_ud_vs_cd(ud_cd_comparison_preset('samples_correct_wrt_executable', 'endpoint'))
-    compare_settings(settings_comparison_preset('samples_correct_wrt_total', 'invocation'))
-    compare_settings(settings_comparison_preset('samples_correct_wrt_total', 'endpoint'))
-    compare_settings(settings_comparison_preset('samples_correct_wrt_executable', 'invocation'))
-    compare_settings(settings_comparison_preset('samples_correct_wrt_executable', 'endpoint'))
+
+    # export(multi_model_plot('invocation', 'vanilla'))
+    # export(multi_model_plot('endpoint', 'vanilla'))
+    # export(multi_model_plot('invocation', 'constrained'))
+    # export(multi_model_plot('endpoint', 'constrained'))
+
+    # export(multi_model_table('invocation', 'vanilla'))
+    # export(multi_model_table('endpoint', 'vanilla'))
+    # export(multi_model_table('invocation', 'rag'))
+    # export(multi_model_table('endpoint', 'rag'))
+    # export(multi_model_table('invocation', 'constrained'))
+    # export(multi_model_table('endpoint', 'constrained'))
+    # export(multi_model_table('invocation', 'constrained-rag'))
+    # export(multi_model_table('endpoint', 'constrained-rag'))
+
+    # export(multi_model_submetric_table('invocation', 'vanilla'))
+    # export(multi_model_submetric_table('endpoint', 'vanilla'))
+    # export(multi_model_submetric_table('invocation', 'constrained'))
+    # export(multi_model_submetric_table('endpoint', 'constrained'))
+
+    # export(single_model_table('starcoder2-15b', 'invocation', 'vanilla'))
+    # export(single_model_table('starcoder2-15b', 'endpoint', 'vanilla'))
+    # export(single_model_table('starcoder2-15b', 'invocation', 'constrained'))
+    # export(single_model_table('starcoder2-15b', 'endpoint', 'constrained'))
+    # export(single_model_table('gpt-4o', 'invocation', 'vanilla'))
+    # export(single_model_table('gpt-4o', 'endpoint', 'vanilla'))
+
+    # export_settings_improvement(settings_improvement('samples_correct_wrt_total', 'invocation'))
+    # export_settings_improvement(settings_improvement('samples_correct_wrt_total', 'endpoint'))
+    # export_settings_improvement(settings_improvement('endpoints_illegal_wrt_total', 'invocation'))
+    # export_settings_improvement(settings_improvement('samples_illegal_wrt_total', 'endpoint'))
+    # export_settings_improvement(settings_improvement('samples_executable_wrt_total', 'invocation'))
+    # export_settings_improvement(settings_improvement('samples_executable_wrt_total', 'endpoint'))
+
+    export_settings_comparison(settings_comparison('samples_correct_wrt_total', 'invocation'))
+    export_settings_comparison(settings_comparison('samples_correct_wrt_total', 'endpoint'))
+    export_settings_comparison(settings_comparison('endpoints_illegal_wrt_total', 'invocation'))
+    export_settings_comparison(settings_comparison('samples_illegal_wrt_total', 'endpoint'))
+    # export_settings_comparison(settings_comparison('samples_executable_wrt_total', 'invocation'))
+    # export_settings_comparison(settings_comparison('samples_executable_wrt_total', 'endpoint'))
 
 
 if __name__ == '__main__':
     os.chdir(os.path.normpath(os.path.join(os.path.dirname(__file__), os.pardir)))
     sys.path.append(os.getcwd())
 
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     _export_results()

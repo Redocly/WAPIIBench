@@ -108,7 +108,7 @@ def generate_config_dataset_in_chunks(model: str, spec_file: str, output_dir: st
     chunk = []
     chunk_size = 0
     chunk_id = 0
-    for (path, path_items) in spec['paths'].items():
+    for path, path_items in spec['paths'].items():
         chunk.append(path)
         chunk_size += len(path_items) - 1 if 'parameters' in path_items else len(path_items)
         if chunk_size > 30:  # the larger the threshold, the higher the risk of incomplete outputs
@@ -176,8 +176,8 @@ def cross_check_configs(output_dir: str, spec_file: str) -> None:
             continue
 
         # Does the expected URL match any path?
-        paths = find_path_in_spec(url, spec)
-        if not paths:
+        paths, _ = find_path_in_spec(url, spec)
+        if paths is None:
             results.append(f"URL '{url}' could not be matched to an existing path in the specification.\n")
             continue
         path = paths[0]
@@ -191,10 +191,10 @@ def cross_check_configs(output_dir: str, spec_file: str) -> None:
         protocol = ""
 
         # Are all arguments in config defined in the spec?
-        for field_name in ['headers', 'params', 'data']:
+        for field_name in ('headers', 'params', 'data'):
             if field_name not in config:
                 continue
-            for (key, value) in config[field_name].items():
+            for key, value in config[field_name].items():
                 arg_exists = validate_argument(key, field_name, method, path, spec.security_schemas)
                 if not arg_exists:
                     protocol += (f"Argument '{key}' is not defined for location "
@@ -232,17 +232,17 @@ def _generate_dataset() -> None:
     print("OK, please wait ...")
 
     model = "gemini-1.5-pro"
-    apis = ["asana", "gmail_v3", "google_calendar_v3", "google_sheet_v4", "hubspot_association", "hubspot_companies",
+    apis = ("asana", "gmail_v3", "google_calendar_v3", "google_sheet_v4", "hubspot_association", "hubspot_companies",
             "hubspot_contact", "hubspot_crm_objects", "hubspot_deal", "hubspot_exports", "hubspot_imports",
             "hubspot_lineitems", "hubspot_object_meetings", "hubspot_object_notes", "hubspot_objects_email",
             "hubspot_object_tasks", "hubspot_pipelines", "hubspot_products", "hubspot_properties", "hubspot_quotes",
-            "hubspot_tickets", "salesforce_crm", "service_now", "slack"]
+            "hubspot_tickets", "salesforce_crm", "service_now", "slack")
     for api in apis:
         spec_file = f"openapi/real_world_specs/{api}.yaml"
         output_dir = f"data/synthetic/{api}/"  # make sure not to overwrite existing data
 
         print(f"Generating dataset for {api} API ...")
-        if api in ["asana", "gmail_v3", "slack"]:
+        if api in ("asana", "gmail_v3", "slack"):
             generate_config_dataset_in_chunks(model, spec_file, output_dir)
         else:
             generate_config_dataset(model, spec_file, output_dir)
@@ -256,3 +256,6 @@ if __name__ == "__main__":
     sys.path.append(os.getcwd())
 
     _generate_dataset()
+    # Note that we later removed the outermost level of the JSON files generated here, i.e., test_data = test_data['samples'].
+    # The reason for this was to simplify and unify the layout of these files.
+    # Also, the information in the 'api' and 'model' items was redundant.

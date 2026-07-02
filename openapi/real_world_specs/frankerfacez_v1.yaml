@@ -1,0 +1,2172 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.frankerfacez.com
+    description: Production API Server
+info:
+  version: '1.0'
+  description: "Get emotes. Set emotes. Be one with the emotes.\n\n## About Emotes\n\
+    \nThere are a few values on the emote model returned by our API that are not\n\
+    immediately obvious what they do, so we'd like to explain how they work.\n\n|\
+    \ Field | Description |\n|-------|-------------|\n| id    | The integer ID of\
+    \ an emote. IDs will always be numbers in API v1, though in a future release we\
+    \ may switch to using strings. |\n| name  | The name of an emote. This is the\
+    \ text string in chat that should be replaced with an instance of the emote. |\n\
+    | height | The height of the emote at 1x scale in pixels. |\n| width | The width\
+    \ of the emote at 1x scale in pixels. |\n| public | A public emote can be freely\
+    \ added to channels and collections on FrankerFaceZ. Non-public emotes require\
+    \ the owner's permission in the form of an unlock code. |\n| hidden | Whether\
+    \ or not the emote should be displayed in UI like menus that list available emotes.\
+    \ This is rarely used, and was intended to create easter eggs. |\n| modifier |\
+    \ Whether or not the emote is a modifier emote. See the secton on [Modifier Emotes](#modifier-emotes)\
+    \ below for more details. |\n| modifier_flags | A bitset of flags for customizing\
+    \ how a modifier functions. See the section on [Emote Effects](#emote-effects)\
+    \ below for more details. |\n| offset | This is deprecated and should not be used\
+    \ in the future. |\n| margins | This is deprecated and should not be used in the\
+    \ future. |\n| css | This is deprecated and should not be used in the future.\
+    \ |\n| owner | Information about the user that uploaded the emote, including their\
+    \ FFZ user ID, username, and display name. |\n| artist | If a separate artist\
+    \ has been set for an emote, information about the artist of the emote, including\
+    \ their FFZ user ID, username, and display name. |\n| urls | A map of DPI scales\
+    \ to emote URLs. There will always be a `1` entry and there may also be `2` and\
+    \ `4` entries for 2x and 4x DPI scales as well. Previously, URLs were sent as\
+    \ network-path references ([see RFC 3986 for details](https://www.rfc-editor.org/rfc/rfc3986#section-4.2))\
+    \ but now all URLs are absolute. Sorry for the inconvenience this has caused.\
+    \ |\n| animated | A map of DPI scales to animated emote URLs. This functions the\
+    \ same as `urls` but may be `null` if the emote is not animated. These URLs currently\
+    \ return WebP images but may return a different type in the future. You may append\
+    \ `.webp` to the end of the URL to ensure you receive a WebP response, or append\
+    \ `.gif` to receive a GIF response. Please avoid GIF if you are able. |\n| mask\
+    \ | If the emote is a modifier emote that applies a mask, a map of DPI scales\
+    \ to mask image URLs. This may be null if the emote is not a modifier with an\
+    \ associated mask. |\n| mask_animated | If the emote is a modifier emote that\
+    \ applies a mask, and the mask is animated, a map of DPI scales to mask image\
+    \ URLs. This may be null if the emote is not a modifier with an associated mask\
+    \ or if that mask does not have animation. |\n| status | A numeric status for\
+    \ emotes in our system. This should always be `1` in APIv1 responses as that represents\
+    \ an emote that has been approved. |\n| usage_count | The number of channels and/or\
+    \ collections that the emote has been added to. |\n| created_at | The datetime\
+    \ when the emote was created. |\n| last_updated | The datetime when the emote\
+    \ was last modified. |\n\n> **Note:** Masks are not yet being used, but will be\
+    \ handled in the official\n> client by applying a `mask-image` to the base emote\
+    \ image. The presence of\n> a mask map is enough to know that the modifier applies\
+    \ a mask. There will not\n> be an associated flag.\n\n### <a id=\"modifier-emotes\"\
+    ></a>Modifier Emotes\n\nModifier emotes are emotes that appear over top of other\
+    \ emotes or otherwise change how another emote is presented.\n\nTo use a modifier\
+    \ emote, users must first use another emote and then follow it with one or more\
+    \ modifiers, separated\nby spaces. If a modifier is used without a target emote\
+    \ directly before it, the modifier will appear as a normal\nemote instead. Including\
+    \ anything between the target emote and modifiers other than whitespace will result\
+    \ prevent the\neffect from working and the modifier will be displayed as a normal\
+    \ emote instead.\n\nWhen displaying modifiers, they should be vertically and horizontally\
+    \ centered over the target emote. The official FFZ\nclient handles this by containing\
+    \ an emote and its modifiers within a container element that has `position: relative`\n\
+    and that scales to the size of the target emote. Modifiers are then absolutely\
+    \ positioned within that container to center\nthem. For example, assume the target\
+    \ emote is [CatBag](https://www.frankerfacez.com/emoticon/25927-CatBag) which\
+    \ has a width\nof 32 pixels and a height of 29 pixels. Let's also assume that\
+    \ the modifier in use is [LookingOutAWreath](https://www.frankerfacez.com/emoticon/147011-LookingOutAWreath).\n\
+    A hypothetical container might look like:\n\n```html\n<figure style=\"display:\
+    \ inline-block; position: relative; width: 32px; height: 29px\">\n    <img src=\"\
+    https://cdn.frankerfacez.com/emoticon/25927/1\">\n\t<img\n\t\tstyle=\"position:\
+    \ absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)\"\n\t\tsrc=\"\
+    https://cdn.frankerfacez.com/emoticon/147011/1\"\n\t>\n</figure>\n```\n\nThat\
+    \ would result in something appearing like the following:\n\n![](https://www.frankerfacez.com/static/images/modifier-example.png)\n\
+    \n\n### <a id=\"emote-effects\"></a>Emote Effects\n\n> I realize that implementing\
+    \ these effects can potentially be a lot of work for\n> a developer, especially\
+    \ if they aren't using a client that renders chat via\n> HTML and CSS. In the\
+    \ future I'd like to potentially offer a server endpoint that\n> prerenders emotes\
+    \ with effects. Unfortunately, we lack the resources to do that\n> at this time.\n\
+    >\n> For now, please at least check for the `Hidden` flag to avoid rendering\n\
+    > modifiers that should be hidden. I think that would give users without full\n\
+    > support in their client of choice the best experience.\n\nIn addition to appearing\
+    \ on top of a target emote, modifiers can also have other visual effects on the\
+    \ presentation\nof the target emote. These additional properties are controlled\
+    \ through a bitset of flags stored in an emote's\n`modifier_flags` field. The\
+    \ following is a table of all currently available modifiers:\n\n> **Note:** Holes\
+    \ in the following table represent flags that were used in testing and removed\
+    \ without being associated\n> with any current effect emote.\n\n| Value | Flag\
+    \ | Description | Example |\n|-------|------|-------------|---------|\n|     1\
+    \ | Hidden | The modifier should not be rendered. This is set for modifiers that\
+    \ have other visual effects on targets. They should not be displayed, and only\
+    \ have images for use when used incorrectly (and thus appearing as a normal emote)\
+    \ or for display in UX such as emote menus. |   |\n|     2 | FlipX | The target\
+    \ emote should be flipped horizontally. | ![](https://www.frankerfacez.com/static/images/modifier-flipx.png)\
+    \ |\n|     4 | FlipY | The target emote should be flipped vertically. | ![](https://www.frankerfacez.com/static/images/modifier-flipy.png)\
+    \ |\n|     8 | GrowX | The target emote should have its width doubled. |   |\n\
+    |    16 |       | Not yet implemented. |   |\n|    32 |       | Not yet implemented.\
+    \ |   |\n|    64 |       | Not yet implemented. |   |\n|   128 |       | Not yet\
+    \ implemented. |   |\n|   256 |       | Not yet implemented. |   |\n|   512 |\
+    \       | Not yet implemented. |   |\n|  1024 |       | Not yet implemented. |\
+    \   |\n|  2048 | Rainbow | The target emote should have its hue rotated over time,\
+    \ creating a rainbow animation effect. | ![](https://www.frankerfacez.com/static/images/modifier-rainbow.gif)\
+    \ |\n|  4096 | HyperRed | The target emote should have its image modified to turn\
+    \ it red and increase its contrast to create an effect similar to \"HYPER\" emotes.\
+    \ | (Example combined with next effect.) |\n|  8192 | HyperShake | The target\
+    \ emote should shake quickly to create an effect similar to \"HYPER\" emotes.\
+    \ | ![](https://www.frankerfacez.com/static/images/modifier-hyper.gif) |\n| 16384\
+    \ | Cursed | The target emote should have its image modified to greatly increase\
+    \ its contrast while reducing its brightness slightly and reducing it to greyscale,\
+    \ creating an effect similar to cursed / despair emotes. | ![](https://www.frankerfacez.com/static/images/modifier-cursed.png)\
+    \ |\n| 32768 | Jam | The target emote should have an animation applied to create\
+    \ the illusion of headbanging / shaking to a rhythm. | ![](https://www.frankerfacez.com/static/images/modifier-jam.gif)\
+    \ |\n| 65536 | Bounce | The target emote should have an animation applied so that\
+    \ it squishes down, flips horizontally, squishes down again, and flips back to\
+    \ the original orientation before repeating. | ![](https://www.frankerfacez.com/static/images/modifier-bounce.gif)\
+    \ |\n\nA modifier emote may have one or more flag set, and all existing effect\
+    \ emotes\nso far have the `Hidden` flag set in addition to the flag(s) for whatever\n\
+    specific effect they produce.\n\nFor example, the `ffzHyper` effect emote has\
+    \ the flags `Hidden | HyperRed | HyperShake`\ngiving it a numeric value of `12_289`.\n\
+    \n\n## About Emote Sets\n\nEmote sets, also known as collections, are exactly\
+    \ what they sound like: a set\ncontaining one or more emotes. There are several\
+    \ types of sets that might be\nencountered:\n\n1. Every channel has a primary\
+    \ emote set which all users within that channel\n   can use freely. These emote\
+    \ sets are included in the responses of `/v1/room`\n   endpoints, with the ID\
+    \ given in a room's `set` property and the contents of\n   the emote set included\
+    \ in a map later in the response.\n\n2. There is at least one global emote set\
+    \ that all users across Twitch can use\n   freely. There may be more than one\
+    \ of these emote sets if there is a special\n   event happening. These sets are\
+    \ included in the response of `/v1/set/global/ids`\n   with their IDs given in\
+    \ the `default_sets` array and the contents of the\n   emote sets included in\
+    \ a map later in the response.\n\n3. There is at least one global emote set that\
+    \ is only usable by specific users.\n   There may be more than one of these emote\
+    \ sets. These sets are included in the\n   response of `/v1/set/global/ids` with\
+    \ a `users` map where the keys of the\n   map are emote set IDs and the values\
+    \ of the map are arrays of Twitch IDs.\n\n   While we would appreciate it if third-party\
+    \ clients support these, we understand\n   if you choose not to. However, if not\
+    \ supporting them then please make sure to\n   at least not include them at all\
+    \ rather than including them as available for all\n   users.\n\n\nEmote set objects,\
+    \ in addition to their array of emotes, will include a title that\ncan be displayed\
+    \ when relevant describing the source of the emote set such as a\nchannel that\
+    \ the emote set is associated with. Emote sets may also include an icon\nthat\
+    \ may be used when displaying the emote set such as within an emote menu. If\n\
+    included, the icon will be the URL of an image which may be a PNG, WebP, or SVG\
+    \ image.\n\n\n## Rate Limits\n\nFrankerFaceZ uses rate limits to help prevent\
+    \ our API from being\noverloaded. We use the [generic cell rate algorithm](https://en.wikipedia.org/wiki/Generic_cell_rate_algorithm),\n\
+    which is a leaky bucket-type limiter.\n\nThe default limits are as follows:\n\n\
+    | Condition | Fill Rate | Bucket Size |\n|-----------|-----------|-------------|\n\
+    | User token is provided | 800 points per user per OAuth client | 800 points |\n\
+    | App token is provided | 300 points per OAuth Client | 300 points |\n| No token\
+    \ | 120 points per IP address | 120 points |\n\n**Note:** Limits are *not* per\
+    \ IP address when an app token or user token is provided.\n\nIf you exhaust your\
+    \ available points, an error is returned: HTTP 429 Too Many Requests\n\nWhen you\
+    \ make an API request, you will receive a set of headers\ncontaining information\
+    \ pertaining to rate limiting:\n\n| Header | Description |\n|--------|-------------|\n\
+    | `RateLimit-Limit` | The maximum number of points you can spend within one minute.\
+    \ |\n| `RateLimit-Remaining` | The remaining points in your bucket. |\n| `RateLimit-Reset`\
+    \ | The number of seconds remaining until your bucket will refill to maximum capacity.\
+    \ |\n| `Retry-After` | The number of seconds until you should retry. Only sent\
+    \ if a request was denied due to an exhausted capacity. |\n\nIf you require a\
+    \ higher rate limit, please ask in the general development channel of our Discord.\n"
+  title: FrankerFaceZ
+  termsOfService: https://www.frankerfacez.com/terms
+tags: []
+paths:
+  /v1/user/{userName}:
+    get:
+      parameters:
+      - name: userName
+        in: path
+        description: User's Name
+        required: true
+        schema:
+          description: User's Name
+          type: string
+      tags:
+      - Users
+      summary: Get a user by name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  badges:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/Badge'
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_user/{userName}:
+    get:
+      parameters:
+      - name: userName
+        in: path
+        description: User's Name
+        required: true
+        schema:
+          description: User's Name
+          type: string
+      tags:
+      - Users
+      summary: Get a user by name, without extra data
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/user/id/{twitchID}:
+    get:
+      parameters:
+      - name: twitchID
+        in: path
+        description: User's Twitch ID
+        required: true
+        schema:
+          description: User's Twitch ID
+          type: integer
+      tags:
+      - Users
+      summary: Get a user by Twitch ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  badges:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/Badge'
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_user/id/{twitchID}:
+    get:
+      parameters:
+      - name: twitchID
+        in: path
+        description: User's Twitch ID
+        required: true
+        schema:
+          description: User's Twitch ID
+          type: integer
+      tags:
+      - Users
+      summary: Get a user by Twitch ID, without extra data
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/user/_id/{userID}:
+    get:
+      parameters:
+      - name: userID
+        in: path
+        description: User's FFZ ID
+        required: true
+        schema:
+          description: User's FFZ ID
+          type: integer
+      tags:
+      - Users
+      summary: Get a user by FFZ ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  badges:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/Badge'
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_user/_id/{userID}:
+    get:
+      parameters:
+      - name: userID
+        in: path
+        description: User's FFZ ID
+        required: true
+        schema:
+          description: User's FFZ ID
+          type: integer
+      tags:
+      - Users
+      summary: Get a user by FFZ ID, without extra data
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/user/yt/{youtubeID}:
+    get:
+      parameters:
+      - name: youtubeID
+        in: path
+        description: User's YouTube ID
+        required: true
+        schema:
+          description: User's YouTube ID
+          type: string
+      tags:
+      - Users
+      summary: Get a user by YouTube ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  badges:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/Badge'
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_user/yt/{youtubeID}:
+    get:
+      parameters:
+      - name: youtubeID
+        in: path
+        description: User's YouTube ID
+        required: true
+        schema:
+          description: User's YouTube ID
+          type: string
+      tags:
+      - Users
+      summary: Get a user by YouTube ID, without extra data
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/emote/{emoteID}/recommend:
+    get:
+      parameters:
+      - name: emoteID
+        in: path
+        description: FFZ Emote ID
+        required: true
+        schema:
+          description: FFZ Emote ID
+          type: integer
+      - name: page
+        in: query
+        required: false
+        schema:
+          default: 1
+          type: number
+          minimum: 1
+      - name: per_page
+        in: query
+        description: Number of emotes per page
+        required: false
+        schema:
+          description: Number of emotes per page
+          default: 50
+          type: number
+          minimum: 1
+          maximum: 200
+      tags:
+      - Emotes
+      summary: '[WIP] Get recommended emotes to an emote'
+      description: 'This uses a random sample of channels using an emote to recommend
+        emotes that other channels with this emote are also using.
+
+
+        **Rate Limit Cost:** 5 points'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pages:
+                    type: integer
+                  total:
+                    type: integer
+                  recommendations:
+                    items:
+                      type: object
+                      properties:
+                        score:
+                          type: integer
+                        emote:
+                          $ref: '#/components/schemas/Emote'
+                      required:
+                      - score
+                      - emote
+                    type: array
+                required:
+                - pages
+                - total
+                - recommendations
+          description: ''
+  /v1/emote/{emoteID}/similar:
+    get:
+      parameters:
+      - name: emoteID
+        in: path
+        description: FFZ Emote ID
+        required: true
+        schema:
+          description: FFZ Emote ID
+          type: integer
+      - name: similarity
+        in: query
+        required: false
+        schema:
+          default: 10
+          type: integer
+          minimum: 0
+          maximum: 20
+      - name: unapproved
+        in: query
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - name: page
+        in: query
+        required: false
+        schema:
+          default: 1
+          type: number
+          minimum: 1
+      - name: per_page
+        in: query
+        description: Number of emotes per page
+        required: false
+        schema:
+          description: Number of emotes per page
+          default: 50
+          type: number
+          minimum: 1
+          maximum: 200
+      tags:
+      - Emotes
+      summary: '[WIP] Get similar emotes (by image) to an emote'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pages:
+                    type: integer
+                  total:
+                    type: integer
+                  emotes:
+                    items:
+                      type: object
+                      properties:
+                        distance:
+                          type: integer
+                        emote:
+                          $ref: '#/components/schemas/Emote'
+                      required:
+                      - distance
+                      - emote
+                    type: array
+                required:
+                - pages
+                - total
+                - emotes
+          description: ''
+      description: '**Rate Limit Cost:** 30 points'
+  /v1/emote/{emoteID}:
+    get:
+      parameters:
+      - name: emoteID
+        in: path
+        required: true
+        schema:
+          type: number
+      tags:
+      - Emotes
+      summary: Get an emote by ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  emote:
+                    $ref: '#/components/schemas/Emote'
+                required:
+                - emote
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/emotes:
+    get:
+      parameters:
+      - name: q
+        in: query
+        description: A string to search by.
+        required: false
+        schema:
+          nullable: true
+          description: A string to search by.
+          type: string
+      - name: owner
+        in: query
+        description: A string to search users by.
+        required: false
+        schema:
+          nullable: true
+          description: A string to search users by.
+          type: string
+      - name: artist
+        in: query
+        description: A string to search users by.
+        required: false
+        schema:
+          nullable: true
+          description: A string to search users by.
+          type: string
+      - name: sensitive
+        in: query
+        description: Whether or not the search query should be treated as case sensitive.
+        required: false
+        schema:
+          description: Whether or not the search query should be treated as case sensitive.
+          default: false
+          type: boolean
+      - name: sort
+        in: query
+        description: The column and direction to sort by.
+        required: false
+        schema:
+          enum:
+          - name-asc
+          - name-desc
+          - owner-asc
+          - owner-desc
+          - count-asc
+          - count-desc
+          - updated-asc
+          - updated-desc
+          - created-asc
+          - created-desc
+          description: The column and direction to sort by.
+          default: created-desc
+          type: string
+      - name: private
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - enum:
+            - 'on'
+            - 'off'
+            - 'null'
+            - any
+            type: string
+      - name: animated
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - enum:
+            - 'on'
+            - 'off'
+            - 'null'
+            - any
+            type: string
+      - name: high_dpi
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - enum:
+            - 'on'
+            - 'off'
+            - 'null'
+            - any
+            type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          default: 1
+          type: number
+          minimum: 1
+      - name: per_page
+        in: query
+        description: 'Number of emotes per page. Range: 1-200.'
+        required: false
+        schema:
+          description: 'Number of emotes per page. Range: 1-200.'
+          default: 50
+          type: number
+          minimum: 1
+          maximum: 200
+      tags:
+      - Emotes
+      summary: Get emotes in bulk
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _links:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                      self:
+                        type: string
+                      prev:
+                        type: string
+                  _pages:
+                    type: number
+                  _total:
+                    type: number
+                  emoticons:
+                    items:
+                      $ref: '#/components/schemas/Emote'
+                    type: array
+                required:
+                - _pages
+                - _total
+                - emoticons
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/emoticons:
+    get:
+      parameters:
+      - name: q
+        in: query
+        description: A string to search by.
+        required: false
+        schema:
+          nullable: true
+          description: A string to search by.
+          type: string
+      - name: owner
+        in: query
+        description: A string to search users by.
+        required: false
+        schema:
+          nullable: true
+          description: A string to search users by.
+          type: string
+      - name: artist
+        in: query
+        description: A string to search users by.
+        required: false
+        schema:
+          nullable: true
+          description: A string to search users by.
+          type: string
+      - name: sensitive
+        in: query
+        description: Whether or not the search query should be treated as case sensitive.
+        required: false
+        schema:
+          description: Whether or not the search query should be treated as case sensitive.
+          default: false
+          type: boolean
+      - name: sort
+        in: query
+        description: The column and direction to sort by.
+        required: false
+        schema:
+          enum:
+          - name-asc
+          - name-desc
+          - owner-asc
+          - owner-desc
+          - count-asc
+          - count-desc
+          - updated-asc
+          - updated-desc
+          - created-asc
+          - created-desc
+          description: The column and direction to sort by.
+          default: created-desc
+          type: string
+      - name: private
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - enum:
+            - 'on'
+            - 'off'
+            - 'null'
+            - any
+            type: string
+      - name: animated
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - enum:
+            - 'on'
+            - 'off'
+            - 'null'
+            - any
+            type: string
+      - name: high_dpi
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - enum:
+            - 'on'
+            - 'off'
+            - 'null'
+            - any
+            type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          default: 1
+          type: number
+          minimum: 1
+      - name: per_page
+        in: query
+        description: 'Number of emotes per page. Range: 1-200.'
+        required: false
+        schema:
+          description: 'Number of emotes per page. Range: 1-200.'
+          default: 50
+          type: number
+          minimum: 1
+          maximum: 200
+      tags:
+      - Emotes
+      summary: Get emotes in bulk
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _links:
+                    type: object
+                    properties:
+                      next:
+                        type: string
+                      self:
+                        type: string
+                      prev:
+                        type: string
+                  _pages:
+                    type: number
+                  _total:
+                    type: number
+                  emoticons:
+                    items:
+                      $ref: '#/components/schemas/Emote'
+                    type: array
+                required:
+                - _pages
+                - _total
+                - emoticons
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/badge/{badgeID}:
+    get:
+      parameters:
+      - name: badgeID
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - Badges
+      summary: Get a badge by ID or name
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  badge:
+                    $ref: '#/components/schemas/Badge'
+                  users:
+                    type: object
+                    additionalProperties:
+                      items:
+                        type: string
+                      type: array
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_badge/{badgeID}:
+    get:
+      parameters:
+      - name: badgeID
+        in: path
+        required: true
+        schema:
+          type: string
+      tags:
+      - Badges
+      summary: Get a badge by ID or name (plain)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  badge:
+                    $ref: '#/components/schemas/Badge'
+                  users:
+                    type: object
+                    additionalProperties:
+                      items:
+                        type: string
+                      type: array
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/badges:
+    get:
+      parameters: []
+      tags:
+      - Badges
+      summary: Get all badges (with user names)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  badges:
+                    items:
+                      $ref: '#/components/schemas/Badge'
+                    type: array
+                  users:
+                    type: object
+                    additionalProperties:
+                      items:
+                        type: string
+                      type: array
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_badges:
+    get:
+      parameters: []
+      tags:
+      - Badges
+      summary: Get all badges (plain)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  badges:
+                    items:
+                      $ref: '#/components/schemas/Badge'
+                    type: array
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/badges/ids:
+    get:
+      parameters: []
+      tags:
+      - Badges
+      summary: Get all badges (with user IDs)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  badges:
+                    items:
+                      $ref: '#/components/schemas/Badge'
+                    type: array
+                  users:
+                    type: object
+                    additionalProperties:
+                      items:
+                        type: number
+                      type: array
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/room/id/{twitchID}:
+    get:
+      parameters:
+      - name: twitchID
+        in: path
+        description: User's Twitch ID
+        required: true
+        schema:
+          description: User's Twitch ID
+          type: integer
+      tags:
+      - Rooms
+      summary: Get a room by Twitch ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  room:
+                    $ref: '#/components/schemas/Room'
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/room/_id/{userID}:
+    get:
+      parameters:
+      - name: userID
+        in: path
+        description: User's FFZ ID
+        required: true
+        schema:
+          description: User's FFZ ID
+          type: integer
+      tags:
+      - Rooms
+      summary: Get a room by FFZ ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  room:
+                    $ref: '#/components/schemas/Room'
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/room/{roomName}:
+    get:
+      parameters:
+      - name: roomName
+        in: path
+        description: User's Name
+        required: true
+        schema:
+          description: User's Name
+          type: string
+      tags:
+      - Rooms
+      summary: Get a room by Twitch login
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  room:
+                    $ref: '#/components/schemas/Room'
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/room/yt/{youtubeID}:
+    get:
+      parameters:
+      - name: youtubeID
+        in: path
+        description: User's YouTube ID
+        required: true
+        schema:
+          description: User's YouTube ID
+          type: string
+      tags:
+      - Rooms
+      summary: Get a room by YouTube ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  room:
+                    $ref: '#/components/schemas/Room'
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_room/id/{twitchID}:
+    get:
+      parameters:
+      - name: twitchID
+        in: path
+        description: User's Twitch ID
+        required: true
+        schema:
+          description: User's Twitch ID
+          type: integer
+      tags:
+      - Rooms
+      summary: Get a room by Twitch ID (plain)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  room:
+                    $ref: '#/components/schemas/Room'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_room/_id/{userID}:
+    get:
+      parameters:
+      - name: userID
+        in: path
+        description: User's FFZ ID
+        required: true
+        schema:
+          description: User's FFZ ID
+          type: integer
+      tags:
+      - Rooms
+      summary: Get a room by FFZ ID (plain)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  room:
+                    $ref: '#/components/schemas/Room'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_room/{roomName}:
+    get:
+      parameters:
+      - name: roomName
+        in: path
+        description: User's Name
+        required: true
+        schema:
+          description: User's Name
+          type: string
+      tags:
+      - Rooms
+      summary: Get a room by Twitch login (plain)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  room:
+                    $ref: '#/components/schemas/Room'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_room/yt/{youtubeID}:
+    get:
+      parameters:
+      - name: youtubeID
+        in: path
+        description: User's YouTube ID
+        required: true
+        schema:
+          description: User's YouTube ID
+          type: string
+      tags:
+      - Rooms
+      summary: Get a room by YouTube ID (plain)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  room:
+                    $ref: '#/components/schemas/Room'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/multi_room/{roomNames}:
+    get:
+      parameters:
+      - name: roomNames
+        in: path
+        description: Comma separated list of Twitch usernames
+        required: true
+        schema:
+          description: Comma separated list of Twitch usernames
+          type: string
+      tags:
+      - Rooms
+      summary: Get multiple rooms by Twitch login
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rooms:
+                    items:
+                      $ref: '#/components/schemas/Room'
+                    type: array
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/multi_room/id/{roomIDs}:
+    get:
+      parameters:
+      - name: roomIDs
+        in: path
+        description: Comma separated list of Twitch IDs
+        required: true
+        schema:
+          description: Comma separated list of Twitch IDs
+          type: string
+      tags:
+      - Rooms
+      summary: Get multiple rooms by Twitch ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rooms:
+                    items:
+                      $ref: '#/components/schemas/Room'
+                    type: array
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/multi_room/_id/{roomIDs}:
+    get:
+      parameters:
+      - name: roomIDs
+        in: path
+        description: Comma separated list of FFZ IDs
+        required: true
+        schema:
+          description: Comma separated list of FFZ IDs
+          type: string
+      tags:
+      - Rooms
+      summary: Get multiple rooms by FFZ ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rooms:
+                    items:
+                      $ref: '#/components/schemas/Room'
+                    type: array
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_multi_room/{roomNames}:
+    get:
+      parameters:
+      - name: roomNames
+        in: path
+        description: Comma separated list of Twitch usernames
+        required: true
+        schema:
+          description: Comma separated list of Twitch usernames
+          type: string
+      tags:
+      - Rooms
+      summary: Get multiple rooms by Twitch login (plain)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rooms:
+                    items:
+                      $ref: '#/components/schemas/Room'
+                    type: array
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_multi_room/id/{roomIDs}:
+    get:
+      parameters:
+      - name: roomIDs
+        in: path
+        description: Comma separated list of Twitch IDs
+        required: true
+        schema:
+          description: Comma separated list of Twitch IDs
+          type: string
+      tags:
+      - Rooms
+      summary: Get multiple rooms by Twitch ID (plain)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rooms:
+                    items:
+                      $ref: '#/components/schemas/Room'
+                    type: array
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_multi_room/_id/{roomIDs}:
+    get:
+      parameters:
+      - name: roomIDs
+        in: path
+        description: Comma separated list of FFZ IDs
+        required: true
+        schema:
+          description: Comma separated list of FFZ IDs
+          type: string
+      tags:
+      - Rooms
+      summary: Get multiple rooms by FFZ ID (plain)
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rooms:
+                    items:
+                      $ref: '#/components/schemas/Room'
+                    type: array
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/rooms/{roomNames}:
+    get:
+      parameters:
+      - name: roomNames
+        in: path
+        description: Comma separated list of Twitch usernames
+        required: true
+        schema:
+          description: Comma separated list of Twitch usernames
+          type: string
+      tags:
+      - Rooms
+      summary: Get limited info for multiple rooms by Twitch login
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  template:
+                    type: object
+                    properties:
+                      static:
+                        description: Static Emote Image Template
+                        type: string
+                      animated:
+                        description: Animated Emote Image Template
+                        type: string
+                    required:
+                    - static
+                    - animated
+                  emotes:
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        animated:
+                          type: boolean
+                        mask:
+                          type: boolean
+                        mask_animated:
+                          type: boolean
+                        modifier:
+                          type: boolean
+                        modifier_flags:
+                          default: 0
+                          type: integer
+                        sizes:
+                          items:
+                            type: integer
+                          type: array
+                        width:
+                          type: integer
+                        height:
+                          type: integer
+                        owner:
+                          nullable: true
+                          type: object
+                          properties:
+                            _id:
+                              type: integer
+                            name:
+                              type: string
+                            display_name:
+                              nullable: true
+                              type: string
+                          required:
+                          - _id
+                          - name
+                        artist:
+                          nullable: true
+                          type: object
+                          properties:
+                            _id:
+                              type: integer
+                            name:
+                              type: string
+                            display_name:
+                              nullable: true
+                              type: string
+                          required:
+                          - _id
+                          - name
+                      required:
+                      - id
+                      - name
+                      - animated
+                      - mask
+                      - mask_animated
+                      - modifier
+                      - sizes
+                    type: array
+                  rooms:
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: integer
+                        id:
+                          type: integer
+                        login:
+                          type: string
+                        emotes:
+                          items:
+                            type: integer
+                          type: array
+                      required:
+                      - _id
+                      - id
+                      - login
+                      - emotes
+                    type: array
+                required:
+                - emotes
+                - rooms
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/rooms/id/{roomIDs}:
+    get:
+      parameters:
+      - name: roomIDs
+        in: path
+        description: Comma separated list of Twitch IDs
+        required: true
+        schema:
+          description: Comma separated list of Twitch IDs
+          type: string
+      tags:
+      - Rooms
+      summary: Get limited info for multiple rooms by Twitch ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  template:
+                    type: object
+                    properties:
+                      static:
+                        description: Static Emote Image Template
+                        type: string
+                      animated:
+                        description: Animated Emote Image Template
+                        type: string
+                    required:
+                    - static
+                    - animated
+                  emotes:
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        animated:
+                          type: boolean
+                        mask:
+                          type: boolean
+                        mask_animated:
+                          type: boolean
+                        modifier:
+                          type: boolean
+                        modifier_flags:
+                          default: 0
+                          type: integer
+                        sizes:
+                          items:
+                            type: integer
+                          type: array
+                        width:
+                          type: integer
+                        height:
+                          type: integer
+                        owner:
+                          nullable: true
+                          type: object
+                          properties:
+                            _id:
+                              type: integer
+                            name:
+                              type: string
+                            display_name:
+                              nullable: true
+                              type: string
+                          required:
+                          - _id
+                          - name
+                        artist:
+                          nullable: true
+                          type: object
+                          properties:
+                            _id:
+                              type: integer
+                            name:
+                              type: string
+                            display_name:
+                              nullable: true
+                              type: string
+                          required:
+                          - _id
+                          - name
+                      required:
+                      - id
+                      - name
+                      - animated
+                      - mask
+                      - mask_animated
+                      - modifier
+                      - sizes
+                    type: array
+                  rooms:
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: integer
+                        id:
+                          type: integer
+                        login:
+                          type: string
+                        emotes:
+                          items:
+                            type: integer
+                          type: array
+                      required:
+                      - _id
+                      - id
+                      - login
+                      - emotes
+                    type: array
+                required:
+                - emotes
+                - rooms
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/rooms/_id/{roomIDs}:
+    get:
+      parameters:
+      - name: roomIDs
+        in: path
+        description: Comma separated list of FFZ IDs
+        required: true
+        schema:
+          description: Comma separated list of FFZ IDs
+          type: string
+      tags:
+      - Rooms
+      summary: Get limited info for multiple rooms by FFZ ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  template:
+                    type: object
+                    properties:
+                      static:
+                        description: Static Emote Image Template
+                        type: string
+                      animated:
+                        description: Animated Emote Image Template
+                        type: string
+                    required:
+                    - static
+                    - animated
+                  emotes:
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        animated:
+                          type: boolean
+                        mask:
+                          type: boolean
+                        mask_animated:
+                          type: boolean
+                        modifier:
+                          type: boolean
+                        modifier_flags:
+                          default: 0
+                          type: integer
+                        sizes:
+                          items:
+                            type: integer
+                          type: array
+                        width:
+                          type: integer
+                        height:
+                          type: integer
+                        owner:
+                          nullable: true
+                          type: object
+                          properties:
+                            _id:
+                              type: integer
+                            name:
+                              type: string
+                            display_name:
+                              nullable: true
+                              type: string
+                          required:
+                          - _id
+                          - name
+                        artist:
+                          nullable: true
+                          type: object
+                          properties:
+                            _id:
+                              type: integer
+                            name:
+                              type: string
+                            display_name:
+                              nullable: true
+                              type: string
+                          required:
+                          - _id
+                          - name
+                      required:
+                      - id
+                      - name
+                      - animated
+                      - mask
+                      - mask_animated
+                      - modifier
+                      - sizes
+                    type: array
+                  rooms:
+                    items:
+                      type: object
+                      properties:
+                        _id:
+                          type: integer
+                        id:
+                          type: integer
+                        login:
+                          type: string
+                        emotes:
+                          items:
+                            type: integer
+                          type: array
+                      required:
+                      - _id
+                      - id
+                      - login
+                      - emotes
+                    type: array
+                required:
+                - emotes
+                - rooms
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/set/global:
+    get:
+      parameters: []
+      tags:
+      - Emote Sets
+      summary: Get all globally applicable emote sets
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  default_sets:
+                    items:
+                      type: number
+                    type: array
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+                  users:
+                    type: object
+                    additionalProperties:
+                      items:
+                        type: string
+                      type: array
+                required:
+                - default_sets
+                - sets
+                - users
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/set/global/ids:
+    get:
+      parameters: []
+      tags:
+      - Emote Sets
+      summary: Get all globally applicable emote sets, with user Twitch IDs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  default_sets:
+                    items:
+                      type: number
+                    type: array
+                  sets:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/EmoteSet'
+                  user_ids:
+                    type: object
+                    additionalProperties:
+                      items:
+                        type: integer
+                      type: array
+                required:
+                - default_sets
+                - sets
+                - user_ids
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_set/global:
+    get:
+      parameters: []
+      tags:
+      - Emote Sets
+      summary: Get all globally applicable emote sets, without any extra data
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  default_sets:
+                    items:
+                      type: number
+                    type: array
+                required:
+                - default_sets
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/set/{setID}:
+    get:
+      parameters:
+      - name: setID
+        in: path
+        required: true
+        schema:
+          type: number
+      tags:
+      - Emote Sets
+      summary: Get an emote set by ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  set:
+                    $ref: '#/components/schemas/EmoteSet'
+                  users:
+                    type: object
+                    additionalProperties:
+                      items:
+                        type: string
+                      type: array
+                required:
+                - set
+                - users
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/set/{setID}/ids:
+    get:
+      parameters:
+      - name: setID
+        in: path
+        required: true
+        schema:
+          type: number
+      tags:
+      - Emote Sets
+      summary: Get an emote set by ID, including user Twitch IDs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  set:
+                    $ref: '#/components/schemas/EmoteSet'
+                  user_ids:
+                    type: object
+                    additionalProperties:
+                      items:
+                        type: integer
+                      type: array
+                required:
+                - set
+                - user_ids
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+  /v1/_set/{setID}:
+    get:
+      parameters:
+      - name: setID
+        in: path
+        required: true
+        schema:
+          type: number
+      tags:
+      - Emote Sets
+      summary: Get an emote set by ID, without a users list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  set:
+                    $ref: '#/components/schemas/EmoteSet'
+                required:
+                - set
+          description: ''
+      description: '**Rate Limit Cost:** 1 point'
+components:
+  securitySchemes: {}
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        twitch_id:
+          type: integer
+        youtube_id:
+          nullable: true
+          description: YouTube ID
+          type: string
+        name:
+          type: string
+        display_name:
+          nullable: true
+          type: string
+        avatar:
+          nullable: true
+          type: string
+        max_emoticons:
+          type: integer
+        is_donor:
+          type: boolean
+        is_subwoofer:
+          type: boolean
+        sub_months:
+          default: 0
+          type: integer
+        sub_lifetime:
+          default: false
+          type: boolean
+        badges:
+          items:
+            type: integer
+          type: array
+        emote_sets:
+          items:
+            type: integer
+          type: array
+      required:
+        - id
+        - twitch_id
+        - name
+        - max_emoticons
+    Badge:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        title:
+          type: string
+        slot:
+          type: integer
+        replaces:
+          nullable: true
+          type: string
+        color:
+          nullable: true
+          type: string
+        image:
+          type: string
+        urls:
+          type: object
+          properties:
+            '1':
+              type: string
+            '2':
+              nullable: true
+              type: string
+            '4':
+              nullable: true
+              type: string
+          required:
+            - '1'
+        css:
+          nullable: true
+          type: string
+      required:
+        - id
+        - name
+        - title
+        - slot
+        - image
+        - urls
+    Emote:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        height:
+          type: number
+        width:
+          type: number
+        public:
+          type: boolean
+        hidden:
+          type: boolean
+        modifier:
+          type: boolean
+        modifier_flags:
+          type: integer
+        offset:
+          nullable: true
+          type: string
+        margins:
+          nullable: true
+          type: string
+        css:
+          nullable: true
+          type: string
+        owner:
+          nullable: true
+          type: object
+          properties:
+            _id:
+              type: integer
+            name:
+              type: string
+            display_name:
+              nullable: true
+              type: string
+          required:
+            - _id
+            - name
+        artist:
+          nullable: true
+          type: object
+          properties:
+            _id:
+              type: integer
+            name:
+              type: string
+            display_name:
+              nullable: true
+              type: string
+          required:
+            - _id
+            - name
+        urls:
+          type: object
+          properties:
+            '1':
+              type: string
+          additionalProperties:
+            nullable: true
+            type: string
+          required:
+            - '1'
+        animated:
+          nullable: true
+          type: object
+          properties:
+            '1':
+              type: string
+          additionalProperties:
+            nullable: true
+            type: string
+          required:
+            - '1'
+        mask:
+          nullable: true
+          type: object
+          properties:
+            '1':
+              type: string
+          additionalProperties:
+            nullable: true
+            type: string
+          required:
+            - '1'
+        mask_animated:
+          nullable: true
+          type: object
+          properties:
+            '1':
+              type: string
+          additionalProperties:
+            nullable: true
+            type: string
+          required:
+            - '1'
+        status:
+          type: integer
+        usage_count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        last_updated:
+          nullable: true
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - height
+        - width
+        - public
+        - hidden
+        - modifier
+        - modifier_flags
+        - created_at
+    EmoteSet:
+      type: object
+      properties:
+        id:
+          type: integer
+        _type:
+          type: number
+        icon:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        css:
+          nullable: true
+          type: string
+        emoticons:
+          items:
+            $ref: '#/components/schemas/Emote'
+          type: array
+      required:
+        - id
+        - _type
+        - emoticons
+    Room:
+      type: object
+      properties:
+        _id:
+          type: integer
+        twitch_id:
+          type: integer
+        youtube_id:
+          nullable: true
+          description: YouTube ID
+          type: string
+        id:
+          type: string
+        is_group:
+          default: false
+          type: boolean
+        display_name:
+          nullable: true
+          type: string
+        set:
+          type: integer
+        moderator_badge:
+          nullable: true
+          type: string
+        vip_badge:
+          nullable: true
+          type: object
+          properties:
+            '1':
+              type: string
+            '2':
+              nullable: true
+              type: string
+            '4':
+              nullable: true
+              type: string
+          required:
+            - '1'
+        mod_urls:
+          nullable: true
+          type: object
+          properties:
+            '1':
+              type: string
+            '2':
+              nullable: true
+              type: string
+            '4':
+              nullable: true
+              type: string
+          required:
+            - '1'
+        user_badges:
+          type: object
+          additionalProperties:
+            items:
+              type: string
+            type: array
+        user_badge_ids:
+          type: object
+          additionalProperties:
+            items:
+              type: integer
+            type: array
+        css:
+          nullable: true
+          type: string
+      required:
+        - _id
+        - twitch_id
+        - id
+        - set

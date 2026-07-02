@@ -1,3 +1,4 @@
+// Test params object inside data
 const axios = require('axios');
 axios.post('https://petstore.swagger.io/v2/pets', {
     params: {
