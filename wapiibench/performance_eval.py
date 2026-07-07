@@ -44,7 +44,9 @@ def _build_input_text(task: dict, setup: str, setting: str, spec_file: str, mode
 def _run_performance_eval():
     """Measure generation runtime for a single task."""
 
-    parser = argparse.ArgumentParser(description="Measure generation runtime for constrained decoding.")
+    parser = argparse.ArgumentParser(
+        description="Measure the generation speed (tokens per second etc.) for the given experiment configuration. "
+                    "Results are stored under data/performance/.")
     parser.add_argument("--model", required=True, type=str, choices=MODELS, help="HuggingFace model name")
     parser.add_argument("--api", required=True, type=str, choices=APIS.keys(), help="API to benchmark")
     parser.add_argument("--setup", required=True, type=str, choices=SETUPS.keys(), help="Setup to benchmark")

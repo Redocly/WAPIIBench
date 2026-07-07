@@ -58,7 +58,7 @@ MODELS = (
     "Salesforce/codet5-large",
     "Salesforce/codet5p-220m",
     "Salesforce/codet5p-770m",
-    "Salesforce/codet5p-2b",  # always crashes
+    "Salesforce/codet5p-2b",
     "Salesforce/codet5p-6b",
     "Salesforce/codet5p-16b",
     "Salesforce/instructcodet5p-16b",
@@ -1207,7 +1207,9 @@ def _run_evaluation() -> None:
     default_node = os.path.join(
         os.environ.get("NVM_SYMLINK", os.path.expanduser("~/.nvm/versions/node/v24.16.0/bin")), "node")
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Run the evaluation with the synthetic dataset for the given experiment configuration. "
+                    "Results are stored under data/generated/.")
     parser.add_argument("--models", default=MODELS, nargs='+', help="the models to evaluate")
     parser.add_argument("--skip-models", default=(), nargs='+', help="the models to skip")
     parser.add_argument("--apis", default=APIS.keys(), nargs='+', help="the APIs to evaluate")
@@ -1216,10 +1218,11 @@ def _run_evaluation() -> None:
     parser.add_argument("--skip-setups", default=(), nargs='+', help="the setups to skip")
     parser.add_argument("--settings", default=SETTINGS, nargs='+', help="the settings to evaluate")
     parser.add_argument("--skip-settings", default=(), nargs='+', help="the settings to skip")
-    parser.add_argument("--node", default=default_node, type=str, help="the node version to use")
+    parser.add_argument("--node", default=default_node, type=str, help="the node binary to use")
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--generate-only", action="store_true", help="only generate the code, then stop")
-    group.add_argument("--evaluate-only", action="store_true", help="skip code generation, just execute and evaluate")
+    group.add_argument(
+        "--evaluate-only", action="store_true", help="skip code generation, just execute, compare, and analyze it")
     args = parser.parse_args()
 
     models = [model for model in args.models if model not in args.skip_models]

@@ -112,7 +112,8 @@ class GenerationRule:
 
     def export(self) -> str:
         """
-        Convert this rule to a regex representation that can be used in other applications.
+        Convert this rule to a regex representation that can be used in other applications
+        (no guarantee that it will actually work in the other application, as it uses many advanced regex features).
         :return: This generation rule as a regex string
         """
         return self.starter + self.body if self.starter is not None else self.body
@@ -190,7 +191,8 @@ class GenerationRuleset(list[GenerationRule]):
                 return rule
         return None
 
-    def print_state(self, completion: str | None = None, active_only: bool = True, logger: Logger = None) -> None:
+    def print_state(self, completion: str | None = None, active_only: bool = True,
+                    logger: Logger | None = None) -> None:
         """
         Print the state of all rules in this ruleset for debugging purposes.
         :param completion: The current completion for more detailed prints
@@ -225,7 +227,8 @@ class GenerationRuleset(list[GenerationRule]):
 
     def export(self) -> str:
         """
-        Convert this ruleset to a regex representation that can be used in other applications.
+        Convert this ruleset to a regex representation that can be used in other applications
+        (no guarantee that it will actually work in the other application, as it uses many advanced regex features).
         :return: This generation ruleset as a regex string
         """
         from openapi_utils import join_alternatives
