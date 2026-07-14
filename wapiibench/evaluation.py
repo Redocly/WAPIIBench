@@ -84,10 +84,30 @@ axios.\
 const axios = require('axios');
 
 axios.{method}('{url}',\
-"""
+""",
+
+    # Starters for the 'sdk-repair' arm (see wapiibench/sdk_repair_arm.py). They inject the
+    # capture function AS the generated client's `fetch` option (verified seam:
+    # `config.fetch ?? fetch` in the generated runtime), rather than monkeypatching global
+    # fetch. `{{ ... }}` are escaped so instantiate_prompt.format() renders literal JS braces;
+    # the client is imported from the fixed relative path './client' (normalized per task by
+    # sdk_repair_arm.generate_client). Only used with setting == 'sdk-repair'.
+    'sdk-invocation': """\
+// {task}
+import {{ configure }} from './client';
+configure({{ fetch: globalThis.__wapiiCaptureFetch }});
+
+""",
+
+    'sdk-createclient': """\
+// {task}
+import {{ createClient }} from './client';
+const client = createClient({{ fetch: globalThis.__wapiiCaptureFetch }});
+
+""",
 }
 
-SETTINGS = ('vanilla', 'spec', 'rag', 'constrained', 'constrained-rag')
+SETTINGS = ('vanilla', 'spec', 'rag', 'constrained', 'constrained-rag', 'sdk-repair')
 
 FIELD_KEYS = ('headers', 'params', 'path_params', 'data')
 SPECIAL_KEYS = ('Accept', 'Content-Type')
@@ -126,6 +146,19 @@ def generate(model_name: str, setup: str, setting: str, prompt_file: str, test_d
     :param openai_batch: Whether to use OpenAI's Batch API to generate the code asynchronously
     :param kwargs: Additional arguments for the generation config
     """
+    if setting == 'sdk-repair':
+        # The SDK+repair arm generates TypeScript against a typed client and repairs it
+        # against tsc over multiple synchronous turns. Its pipeline diverges from the
+        # axios-oriented body below, so hand off before it. The repair loop is multi-turn and
+        # synchronous, which the async single-shot Batch API (model_utils.py:182-216) cannot
+        # carry -> generation is forced synchronous (openai_batch is not propagated). The arm
+        # also uses its own prompt template (the default one instructs "write ... Axios").
+        from sdk_repair_arm import generate_sdk_repair
+        sdk_prompt_file = os.path.join("resources", "sdk_code_generation_prompt.md")
+        return generate_sdk_repair(
+            model_name, setup, setting, sdk_prompt_file, test_data_file, output_dir,
+            api=api, num_outputs=num_outputs, **kwargs)
+
     kwargs.setdefault('max_new_tokens', 250)
     kwargs.setdefault('do_sample', num_outputs > 1)
     kwargs.setdefault('num_beams', 1)
@@ -365,6 +398,13 @@ def execute(code_dir: str, node: str, test_data_file: str | None = None) -> None
     :param node: The path to the node binary to execute the JS code in the shell
     :param test_data_file: Path to the test data in case variables need to be defined before execution
     """
+    # The SDK+repair arm emits TypeScript ({index}_code.ts), not raw axios ({index}_code.js).
+    # Its executor compiles TS -> JS and prepends capture_shim.js instead of mock.js, but
+    # writes the SAME {index}_config.json shape so compare()/analyze() are reused unchanged.
+    if os.path.isdir(code_dir) and any(f.endswith("_code.ts") for f in os.listdir(code_dir)):
+        from sdk_repair_arm import execute_sdk_repair
+        return execute_sdk_repair(code_dir, node, test_data_file=test_data_file)
+
     with open(os.path.join("wapiibench", "mock.js"), 'r') as file:
         mock_code_template = file.read()
 
