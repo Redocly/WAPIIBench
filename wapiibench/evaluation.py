@@ -87,22 +87,34 @@ axios.{method}('{url}',\
 """,
 
     # Starters for the 'sdk-repair' arm (see wapiibench/sdk_repair_arm.py). They inject the
-    # capture function AS the generated client's `fetch` option (verified seam:
-    # `config.fetch ?? fetch` in the generated runtime), rather than monkeypatching global
-    # fetch. `{{ ... }}` are escaped so instantiate_prompt.format() renders literal JS braces;
-    # the client is imported from the fixed relative path './client' (normalized per task by
-    # sdk_repair_arm.generate_client). Only used with setting == 'sdk-repair'.
+    # capture function AS the generated client's `fetch` option (seam re-verified against
+    # released @redocly/cli 2.51.0: `const doFetch = config.fetch ?? fetch;`), rather than
+    # monkeypatching global fetch. `{{ ... }}` are escaped so instantiate_prompt.format()
+    # renders literal JS braces; the client is imported from the fixed relative path
+    # './client' (written there per task by sdk_repair_arm.generate_client).
+    # `clientHeader: false` suppresses the client's own `X-Redocly-Client` header, which is
+    # NOT in SPECIAL_KEYS and would otherwise be scored as an unexpected/illegal argument on
+    # every single task. `use(zodValidation())` activates the generated zod middleware:
+    # request-body validation throws, response validation stays at its "warn" default.
+    # Only used with setting == 'sdk-repair'.
     'sdk-invocation': """\
 // {task}
-import {{ configure }} from './client';
-configure({{ fetch: globalThis.__wapiiCaptureFetch }});
+import {{ client }} from './client';
+import {{ zodValidation }} from './client.zod';
+client.configure({{ fetch: globalThis.__wapiiCaptureFetch, clientHeader: false }});
+client.use(zodValidation());
+{{auth_setup}}
 
 """,
 
     'sdk-createclient': """\
 // {task}
-import {{ createClient }} from './client';
-const client = createClient({{ fetch: globalThis.__wapiiCaptureFetch }});
+import {{ createClient, OPERATIONS }} from './client';
+import {{ zodValidation }} from './client.zod';
+const client = createClient(OPERATIONS, {{
+  fetch: globalThis.__wapiiCaptureFetch, clientHeader: false }});
+client.use(zodValidation());
+{{auth_setup}}
 
 """,
 }

@@ -3,7 +3,7 @@
  *
  * PURPOSE
  * -------
- * The Redocly `generate-client` output (redocly-cli PR #2885, branch feat/ts-client-gen)
+ * The Redocly `generate-client` output (released @redocly/cli, pinned 2.51.0)
  * defaults to a *web-standard fetch* runtime (the `inline` runtime), NOT axios. WAPIIBench's
  * existing capture asset, wapiibench/mock.js, installs axios-mock-adapter on the axios
  * singleton and writes `{index}_config.json`; it never fires for a fetch-based client.
@@ -17,7 +17,8 @@
  * `configure({ fetch })` receives every outbound request. See sdk_repair_arm.py for how the
  * starter code wires it in, and the branch README for the verification of this seam.
  *
- * VERIFIED CALL SHAPE (redocly-cli@f5776cf, packages/client-generator/src/runtime/send.ts)
+ * VERIFIED CALL SHAPE (released @redocly/cli 2.51.0; source at redocly-cli HEAD 2566393,
+ *                      packages/client-generator/src/generators/typescript/runtime/send.ts:138)
  * ----------------------------------------------------------------------------------------
  *   doFetch(url, init) is called with:
  *     url        : string, with the query string ALREADY baked in (url.ts serializes it)
@@ -27,7 +28,8 @@
  *                   when a JSON body is serialized
  *     init.body  : ALREADY serialized -> a JSON string (JSON.stringify) for JSON bodies, or
  *                   a URLSearchParams / FormData / Blob / ArrayBuffer / string for others
- *   (config.fetch is typed `fetch?: typeof fetch` on ClientConfig — runtime/types.ts.)
+ *   (config.fetch is typed `fetch?: typeof fetch;` on ClientConfig —
+ *    packages/client-generator/src/generators/typescript/runtime/types.ts:105.)
  *
  * OUTPUT SHAPE (verified against redocly/wapiibench@main)
  * ------------------------------------------------------
@@ -222,9 +224,14 @@ function captureFetch(input, init) {
     }
   } catch (e) {
     // Match execute()'s failure contract: a config file with an ERROR key mapped by the
-    // Python side to Verdict.EXECUTION_ERROR (evaluation.py:420). Same literal value, so no
-    // scoring code changes are needed.
-    writeConfig({ ERROR: 'execution_error', _detail: String((e && e.message) || e) });
+    // Python side to Verdict.EXECUTION_ERROR (evaluation.py:420).
+    // CASING IS LOAD-BEARING: Verdict is a strenum.StrEnum whose members use auto(), so the
+    // VALUE equals the member NAME -- Verdict.EXECUTION_ERROR is the string
+    // 'EXECUTION_ERROR', not 'execution_error'. Writing the lowercase form here makes
+    // _analyze_sample() fall through its verdict chain and
+    // `raise AssertionError(f"Unexpected verdict {sample['ERROR']}")`, crashing analyze()
+    // for the whole run instead of scoring the sample as nonexecutable.
+    writeConfig({ ERROR: 'EXECUTION_ERROR', _detail: String((e && e.message) || e) });
   }
   // Synthetic OK response so the client resolves without hitting the network. `application/
   // json` + `{}` body keeps the generated runtime's `response.json()` parse path happy.
