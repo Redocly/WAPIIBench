@@ -1,0 +1,1111 @@
+{
+  "retriever": "bm25-lexical-standin",
+  "note": "declared deviation from the paper's all-MiniLM-L6-v2 + CrossEncoder retriever; huggingface.co is blocked by network policy in this environment",
+  "whitelist_size": 5,
+  "accuracy": {
+    "n": 78,
+    "top1": 0.7948717948717948,
+    "top5": 0.9871794871794872,
+    "substituted": 1,
+    "substituted_fraction": 0.01282051282051282,
+    "unresolved_ground_truth": 0,
+    "paper_reference": {
+      "top1": 0.757,
+      "top5": 0.952
+    }
+  },
+  "tasks": [
+    {
+      "api": "asana",
+      "index": 4,
+      "operation_ids": [
+        "createBatchRequest",
+        "createTask",
+        "setParentForTask",
+        "createSubtaskForTask",
+        "createProjectBrief"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 5,
+      "operation_ids": [
+        "createCustomField",
+        "createPortfolio",
+        "getCustomField",
+        "createEnumOptionForCustomField",
+        "typeaheadForWorkspace"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 8,
+      "operation_ids": [
+        "deleteCustomField",
+        "deleteStory",
+        "deleteAttachment",
+        "deletePortfolio",
+        "deleteGoal"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 16,
+      "operation_ids": [
+        "getGoals",
+        "getGoalRelationships",
+        "getParentGoalsForGoal",
+        "createGoal",
+        "getGoal"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 22,
+      "operation_ids": [
+        "addSupportingRelationship",
+        "removeSupportingRelationship",
+        "getGoalRelationship",
+        "updateGoalRelationship",
+        "getGoalRelationships"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 27,
+      "operation_ids": [
+        "updateGoalMetric",
+        "createGoalMetric",
+        "updateGoal",
+        "updateGoalRelationship",
+        "getParentGoalsForGoal"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 43,
+      "operation_ids": [
+        "getPortfolioMemberships",
+        "getPortfolioMembership",
+        "getPortfolioMembershipsForPortfolio",
+        "getItemsForPortfolio",
+        "addMembersForPortfolio"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 3
+    },
+    {
+      "api": "asana",
+      "index": 50,
+      "operation_ids": [
+        "getProjectMembership",
+        "getProjectMembershipsForProject",
+        "removeFollowersForProject",
+        "getProject",
+        "getTeamMembership"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 57,
+      "operation_ids": [
+        "createProjectStatusForProject",
+        "getProjectStatus",
+        "deleteProjectStatus",
+        "projectSaveAsTemplate",
+        "createProject"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 5
+    },
+    {
+      "api": "asana",
+      "index": 70,
+      "operation_ids": [
+        "removeCustomFieldSettingForProject",
+        "removeCustomFieldSettingForPortfolio",
+        "addCustomFieldSettingForProject",
+        "getCustomFieldSettingsForProject",
+        "getCustomFieldSettingsForPortfolio"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 79,
+      "operation_ids": [
+        "getSection",
+        "deleteSection",
+        "insertSectionForProject",
+        "getTasksForSection",
+        "addTaskForSection"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 80,
+      "operation_ids": [
+        "deleteSection",
+        "getSection",
+        "insertSectionForProject",
+        "getTasksForSection",
+        "addTaskForSection"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 87,
+      "operation_ids": [
+        "deleteStatus",
+        "deleteProjectStatus",
+        "getStatus",
+        "createStatusForObject",
+        "getStatusesForObject"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 90,
+      "operation_ids": [
+        "updateStory",
+        "createStoryForTask",
+        "getStory",
+        "deleteStory",
+        "updateGoal"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 92,
+      "operation_ids": [
+        "createTagForWorkspace",
+        "createTag",
+        "getTagsForWorkspace",
+        "getTags",
+        "getTag"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "asana",
+      "index": 96,
+      "operation_ids": [
+        "getTasksForTag",
+        "getTagsForTask",
+        "addTagForTask",
+        "removeTagForTask",
+        "addFollowersForTask"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 98,
+      "operation_ids": [
+        "createSubtaskForTask",
+        "createStoryForTask",
+        "createTask",
+        "createCustomField",
+        "duplicateTask"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 3
+    },
+    {
+      "api": "asana",
+      "index": 104,
+      "operation_ids": [
+        "addFollowersForTask",
+        "addFollowersForProject",
+        "addFollowers",
+        "addMembersForProject",
+        "removeFollowerForTask"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 114,
+      "operation_ids": [
+        "removeProjectForTask",
+        "removeTagForTask",
+        "removeFollowerForTask",
+        "removeMembersForProject",
+        "removeCustomFieldSettingForProject"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 116,
+      "operation_ids": [
+        "setParentForTask",
+        "createTask",
+        "createSubtaskForTask",
+        "addDependenciesForTask",
+        "addDependentsForTask"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 117,
+      "operation_ids": [
+        "getStoriesForTask",
+        "createStoryForTask",
+        "updateStory",
+        "deleteStory",
+        "getStory"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 120,
+      "operation_ids": [
+        "createSubtaskForTask",
+        "getSubtasksForTask",
+        "createSectionForProject",
+        "createCustomField",
+        "createStoryForTask"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 121,
+      "operation_ids": [
+        "getTasksForTag",
+        "getTagsForTask",
+        "addTagForTask",
+        "removeTagForTask",
+        "getTag"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "asana",
+      "index": 134,
+      "operation_ids": [
+        "getTimePeriods",
+        "getTimePeriod",
+        "getGoals",
+        "searchTasksForWorkspace",
+        "getUsers"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 137,
+      "operation_ids": [
+        "getTasksForUserTaskList",
+        "getUserTaskList",
+        "getUserTaskListForUser",
+        "getTasks",
+        "getTasksForProject"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 139,
+      "operation_ids": [
+        "getUsers",
+        "getUser",
+        "addUserForWorkspace",
+        "removeUserForWorkspace",
+        "getJob"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "asana",
+      "index": 142,
+      "operation_ids": [
+        "getUsers",
+        "addUserForWorkspace",
+        "getTeamsForUser",
+        "removeUserForWorkspace",
+        "addUserForTeam"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 3
+    },
+    {
+      "api": "asana",
+      "index": 144,
+      "operation_ids": [
+        "getWorkspaceMembershipsForUser",
+        "getWorkspaceMembershipsForWorkspace",
+        "getTeamMembershipsForUser",
+        "getPortfolioMemberships",
+        "getWorkspaceMembership"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 148,
+      "operation_ids": [
+        "deleteWebhook",
+        "getWebhook",
+        "updateWebhook",
+        "getWebhooks",
+        "createWebhook"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 151,
+      "operation_ids": [
+        "getPortfolios",
+        "getUsers",
+        "getUsersForWorkspace",
+        "getWorkspaces",
+        "getFavoritesForUser"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 4
+    },
+    {
+      "api": "asana",
+      "index": 153,
+      "operation_ids": [
+        "updateWorkspace",
+        "createCustomField",
+        "getUsers",
+        "addUserForWorkspace",
+        "removeUserForWorkspace"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 156,
+      "operation_ids": [
+        "getCustomFieldsForWorkspace",
+        "getCustomFieldSettingsForProject",
+        "getUsersForWorkspace",
+        "getWebhooks",
+        "typeaheadForWorkspace"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "asana",
+      "index": 165,
+      "operation_ids": [
+        "addUserForWorkspace",
+        "getWorkspaceMembershipsForUser",
+        "removeUserForWorkspace",
+        "getUsersForWorkspace",
+        "updateWorkspace"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 4
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 2,
+      "operation_ids": [
+        "calendar.calendars.get",
+        "calendar.calendars.update",
+        "calendar.calendars.patch",
+        "calendar.events.get",
+        "calendar.acl.get"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 6,
+      "operation_ids": [
+        "calendar.acl.insert",
+        "calendar.acl.get",
+        "calendar.acl.delete",
+        "calendar.acl.update",
+        "calendar.acl.patch"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 15,
+      "operation_ids": [
+        "calendar.events.import",
+        "calendar.events.insert",
+        "calendar.events.update",
+        "calendar.events.patch",
+        "calendar.events.get"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 20,
+      "operation_ids": [
+        "calendar.events.update",
+        "calendar.events.patch",
+        "calendar.events.insert",
+        "calendar.events.delete",
+        "calendar.events.move"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 23,
+      "operation_ids": [
+        "calendar.events.move",
+        "calendar.events.get",
+        "calendar.events.delete",
+        "calendar.events.instances",
+        "calendar.events.quickAdd"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 26,
+      "operation_ids": [
+        "calendar.freebusy.query",
+        "calendar.calendars.delete",
+        "calendar.calendars.get",
+        "calendar.calendarList.get",
+        "calendar.calendarList.delete"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 36,
+      "operation_ids": [
+        "calendar.settings.get",
+        "calendar.settings.list",
+        "calendar.settings.watch",
+        "calendar.calendarList.insert",
+        "calendar.calendarList.update"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 5,
+      "operation_ids": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.getByDataFilter",
+        "sheets.spreadsheets.values.update",
+        "sheets.spreadsheets.values.get",
+        "sheets.spreadsheets.values.batchGet"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 4
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 9,
+      "operation_ids": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.clear",
+        "sheets.spreadsheets.values.batchClear",
+        "sheets.spreadsheets.values.batchClearByDataFilter",
+        "sheets.spreadsheets.values.update"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 3
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 13,
+      "operation_ids": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.append",
+        "sheets.spreadsheets.values.update",
+        "sheets.spreadsheets.values.batchUpdate",
+        "sheets.spreadsheets.values.batchUpdateByDataFilter"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 4
+    },
+    {
+      "api": "slack",
+      "index": 0,
+      "operation_ids": [
+        "admin_apps_approve",
+        "admin_apps_restrict",
+        "admin_inviteRequests_approve",
+        "apps_uninstall",
+        "admin_apps_approved_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 9,
+      "operation_ids": [
+        "admin_conversations_disconnectShared",
+        "files_sharedPublicURL",
+        "admin_conversations_setTeams",
+        "admin_users_assign",
+        "admin_teams_settings_setDefaultChannels"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 14,
+      "operation_ids": [
+        "admin_emoji_rename",
+        "admin_conversations_rename",
+        "conversations_rename",
+        "calls_participants_add",
+        "reactions_add"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "slack",
+      "index": 20,
+      "operation_ids": [
+        "admin_conversations_disconnectShared",
+        "admin_teams_settings_setDefaultChannels",
+        "admin_conversations_setTeams",
+        "files_sharedPublicURL",
+        "migration_exchange"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 3
+    },
+    {
+      "api": "slack",
+      "index": 33,
+      "operation_ids": [
+        "admin_teams_create",
+        "usergroups_create",
+        "admin_conversations_create",
+        "admin_teams_settings_setDescription",
+        "conversations_join"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 41,
+      "operation_ids": [
+        "admin_teams_settings_setName",
+        "api_test",
+        "auth_test",
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 42,
+      "operation_ids": [
+        "admin_usergroups_addChannels",
+        "admin_usergroups_addTeams",
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_usergroups_removeChannels",
+        "admin_teams_settings_setDefaultChannels"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 43,
+      "operation_ids": [
+        "admin_usergroups_addTeams",
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_usergroups_listChannels"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 46,
+      "operation_ids": [
+        "admin_users_assign",
+        "admin_users_setRegular",
+        "admin_users_setOwner",
+        "migration_exchange",
+        "admin_users_setAdmin"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 52,
+      "operation_ids": [
+        "admin_users_setAdmin",
+        "admin_users_remove",
+        "admin_users_list",
+        "admin_users_setOwner",
+        "admin_users_assign"
+      ],
+      "ground_truth_in_retrieved_top5": false,
+      "ground_truth_substituted": true,
+      "retriever_rank_of_ground_truth": 6
+    },
+    {
+      "api": "slack",
+      "index": 54,
+      "operation_ids": [
+        "admin_users_setOwner",
+        "admin_teams_owners_list",
+        "admin_users_setAdmin",
+        "admin_users_setRegular",
+        "admin_users_remove"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 55,
+      "operation_ids": [
+        "admin_users_setRegular",
+        "admin_users_setOwner",
+        "admin_users_setAdmin",
+        "admin_users_remove",
+        "admin_users_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 56,
+      "operation_ids": [
+        "api_test",
+        "admin_teams_settings_info",
+        "auth_test",
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 64,
+      "operation_ids": [
+        "apps_uninstall",
+        "oauth_access",
+        "oauth_token",
+        "oauth_v2_access",
+        "admin_apps_approve"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 73,
+      "operation_ids": [
+        "calls_update",
+        "calls_add",
+        "calls_info",
+        "calls_end",
+        "calls_participants_remove"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 76,
+      "operation_ids": [
+        "chat_getPermalink",
+        "conversations_replies",
+        "chat_postMessage",
+        "chat_unfurl",
+        "chat_meMessage"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 100,
+      "operation_ids": [
+        "conversations_setTopic",
+        "conversations_setPurpose",
+        "admin_teams_settings_setDefaultChannels",
+        "admin_conversations_setConversationPrefs",
+        "admin_conversations_setTeams"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 103,
+      "operation_ids": [
+        "dnd_endDnd",
+        "dnd_info",
+        "dnd_endSnooze",
+        "dnd_setSnooze",
+        "dnd_teamInfo"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 105,
+      "operation_ids": [
+        "dnd_info",
+        "dnd_teamInfo",
+        "dnd_endDnd",
+        "dnd_setSnooze",
+        "users_profile_get"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 110,
+      "operation_ids": [
+        "files_comments_delete",
+        "files_delete",
+        "admin_conversations_delete",
+        "reminders_delete",
+        "chat_deleteScheduledMessage"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "slack",
+      "index": 115,
+      "operation_ids": [
+        "files_remote_list",
+        "files_remote_info",
+        "files_remote_share",
+        "files_remote_remove",
+        "files_remote_update"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 120,
+      "operation_ids": [
+        "files_sharedPublicURL",
+        "files_revokePublicURL",
+        "usergroups_enable",
+        "files_comments_delete",
+        "files_remote_remove"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 128,
+      "operation_ids": [
+        "pins_remove",
+        "pins_add",
+        "stars_remove",
+        "pins_list",
+        "reactions_remove"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 134,
+      "operation_ids": [
+        "reminders_complete",
+        "reminders_delete",
+        "reminders_info",
+        "reminders_add",
+        "reminders_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 145,
+      "operation_ids": [
+        "team_info",
+        "team_billableInfo",
+        "admin_teams_settings_info",
+        "calls_info",
+        "reminders_info"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 146,
+      "operation_ids": [
+        "team_integrationLogs",
+        "team_accessLogs",
+        "team_info",
+        "team_billableInfo",
+        "dnd_info"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 147,
+      "operation_ids": [
+        "team_profile_get",
+        "users_profile_get",
+        "dnd_info",
+        "users_profile_set",
+        "team_info"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 155,
+      "operation_ids": [
+        "users_conversations",
+        "conversations_list",
+        "admin_conversations_restrictAccess_listGroups",
+        "conversations_open",
+        "files_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 158,
+      "operation_ids": [
+        "users_identity",
+        "users_conversations",
+        "api_test",
+        "auth_test",
+        "users_getPresence"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 159,
+      "operation_ids": [
+        "users_info",
+        "calls_info",
+        "bots_info",
+        "reminders_info",
+        "team_info"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 160,
+      "operation_ids": [
+        "users_list",
+        "conversations_list",
+        "admin_users_list",
+        "files_remote_list",
+        "usergroups_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 161,
+      "operation_ids": [
+        "users_lookupByEmail",
+        "admin_users_invite",
+        "users_getPresence",
+        "users_profile_get",
+        "users_identity"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 169,
+      "operation_ids": [
+        "views_push",
+        "views_open",
+        "views_update",
+        "views_publish",
+        "apps_permissions_users_request"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 171,
+      "operation_ids": [
+        "workflows_stepCompleted",
+        "workflows_stepFailed",
+        "workflows_updateStep",
+        "apps_permissions_info",
+        "apps_permissions_scopes_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 173,
+      "operation_ids": [
+        "workflows_updateStep",
+        "workflows_stepCompleted",
+        "workflows_stepFailed",
+        "admin_emoji_rename",
+        "chat_update"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    }
+  ]
+}

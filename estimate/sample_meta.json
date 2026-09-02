@@ -1,0 +1,26 @@
+{
+  "seed": 20260902,
+  "sample_size_arithmetic": {
+    "z": 1.959964,
+    "margin": 0.1,
+    "p_worst_case": 0.5,
+    "N": 395,
+    "n0_infinite_population": 96.03647203239998,
+    "n0_ceil": 97,
+    "n_finite_population_corrected": 77.41139408556077,
+    "n": 78
+  },
+  "population_by_api": {
+    "asana": 167,
+    "google_calendar_v3": 37,
+    "google_sheet_v4": 17,
+    "slack": 174
+  },
+  "allocation_by_api": {
+    "asana": 33,
+    "google_calendar_v3": 7,
+    "google_sheet_v4": 3,
+    "slack": 35
+  },
+  "n": 78
+}

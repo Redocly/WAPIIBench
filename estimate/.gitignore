@@ -1,0 +1,5 @@
+# Generated per-task material: 76-270 kB of client.ts each, plus a node_modules symlink and
+# tsc output. Rebuildable with `python estimate/build_clients.py`. Not source.
+work/
+# Driver output; the dry-run copy in dryrun/ is the one worth keeping.
+results/

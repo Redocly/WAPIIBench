@@ -1,0 +1,907 @@
+{
+  "summary": {
+    "n_scored": 3,
+    "population": 395,
+    "counts": {
+      "correct": 1,
+      "wrong": 1,
+      "illegal": 1,
+      "nonexecutable": 0
+    },
+    "correctness_rate": {
+      "p": 0.3333333333333333,
+      "low": 0.06242059667488903,
+      "high": 0.7914117485382175,
+      "half_width": 0.3644955759316642,
+      "fpc": 0.997458699830735,
+      "method": "wilson+fpc",
+      "n": 3,
+      "successes": 1
+    },
+    "endpoint_rate": {
+      "p": 0.6666666666666666,
+      "low": 0.20858825146178245,
+      "high": 0.9375794033251108,
+      "half_width": 0.3644955759316642,
+      "fpc": 0.997458699830735,
+      "method": "wilson+fpc",
+      "n": 3,
+      "successes": 2
+    },
+    "DIAGNOSTIC_correctness_ignoring_auth_header": {
+      "p": 0.3333333333333333,
+      "low": 0.06242059667488903,
+      "high": 0.7914117485382175,
+      "half_width": 0.3644955759316642,
+      "fpc": 0.997458699830735,
+      "method": "wilson+fpc",
+      "n": 3,
+      "successes": 1
+    },
+    "auth_only_failures": 0
+  },
+  "tasks": [
+    {
+      "api": "google_calendar_v3",
+      "index": 2,
+      "sample_verdict": "illegal",
+      "error_verdict": null,
+      "url_verdict": "wrong",
+      "method_verdict": "correct",
+      "endpoint_verdict": "wrong",
+      "verdict_ignoring_auth": "illegal",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 5,
+      "sample_verdict": "wrong",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "wrong",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 0,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    }
+  ],
+  "per_api": {
+    "google_calendar_v3": {
+      "argument_name_mean_jaccard_wrt_executable": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_name_mean_jaccard_wrt_total": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_name_mean_precision_wrt_executable": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_name_mean_precision_wrt_total": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_name_mean_recall_wrt_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_recall_wrt_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_executable": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_name_sum_jaccard_wrt_total": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_name_sum_precision_wrt_executable": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_name_sum_precision_wrt_total": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_name_sum_recall_wrt_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_recall_wrt_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_all_executable": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_value_mean_accuracy_wrt_all_total": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_value_mean_accuracy_wrt_correct_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_correct_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_all_executable": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_value_sum_accuracy_wrt_all_total": {
+        "all": 0.6666666666666666,
+        "headers": 1.0,
+        "path_params": 0.5
+      },
+      "argument_value_sum_accuracy_wrt_correct_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_correct_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_all_executable": {
+        "all": 3,
+        "headers": 1,
+        "path_params": 2
+      },
+      "arguments_all_total": {
+        "all": 3,
+        "headers": 1,
+        "path_params": 2
+      },
+      "arguments_correct_name": {
+        "all": 2,
+        "headers": 1,
+        "path_params": 1
+      },
+      "arguments_correct_name_wrt_expected_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_name_wrt_expected_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_value": {
+        "all": 2,
+        "headers": 1,
+        "path_params": 1
+      },
+      "arguments_correct_value_wrt_expected_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_value_wrt_expected_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_expected_executable": {
+        "all": 2,
+        "headers": 1,
+        "path_params": 1
+      },
+      "arguments_expected_total": {
+        "all": 2,
+        "headers": 1,
+        "path_params": 1
+      },
+      "arguments_illegal": {
+        "all": 1,
+        "path_params": 1
+      },
+      "arguments_illegal_wrt_all_executable": {
+        "all": 0.3333333333333333,
+        "headers": 0.0,
+        "path_params": 0.5
+      },
+      "arguments_illegal_wrt_all_total": {
+        "all": 0.3333333333333333,
+        "headers": 0.0,
+        "path_params": 0.5
+      },
+      "arguments_missing_executable": {},
+      "arguments_missing_total": {},
+      "arguments_missing_wrt_expected_executable": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_missing_wrt_expected_total": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unexpected": {
+        "all": 1,
+        "path_params": 1
+      },
+      "arguments_unexpected_wrt_all_executable": {
+        "all": 0.3333333333333333,
+        "headers": 0.0,
+        "path_params": 0.5
+      },
+      "arguments_unexpected_wrt_all_total": {
+        "all": 0.3333333333333333,
+        "headers": 0.0,
+        "path_params": 0.5
+      },
+      "arguments_unnecessary": {},
+      "arguments_unnecessary_wrt_all_executable": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unnecessary_wrt_all_total": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "endpoints_correct": 0,
+      "endpoints_correct_wrt_executable": 0.0,
+      "endpoints_correct_wrt_total": 0.0,
+      "endpoints_illegal": 0,
+      "endpoints_illegal_wrt_executable": 0.0,
+      "endpoints_illegal_wrt_total": 0.0,
+      "endpoints_wrong": 1,
+      "endpoints_wrong_wrt_executable": 1.0,
+      "endpoints_wrong_wrt_total": 1.0,
+      "errors_incomplete_request": 0,
+      "errors_incomplete_request_wrt_errors": 0,
+      "errors_incomplete_request_wrt_samples": 0.0,
+      "errors_no_request": 0,
+      "errors_no_request_wrt_errors": 0,
+      "errors_no_request_wrt_samples": 0.0,
+      "errors_runtime_error": 0,
+      "errors_runtime_error_wrt_errors": 0,
+      "errors_runtime_error_wrt_samples": 0.0,
+      "errors_timeout": 0,
+      "errors_timeout_wrt_errors": 0,
+      "errors_timeout_wrt_samples": 0.0,
+      "errors_total": 0,
+      "errors_total_wrt_samples": 0.0,
+      "errors_unsatisfiable": 0,
+      "errors_unsatisfiable_wrt_errors": 0,
+      "errors_unsatisfiable_wrt_samples": 0.0,
+      "methods_correct": 1,
+      "methods_correct_wrt_executable": 1.0,
+      "methods_correct_wrt_total": 1.0,
+      "methods_illegal": 0,
+      "methods_illegal_wrt_executable": 0.0,
+      "methods_illegal_wrt_total": 0.0,
+      "methods_wrong": 0,
+      "methods_wrong_wrt_executable": 0.0,
+      "methods_wrong_wrt_total": 0.0,
+      "samples_correct": 0,
+      "samples_correct_wrt_executable": 0.0,
+      "samples_correct_wrt_total": 0.0,
+      "samples_executable": 1,
+      "samples_executable_wrt_total": 1.0,
+      "samples_illegal": 1,
+      "samples_illegal_wrt_executable": 1.0,
+      "samples_illegal_wrt_total": 1.0,
+      "samples_nonexecutable": 0,
+      "samples_total": 1,
+      "samples_wrong": 0,
+      "samples_wrong_wrt_executable": 0.0,
+      "samples_wrong_wrt_total": 0.0,
+      "urls_correct": 0,
+      "urls_correct_wrt_executable": 0.0,
+      "urls_correct_wrt_total": 0.0,
+      "urls_illegal": 0,
+      "urls_illegal_wrt_executable": 0.0,
+      "urls_illegal_wrt_total": 0.0,
+      "urls_wrong": 1,
+      "urls_wrong_wrt_executable": 1.0,
+      "urls_wrong_wrt_total": 1.0
+    },
+    "google_sheet_v4": {
+      "argument_name_mean_jaccard_wrt_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_jaccard_wrt_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_precision_wrt_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_precision_wrt_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_recall_wrt_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_recall_wrt_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_precision_wrt_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_precision_wrt_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_recall_wrt_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_recall_wrt_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_all_executable": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_mean_accuracy_wrt_all_total": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_mean_accuracy_wrt_correct_executable": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_mean_accuracy_wrt_correct_total": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_executable": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_total": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_sum_accuracy_wrt_all_executable": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_sum_accuracy_wrt_all_total": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_sum_accuracy_wrt_correct_executable": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_sum_accuracy_wrt_correct_total": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_executable": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_total": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "arguments_all_executable": {
+        "all": 3,
+        "headers": 1,
+        "path_params": 2
+      },
+      "arguments_all_total": {
+        "all": 3,
+        "headers": 1,
+        "path_params": 2
+      },
+      "arguments_correct_name": {
+        "all": 3,
+        "headers": 1,
+        "path_params": 2
+      },
+      "arguments_correct_name_wrt_expected_executable": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_name_wrt_expected_total": {
+        "all": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_value": {
+        "all": 1,
+        "headers": 1
+      },
+      "arguments_correct_value_wrt_expected_executable": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "arguments_correct_value_wrt_expected_total": {
+        "all": 0.3333333333333333,
+        "headers": 1.0,
+        "path_params": 0.0
+      },
+      "arguments_expected_executable": {
+        "all": 3,
+        "headers": 1,
+        "path_params": 2
+      },
+      "arguments_expected_total": {
+        "all": 3,
+        "headers": 1,
+        "path_params": 2
+      },
+      "arguments_illegal": {},
+      "arguments_illegal_wrt_all_executable": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_illegal_wrt_all_total": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_missing_executable": {},
+      "arguments_missing_total": {},
+      "arguments_missing_wrt_expected_executable": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_missing_wrt_expected_total": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unexpected": {},
+      "arguments_unexpected_wrt_all_executable": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unexpected_wrt_all_total": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unnecessary": {},
+      "arguments_unnecessary_wrt_all_executable": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unnecessary_wrt_all_total": {
+        "all": 0.0,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "endpoints_correct": 1,
+      "endpoints_correct_wrt_executable": 1.0,
+      "endpoints_correct_wrt_total": 1.0,
+      "endpoints_illegal": 0,
+      "endpoints_illegal_wrt_executable": 0.0,
+      "endpoints_illegal_wrt_total": 0.0,
+      "endpoints_wrong": 0,
+      "endpoints_wrong_wrt_executable": 0.0,
+      "endpoints_wrong_wrt_total": 0.0,
+      "errors_incomplete_request": 0,
+      "errors_incomplete_request_wrt_errors": 0,
+      "errors_incomplete_request_wrt_samples": 0.0,
+      "errors_no_request": 0,
+      "errors_no_request_wrt_errors": 0,
+      "errors_no_request_wrt_samples": 0.0,
+      "errors_runtime_error": 0,
+      "errors_runtime_error_wrt_errors": 0,
+      "errors_runtime_error_wrt_samples": 0.0,
+      "errors_timeout": 0,
+      "errors_timeout_wrt_errors": 0,
+      "errors_timeout_wrt_samples": 0.0,
+      "errors_total": 0,
+      "errors_total_wrt_samples": 0.0,
+      "errors_unsatisfiable": 0,
+      "errors_unsatisfiable_wrt_errors": 0,
+      "errors_unsatisfiable_wrt_samples": 0.0,
+      "methods_correct": 1,
+      "methods_correct_wrt_executable": 1.0,
+      "methods_correct_wrt_total": 1.0,
+      "methods_illegal": 0,
+      "methods_illegal_wrt_executable": 0.0,
+      "methods_illegal_wrt_total": 0.0,
+      "methods_wrong": 0,
+      "methods_wrong_wrt_executable": 0.0,
+      "methods_wrong_wrt_total": 0.0,
+      "samples_correct": 0,
+      "samples_correct_wrt_executable": 0.0,
+      "samples_correct_wrt_total": 0.0,
+      "samples_executable": 1,
+      "samples_executable_wrt_total": 1.0,
+      "samples_illegal": 0,
+      "samples_illegal_wrt_executable": 0.0,
+      "samples_illegal_wrt_total": 0.0,
+      "samples_nonexecutable": 0,
+      "samples_total": 1,
+      "samples_wrong": 1,
+      "samples_wrong_wrt_executable": 1.0,
+      "samples_wrong_wrt_total": 1.0,
+      "urls_correct": 1,
+      "urls_correct_wrt_executable": 1.0,
+      "urls_correct_wrt_total": 1.0,
+      "urls_illegal": 0,
+      "urls_illegal_wrt_executable": 0.0,
+      "urls_illegal_wrt_total": 0.0,
+      "urls_wrong": 0,
+      "urls_wrong_wrt_executable": 0.0,
+      "urls_wrong_wrt_total": 0.0
+    },
+    "slack": {
+      "argument_name_mean_jaccard_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_mean_jaccard_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_mean_precision_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_mean_precision_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_mean_recall_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_mean_recall_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_sum_precision_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_sum_precision_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_sum_recall_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_name_sum_recall_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_all_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_all_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_correct_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_correct_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_all_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_all_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_correct_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_correct_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "arguments_all_executable": {
+        "all": 4,
+        "data": 3,
+        "headers": 1
+      },
+      "arguments_all_total": {
+        "all": 4,
+        "data": 3,
+        "headers": 1
+      },
+      "arguments_correct_name": {
+        "all": 4,
+        "data": 3,
+        "headers": 1
+      },
+      "arguments_correct_name_wrt_expected_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "arguments_correct_name_wrt_expected_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "arguments_correct_value": {
+        "all": 4,
+        "data": 3,
+        "headers": 1
+      },
+      "arguments_correct_value_wrt_expected_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "arguments_correct_value_wrt_expected_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0
+      },
+      "arguments_expected_executable": {
+        "all": 4,
+        "data": 3,
+        "headers": 1
+      },
+      "arguments_expected_total": {
+        "all": 4,
+        "data": 3,
+        "headers": 1
+      },
+      "arguments_illegal": {},
+      "arguments_illegal_wrt_all_executable": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0
+      },
+      "arguments_illegal_wrt_all_total": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0
+      },
+      "arguments_missing_executable": {},
+      "arguments_missing_total": {},
+      "arguments_missing_wrt_expected_executable": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0
+      },
+      "arguments_missing_wrt_expected_total": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0
+      },
+      "arguments_unexpected": {},
+      "arguments_unexpected_wrt_all_executable": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0
+      },
+      "arguments_unexpected_wrt_all_total": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0
+      },
+      "arguments_unnecessary": {},
+      "arguments_unnecessary_wrt_all_executable": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0
+      },
+      "arguments_unnecessary_wrt_all_total": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0
+      },
+      "endpoints_correct": 1,
+      "endpoints_correct_wrt_executable": 1.0,
+      "endpoints_correct_wrt_total": 1.0,
+      "endpoints_illegal": 0,
+      "endpoints_illegal_wrt_executable": 0.0,
+      "endpoints_illegal_wrt_total": 0.0,
+      "endpoints_wrong": 0,
+      "endpoints_wrong_wrt_executable": 0.0,
+      "endpoints_wrong_wrt_total": 0.0,
+      "errors_incomplete_request": 0,
+      "errors_incomplete_request_wrt_errors": 0,
+      "errors_incomplete_request_wrt_samples": 0.0,
+      "errors_no_request": 0,
+      "errors_no_request_wrt_errors": 0,
+      "errors_no_request_wrt_samples": 0.0,
+      "errors_runtime_error": 0,
+      "errors_runtime_error_wrt_errors": 0,
+      "errors_runtime_error_wrt_samples": 0.0,
+      "errors_timeout": 0,
+      "errors_timeout_wrt_errors": 0,
+      "errors_timeout_wrt_samples": 0.0,
+      "errors_total": 0,
+      "errors_total_wrt_samples": 0.0,
+      "errors_unsatisfiable": 0,
+      "errors_unsatisfiable_wrt_errors": 0,
+      "errors_unsatisfiable_wrt_samples": 0.0,
+      "methods_correct": 1,
+      "methods_correct_wrt_executable": 1.0,
+      "methods_correct_wrt_total": 1.0,
+      "methods_illegal": 0,
+      "methods_illegal_wrt_executable": 0.0,
+      "methods_illegal_wrt_total": 0.0,
+      "methods_wrong": 0,
+      "methods_wrong_wrt_executable": 0.0,
+      "methods_wrong_wrt_total": 0.0,
+      "samples_correct": 1,
+      "samples_correct_wrt_executable": 1.0,
+      "samples_correct_wrt_total": 1.0,
+      "samples_executable": 1,
+      "samples_executable_wrt_total": 1.0,
+      "samples_illegal": 0,
+      "samples_illegal_wrt_executable": 0.0,
+      "samples_illegal_wrt_total": 0.0,
+      "samples_nonexecutable": 0,
+      "samples_total": 1,
+      "samples_wrong": 0,
+      "samples_wrong_wrt_executable": 0.0,
+      "samples_wrong_wrt_total": 0.0,
+      "urls_correct": 1,
+      "urls_correct_wrt_executable": 1.0,
+      "urls_correct_wrt_total": 1.0,
+      "urls_illegal": 0,
+      "urls_illegal_wrt_executable": 0.0,
+      "urls_illegal_wrt_total": 0.0,
+      "urls_wrong": 0,
+      "urls_wrong_wrt_executable": 0.0,
+      "urls_wrong_wrt_total": 0.0
+    }
+  }
+}
