@@ -1,0 +1,1094 @@
+{
+  "note": "byte sizes of the control's filtered spec per task; bytes_unpruned_components is the same document with the API's whole components block, for the size confound",
+  "spec_name": "filtered_spec.yaml",
+  "tasks": [
+    {
+      "api": "google_calendar_v3",
+      "index": 1,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0001_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0001_spec",
+      "operations_spec_order": [
+        "calendar.calendars.insert",
+        "calendar.calendars.delete",
+        "calendar.acl.delete",
+        "calendar.events.delete",
+        "calendar.calendarList.delete"
+      ],
+      "bytes_pruned": 11840,
+      "bytes_unpruned_components": 67072
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 5,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0005_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0005_spec",
+      "operations_spec_order": [
+        "calendar.acl.list",
+        "calendar.acl.insert",
+        "calendar.acl.get",
+        "calendar.acl.update",
+        "calendar.acl.delete"
+      ],
+      "bytes_pruned": 14500,
+      "bytes_unpruned_components": 68257
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 14,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0014_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0014_spec",
+      "operations_spec_order": [
+        "calendar.events.insert",
+        "calendar.events.import",
+        "calendar.events.quickAdd",
+        "calendar.events.update",
+        "calendar.events.patch"
+      ],
+      "bytes_pruned": 52330,
+      "bytes_unpruned_components": 75181
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 15,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0015_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0015_spec",
+      "operations_spec_order": [
+        "calendar.events.insert",
+        "calendar.events.import",
+        "calendar.events.get",
+        "calendar.events.update",
+        "calendar.events.patch"
+      ],
+      "bytes_pruned": 52589,
+      "bytes_unpruned_components": 75440
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 17,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0017_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0017_spec",
+      "operations_spec_order": [
+        "calendar.acl.watch",
+        "calendar.events.watch",
+        "calendar.events.move",
+        "calendar.channels.stop",
+        "calendar.settings.watch"
+      ],
+      "bytes_pruned": 58293,
+      "bytes_unpruned_components": 79299
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 19,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0019_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0019_spec",
+      "operations_spec_order": [
+        "calendar.events.quickAdd",
+        "calendar.events.get",
+        "calendar.events.delete",
+        "calendar.events.instances",
+        "calendar.events.move"
+      ],
+      "bytes_pruned": 53319,
+      "bytes_unpruned_components": 73542
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 21,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0021_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0021_spec",
+      "operations_spec_order": [
+        "calendar.events.insert",
+        "calendar.events.import",
+        "calendar.events.update",
+        "calendar.events.delete",
+        "calendar.events.patch"
+      ],
+      "bytes_pruned": 51768,
+      "bytes_unpruned_components": 74619
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 22,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0022_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0022_spec",
+      "operations_spec_order": [
+        "calendar.calendars.delete",
+        "calendar.calendars.clear",
+        "calendar.events.update",
+        "calendar.events.patch",
+        "calendar.events.instances"
+      ],
+      "bytes_pruned": 53921,
+      "bytes_unpruned_components": 74144
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 23,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0023_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0023_spec",
+      "operations_spec_order": [
+        "calendar.events.quickAdd",
+        "calendar.events.get",
+        "calendar.events.delete",
+        "calendar.events.instances",
+        "calendar.events.move"
+      ],
+      "bytes_pruned": 53319,
+      "bytes_unpruned_components": 73542
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 32,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0032_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0032_spec",
+      "operations_spec_order": [
+        "calendar.calendarList.insert",
+        "calendar.calendarList.update",
+        "calendar.calendarList.patch",
+        "calendar.settings.list",
+        "calendar.settings.get"
+      ],
+      "bytes_pruned": 20247,
+      "bytes_unpruned_components": 68898
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 34,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_calendar_v3/0034_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_calendar_v3/0034_spec",
+      "operations_spec_order": [
+        "calendar.calendars.delete",
+        "calendar.calendars.clear",
+        "calendar.settings.list",
+        "calendar.settings.watch",
+        "calendar.settings.get"
+      ],
+      "bytes_pruned": 15619,
+      "bytes_unpruned_components": 69014
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 4,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_sheet_v4/0004_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_sheet_v4/0004_spec",
+      "operations_spec_order": [
+        "sheets.spreadsheets.developerMetadata.get",
+        "sheets.spreadsheets.sheets.copyTo",
+        "sheets.spreadsheets.values.get",
+        "sheets.spreadsheets.values.clear",
+        "sheets.spreadsheets.values.batchGet"
+      ],
+      "bytes_pruned": 37174,
+      "bytes_unpruned_components": 262422
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 8,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_sheet_v4/0008_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_sheet_v4/0008_spec",
+      "operations_spec_order": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.update",
+        "sheets.spreadsheets.values.clear",
+        "sheets.spreadsheets.values.batchClear",
+        "sheets.spreadsheets.values.batchClearByDataFilter"
+      ],
+      "bytes_pruned": 179502,
+      "bytes_unpruned_components": 262565
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 13,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_sheet_v4/0013_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_sheet_v4/0013_spec",
+      "operations_spec_order": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.update",
+        "sheets.spreadsheets.values.append",
+        "sheets.spreadsheets.values.batchUpdate",
+        "sheets.spreadsheets.values.batchUpdateByDataFilter"
+      ],
+      "bytes_pruned": 187307,
+      "bytes_unpruned_components": 264331
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 14,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_sheet_v4/0014_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_sheet_v4/0014_spec",
+      "operations_spec_order": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.update",
+        "sheets.spreadsheets.values.batchUpdate",
+        "sheets.spreadsheets.values.batchUpdateByDataFilter",
+        "sheets.spreadsheets.getByDataFilter"
+      ],
+      "bytes_pruned": 185679,
+      "bytes_unpruned_components": 262789
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 16,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/google_sheet_v4/0016_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/google_sheet_v4/0016_spec",
+      "operations_spec_order": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.append",
+        "sheets.spreadsheets.values.batchGetByDataFilter",
+        "sheets.spreadsheets.batchUpdate",
+        "sheets.spreadsheets.getByDataFilter"
+      ],
+      "bytes_pruned": 251224,
+      "bytes_unpruned_components": 264346
+    },
+    {
+      "api": "slack",
+      "index": 0,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0000_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0000_spec",
+      "operations_spec_order": [
+        "admin_apps_approve",
+        "admin_apps_approved_list",
+        "admin_apps_restrict",
+        "admin_inviteRequests_approve",
+        "apps_uninstall"
+      ],
+      "bytes_pruned": 19359,
+      "bytes_unpruned_components": 69623
+    },
+    {
+      "api": "slack",
+      "index": 8,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0008_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0008_spec",
+      "operations_spec_order": [
+        "admin_conversations_delete",
+        "chat_delete",
+        "chat_deleteScheduledMessage",
+        "files_comments_delete",
+        "files_delete"
+      ],
+      "bytes_pruned": 20914,
+      "bytes_unpruned_components": 71437
+    },
+    {
+      "api": "slack",
+      "index": 9,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0009_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0009_spec",
+      "operations_spec_order": [
+        "admin_conversations_disconnectShared",
+        "admin_conversations_setTeams",
+        "admin_teams_settings_setDefaultChannels",
+        "admin_users_assign",
+        "files_sharedPublicURL"
+      ],
+      "bytes_pruned": 24535,
+      "bytes_unpruned_components": 69883
+    },
+    {
+      "api": "slack",
+      "index": 14,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0014_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0014_spec",
+      "operations_spec_order": [
+        "admin_conversations_rename",
+        "admin_emoji_rename",
+        "calls_participants_add",
+        "conversations_rename",
+        "reactions_add"
+      ],
+      "bytes_pruned": 52442,
+      "bytes_unpruned_components": 71833
+    },
+    {
+      "api": "slack",
+      "index": 16,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0016_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0016_spec",
+      "operations_spec_order": [
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_listChannels",
+        "admin_usergroups_removeChannels"
+      ],
+      "bytes_pruned": 18474,
+      "bytes_unpruned_components": 69225
+    },
+    {
+      "api": "slack",
+      "index": 20,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0020_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0020_spec",
+      "operations_spec_order": [
+        "admin_conversations_disconnectShared",
+        "admin_conversations_setTeams",
+        "admin_teams_settings_setDefaultChannels",
+        "files_sharedPublicURL",
+        "migration_exchange"
+      ],
+      "bytes_pruned": 26176,
+      "bytes_unpruned_components": 71524
+    },
+    {
+      "api": "slack",
+      "index": 21,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0021_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0021_spec",
+      "operations_spec_order": [
+        "admin_conversations_convertToPrivate",
+        "admin_conversations_unarchive",
+        "admin_usergroups_addChannels",
+        "admin_usergroups_listChannels",
+        "conversations_unarchive"
+      ],
+      "bytes_pruned": 19106,
+      "bytes_unpruned_components": 69857
+    },
+    {
+      "api": "slack",
+      "index": 25,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0025_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0025_spec",
+      "operations_spec_order": [
+        "admin_emoji_add",
+        "admin_emoji_list",
+        "admin_emoji_remove",
+        "admin_emoji_rename",
+        "emoji_list"
+      ],
+      "bytes_pruned": 17515,
+      "bytes_unpruned_components": 68266
+    },
+    {
+      "api": "slack",
+      "index": 27,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0027_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0027_spec",
+      "operations_spec_order": [
+        "admin_apps_approve",
+        "admin_inviteRequests_approve",
+        "admin_inviteRequests_approved_list",
+        "admin_inviteRequests_deny",
+        "admin_inviteRequests_list"
+      ],
+      "bytes_pruned": 16356,
+      "bytes_unpruned_components": 66620
+    },
+    {
+      "api": "slack",
+      "index": 36,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0036_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0036_spec",
+      "operations_spec_order": [
+        "admin_teams_settings_info",
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon",
+        "admin_teams_settings_setName",
+        "calls_info"
+      ],
+      "bytes_pruned": 16126,
+      "bytes_unpruned_components": 66877
+    },
+    {
+      "api": "slack",
+      "index": 41,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0041_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0041_spec",
+      "operations_spec_order": [
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon",
+        "admin_teams_settings_setName",
+        "api_test",
+        "auth_test"
+      ],
+      "bytes_pruned": 17242,
+      "bytes_unpruned_components": 67721
+    },
+    {
+      "api": "slack",
+      "index": 43,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0043_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0043_spec",
+      "operations_spec_order": [
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_addTeams",
+        "admin_usergroups_listChannels"
+      ],
+      "bytes_pruned": 18704,
+      "bytes_unpruned_components": 69455
+    },
+    {
+      "api": "slack",
+      "index": 45,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0045_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0045_spec",
+      "operations_spec_order": [
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_addChannels",
+        "admin_usergroups_listChannels",
+        "admin_usergroups_removeChannels"
+      ],
+      "bytes_pruned": 18257,
+      "bytes_unpruned_components": 69008
+    },
+    {
+      "api": "slack",
+      "index": 46,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0046_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0046_spec",
+      "operations_spec_order": [
+        "admin_users_assign",
+        "admin_users_setAdmin",
+        "admin_users_setOwner",
+        "admin_users_setRegular",
+        "migration_exchange"
+      ],
+      "bytes_pruned": 19276,
+      "bytes_unpruned_components": 69939
+    },
+    {
+      "api": "slack",
+      "index": 50,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0050_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0050_spec",
+      "operations_spec_order": [
+        "admin_users_session_invalidate",
+        "admin_users_session_reset",
+        "dnd_endDnd",
+        "rtm_connect",
+        "team_integrationLogs"
+      ],
+      "bytes_pruned": 22356,
+      "bytes_unpruned_components": 72332
+    },
+    {
+      "api": "slack",
+      "index": 52,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0052_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0052_spec",
+      "operations_spec_order": [
+        "admin_users_assign",
+        "admin_users_list",
+        "admin_users_remove",
+        "admin_users_setAdmin",
+        "admin_users_setOwner"
+      ],
+      "bytes_pruned": 17325,
+      "bytes_unpruned_components": 68076
+    },
+    {
+      "api": "slack",
+      "index": 54,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0054_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0054_spec",
+      "operations_spec_order": [
+        "admin_teams_owners_list",
+        "admin_users_remove",
+        "admin_users_setAdmin",
+        "admin_users_setOwner",
+        "admin_users_setRegular"
+      ],
+      "bytes_pruned": 16613,
+      "bytes_unpruned_components": 67364
+    },
+    {
+      "api": "slack",
+      "index": 55,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0055_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0055_spec",
+      "operations_spec_order": [
+        "admin_users_list",
+        "admin_users_remove",
+        "admin_users_setAdmin",
+        "admin_users_setOwner",
+        "admin_users_setRegular"
+      ],
+      "bytes_pruned": 16888,
+      "bytes_unpruned_components": 67639
+    },
+    {
+      "api": "slack",
+      "index": 57,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0057_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0057_spec",
+      "operations_spec_order": [
+        "apps_event_authorizations_list",
+        "conversations_history",
+        "files_info",
+        "reactions_list",
+        "stars_list"
+      ],
+      "bytes_pruned": 49529,
+      "bytes_unpruned_components": 85951
+    },
+    {
+      "api": "slack",
+      "index": 61,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0061_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0061_spec",
+      "operations_spec_order": [
+        "apps_permissions_request",
+        "apps_permissions_resources_list",
+        "apps_permissions_scopes_list",
+        "apps_permissions_users_list",
+        "apps_permissions_users_request"
+      ],
+      "bytes_pruned": 22363,
+      "bytes_unpruned_components": 72931
+    },
+    {
+      "api": "slack",
+      "index": 64,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0064_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0064_spec",
+      "operations_spec_order": [
+        "admin_apps_approve",
+        "apps_uninstall",
+        "oauth_access",
+        "oauth_token",
+        "oauth_v2_access"
+      ],
+      "bytes_pruned": 18887,
+      "bytes_unpruned_components": 69638
+    },
+    {
+      "api": "slack",
+      "index": 76,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0076_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0076_spec",
+      "operations_spec_order": [
+        "chat_getPermalink",
+        "chat_meMessage",
+        "chat_postMessage",
+        "chat_unfurl",
+        "conversations_replies"
+      ],
+      "bytes_pruned": 45112,
+      "bytes_unpruned_components": 83258
+    },
+    {
+      "api": "slack",
+      "index": 79,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0079_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0079_spec",
+      "operations_spec_order": [
+        "chat_deleteScheduledMessage",
+        "chat_meMessage",
+        "chat_postMessage",
+        "chat_scheduleMessage",
+        "conversations_close"
+      ],
+      "bytes_pruned": 42655,
+      "bytes_unpruned_components": 80801
+    },
+    {
+      "api": "slack",
+      "index": 80,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0080_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0080_spec",
+      "operations_spec_order": [
+        "chat_deleteScheduledMessage",
+        "chat_getPermalink",
+        "chat_meMessage",
+        "chat_scheduleMessage",
+        "chat_scheduledMessages_list"
+      ],
+      "bytes_pruned": 30387,
+      "bytes_unpruned_components": 79491
+    },
+    {
+      "api": "slack",
+      "index": 84,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0084_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0084_spec",
+      "operations_spec_order": [
+        "admin_conversations_archive",
+        "admin_conversations_delete",
+        "admin_conversations_getConversationPrefs",
+        "admin_conversations_setConversationPrefs",
+        "conversations_archive"
+      ],
+      "bytes_pruned": 19570,
+      "bytes_unpruned_components": 70321
+    },
+    {
+      "api": "slack",
+      "index": 87,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0087_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0087_spec",
+      "operations_spec_order": [
+        "admin_conversations_getConversationPrefs",
+        "conversations_close",
+        "conversations_history",
+        "conversations_open",
+        "conversations_replies"
+      ],
+      "bytes_pruned": 63169,
+      "bytes_unpruned_components": 82560
+    },
+    {
+      "api": "slack",
+      "index": 92,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0092_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0092_spec",
+      "operations_spec_order": [
+        "admin_conversations_archive",
+        "admin_conversations_delete",
+        "admin_conversations_getConversationPrefs",
+        "admin_conversations_setConversationPrefs",
+        "conversations_leave"
+      ],
+      "bytes_pruned": 19681,
+      "bytes_unpruned_components": 70432
+    },
+    {
+      "api": "slack",
+      "index": 96,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0096_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0096_spec",
+      "operations_spec_order": [
+        "chat_deleteScheduledMessage",
+        "conversations_close",
+        "conversations_open",
+        "dialog_open",
+        "views_open"
+      ],
+      "bytes_pruned": 55373,
+      "bytes_unpruned_components": 74764
+    },
+    {
+      "api": "slack",
+      "index": 98,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0098_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0098_spec",
+      "operations_spec_order": [
+        "chat_getPermalink",
+        "chat_meMessage",
+        "chat_postMessage",
+        "chat_scheduleMessage",
+        "conversations_replies"
+      ],
+      "bytes_pruned": 48683,
+      "bytes_unpruned_components": 86829
+    },
+    {
+      "api": "slack",
+      "index": 100,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0100_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0100_spec",
+      "operations_spec_order": [
+        "admin_conversations_setConversationPrefs",
+        "admin_conversations_setTeams",
+        "admin_teams_settings_setDefaultChannels",
+        "conversations_setPurpose",
+        "conversations_setTopic"
+      ],
+      "bytes_pruned": 51302,
+      "bytes_unpruned_components": 70693
+    },
+    {
+      "api": "slack",
+      "index": 103,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0103_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0103_spec",
+      "operations_spec_order": [
+        "dnd_endDnd",
+        "dnd_endSnooze",
+        "dnd_info",
+        "dnd_setSnooze",
+        "dnd_teamInfo"
+      ],
+      "bytes_pruned": 19393,
+      "bytes_unpruned_components": 70144
+    },
+    {
+      "api": "slack",
+      "index": 104,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0104_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0104_spec",
+      "operations_spec_order": [
+        "calls_end",
+        "dnd_endDnd",
+        "dnd_endSnooze",
+        "dnd_info",
+        "dnd_setSnooze"
+      ],
+      "bytes_pruned": 19360,
+      "bytes_unpruned_components": 70111
+    },
+    {
+      "api": "slack",
+      "index": 107,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0107_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0107_spec",
+      "operations_spec_order": [
+        "dnd_endDnd",
+        "dnd_info",
+        "dnd_setSnooze",
+        "dnd_teamInfo",
+        "users_getPresence"
+      ],
+      "bytes_pruned": 18800,
+      "bytes_unpruned_components": 69551
+    },
+    {
+      "api": "slack",
+      "index": 108,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0108_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0108_spec",
+      "operations_spec_order": [
+        "admin_emoji_list",
+        "admin_inviteRequests_list",
+        "admin_teams_admins_list",
+        "admin_teams_owners_list",
+        "emoji_list"
+      ],
+      "bytes_pruned": 17670,
+      "bytes_unpruned_components": 68421
+    },
+    {
+      "api": "slack",
+      "index": 120,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0120_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0120_spec",
+      "operations_spec_order": [
+        "files_comments_delete",
+        "files_remote_remove",
+        "files_revokePublicURL",
+        "files_sharedPublicURL",
+        "usergroups_enable"
+      ],
+      "bytes_pruned": 27164,
+      "bytes_unpruned_components": 70239
+    },
+    {
+      "api": "slack",
+      "index": 121,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0121_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0121_spec",
+      "operations_spec_order": [
+        "files_delete",
+        "files_remote_add",
+        "files_remote_share",
+        "files_remote_update",
+        "files_upload"
+      ],
+      "bytes_pruned": 27418,
+      "bytes_unpruned_components": 72766
+    },
+    {
+      "api": "slack",
+      "index": 126,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0126_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0126_spec",
+      "operations_spec_order": [
+        "pins_add",
+        "pins_list",
+        "pins_remove",
+        "reactions_add",
+        "reactions_get"
+      ],
+      "bytes_pruned": 38582,
+      "bytes_unpruned_components": 76728
+    },
+    {
+      "api": "slack",
+      "index": 128,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0128_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0128_spec",
+      "operations_spec_order": [
+        "pins_add",
+        "pins_list",
+        "pins_remove",
+        "reactions_remove",
+        "stars_remove"
+      ],
+      "bytes_pruned": 36796,
+      "bytes_unpruned_components": 74942
+    },
+    {
+      "api": "slack",
+      "index": 131,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0131_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0131_spec",
+      "operations_spec_order": [
+        "reactions_add",
+        "reactions_get",
+        "reactions_list",
+        "usergroups_users_list",
+        "users_list"
+      ],
+      "bytes_pruned": 57941,
+      "bytes_unpruned_components": 83900
+    },
+    {
+      "api": "slack",
+      "index": 134,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0134_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0134_spec",
+      "operations_spec_order": [
+        "reminders_add",
+        "reminders_complete",
+        "reminders_delete",
+        "reminders_info",
+        "reminders_list"
+      ],
+      "bytes_pruned": 20974,
+      "bytes_unpruned_components": 70992
+    },
+    {
+      "api": "slack",
+      "index": 143,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0143_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0143_spec",
+      "operations_spec_order": [
+        "admin_conversations_restrictAccess_listGroups",
+        "team_accessLogs",
+        "team_billableInfo",
+        "team_info",
+        "team_integrationLogs"
+      ],
+      "bytes_pruned": 28188,
+      "bytes_unpruned_components": 74784
+    },
+    {
+      "api": "slack",
+      "index": 144,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0144_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0144_spec",
+      "operations_spec_order": [
+        "dnd_info",
+        "team_accessLogs",
+        "team_billableInfo",
+        "team_info",
+        "team_integrationLogs"
+      ],
+      "bytes_pruned": 28995,
+      "bytes_unpruned_components": 75591
+    },
+    {
+      "api": "slack",
+      "index": 148,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0148_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0148_spec",
+      "operations_spec_order": [
+        "usergroups_create",
+        "usergroups_enable",
+        "usergroups_update",
+        "usergroups_users_list",
+        "usergroups_users_update"
+      ],
+      "bytes_pruned": 27571,
+      "bytes_unpruned_components": 75669
+    },
+    {
+      "api": "slack",
+      "index": 152,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0152_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0152_spec",
+      "operations_spec_order": [
+        "admin_emoji_rename",
+        "usergroups_create",
+        "usergroups_update",
+        "usergroups_users_list",
+        "usergroups_users_update"
+      ],
+      "bytes_pruned": 26568,
+      "bytes_unpruned_components": 74666
+    },
+    {
+      "api": "slack",
+      "index": 156,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0156_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0156_spec",
+      "operations_spec_order": [
+        "users_conversations",
+        "users_deletePhoto",
+        "users_profile_get",
+        "users_profile_set",
+        "users_setPhoto"
+      ],
+      "bytes_pruned": 64383,
+      "bytes_unpruned_components": 80409
+    },
+    {
+      "api": "slack",
+      "index": 157,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0157_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0157_spec",
+      "operations_spec_order": [
+        "rtm_connect",
+        "users_getPresence",
+        "users_info",
+        "users_profile_get",
+        "users_setPresence"
+      ],
+      "bytes_pruned": 34467,
+      "bytes_unpruned_components": 74285
+    },
+    {
+      "api": "slack",
+      "index": 161,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0161_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0161_spec",
+      "operations_spec_order": [
+        "admin_users_invite",
+        "users_getPresence",
+        "users_identity",
+        "users_lookupByEmail",
+        "users_profile_get"
+      ],
+      "bytes_pruned": 40425,
+      "bytes_unpruned_components": 80243
+    },
+    {
+      "api": "slack",
+      "index": 163,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0163_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0163_spec",
+      "operations_spec_order": [
+        "chat_update",
+        "dnd_info",
+        "dnd_teamInfo",
+        "users_profile_get",
+        "users_profile_set"
+      ],
+      "bytes_pruned": 29627,
+      "bytes_unpruned_components": 76810
+    },
+    {
+      "api": "slack",
+      "index": 165,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0165_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0165_spec",
+      "operations_spec_order": [
+        "files_remote_add",
+        "files_remote_update",
+        "users_deletePhoto",
+        "users_profile_set",
+        "users_setPhoto"
+      ],
+      "bytes_pruned": 27105,
+      "bytes_unpruned_components": 74288
+    },
+    {
+      "api": "slack",
+      "index": 169,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0169_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0169_spec",
+      "operations_spec_order": [
+        "apps_permissions_users_request",
+        "views_open",
+        "views_publish",
+        "views_push",
+        "views_update"
+      ],
+      "bytes_pruned": 22235,
+      "bytes_unpruned_components": 72986
+    },
+    {
+      "api": "slack",
+      "index": 172,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0172_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0172_spec",
+      "operations_spec_order": [
+        "api_test",
+        "chat_deleteScheduledMessage",
+        "workflows_stepCompleted",
+        "workflows_stepFailed",
+        "workflows_updateStep"
+      ],
+      "bytes_pruned": 18460,
+      "bytes_unpruned_components": 69211
+    },
+    {
+      "api": "slack",
+      "index": 173,
+      "ok": true,
+      "spec": "/home/claude/wapiibench/control/work/slack/0173_spec/filtered_spec.yaml",
+      "spec_dir": "/home/claude/wapiibench/control/work/slack/0173_spec",
+      "operations_spec_order": [
+        "admin_emoji_rename",
+        "chat_update",
+        "workflows_stepCompleted",
+        "workflows_stepFailed",
+        "workflows_updateStep"
+      ],
+      "bytes_pruned": 21437,
+      "bytes_unpruned_components": 72188
+    }
+  ]
+}
