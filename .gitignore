@@ -183,3 +183,6 @@ eval_db*/
 test_db*/
 *.resolved.yaml
 data/test/test_data_cleaned.json
+
+# Verification scratch output (regenerable; holds generated clients)
+data/sdk_repair_verify/
