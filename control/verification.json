@@ -1,0 +1,183 @@
+{
+  "cases": [
+    {
+      "api": "slack",
+      "index": 57,
+      "variant": "correct",
+      "operations_in_spec": [
+        "apps_event_authorizations_list",
+        "conversations_history",
+        "files_info",
+        "reactions_list",
+        "stars_list"
+      ],
+      "answer": "const response = await fetch(\"https://slack.com/api/apps.event.authorizations.list?event_context=EC12345678&cursor=abc&limit=50\", {\n  method: \"GET\",\n  headers: {\"Accept\": \"application/json, text/plain, */*\", \"Authorization\": \"Bearer <token>\"},\n});\n",
+      "sample_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "captured_params": {
+        "event_context": "EC12345678",
+        "cursor": "abc",
+        "limit": 50
+      },
+      "coerced": {
+        "limit": {
+          "declared_type": "integer",
+          "value": 50
+        }
+      },
+      "left_as_string": {
+        "event_context": "spec declares string, left as captured",
+        "cursor": "spec declares string, left as captured"
+      },
+      "param_verdicts": {
+        "cursor": "CORRECT",
+        "event_context": "CORRECT",
+        "limit": "CORRECT"
+      },
+      "whitelist_source": "precomputed",
+      "expected_params": {
+        "event_context": "EC12345678",
+        "cursor": "abc",
+        "limit": 50
+      }
+    },
+    {
+      "api": "slack",
+      "index": 57,
+      "variant": "wrong_typed_value",
+      "operations_in_spec": [
+        "apps_event_authorizations_list",
+        "conversations_history",
+        "files_info",
+        "reactions_list",
+        "stars_list"
+      ],
+      "answer": "const response = await fetch(\"https://slack.com/api/apps.event.authorizations.list?event_context=EC12345678&cursor=abc&limit=42\", {\n  method: \"GET\",\n  headers: {\"Accept\": \"application/json, text/plain, */*\", \"Authorization\": \"Bearer <token>\"},\n});\n",
+      "sample_verdict": "wrong",
+      "endpoint_verdict": "correct",
+      "captured_params": {
+        "event_context": "EC12345678",
+        "cursor": "abc",
+        "limit": 42
+      },
+      "coerced": {
+        "limit": {
+          "declared_type": "integer",
+          "value": 42
+        }
+      },
+      "left_as_string": {
+        "event_context": "spec declares string, left as captured",
+        "cursor": "spec declares string, left as captured"
+      },
+      "param_verdicts": {
+        "cursor": "CORRECT",
+        "event_context": "CORRECT",
+        "limit": "INCORRECT_VALUE"
+      },
+      "whitelist_source": "precomputed",
+      "damage": {
+        "limit": 42
+      },
+      "expected_params": {
+        "event_context": "EC12345678",
+        "cursor": "abc",
+        "limit": 50
+      }
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 1,
+      "variant": "correct",
+      "operations_in_spec": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.batchClearByDataFilter",
+        "sheets.spreadsheets.values.batchGetByDataFilter",
+        "sheets.spreadsheets.batchUpdate",
+        "sheets.spreadsheets.getByDataFilter"
+      ],
+      "answer": "const response = await fetch(\"https://sheets.googleapis.com/v4/spreadsheets/<spreadsheetId>?includeGridData=true\", {\n  method: \"GET\",\n  headers: {\"Accept\": \"application/json, text/plain, */*\", \"Authorization\": \"Bearer <token>\"},\n});\n",
+      "sample_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "captured_params": {
+        "includeGridData": true
+      },
+      "coerced": {
+        "includeGridData": {
+          "declared_type": "boolean",
+          "value": true
+        }
+      },
+      "left_as_string": {},
+      "param_verdicts": {
+        "includeGridData": "CORRECT"
+      },
+      "whitelist_source": "live BM25",
+      "expected_params": {
+        "includeGridData": true
+      }
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 1,
+      "variant": "wrong_typed_value",
+      "operations_in_spec": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.batchClearByDataFilter",
+        "sheets.spreadsheets.values.batchGetByDataFilter",
+        "sheets.spreadsheets.batchUpdate",
+        "sheets.spreadsheets.getByDataFilter"
+      ],
+      "answer": "const response = await fetch(\"https://sheets.googleapis.com/v4/spreadsheets/<spreadsheetId>?includeGridData=false\", {\n  method: \"GET\",\n  headers: {\"Accept\": \"application/json, text/plain, */*\", \"Authorization\": \"Bearer <token>\"},\n});\n",
+      "sample_verdict": "wrong",
+      "endpoint_verdict": "correct",
+      "captured_params": {
+        "includeGridData": false
+      },
+      "coerced": {
+        "includeGridData": {
+          "declared_type": "boolean",
+          "value": false
+        }
+      },
+      "left_as_string": {},
+      "param_verdicts": {
+        "includeGridData": "INCORRECT_VALUE"
+      },
+      "whitelist_source": "live BM25",
+      "damage": {
+        "includeGridData": false
+      },
+      "expected_params": {
+        "includeGridData": true
+      }
+    }
+  ],
+  "probe": {
+    "shim_only_treatment_wiring": {
+      "returncode": 0,
+      "config_written": false,
+      "captured_params": null,
+      "stderr_head": ""
+    },
+    "shim_plus_control_global_patch": {
+      "returncode": 0,
+      "config_written": true,
+      "captured_params": {
+        "event_context": "EC12345678",
+        "cursor": "abc",
+        "limit": 50
+      },
+      "stderr_head": ""
+    },
+    "verdict": "adaptation required and effective"
+  },
+  "summary": {
+    "correct_answers_scored_correct": 2,
+    "correct_answers": 2,
+    "wrong_typed_answers_scored_wrong": 2,
+    "wrong_typed_answers": 2,
+    "shim_adaptation": "adaptation required and effective",
+    "clean": true
+  }
+}
