@@ -1,0 +1,2759 @@
+{
+  "summary": {
+    "starter_shape_ok": true,
+    "n": 68,
+    "tasks_with_hard_leaks": 2,
+    "tasks_with_expected_value_overlap": 52,
+    "tasks_with_common_word_param_name_note": 24,
+    "tasks_with_normalised_param_name_note": 17,
+    "leak_kinds": {
+      "leak_url": 0,
+      "leak_path_literal": 0,
+      "leak_path_template": 0,
+      "leak_operation_id": 0,
+      "leak_param_name_structured": 2
+    },
+    "common_word_param_names_seen": [
+      "channel",
+      "content",
+      "cursor",
+      "data",
+      "description",
+      "email",
+      "error",
+      "file",
+      "handle",
+      "id",
+      "limit",
+      "name",
+      "profile",
+      "reminder",
+      "summary",
+      "timestamp",
+      "topic",
+      "user",
+      "view"
+    ],
+    "normalised_param_names_seen": [
+      "app_id",
+      "channel_id",
+      "client_id",
+      "client_secret",
+      "destination",
+      "destinationSpreadsheetId",
+      "event_context",
+      "image",
+      "invite_request_id",
+      "request_id",
+      "session_id",
+      "step_name",
+      "team_id",
+      "trigger_id",
+      "usergroup",
+      "workflow_step_edit_id"
+    ],
+    "tasks_with_placeholder_only_param_name_note": 3,
+    "placeholder_only_param_names_seen": [
+      "destination",
+      "destinationSpreadsheetId",
+      "image"
+    ],
+    "ordering": {
+      "emitted_order_is_spec_order_on": 68,
+      "emitted_spec_has_exactly_the_whitelist_on": 68,
+      "emitted_order_equals_retriever_order_on": 3,
+      "position_equals_retriever_rank_on": 15,
+      "position_of_ground_truth_histogram": {
+        "0": 14,
+        "1": 15,
+        "2": 13,
+        "3": 11,
+        "4": 15
+      },
+      "ground_truth_not_found_in_emitted_spec_on": 0
+    },
+    "surface_symmetry": {
+      "treatment_client_names_all_five_on": 68,
+      "treatment_client_missing_on": 0
+    },
+    "vs_treatment": {
+      "available": true,
+      "report": "estimate/blinding_report_parseable.json",
+      "compared": 68,
+      "tasks_not_in_treatment_report": [],
+      "differing_fields": 0,
+      "differences": [],
+      "identical": true
+    }
+  },
+  "tasks": [
+    {
+      "api": "google_calendar_v3",
+      "index": 1,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2152,
+      "operations_in_emitted_spec": [
+        "calendar.calendars.insert",
+        "calendar.calendars.delete",
+        "calendar.acl.delete",
+        "calendar.events.delete",
+        "calendar.calendarList.delete"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 5,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2182,
+      "operations_in_emitted_spec": [
+        "calendar.acl.list",
+        "calendar.acl.insert",
+        "calendar.acl.get",
+        "calendar.acl.update",
+        "calendar.acl.delete"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 14,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "summary"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "2024-03-05T09:00:00-08:00",
+        "2024-03-05T10:00:00-08:00",
+        "Test Event"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "end",
+        "start",
+        "summary"
+      ],
+      "expected_values": [
+        "2024-03-05T09:00:00-08:00",
+        "2024-03-05T10:00:00-08:00",
+        "Test Event"
+      ],
+      "rendered_chars": 2368,
+      "operations_in_emitted_spec": [
+        "calendar.events.insert",
+        "calendar.events.import",
+        "calendar.events.quickAdd",
+        "calendar.events.update",
+        "calendar.events.patch"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 15,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [
+        "iCalUID"
+      ],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "2024-03-06T09:00:00-08:00",
+        "2024-03-06T10:00:00-08:00",
+        "<iCalUID>"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "end",
+        "iCalUID",
+        "start"
+      ],
+      "expected_values": [
+        "2024-03-06T09:00:00-08:00",
+        "2024-03-06T10:00:00-08:00",
+        "<iCalUID>"
+      ],
+      "rendered_chars": 2384,
+      "operations_in_emitted_spec": [
+        "calendar.events.insert",
+        "calendar.events.import",
+        "calendar.events.get",
+        "calendar.events.update",
+        "calendar.events.patch"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 17,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "id"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "channel-id",
+        "https://example.com/webhook",
+        "web_hook"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "address",
+        "id",
+        "type"
+      ],
+      "expected_values": [
+        "channel-id",
+        "https://example.com/webhook",
+        "web_hook"
+      ],
+      "rendered_chars": 2378,
+      "operations_in_emitted_spec": [
+        "calendar.acl.watch",
+        "calendar.events.watch",
+        "calendar.events.move",
+        "calendar.channels.stop",
+        "calendar.settings.watch"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 2,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 19,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2196,
+      "operations_in_emitted_spec": [
+        "calendar.events.quickAdd",
+        "calendar.events.get",
+        "calendar.events.delete",
+        "calendar.events.instances",
+        "calendar.events.move"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 21,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "description"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "This is an updated description."
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "description"
+      ],
+      "expected_values": [
+        "This is an updated description."
+      ],
+      "rendered_chars": 2326,
+      "operations_in_emitted_spec": [
+        "calendar.events.insert",
+        "calendar.events.import",
+        "calendar.events.update",
+        "calendar.events.delete",
+        "calendar.events.patch"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 2,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 22,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2226,
+      "operations_in_emitted_spec": [
+        "calendar.calendars.delete",
+        "calendar.calendars.clear",
+        "calendar.events.update",
+        "calendar.events.patch",
+        "calendar.events.instances"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 23,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "destination"
+      ],
+      "expected_value_in_task": [
+        "<destination>"
+      ],
+      "note_param_name_placeholder_only": [
+        "destination"
+      ],
+      "expected_param_names": [
+        "destination"
+      ],
+      "expected_values": [
+        "<destination>"
+      ],
+      "rendered_chars": 2256,
+      "operations_in_emitted_spec": [
+        "calendar.events.quickAdd",
+        "calendar.events.get",
+        "calendar.events.delete",
+        "calendar.events.instances",
+        "calendar.events.move"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 32,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [
+        "summaryOverride"
+      ],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "My Calendar"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "summaryOverride"
+      ],
+      "expected_values": [
+        "My Calendar"
+      ],
+      "rendered_chars": 2264,
+      "operations_in_emitted_spec": [
+        "calendar.calendarList.insert",
+        "calendar.calendarList.update",
+        "calendar.calendarList.patch",
+        "calendar.settings.list",
+        "calendar.settings.get"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 34,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2078,
+      "operations_in_emitted_spec": [
+        "calendar.calendars.delete",
+        "calendar.calendars.clear",
+        "calendar.settings.list",
+        "calendar.settings.watch",
+        "calendar.settings.get"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 4,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "destinationSpreadsheetId"
+      ],
+      "expected_value_in_task": [
+        "<destinationSpreadsheetId>"
+      ],
+      "note_param_name_placeholder_only": [
+        "destinationSpreadsheetId"
+      ],
+      "expected_param_names": [
+        "destinationSpreadsheetId"
+      ],
+      "expected_values": [
+        "<destinationSpreadsheetId>"
+      ],
+      "rendered_chars": 2283,
+      "operations_in_emitted_spec": [
+        "sheets.spreadsheets.developerMetadata.get",
+        "sheets.spreadsheets.sheets.copyTo",
+        "sheets.spreadsheets.values.get",
+        "sheets.spreadsheets.values.clear",
+        "sheets.spreadsheets.values.batchGet"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 8,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2177,
+      "operations_in_emitted_spec": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.update",
+        "sheets.spreadsheets.values.clear",
+        "sheets.spreadsheets.values.batchClear",
+        "sheets.spreadsheets.values.batchClearByDataFilter"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 2,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 13,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "123",
+        "A1",
+        "B1",
+        "Hello"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "data",
+        "valueInputOption"
+      ],
+      "expected_values": [
+        "123",
+        "A1",
+        "B1",
+        "Hello",
+        "USER_ENTERED"
+      ],
+      "rendered_chars": 2389,
+      "operations_in_emitted_spec": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.update",
+        "sheets.spreadsheets.values.append",
+        "sheets.spreadsheets.values.batchUpdate",
+        "sheets.spreadsheets.values.batchUpdateByDataFilter"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 4,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 14,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "data"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "RAW",
+        "updated"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "data",
+        "includeValuesInResponse",
+        "valueInputOption"
+      ],
+      "expected_values": [
+        "0",
+        "RAW",
+        "updated"
+      ],
+      "rendered_chars": 2395,
+      "operations_in_emitted_spec": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.update",
+        "sheets.spreadsheets.values.batchUpdate",
+        "sheets.spreadsheets.values.batchUpdateByDataFilter",
+        "sheets.spreadsheets.getByDataFilter"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 3,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 16,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "dataFilters",
+        "includeGridData"
+      ],
+      "expected_values": [
+        "0",
+        "2"
+      ],
+      "rendered_chars": 2223,
+      "operations_in_emitted_spec": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.append",
+        "sheets.spreadsheets.values.batchGetByDataFilter",
+        "sheets.spreadsheets.batchUpdate",
+        "sheets.spreadsheets.getByDataFilter"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 3,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 0,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "app_id",
+        "request_id"
+      ],
+      "expected_value_in_task": [
+        "A12345678",
+        "R98765432",
+        "T87654321"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "app_id",
+        "request_id",
+        "team_id"
+      ],
+      "expected_values": [
+        "A12345678",
+        "R98765432",
+        "T87654321"
+      ],
+      "rendered_chars": 2235,
+      "operations_in_emitted_spec": [
+        "admin_apps_approve",
+        "admin_apps_approved_list",
+        "admin_apps_restrict",
+        "admin_inviteRequests_approve",
+        "apps_uninstall"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 8,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "channel_id"
+      ],
+      "expected_value_in_task": [
+        "C90123456"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel_id"
+      ],
+      "expected_values": [
+        "C90123456"
+      ],
+      "rendered_chars": 2085,
+      "operations_in_emitted_spec": [
+        "admin_conversations_delete",
+        "chat_delete",
+        "chat_deleteScheduledMessage",
+        "files_comments_delete",
+        "files_delete"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": true,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 9,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "channel_id"
+      ],
+      "expected_value_in_task": [
+        "C23456789",
+        "T56789012"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel_id",
+        "leaving_team_ids"
+      ],
+      "expected_values": [
+        "C23456789",
+        "T56789012"
+      ],
+      "rendered_chars": 2171,
+      "operations_in_emitted_spec": [
+        "admin_conversations_disconnectShared",
+        "admin_conversations_setTeams",
+        "admin_teams_settings_setDefaultChannels",
+        "admin_users_assign",
+        "files_sharedPublicURL"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 14,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "name"
+      ],
+      "note_param_name_normalised": [
+        "channel_id"
+      ],
+      "expected_value_in_task": [
+        "C89012345",
+        "new-channel-name"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel_id",
+        "name"
+      ],
+      "expected_values": [
+        "C89012345",
+        "new-channel-name"
+      ],
+      "rendered_chars": 2117,
+      "operations_in_emitted_spec": [
+        "admin_conversations_rename",
+        "admin_emoji_rename",
+        "calls_participants_add",
+        "conversations_rename",
+        "reactions_add"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 2,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 16,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "channel_id"
+      ],
+      "expected_value_in_task": [
+        "C90123456",
+        "T67890123"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel_id",
+        "team_id"
+      ],
+      "expected_values": [
+        "C90123456",
+        "T67890123"
+      ],
+      "rendered_chars": 2193,
+      "operations_in_emitted_spec": [
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_listChannels",
+        "admin_usergroups_removeChannels"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 20,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "channel_id"
+      ],
+      "expected_value_in_task": [
+        "C23456789"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel_id",
+        "target_team_ids"
+      ],
+      "expected_values": [
+        "C23456789",
+        "T90123456,T01234567"
+      ],
+      "rendered_chars": 2207,
+      "operations_in_emitted_spec": [
+        "admin_conversations_disconnectShared",
+        "admin_conversations_setTeams",
+        "admin_teams_settings_setDefaultChannels",
+        "files_sharedPublicURL",
+        "migration_exchange"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 3,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 21,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "channel_id"
+      ],
+      "expected_value_in_task": [
+        "C67890123"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel_id"
+      ],
+      "expected_values": [
+        "C67890123"
+      ],
+      "rendered_chars": 2079,
+      "operations_in_emitted_spec": [
+        "admin_conversations_convertToPrivate",
+        "admin_conversations_unarchive",
+        "admin_usergroups_addChannels",
+        "admin_usergroups_listChannels",
+        "conversations_unarchive"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 25,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "partyparrot"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "name"
+      ],
+      "expected_values": [
+        "partyparrot"
+      ],
+      "rendered_chars": 2069,
+      "operations_in_emitted_spec": [
+        "admin_emoji_add",
+        "admin_emoji_list",
+        "admin_emoji_remove",
+        "admin_emoji_rename",
+        "emoji_list"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 27,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "invite_request_id"
+      ],
+      "expected_value_in_task": [
+        "I01234567",
+        "T87654321"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "invite_request_id",
+        "team_id"
+      ],
+      "expected_values": [
+        "I01234567",
+        "T87654321"
+      ],
+      "rendered_chars": 2185,
+      "operations_in_emitted_spec": [
+        "admin_apps_approve",
+        "admin_inviteRequests_approve",
+        "admin_inviteRequests_approved_list",
+        "admin_inviteRequests_deny",
+        "admin_inviteRequests_list"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 36,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "T12345"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "team_id"
+      ],
+      "expected_values": [
+        "T12345"
+      ],
+      "rendered_chars": 2101,
+      "operations_in_emitted_spec": [
+        "admin_teams_settings_info",
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon",
+        "admin_teams_settings_setName",
+        "calls_info"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": true,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 41,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "name"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "T12345",
+        "Test Workspace"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "name",
+        "team_id"
+      ],
+      "expected_values": [
+        "T12345",
+        "Test Workspace"
+      ],
+      "rendered_chars": 2101,
+      "operations_in_emitted_spec": [
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon",
+        "admin_teams_settings_setName",
+        "api_test",
+        "auth_test"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 43,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "S12345"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "auto_provision",
+        "team_ids",
+        "usergroup_id"
+      ],
+      "expected_values": [
+        "S12345",
+        "T12345,T67890"
+      ],
+      "rendered_chars": 2207,
+      "operations_in_emitted_spec": [
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_addTeams",
+        "admin_usergroups_listChannels"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 45,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "S12345"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel_ids",
+        "usergroup_id"
+      ],
+      "expected_values": [
+        "C12345678,C87654321",
+        "S12345"
+      ],
+      "rendered_chars": 2185,
+      "operations_in_emitted_spec": [
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_addChannels",
+        "admin_usergroups_listChannels",
+        "admin_usergroups_removeChannels"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 46,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "T12345",
+        "U12345"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "is_restricted",
+        "is_ultra_restricted",
+        "team_id",
+        "user_id"
+      ],
+      "expected_values": [
+        "T12345",
+        "U12345"
+      ],
+      "rendered_chars": 2217,
+      "operations_in_emitted_spec": [
+        "admin_users_assign",
+        "admin_users_setAdmin",
+        "admin_users_setOwner",
+        "admin_users_setRegular",
+        "migration_exchange"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 50,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "session_id",
+        "team_id"
+      ],
+      "expected_value_in_task": [
+        "1234567890",
+        "T12345"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "session_id",
+        "team_id"
+      ],
+      "expected_values": [
+        "1234567890",
+        "T12345"
+      ],
+      "rendered_chars": 2109,
+      "operations_in_emitted_spec": [
+        "admin_users_session_invalidate",
+        "admin_users_session_reset",
+        "dnd_endDnd",
+        "rtm_connect",
+        "team_integrationLogs"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": true,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 52,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "T12345",
+        "U12345"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "team_id",
+        "user_id"
+      ],
+      "expected_values": [
+        "T12345",
+        "U12345"
+      ],
+      "rendered_chars": 2087,
+      "operations_in_emitted_spec": [
+        "admin_users_assign",
+        "admin_users_list",
+        "admin_users_remove",
+        "admin_users_setAdmin",
+        "admin_users_setOwner"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 6,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 54,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "T12345",
+        "U12345"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "team_id",
+        "user_id"
+      ],
+      "expected_values": [
+        "T12345",
+        "U12345"
+      ],
+      "rendered_chars": 2093,
+      "operations_in_emitted_spec": [
+        "admin_teams_owners_list",
+        "admin_users_remove",
+        "admin_users_setAdmin",
+        "admin_users_setOwner",
+        "admin_users_setRegular"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 55,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "T12345",
+        "U12345"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "team_id",
+        "user_id"
+      ],
+      "expected_values": [
+        "T12345",
+        "U12345"
+      ],
+      "rendered_chars": 2105,
+      "operations_in_emitted_spec": [
+        "admin_users_list",
+        "admin_users_remove",
+        "admin_users_setAdmin",
+        "admin_users_setOwner",
+        "admin_users_setRegular"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 57,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "cursor",
+        "limit"
+      ],
+      "note_param_name_normalised": [
+        "event_context"
+      ],
+      "expected_value_in_task": [
+        "50",
+        "EC12345678",
+        "abc"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "cursor",
+        "event_context",
+        "limit"
+      ],
+      "expected_values": [
+        "50",
+        "EC12345678",
+        "abc"
+      ],
+      "rendered_chars": 2261,
+      "operations_in_emitted_spec": [
+        "apps_event_authorizations_list",
+        "conversations_history",
+        "files_info",
+        "reactions_list",
+        "stars_list"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 61,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2059,
+      "operations_in_emitted_spec": [
+        "apps_permissions_request",
+        "apps_permissions_resources_list",
+        "apps_permissions_scopes_list",
+        "apps_permissions_users_list",
+        "apps_permissions_users_request"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 64,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "client_id",
+        "client_secret"
+      ],
+      "expected_value_in_task": [
+        "1234567890.12345678",
+        "abcdef1234567890abcdef1234567890abcdef"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "client_id",
+        "client_secret"
+      ],
+      "expected_values": [
+        "1234567890.12345678",
+        "abcdef1234567890abcdef1234567890abcdef"
+      ],
+      "rendered_chars": 2223,
+      "operations_in_emitted_spec": [
+        "admin_apps_approve",
+        "apps_uninstall",
+        "oauth_access",
+        "oauth_token",
+        "oauth_v2_access"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 76,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "channel"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "1678901234.567890",
+        "C12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel",
+        "message_ts"
+      ],
+      "expected_values": [
+        "1678901234.567890",
+        "C12345678"
+      ],
+      "rendered_chars": 2193,
+      "operations_in_emitted_spec": [
+        "chat_getPermalink",
+        "chat_meMessage",
+        "chat_postMessage",
+        "chat_unfurl",
+        "conversations_replies"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 79,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "channel"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "C12345678",
+        "Hello, world!"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel",
+        "text"
+      ],
+      "expected_values": [
+        "C12345678",
+        "Hello, world!"
+      ],
+      "rendered_chars": 2117,
+      "operations_in_emitted_spec": [
+        "chat_deleteScheduledMessage",
+        "chat_meMessage",
+        "chat_postMessage",
+        "chat_scheduleMessage",
+        "conversations_close"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 5,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 80,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "channel"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "1678901234",
+        "C12345678",
+        "This is a scheduled message."
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel",
+        "post_at",
+        "text"
+      ],
+      "expected_values": [
+        "1678901234",
+        "C12345678",
+        "This is a scheduled message."
+      ],
+      "rendered_chars": 2225,
+      "operations_in_emitted_spec": [
+        "chat_deleteScheduledMessage",
+        "chat_getPermalink",
+        "chat_meMessage",
+        "chat_scheduleMessage",
+        "chat_scheduledMessages_list"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 84,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "C12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel"
+      ],
+      "expected_values": [
+        "C12345678"
+      ],
+      "rendered_chars": 2085,
+      "operations_in_emitted_spec": [
+        "admin_conversations_archive",
+        "admin_conversations_delete",
+        "admin_conversations_getConversationPrefs",
+        "admin_conversations_setConversationPrefs",
+        "conversations_archive"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 87,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "10",
+        "C12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel",
+        "limit"
+      ],
+      "expected_values": [
+        "10",
+        "C12345678"
+      ],
+      "rendered_chars": 2201,
+      "operations_in_emitted_spec": [
+        "admin_conversations_getConversationPrefs",
+        "conversations_close",
+        "conversations_history",
+        "conversations_open",
+        "conversations_replies"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 92,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "C12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel"
+      ],
+      "expected_values": [
+        "C12345678"
+      ],
+      "rendered_chars": 2081,
+      "operations_in_emitted_spec": [
+        "admin_conversations_archive",
+        "admin_conversations_delete",
+        "admin_conversations_getConversationPrefs",
+        "admin_conversations_setConversationPrefs",
+        "conversations_leave"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 96,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "U12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "users"
+      ],
+      "expected_values": [
+        "U12345678"
+      ],
+      "rendered_chars": 2087,
+      "operations_in_emitted_spec": [
+        "chat_deleteScheduledMessage",
+        "conversations_close",
+        "conversations_open",
+        "dialog_open",
+        "views_open"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 98,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "channel"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "1234567890.123456",
+        "C12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel",
+        "ts"
+      ],
+      "expected_values": [
+        "1234567890.123456",
+        "C12345678"
+      ],
+      "rendered_chars": 2243,
+      "operations_in_emitted_spec": [
+        "chat_getPermalink",
+        "chat_meMessage",
+        "chat_postMessage",
+        "chat_scheduleMessage",
+        "conversations_replies"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 100,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "channel",
+        "topic"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "C12345678",
+        "new-topic"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel",
+        "topic"
+      ],
+      "expected_values": [
+        "C12345678",
+        "new-topic"
+      ],
+      "rendered_chars": 2105,
+      "operations_in_emitted_spec": [
+        "admin_conversations_setConversationPrefs",
+        "admin_conversations_setTeams",
+        "admin_teams_settings_setDefaultChannels",
+        "conversations_setPurpose",
+        "conversations_setTopic"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 103,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2101,
+      "operations_in_emitted_spec": [
+        "dnd_endDnd",
+        "dnd_endSnooze",
+        "dnd_info",
+        "dnd_setSnooze",
+        "dnd_teamInfo"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 104,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2079,
+      "operations_in_emitted_spec": [
+        "calls_end",
+        "dnd_endDnd",
+        "dnd_endSnooze",
+        "dnd_info",
+        "dnd_setSnooze"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 107,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "users"
+      ],
+      "expected_values": [
+        "U12345678,W12345678"
+      ],
+      "rendered_chars": 2141,
+      "operations_in_emitted_spec": [
+        "dnd_endDnd",
+        "dnd_info",
+        "dnd_setSnooze",
+        "dnd_teamInfo",
+        "users_getPresence"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 2,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 108,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2093,
+      "operations_in_emitted_spec": [
+        "admin_emoji_list",
+        "admin_inviteRequests_list",
+        "admin_teams_admins_list",
+        "admin_teams_owners_list",
+        "emoji_list"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 120,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "file"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "F12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "file"
+      ],
+      "expected_values": [
+        "F12345678"
+      ],
+      "rendered_chars": 2103,
+      "operations_in_emitted_spec": [
+        "files_comments_delete",
+        "files_remote_remove",
+        "files_revokePublicURL",
+        "files_sharedPublicURL",
+        "usergroups_enable"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 121,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "content"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "C12345678",
+        "This is the content of the file.",
+        "my_file.txt"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channels",
+        "content",
+        "filename"
+      ],
+      "expected_values": [
+        "C12345678",
+        "This is the content of the file.",
+        "my_file.txt"
+      ],
+      "rendered_chars": 2219,
+      "operations_in_emitted_spec": [
+        "files_delete",
+        "files_remote_add",
+        "files_remote_share",
+        "files_remote_update",
+        "files_upload"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 126,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "channel",
+        "timestamp"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "1234567890.123456",
+        "C12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel",
+        "timestamp"
+      ],
+      "expected_values": [
+        "1234567890.123456",
+        "C12345678"
+      ],
+      "rendered_chars": 2163,
+      "operations_in_emitted_spec": [
+        "pins_add",
+        "pins_list",
+        "pins_remove",
+        "reactions_add",
+        "reactions_get"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 128,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "channel",
+        "timestamp"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "1234567890.123456",
+        "C12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "channel",
+        "timestamp"
+      ],
+      "expected_values": [
+        "1234567890.123456",
+        "C12345678"
+      ],
+      "rendered_chars": 2197,
+      "operations_in_emitted_spec": [
+        "pins_add",
+        "pins_list",
+        "pins_remove",
+        "reactions_remove",
+        "stars_remove"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 131,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2117,
+      "operations_in_emitted_spec": [
+        "reactions_add",
+        "reactions_get",
+        "reactions_list",
+        "usergroups_users_list",
+        "users_list"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 134,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "reminder"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "Rm12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "reminder"
+      ],
+      "expected_values": [
+        "Rm12345678"
+      ],
+      "rendered_chars": 2099,
+      "operations_in_emitted_spec": [
+        "reminders_add",
+        "reminders_complete",
+        "reminders_delete",
+        "reminders_info",
+        "reminders_list"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 143,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2079,
+      "operations_in_emitted_spec": [
+        "admin_conversations_restrictAccess_listGroups",
+        "team_accessLogs",
+        "team_billableInfo",
+        "team_info",
+        "team_integrationLogs"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 144,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2101,
+      "operations_in_emitted_spec": [
+        "dnd_info",
+        "team_accessLogs",
+        "team_billableInfo",
+        "team_info",
+        "team_integrationLogs"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 148,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "handle",
+        "name"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "<usergroup_handle>",
+        "<usergroup_name>"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "handle",
+        "name"
+      ],
+      "expected_values": [
+        "<usergroup_handle>",
+        "<usergroup_name>"
+      ],
+      "rendered_chars": 2175,
+      "operations_in_emitted_spec": [
+        "usergroups_create",
+        "usergroups_enable",
+        "usergroups_update",
+        "usergroups_users_list",
+        "usergroups_users_update"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 0,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": true,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 152,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "handle",
+        "name"
+      ],
+      "note_param_name_normalised": [
+        "usergroup"
+      ],
+      "expected_value_in_task": [
+        "<new_usergroup_handle>",
+        "<new_usergroup_name>",
+        "S12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "handle",
+        "name",
+        "usergroup"
+      ],
+      "expected_values": [
+        "<new_usergroup_handle>",
+        "<new_usergroup_name>",
+        "S12345678"
+      ],
+      "rendered_chars": 2241,
+      "operations_in_emitted_spec": [
+        "admin_emoji_rename",
+        "usergroups_create",
+        "usergroups_update",
+        "usergroups_users_list",
+        "usergroups_users_update"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 2,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 156,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [],
+      "expected_values": [],
+      "rendered_chars": 2097,
+      "operations_in_emitted_spec": [
+        "users_conversations",
+        "users_deletePhoto",
+        "users_profile_get",
+        "users_profile_set",
+        "users_setPhoto"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 157,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "user"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "U12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "user"
+      ],
+      "expected_values": [
+        "U12345678"
+      ],
+      "rendered_chars": 2119,
+      "operations_in_emitted_spec": [
+        "rtm_connect",
+        "users_getPresence",
+        "users_info",
+        "users_profile_get",
+        "users_setPresence"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 1,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 161,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "email"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "user@example.com"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "email"
+      ],
+      "expected_values": [
+        "user@example.com"
+      ],
+      "rendered_chars": 2109,
+      "operations_in_emitted_spec": [
+        "admin_users_invite",
+        "users_getPresence",
+        "users_identity",
+        "users_lookupByEmail",
+        "users_profile_get"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 163,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "profile"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        ":sandwich:",
+        "Out for lunch"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "profile"
+      ],
+      "expected_values": [
+        ":sandwich:",
+        "Out for lunch"
+      ],
+      "rendered_chars": 2255,
+      "operations_in_emitted_spec": [
+        "chat_update",
+        "dnd_info",
+        "dnd_teamInfo",
+        "users_profile_get",
+        "users_profile_set"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 165,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "image"
+      ],
+      "expected_value_in_task": [
+        "<image data>"
+      ],
+      "note_param_name_placeholder_only": [
+        "image"
+      ],
+      "expected_param_names": [
+        "image"
+      ],
+      "expected_values": [
+        "<image data>"
+      ],
+      "rendered_chars": 2163,
+      "operations_in_emitted_spec": [
+        "files_remote_add",
+        "files_remote_update",
+        "users_deletePhoto",
+        "users_profile_set",
+        "users_setPhoto"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 169,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "view"
+      ],
+      "note_param_name_normalised": [
+        "trigger_id"
+      ],
+      "expected_value_in_task": [
+        "T12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "trigger_id",
+        "view"
+      ],
+      "expected_values": [
+        "T12345678",
+        "{\"type\": \"modal\", \"callback_id\": \"view_2\", \"title\": {\"type\": \"plain_text\", \"text\": \"My Pushed Modal\"}, \"blocks\": []}"
+      ],
+      "rendered_chars": 2277,
+      "operations_in_emitted_spec": [
+        "apps_permissions_users_request",
+        "views_open",
+        "views_publish",
+        "views_push",
+        "views_update"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 172,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [
+        "error"
+      ],
+      "note_param_name_normalised": [],
+      "expected_value_in_task": [
+        "W12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "error",
+        "workflow_step_execute_id"
+      ],
+      "expected_values": [
+        "W12345678",
+        "{\"message\": \"Something went wrong.\"}"
+      ],
+      "rendered_chars": 2245,
+      "operations_in_emitted_spec": [
+        "api_test",
+        "chat_deleteScheduledMessage",
+        "workflows_stepCompleted",
+        "workflows_stepFailed",
+        "workflows_updateStep"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 3,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    },
+    {
+      "api": "slack",
+      "index": 173,
+      "leak_url": [],
+      "leak_path_literal": [],
+      "leak_path_template": [],
+      "leak_operation_id": [],
+      "leak_param_name_structured": [],
+      "note_param_name_common_word": [],
+      "note_param_name_normalised": [
+        "step_name",
+        "workflow_step_edit_id"
+      ],
+      "expected_value_in_task": [
+        "New Step Name",
+        "W12345678"
+      ],
+      "note_param_name_placeholder_only": [],
+      "expected_param_names": [
+        "step_name",
+        "workflow_step_edit_id"
+      ],
+      "expected_values": [
+        "New Step Name",
+        "W12345678"
+      ],
+      "rendered_chars": 2235,
+      "operations_in_emitted_spec": [
+        "admin_emoji_rename",
+        "chat_update",
+        "workflows_stepCompleted",
+        "workflows_stepFailed",
+        "workflows_updateStep"
+      ],
+      "emitted_order_is_spec_order": true,
+      "emitted_order_equals_retriever_order": false,
+      "emitted_spec_has_exactly_the_whitelist": true,
+      "position_of_ground_truth": 4,
+      "retriever_rank_of_ground_truth": 1,
+      "position_equals_retriever_rank": false,
+      "treatment_client_names_all_five": true,
+      "leaks": 0
+    }
+  ]
+}
