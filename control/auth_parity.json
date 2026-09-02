@@ -1,0 +1,625 @@
+{
+  "summary": {
+    "n": 68,
+    "compared_against_a_generated_client": 68,
+    "clients_missing": [],
+    "control_emits_auth": 68,
+    "treatment_emits_auth": 68,
+    "disagreements": 0,
+    "clean": true
+  },
+  "tasks": [
+    {
+      "api": "google_calendar_v3",
+      "index": 1,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 5,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 14,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 15,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 17,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 19,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 21,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 22,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 23,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 32,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 34,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 4,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 8,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 13,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 14,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 16,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 0,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 8,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 9,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 14,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 16,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 20,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 21,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 25,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 27,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 36,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 41,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 43,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 45,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 46,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 50,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 52,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 54,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 55,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 57,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 61,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 64,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 76,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 79,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 80,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 84,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 87,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 92,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 96,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 98,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 100,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 103,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 104,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 107,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 108,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 120,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 121,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 126,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 128,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 131,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 134,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 143,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 144,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 148,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 152,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 156,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 157,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 161,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 163,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 165,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 169,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 172,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    },
+    {
+      "api": "slack",
+      "index": 173,
+      "control_emits_auth": true,
+      "treatment_emits_auth": true,
+      "control_line": "const AUTH_HEADERS = { Authorization: 'Bearer <token>' };",
+      "treatment_line": "client.auth.bearer('<token>');",
+      "agree": true
+    }
+  ]
+}
