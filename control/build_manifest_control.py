@@ -84,7 +84,7 @@ def build(sample_file: str, work_root: str, prompt_root: str, whitelist_file: st
         "sample": os.path.relpath(sample_file, REPO_ROOT),
         "whitelist_size": 5,
         "n": len(rows),
-        "contract": "control/RUNNER_CONTRACT_CONTROL.md",
+        "contract": "control/RUNNER_CONTRACT.md",
         "treatment_manifest": "estimate/task_manifest.json",
         "note": "One fresh generator agent per row; one attempt; NO repair loop -- a raw "
                 "fetch call has nothing to typecheck, which is an asymmetry favouring the "

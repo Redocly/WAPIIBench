@@ -130,7 +130,7 @@ def emit(api: str, index: int, work_root: str, whitelist_file: str,
         "artifact_path": artifact,
         "attempts": 1,
         "repair_budget": "none -- a raw fetch call has nothing to typecheck "
-                         "(see control/RUNNER_CONTRACT_CONTROL.md)",
+                         "(see control/RUNNER_CONTRACT.md)",
     }
 
 

@@ -25,7 +25,11 @@ at any score:
 
 The answers here are GENERATED FROM THE EXPECTED CONFIG on purpose: this is a test of the
 plumbing (capture -> coercion -> the harness's own compare/analyze), not a measurement of a
-model, so the ideal answer is derived rather than guessed. That is the same choice
+model, so the ideal answer is derived rather than guessed. BECAUSE the derived answer and its
+expected params are written into `control/verification.json`, every case must come from a
+task OUTSIDE the measured 68-task sample -- `assert_cases_outside_sample()` enforces it
+against `control/task_manifest_control.json` and aborts otherwise, so this file can never
+publish the answer to a task a generator agent is scored on. That is the same choice
 `wapiibench/sdk_repair_verify.py` makes for the treatment, where the ideal SDK invocation is
 hand-written against the generated client. Nothing in the measurement path reads ground truth.
 
@@ -61,13 +65,45 @@ DEFAULT_WORK = os.path.join(REPO_ROOT, "control", "verify_work")
 DEFAULT_OUT = os.path.join(REPO_ROOT, "control", "verification.json")
 
 # (api, index, which query parameter to damage in the negative control, damaged value)
+#
+# EVERY CASE MUST BE OUTSIDE THE 68-TASK SAMPLE (`control/task_manifest_control.json`), and
+# `assert_cases_outside_sample()` below refuses to run if one is not. This file DERIVES the
+# correct answer from the expected config and records it in `control/verification.json`, so a
+# case drawn from the sample would put a measured task's answer in a committed file where a
+# generator agent could read it. The coercion paths being verified are properties of the
+# capture shim and the parameter-type table, not of any particular task, so an unsampled task
+# from the same API exercises exactly the same plumbing.
 CASES = [
-    # In the operative 68-task sample. Expected `limit` is the integer 50.
-    ("slack", 57, "limit", 42),
-    # NOT in the sample (no sampled google_sheet_v4 task has a boolean query value); this is
-    # the same case the treatment's own verification used for the boolean path.
+    # Query INTEGER. NOT in the sample. `files_remote_list`, expected `limit` is the
+    # integer 50 (the same shape as the sampled slack task this case replaced).
+    ("slack", 115, "limit", 42),
+    # Query BOOLEAN. NOT in the sample (no sampled google_sheet_v4 task has a boolean query
+    # value); this is the same case the treatment's own verification used for the boolean
+    # path.
     ("google_sheet_v4", 1, "includeGridData", False),
 ]
+
+MANIFEST = os.path.join(REPO_ROOT, "control", "task_manifest_control.json")
+
+
+def assert_cases_outside_sample(manifest_file: str = MANIFEST) -> list[str]:
+    """Refuse to derive an answer for a task the control is measured on.
+
+    The whole output of this script is a correct answer plus its expected params. Deriving
+    one for a sampled task and committing it would hand a generator agent the answer to the
+    task it is being scored on, so this is a hard precondition, not a warning.
+    """
+    with open(manifest_file, "r") as file:
+        manifest = json.load(file)
+    sampled = {(row["api"], row["index"]) for row in manifest["tasks"]}
+    offenders = [f"{api}:{index}" for api, index, _key, _value in CASES
+                 if (api, index) in sampled]
+    if offenders:
+        raise SystemExit(
+            "verify_control.py refuses to run: "
+            f"{', '.join(offenders)} is in the measured sample ({manifest_file}). "
+            "Verification cases must come from tasks the control is NOT scored on.")
+    return [f"{api}:{index}" for api, index, _key, _value in CASES]
 
 
 # --------------------------------------------------------------------------------------- #
@@ -243,13 +279,25 @@ def main() -> None:
     args = parser.parse_args()
 
     os.chdir(REPO_ROOT)
+    case_ids = assert_cases_outside_sample()
+    print(f"cases outside the measured sample: {', '.join(case_ids)}")
+
     from harness_import import load_harness
     evaluation, _arm, stubbed = load_harness()
     if stubbed:
         print(f"harness_import stubbed: {stubbed}")
 
     os.makedirs(args.work_root, exist_ok=True)
-    report: dict[str, object] = {"cases": [], "probe": None}
+    report: dict[str, object] = {
+        "cases_outside_measured_sample": {
+            "manifest": os.path.relpath(MANIFEST, REPO_ROOT),
+            "case_ids": case_ids,
+            "note": "Enforced by assert_cases_outside_sample(). No task scored by the "
+                    "control appears in this file, so the derived answers below cannot be "
+                    "the answer to a task any generator agent is measured on.",
+        },
+        "cases": [], "probe": None,
+    }
 
     for api, index, damaged_key, damaged_value in CASES:
         with open(os.path.join(DATASET_DIR, api, "test_data_final.json"), "r") as file:

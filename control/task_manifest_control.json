@@ -5,7 +5,7 @@
   "sample": "estimate/sample_parseable.json",
   "whitelist_size": 5,
   "n": 68,
-  "contract": "control/RUNNER_CONTRACT_CONTROL.md",
+  "contract": "control/RUNNER_CONTRACT.md",
   "treatment_manifest": "estimate/task_manifest.json",
   "note": "One fresh generator agent per row; one attempt; NO repair loop -- a raw fetch call has nothing to typecheck, which is an asymmetry favouring the treatment and is disclosed in the contract. This file contains no ground truth and no operation whitelist -- a row may be shown to a generator agent in full.",
   "tasks": [

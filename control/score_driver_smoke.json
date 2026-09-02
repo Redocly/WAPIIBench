@@ -1,6 +1,6 @@
 {
   "what": "Smoke run of control/score_driver_control.py end-to-end (execute_fetch -> evaluation.compare -> evaluation.analyze -> aggregate).",
-  "why_these_inputs": "The two hand-written correct fetch answers from control/verify_control.py (--work-root control/verify_work/correct): google_sheet_v4 carries a query INTEGER and slack a query BOOLEAN, the two cases spec-driven coercion has to get right. Both must come out `correct` through the driver, not just through the verification script.",
+  "why_these_inputs": "The two hand-written correct fetch answers from control/verify_control.py (--work-root control/verify_work/correct): slack carries a query INTEGER and google_sheet_v4 a query BOOLEAN, the two cases spec-driven coercion has to get right. Both come from tasks OUTSIDE the measured 68-task sample, so no answer to a scored task is recorded here. Both must come out `correct` through the driver, not just through the verification script.",
   "not_a_measurement": "n = 2 hand-written answers, not model output. The interval below is printed only to show the FPC is wired to N = 228; it means nothing.",
   "command": "python control/score_driver_control.py --work-root control/verify_work/correct",
   "population_default": 228,
@@ -62,7 +62,7 @@
     },
     {
       "api": "slack",
-      "index": 57,
+      "index": 115,
       "sample_verdict": "correct",
       "error_verdict": null,
       "url_verdict": "correct",
