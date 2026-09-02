@@ -1,0 +1,281 @@
+{
+  "seed": 20260902,
+  "frame": "parseable-apis-only",
+  "n": 68,
+  "population": 228,
+  "dataset": "data/synthetic/all/test_data_final.json",
+  "tasks": [
+    {
+      "api": "google_calendar_v3",
+      "index": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 5
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 14
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 15
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 17
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 19
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 21
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 22
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 23
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 32
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 34
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 4
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 8
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 13
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 14
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 16
+    },
+    {
+      "api": "slack",
+      "index": 0
+    },
+    {
+      "api": "slack",
+      "index": 8
+    },
+    {
+      "api": "slack",
+      "index": 9
+    },
+    {
+      "api": "slack",
+      "index": 14
+    },
+    {
+      "api": "slack",
+      "index": 16
+    },
+    {
+      "api": "slack",
+      "index": 20
+    },
+    {
+      "api": "slack",
+      "index": 21
+    },
+    {
+      "api": "slack",
+      "index": 25
+    },
+    {
+      "api": "slack",
+      "index": 27
+    },
+    {
+      "api": "slack",
+      "index": 36
+    },
+    {
+      "api": "slack",
+      "index": 41
+    },
+    {
+      "api": "slack",
+      "index": 43
+    },
+    {
+      "api": "slack",
+      "index": 45
+    },
+    {
+      "api": "slack",
+      "index": 46
+    },
+    {
+      "api": "slack",
+      "index": 50
+    },
+    {
+      "api": "slack",
+      "index": 52
+    },
+    {
+      "api": "slack",
+      "index": 54
+    },
+    {
+      "api": "slack",
+      "index": 55
+    },
+    {
+      "api": "slack",
+      "index": 57
+    },
+    {
+      "api": "slack",
+      "index": 61
+    },
+    {
+      "api": "slack",
+      "index": 64
+    },
+    {
+      "api": "slack",
+      "index": 76
+    },
+    {
+      "api": "slack",
+      "index": 79
+    },
+    {
+      "api": "slack",
+      "index": 80
+    },
+    {
+      "api": "slack",
+      "index": 84
+    },
+    {
+      "api": "slack",
+      "index": 87
+    },
+    {
+      "api": "slack",
+      "index": 92
+    },
+    {
+      "api": "slack",
+      "index": 96
+    },
+    {
+      "api": "slack",
+      "index": 98
+    },
+    {
+      "api": "slack",
+      "index": 100
+    },
+    {
+      "api": "slack",
+      "index": 103
+    },
+    {
+      "api": "slack",
+      "index": 104
+    },
+    {
+      "api": "slack",
+      "index": 107
+    },
+    {
+      "api": "slack",
+      "index": 108
+    },
+    {
+      "api": "slack",
+      "index": 120
+    },
+    {
+      "api": "slack",
+      "index": 121
+    },
+    {
+      "api": "slack",
+      "index": 126
+    },
+    {
+      "api": "slack",
+      "index": 128
+    },
+    {
+      "api": "slack",
+      "index": 131
+    },
+    {
+      "api": "slack",
+      "index": 134
+    },
+    {
+      "api": "slack",
+      "index": 143
+    },
+    {
+      "api": "slack",
+      "index": 144
+    },
+    {
+      "api": "slack",
+      "index": 148
+    },
+    {
+      "api": "slack",
+      "index": 152
+    },
+    {
+      "api": "slack",
+      "index": 156
+    },
+    {
+      "api": "slack",
+      "index": 157
+    },
+    {
+      "api": "slack",
+      "index": 161
+    },
+    {
+      "api": "slack",
+      "index": 163
+    },
+    {
+      "api": "slack",
+      "index": 165
+    },
+    {
+      "api": "slack",
+      "index": 169
+    },
+    {
+      "api": "slack",
+      "index": 172
+    },
+    {
+      "api": "slack",
+      "index": 173
+    }
+  ]
+}

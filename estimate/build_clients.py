@@ -31,7 +31,19 @@ DEFAULT_NODE_MODULES = "/home/claude/tools/node_modules"
 
 
 def _patch_match_strategy(config_path: str) -> None:
-    """SHIM (one key), and a BUG REPORT for whoever owns sdk_repair_arm.py.
+    """SHIM (one key) + one blinding fix, and a BUG REPORT for whoever owns sdk_repair_arm.py.
+
+    THE BLINDING FIX (second edit below): `filter_spec()` writes the whitelist into
+    `decorators.filter-in.value` in RETRIEVER-RANK ORDER, and this config file lands INSIDE
+    the client directory the generator agent is told to read. The rank order is informative:
+    the stand-in retriever puts the ground-truth operation first on ~84% of tasks, and on a
+    SUBSTITUTED task it is first by construction. An agent that opened `redocly.yaml` and
+    picked `value[0]` would score the endpoint far above what the typed client earns it.
+    `client.ts` itself is safe -- `generate-client` re-emits `OPERATIONS` in SPEC order, so
+    the ranking is not recoverable from the client -- but `redocly.yaml` gave it away.
+    Sorting the list destroys the signal and cannot change the generated client, because
+    `matchStrategy: "any"` is order-independent. Verified: sorting leaves `client.ts`
+    byte-identical.
 
     `sdk_repair_arm.filter_spec()` hardcodes `matchStrategy: "all"` in the `filter-in`
     decorator. Verified against @redocly/cli 2.51.0: "all" means the node must match EVERY
@@ -47,7 +59,10 @@ def _patch_match_strategy(config_path: str) -> None:
     with open(config_path, "r") as file:
         config = json.load(file)
     for api_config in config["apis"].values():
-        api_config["decorators"]["filter-in"]["matchStrategy"] = "any"
+        filter_in = api_config["decorators"]["filter-in"]
+        filter_in["matchStrategy"] = "any"
+        # Blinding: drop the retriever's ranking from a file that sits in the client dir.
+        filter_in["value"] = sorted(filter_in["value"])
     with open(config_path, "w") as file:
         json.dump(config, file, indent=2)
 
@@ -84,6 +99,13 @@ def build(whitelist_file: str, work_root: str, redocly_bin: str, node_modules: s
         arm.write_tsconfig(out_dir)
         # No `definitions` on synthetic tasks, but call it so the real-world set works too.
         arm.write_task_globals(out_dir, {"definitions": None})
+        # The spec-declared parameter-type table the capture shim coerces query values with.
+        # Wired exactly as sdk_repair_verify.build_case_dir() does it: the SPEC and the
+        # operationId whitelist are the only inputs -- the task and its expected config are
+        # deliberately not passed (see sdk_repair_arm.param_types_from_spec). Without this
+        # file beside client.ts the shim coerces nothing, every captured query value stays a
+        # string, and a task whose expected value is `limit: 100` can never score correct.
+        arm.write_param_types(spec, out_dir, operation_ids=entry["operation_ids"])
         link = os.path.join(out_dir, "node_modules")
         if node_modules and not os.path.exists(link):
             os.symlink(node_modules, link)

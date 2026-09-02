@@ -1,0 +1,41 @@
+{
+  "seed": 20260902,
+  "frame": "parseable-apis-only",
+  "sample_size_arithmetic": {
+    "z": 1.959964,
+    "margin": 0.1,
+    "p_worst_case": 0.5,
+    "N": 228,
+    "n0_infinite_population": 96.03647203239998,
+    "n0_ceil": 97,
+    "n_finite_population_corrected": 67.78279704958837,
+    "n": 68
+  },
+  "population_by_api": {
+    "slack": 174,
+    "google_calendar_v3": 37,
+    "google_sheet_v4": 17
+  },
+  "population_total": 228,
+  "excluded_apis": {
+    "asana": {
+      "tasks": 167,
+      "reason": "openapi_utils.parse_spec never completes within the run budget (167 synthetic tasks, therefore unscoreable)"
+    }
+  },
+  "dataset_population_total": 395,
+  "allocation_exact": {
+    "slack": 51.894737,
+    "google_calendar_v3": 11.035088,
+    "google_sheet_v4": 5.070175
+  },
+  "allocation_by_api": {
+    "slack": 52,
+    "google_calendar_v3": 11,
+    "google_sheet_v4": 5
+  },
+  "allocation_method": "proportional, largest-remainder rounding",
+  "n": 68,
+  "supports_per_api_claims": false,
+  "per_api_claim_note": "The strata are sized for an OVERALL rate across the three parseable APIs only. google_sheet_v4 contributes 5 draws and google_calendar_v3 eleven; a per-API proportion from those has a 95% half-width far wider than the +/-10pp this frame was sized for. No per-API claim is supportable."
+}

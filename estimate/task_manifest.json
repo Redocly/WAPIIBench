@@ -1,0 +1,555 @@
+{
+  "frame": "parseable-apis-only",
+  "seed": 20260902,
+  "sample": "estimate/sample_parseable.json",
+  "whitelist_size": 5,
+  "n": 68,
+  "contract": "estimate/RUNNER_CONTRACT.md",
+  "note": "One fresh generator agent per row; one attempt; the only permitted iteration is the tsc repair loop (<=3 rounds). This file contains no ground truth and no operation whitelist -- a row may be shown to a generator agent in full.",
+  "tasks": [
+    {
+      "task_id": "google_calendar_v3:0001",
+      "api": "google_calendar_v3",
+      "index": 1,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0001_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/1_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/1_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0005",
+      "api": "google_calendar_v3",
+      "index": 5,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0005_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/5_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/5_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0014",
+      "api": "google_calendar_v3",
+      "index": 14,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0014_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/14_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/14_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0015",
+      "api": "google_calendar_v3",
+      "index": 15,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0015_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/15_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/15_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0017",
+      "api": "google_calendar_v3",
+      "index": 17,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0017_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/17_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/17_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0019",
+      "api": "google_calendar_v3",
+      "index": 19,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0019_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/19_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/19_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0021",
+      "api": "google_calendar_v3",
+      "index": 21,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0021_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/21_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/21_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0022",
+      "api": "google_calendar_v3",
+      "index": 22,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0022_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/22_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/22_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0023",
+      "api": "google_calendar_v3",
+      "index": 23,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0023_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/23_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/23_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0032",
+      "api": "google_calendar_v3",
+      "index": 32,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0032_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/32_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/32_code.ts"
+    },
+    {
+      "task_id": "google_calendar_v3:0034",
+      "api": "google_calendar_v3",
+      "index": 34,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0034_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_calendar_v3/34_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/34_code.ts"
+    },
+    {
+      "task_id": "google_sheet_v4:0004",
+      "api": "google_sheet_v4",
+      "index": 4,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0004_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_sheet_v4/4_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/4_code.ts"
+    },
+    {
+      "task_id": "google_sheet_v4:0008",
+      "api": "google_sheet_v4",
+      "index": 8,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0008_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_sheet_v4/8_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/8_code.ts"
+    },
+    {
+      "task_id": "google_sheet_v4:0013",
+      "api": "google_sheet_v4",
+      "index": 13,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0013_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_sheet_v4/13_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/13_code.ts"
+    },
+    {
+      "task_id": "google_sheet_v4:0014",
+      "api": "google_sheet_v4",
+      "index": 14,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0014_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_sheet_v4/14_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/14_code.ts"
+    },
+    {
+      "task_id": "google_sheet_v4:0016",
+      "api": "google_sheet_v4",
+      "index": 16,
+      "client_dir": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0016_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/google_sheet_v4/16_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/16_code.ts"
+    },
+    {
+      "task_id": "slack:0000",
+      "api": "slack",
+      "index": 0,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0000_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/0_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/0_code.ts"
+    },
+    {
+      "task_id": "slack:0008",
+      "api": "slack",
+      "index": 8,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0008_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/8_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/8_code.ts"
+    },
+    {
+      "task_id": "slack:0009",
+      "api": "slack",
+      "index": 9,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0009_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/9_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/9_code.ts"
+    },
+    {
+      "task_id": "slack:0014",
+      "api": "slack",
+      "index": 14,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0014_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/14_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/14_code.ts"
+    },
+    {
+      "task_id": "slack:0016",
+      "api": "slack",
+      "index": 16,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0016_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/16_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/16_code.ts"
+    },
+    {
+      "task_id": "slack:0020",
+      "api": "slack",
+      "index": 20,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0020_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/20_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/20_code.ts"
+    },
+    {
+      "task_id": "slack:0021",
+      "api": "slack",
+      "index": 21,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0021_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/21_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/21_code.ts"
+    },
+    {
+      "task_id": "slack:0025",
+      "api": "slack",
+      "index": 25,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0025_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/25_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/25_code.ts"
+    },
+    {
+      "task_id": "slack:0027",
+      "api": "slack",
+      "index": 27,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0027_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/27_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/27_code.ts"
+    },
+    {
+      "task_id": "slack:0036",
+      "api": "slack",
+      "index": 36,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0036_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/36_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/36_code.ts"
+    },
+    {
+      "task_id": "slack:0041",
+      "api": "slack",
+      "index": 41,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0041_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/41_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/41_code.ts"
+    },
+    {
+      "task_id": "slack:0043",
+      "api": "slack",
+      "index": 43,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0043_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/43_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/43_code.ts"
+    },
+    {
+      "task_id": "slack:0045",
+      "api": "slack",
+      "index": 45,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0045_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/45_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/45_code.ts"
+    },
+    {
+      "task_id": "slack:0046",
+      "api": "slack",
+      "index": 46,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0046_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/46_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/46_code.ts"
+    },
+    {
+      "task_id": "slack:0050",
+      "api": "slack",
+      "index": 50,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0050_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/50_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/50_code.ts"
+    },
+    {
+      "task_id": "slack:0052",
+      "api": "slack",
+      "index": 52,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0052_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/52_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/52_code.ts"
+    },
+    {
+      "task_id": "slack:0054",
+      "api": "slack",
+      "index": 54,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0054_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/54_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/54_code.ts"
+    },
+    {
+      "task_id": "slack:0055",
+      "api": "slack",
+      "index": 55,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0055_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/55_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/55_code.ts"
+    },
+    {
+      "task_id": "slack:0057",
+      "api": "slack",
+      "index": 57,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0057_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/57_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/57_code.ts"
+    },
+    {
+      "task_id": "slack:0061",
+      "api": "slack",
+      "index": 61,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0061_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/61_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/61_code.ts"
+    },
+    {
+      "task_id": "slack:0064",
+      "api": "slack",
+      "index": 64,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0064_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/64_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/64_code.ts"
+    },
+    {
+      "task_id": "slack:0076",
+      "api": "slack",
+      "index": 76,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0076_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/76_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/76_code.ts"
+    },
+    {
+      "task_id": "slack:0079",
+      "api": "slack",
+      "index": 79,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0079_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/79_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/79_code.ts"
+    },
+    {
+      "task_id": "slack:0080",
+      "api": "slack",
+      "index": 80,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0080_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/80_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/80_code.ts"
+    },
+    {
+      "task_id": "slack:0084",
+      "api": "slack",
+      "index": 84,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0084_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/84_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/84_code.ts"
+    },
+    {
+      "task_id": "slack:0087",
+      "api": "slack",
+      "index": 87,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0087_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/87_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/87_code.ts"
+    },
+    {
+      "task_id": "slack:0092",
+      "api": "slack",
+      "index": 92,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0092_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/92_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/92_code.ts"
+    },
+    {
+      "task_id": "slack:0096",
+      "api": "slack",
+      "index": 96,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0096_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/96_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/96_code.ts"
+    },
+    {
+      "task_id": "slack:0098",
+      "api": "slack",
+      "index": 98,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0098_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/98_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/98_code.ts"
+    },
+    {
+      "task_id": "slack:0100",
+      "api": "slack",
+      "index": 100,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0100_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/100_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/100_code.ts"
+    },
+    {
+      "task_id": "slack:0103",
+      "api": "slack",
+      "index": 103,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0103_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/103_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/103_code.ts"
+    },
+    {
+      "task_id": "slack:0104",
+      "api": "slack",
+      "index": 104,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0104_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/104_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/104_code.ts"
+    },
+    {
+      "task_id": "slack:0107",
+      "api": "slack",
+      "index": 107,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0107_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/107_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/107_code.ts"
+    },
+    {
+      "task_id": "slack:0108",
+      "api": "slack",
+      "index": 108,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0108_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/108_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/108_code.ts"
+    },
+    {
+      "task_id": "slack:0120",
+      "api": "slack",
+      "index": 120,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0120_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/120_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/120_code.ts"
+    },
+    {
+      "task_id": "slack:0121",
+      "api": "slack",
+      "index": 121,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0121_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/121_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/121_code.ts"
+    },
+    {
+      "task_id": "slack:0126",
+      "api": "slack",
+      "index": 126,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0126_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/126_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/126_code.ts"
+    },
+    {
+      "task_id": "slack:0128",
+      "api": "slack",
+      "index": 128,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0128_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/128_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/128_code.ts"
+    },
+    {
+      "task_id": "slack:0131",
+      "api": "slack",
+      "index": 131,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0131_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/131_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/131_code.ts"
+    },
+    {
+      "task_id": "slack:0134",
+      "api": "slack",
+      "index": 134,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0134_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/134_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/134_code.ts"
+    },
+    {
+      "task_id": "slack:0143",
+      "api": "slack",
+      "index": 143,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0143_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/143_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/143_code.ts"
+    },
+    {
+      "task_id": "slack:0144",
+      "api": "slack",
+      "index": 144,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0144_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/144_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/144_code.ts"
+    },
+    {
+      "task_id": "slack:0148",
+      "api": "slack",
+      "index": 148,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0148_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/148_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/148_code.ts"
+    },
+    {
+      "task_id": "slack:0152",
+      "api": "slack",
+      "index": 152,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0152_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/152_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/152_code.ts"
+    },
+    {
+      "task_id": "slack:0156",
+      "api": "slack",
+      "index": 156,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0156_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/156_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/156_code.ts"
+    },
+    {
+      "task_id": "slack:0157",
+      "api": "slack",
+      "index": 157,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0157_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/157_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/157_code.ts"
+    },
+    {
+      "task_id": "slack:0161",
+      "api": "slack",
+      "index": 161,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0161_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/161_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/161_code.ts"
+    },
+    {
+      "task_id": "slack:0163",
+      "api": "slack",
+      "index": 163,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0163_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/163_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/163_code.ts"
+    },
+    {
+      "task_id": "slack:0165",
+      "api": "slack",
+      "index": 165,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0165_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/165_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/165_code.ts"
+    },
+    {
+      "task_id": "slack:0169",
+      "api": "slack",
+      "index": 169,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0169_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/169_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/169_code.ts"
+    },
+    {
+      "task_id": "slack:0172",
+      "api": "slack",
+      "index": 172,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0172_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/172_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/172_code.ts"
+    },
+    {
+      "task_id": "slack:0173",
+      "api": "slack",
+      "index": 173,
+      "client_dir": "/home/claude/wapiibench/estimate/work/slack/0173_client",
+      "prompt_file": "/home/claude/wapiibench/estimate/prompts/slack/173_prompt.md",
+      "answer_path": "/home/claude/wapiibench/estimate/work/slack/173_code.ts"
+    }
+  ]
+}

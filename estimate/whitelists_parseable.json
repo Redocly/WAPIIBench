@@ -1,0 +1,971 @@
+{
+  "retriever": "bm25-lexical-standin",
+  "note": "declared deviation from the paper's all-MiniLM-L6-v2 + CrossEncoder retriever; huggingface.co is blocked by network policy in this environment",
+  "whitelist_size": 5,
+  "accuracy": {
+    "n": 68,
+    "top1": 0.8382352941176471,
+    "top5": 0.9852941176470589,
+    "substituted": 1,
+    "substituted_fraction": 0.014705882352941176,
+    "unresolved_ground_truth": 0,
+    "paper_reference": {
+      "top1": 0.757,
+      "top5": 0.952
+    }
+  },
+  "tasks": [
+    {
+      "api": "google_calendar_v3",
+      "index": 1,
+      "operation_ids": [
+        "calendar.calendars.delete",
+        "calendar.acl.delete",
+        "calendar.events.delete",
+        "calendar.calendars.insert",
+        "calendar.calendarList.delete"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 5,
+      "operation_ids": [
+        "calendar.acl.list",
+        "calendar.acl.get",
+        "calendar.acl.delete",
+        "calendar.acl.insert",
+        "calendar.acl.update"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 14,
+      "operation_ids": [
+        "calendar.events.insert",
+        "calendar.events.update",
+        "calendar.events.import",
+        "calendar.events.patch",
+        "calendar.events.quickAdd"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 15,
+      "operation_ids": [
+        "calendar.events.import",
+        "calendar.events.insert",
+        "calendar.events.update",
+        "calendar.events.patch",
+        "calendar.events.get"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 17,
+      "operation_ids": [
+        "calendar.channels.stop",
+        "calendar.events.watch",
+        "calendar.acl.watch",
+        "calendar.settings.watch",
+        "calendar.events.move"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 19,
+      "operation_ids": [
+        "calendar.events.get",
+        "calendar.events.delete",
+        "calendar.events.move",
+        "calendar.events.instances",
+        "calendar.events.quickAdd"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 21,
+      "operation_ids": [
+        "calendar.events.update",
+        "calendar.events.patch",
+        "calendar.events.insert",
+        "calendar.events.import",
+        "calendar.events.delete"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 22,
+      "operation_ids": [
+        "calendar.events.instances",
+        "calendar.calendars.delete",
+        "calendar.calendars.clear",
+        "calendar.events.update",
+        "calendar.events.patch"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 23,
+      "operation_ids": [
+        "calendar.events.move",
+        "calendar.events.get",
+        "calendar.events.delete",
+        "calendar.events.instances",
+        "calendar.events.quickAdd"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 32,
+      "operation_ids": [
+        "calendar.calendarList.update",
+        "calendar.calendarList.patch",
+        "calendar.calendarList.insert",
+        "calendar.settings.list",
+        "calendar.settings.get"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 34,
+      "operation_ids": [
+        "calendar.settings.list",
+        "calendar.settings.get",
+        "calendar.settings.watch",
+        "calendar.calendars.delete",
+        "calendar.calendars.clear"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 4,
+      "operation_ids": [
+        "sheets.spreadsheets.sheets.copyTo",
+        "sheets.spreadsheets.developerMetadata.get",
+        "sheets.spreadsheets.values.get",
+        "sheets.spreadsheets.values.batchGet",
+        "sheets.spreadsheets.values.clear"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 8,
+      "operation_ids": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.clear",
+        "sheets.spreadsheets.values.batchClear",
+        "sheets.spreadsheets.values.batchClearByDataFilter",
+        "sheets.spreadsheets.values.update"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 13,
+      "operation_ids": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.append",
+        "sheets.spreadsheets.values.update",
+        "sheets.spreadsheets.values.batchUpdate",
+        "sheets.spreadsheets.values.batchUpdateByDataFilter"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 4
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 14,
+      "operation_ids": [
+        "sheets.spreadsheets.getByDataFilter",
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.batchUpdateByDataFilter",
+        "sheets.spreadsheets.values.batchUpdate",
+        "sheets.spreadsheets.values.update"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 3
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 16,
+      "operation_ids": [
+        "sheets.spreadsheets.values.append",
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.getByDataFilter",
+        "sheets.spreadsheets.batchUpdate",
+        "sheets.spreadsheets.values.batchGetByDataFilter"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 3
+    },
+    {
+      "api": "slack",
+      "index": 0,
+      "operation_ids": [
+        "admin_apps_approve",
+        "admin_apps_restrict",
+        "admin_inviteRequests_approve",
+        "apps_uninstall",
+        "admin_apps_approved_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 8,
+      "operation_ids": [
+        "admin_conversations_delete",
+        "chat_delete",
+        "chat_deleteScheduledMessage",
+        "files_comments_delete",
+        "files_delete"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 9,
+      "operation_ids": [
+        "admin_conversations_disconnectShared",
+        "files_sharedPublicURL",
+        "admin_conversations_setTeams",
+        "admin_users_assign",
+        "admin_teams_settings_setDefaultChannels"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 14,
+      "operation_ids": [
+        "admin_emoji_rename",
+        "admin_conversations_rename",
+        "conversations_rename",
+        "calls_participants_add",
+        "reactions_add"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "slack",
+      "index": 16,
+      "operation_ids": [
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_usergroups_listChannels",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_usergroups_removeChannels"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 20,
+      "operation_ids": [
+        "admin_conversations_disconnectShared",
+        "admin_teams_settings_setDefaultChannels",
+        "admin_conversations_setTeams",
+        "files_sharedPublicURL",
+        "migration_exchange"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 3
+    },
+    {
+      "api": "slack",
+      "index": 21,
+      "operation_ids": [
+        "admin_conversations_unarchive",
+        "conversations_unarchive",
+        "admin_usergroups_addChannels",
+        "admin_usergroups_listChannels",
+        "admin_conversations_convertToPrivate"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 25,
+      "operation_ids": [
+        "admin_emoji_remove",
+        "emoji_list",
+        "admin_emoji_add",
+        "admin_emoji_rename",
+        "admin_emoji_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 27,
+      "operation_ids": [
+        "admin_inviteRequests_approve",
+        "admin_apps_approve",
+        "admin_inviteRequests_deny",
+        "admin_inviteRequests_list",
+        "admin_inviteRequests_approved_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 36,
+      "operation_ids": [
+        "admin_teams_settings_info",
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon",
+        "admin_teams_settings_setName",
+        "calls_info"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 41,
+      "operation_ids": [
+        "admin_teams_settings_setName",
+        "api_test",
+        "auth_test",
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 43,
+      "operation_ids": [
+        "admin_usergroups_addTeams",
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_usergroups_listChannels"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 45,
+      "operation_ids": [
+        "admin_usergroups_removeChannels",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_addChannels",
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_usergroups_listChannels"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 46,
+      "operation_ids": [
+        "admin_users_assign",
+        "admin_users_setRegular",
+        "admin_users_setOwner",
+        "migration_exchange",
+        "admin_users_setAdmin"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 50,
+      "operation_ids": [
+        "admin_users_session_invalidate",
+        "admin_users_session_reset",
+        "dnd_endDnd",
+        "rtm_connect",
+        "team_integrationLogs"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 52,
+      "operation_ids": [
+        "admin_users_setAdmin",
+        "admin_users_remove",
+        "admin_users_list",
+        "admin_users_setOwner",
+        "admin_users_assign"
+      ],
+      "ground_truth_in_retrieved_top5": false,
+      "ground_truth_substituted": true,
+      "retriever_rank_of_ground_truth": 6
+    },
+    {
+      "api": "slack",
+      "index": 54,
+      "operation_ids": [
+        "admin_users_setOwner",
+        "admin_teams_owners_list",
+        "admin_users_setAdmin",
+        "admin_users_setRegular",
+        "admin_users_remove"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 55,
+      "operation_ids": [
+        "admin_users_setRegular",
+        "admin_users_setOwner",
+        "admin_users_setAdmin",
+        "admin_users_remove",
+        "admin_users_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 57,
+      "operation_ids": [
+        "apps_event_authorizations_list",
+        "stars_list",
+        "reactions_list",
+        "conversations_history",
+        "files_info"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 61,
+      "operation_ids": [
+        "apps_permissions_scopes_list",
+        "apps_permissions_users_list",
+        "apps_permissions_request",
+        "apps_permissions_users_request",
+        "apps_permissions_resources_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 64,
+      "operation_ids": [
+        "apps_uninstall",
+        "oauth_access",
+        "oauth_token",
+        "oauth_v2_access",
+        "admin_apps_approve"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 76,
+      "operation_ids": [
+        "chat_getPermalink",
+        "conversations_replies",
+        "chat_postMessage",
+        "chat_unfurl",
+        "chat_meMessage"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 79,
+      "operation_ids": [
+        "chat_meMessage",
+        "chat_deleteScheduledMessage",
+        "conversations_close",
+        "chat_scheduleMessage",
+        "chat_postMessage"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 5
+    },
+    {
+      "api": "slack",
+      "index": 80,
+      "operation_ids": [
+        "chat_scheduleMessage",
+        "chat_deleteScheduledMessage",
+        "chat_scheduledMessages_list",
+        "chat_meMessage",
+        "chat_getPermalink"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 84,
+      "operation_ids": [
+        "conversations_archive",
+        "admin_conversations_archive",
+        "admin_conversations_getConversationPrefs",
+        "admin_conversations_setConversationPrefs",
+        "admin_conversations_delete"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 87,
+      "operation_ids": [
+        "conversations_history",
+        "conversations_close",
+        "conversations_open",
+        "conversations_replies",
+        "admin_conversations_getConversationPrefs"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 92,
+      "operation_ids": [
+        "conversations_leave",
+        "admin_conversations_getConversationPrefs",
+        "admin_conversations_setConversationPrefs",
+        "admin_conversations_archive",
+        "admin_conversations_delete"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 96,
+      "operation_ids": [
+        "conversations_open",
+        "conversations_close",
+        "views_open",
+        "dialog_open",
+        "chat_deleteScheduledMessage"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 98,
+      "operation_ids": [
+        "conversations_replies",
+        "chat_getPermalink",
+        "chat_scheduleMessage",
+        "chat_postMessage",
+        "chat_meMessage"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 100,
+      "operation_ids": [
+        "conversations_setTopic",
+        "conversations_setPurpose",
+        "admin_teams_settings_setDefaultChannels",
+        "admin_conversations_setConversationPrefs",
+        "admin_conversations_setTeams"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 103,
+      "operation_ids": [
+        "dnd_endDnd",
+        "dnd_info",
+        "dnd_endSnooze",
+        "dnd_setSnooze",
+        "dnd_teamInfo"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 104,
+      "operation_ids": [
+        "dnd_endSnooze",
+        "dnd_setSnooze",
+        "dnd_endDnd",
+        "calls_end",
+        "dnd_info"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 107,
+      "operation_ids": [
+        "dnd_info",
+        "dnd_teamInfo",
+        "dnd_endDnd",
+        "dnd_setSnooze",
+        "users_getPresence"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 2
+    },
+    {
+      "api": "slack",
+      "index": 108,
+      "operation_ids": [
+        "emoji_list",
+        "admin_emoji_list",
+        "admin_teams_admins_list",
+        "admin_teams_owners_list",
+        "admin_inviteRequests_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 120,
+      "operation_ids": [
+        "files_sharedPublicURL",
+        "files_revokePublicURL",
+        "usergroups_enable",
+        "files_comments_delete",
+        "files_remote_remove"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 121,
+      "operation_ids": [
+        "files_upload",
+        "files_remote_update",
+        "files_remote_add",
+        "files_remote_share",
+        "files_delete"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 126,
+      "operation_ids": [
+        "pins_add",
+        "pins_remove",
+        "pins_list",
+        "reactions_add",
+        "reactions_get"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 128,
+      "operation_ids": [
+        "pins_remove",
+        "pins_add",
+        "stars_remove",
+        "pins_list",
+        "reactions_remove"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 131,
+      "operation_ids": [
+        "reactions_list",
+        "users_list",
+        "usergroups_users_list",
+        "reactions_add",
+        "reactions_get"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 134,
+      "operation_ids": [
+        "reminders_complete",
+        "reminders_delete",
+        "reminders_info",
+        "reminders_add",
+        "reminders_list"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 143,
+      "operation_ids": [
+        "team_accessLogs",
+        "team_integrationLogs",
+        "team_info",
+        "team_billableInfo",
+        "admin_conversations_restrictAccess_listGroups"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 144,
+      "operation_ids": [
+        "team_billableInfo",
+        "team_info",
+        "team_integrationLogs",
+        "team_accessLogs",
+        "dnd_info"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 148,
+      "operation_ids": [
+        "usergroups_create",
+        "usergroups_update",
+        "usergroups_users_list",
+        "usergroups_users_update",
+        "usergroups_enable"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 152,
+      "operation_ids": [
+        "usergroups_update",
+        "usergroups_create",
+        "usergroups_users_update",
+        "usergroups_users_list",
+        "admin_emoji_rename"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 156,
+      "operation_ids": [
+        "users_deletePhoto",
+        "users_setPhoto",
+        "users_profile_set",
+        "users_profile_get",
+        "users_conversations"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 157,
+      "operation_ids": [
+        "users_getPresence",
+        "users_setPresence",
+        "rtm_connect",
+        "users_info",
+        "users_profile_get"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 161,
+      "operation_ids": [
+        "users_lookupByEmail",
+        "admin_users_invite",
+        "users_getPresence",
+        "users_profile_get",
+        "users_identity"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 163,
+      "operation_ids": [
+        "users_profile_set",
+        "dnd_info",
+        "users_profile_get",
+        "dnd_teamInfo",
+        "chat_update"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 165,
+      "operation_ids": [
+        "users_setPhoto",
+        "users_deletePhoto",
+        "users_profile_set",
+        "files_remote_update",
+        "files_remote_add"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 169,
+      "operation_ids": [
+        "views_push",
+        "views_open",
+        "views_update",
+        "views_publish",
+        "apps_permissions_users_request"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 172,
+      "operation_ids": [
+        "workflows_stepFailed",
+        "workflows_stepCompleted",
+        "workflows_updateStep",
+        "api_test",
+        "chat_deleteScheduledMessage"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    },
+    {
+      "api": "slack",
+      "index": 173,
+      "operation_ids": [
+        "workflows_updateStep",
+        "workflows_stepCompleted",
+        "workflows_stepFailed",
+        "admin_emoji_rename",
+        "chat_update"
+      ],
+      "ground_truth_in_retrieved_top5": true,
+      "ground_truth_substituted": false,
+      "retriever_rank_of_ground_truth": 1
+    }
+  ]
+}

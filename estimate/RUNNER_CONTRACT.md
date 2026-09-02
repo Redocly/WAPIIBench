@@ -4,6 +4,11 @@ One generator agent, one task, one attempt. This file is the protocol; nothing a
 is left to the runner's judgement. It is written for the operator (whoever launches the
 subagents) and for the generator agent itself, whose entire input is section 4.
 
+The operative sample is the **68 tasks** in `estimate/sample_parseable.json` — slack 52,
+google_calendar_v3 11, google_sheet_v4 5, drawn over the N = 228 parseable synthetic APIs
+(see `estimate/README.md`, "Why the population changed"). Dispatch from
+`estimate/task_manifest.json`; score with `score_driver.py --population 228`.
+
 ---
 
 ## 1. What one generator agent receives
@@ -27,8 +32,9 @@ instruction and the two paths filled in. It receives:
 
 It receives **nothing else**. In particular it is not given, and must not obtain:
 the dataset file or its path, the expected request, any spec file, the operation whitelist as a
-list, the `_surface.txt` extract, another task's prompt, another task's artifact, this
-contract's section 5, or any aggregate result.
+list, another task's prompt, another task's artifact, this contract's section 5, or any
+aggregate result. (`_surface.txt` sits in the client directory and is a plain extract of
+`client.ts`'s own `OPERATIONS` block, so reading it reveals nothing `client.ts` does not.)
 
 ### Why five operations, not one
 
@@ -88,8 +94,15 @@ field names at all. A clean compile means "well-formed", never "right".
 3. **Never read another task's** prompt, artifact, config, verdict or notes.
 4. **Never search** for the answer: no grep for the endpoint, no web lookup of the API's
    docs, no reconstructing the expected URL from memory of the API.
-5. **Do not read** `estimate/whitelists.json`, `estimate/blinding_report.json`,
-   `estimate/results/`, or section 5 of this file.
+5. **Do not read** any of the operator-only files under `estimate/`:
+   `whitelists.json`, `whitelists_parseable.json`, `blinding_report.json`,
+   `blinding_report_parseable.json`, `manifest_verification.json`, `task_manifest.json`
+   (another task's row is another task's material), `results/`, `dryrun/`, or section 5 of
+   this file. `whitelists*.json` names the ground-truth operation outright;
+   `manifest_verification.json` records, per task, whether the ground truth is the first of
+   the five operationIds a reader of `client.ts` meets — which is the answer on the tasks
+   where it is true. An agent needs exactly its own prompt file and its own client
+   directory.
 6. If the agent believes the task is ambiguous, it makes its best single choice and says so
    in its report. It does not ask for the answer and does not hedge by making two calls.
 
@@ -126,7 +139,13 @@ import { client } from './client';
 import { zodValidation } from './client.zod';
 client.configure({ fetch: globalThis.__wapiiCaptureFetch, clientHeader: false });
 client.use(zodValidation());
+client.auth.bearer('<token>');
 ```
+
+(The last line is `evaluation.SETUPS['sdk-invocation']`'s `{auth_setup}` placeholder,
+rendered by `emit_prompt._auth_setup()` from the generated client's own
+`OPERATIONS[...].security` entry — exactly as `sdk_repair_arm.assemble_prompt()` renders it
+at generation time. It is absent for operations that declare no security.)
 
 ## The typed client
 A generated TypeScript client for a FIVE-operation subset of this API is at:
@@ -181,6 +200,11 @@ evaluation.analyze(<same dir>)                                                  
 
 ### Operator checklist per task
 
+Dispatch is driven by `estimate/task_manifest.json` (built by `estimate/build_manifest.py`,
+checked by `estimate/verify_manifest.py`). One row per task; a row carries only the task id,
+api, dataset index, `client_dir`, `prompt_file` and `answer_path`, so a row may be handed to
+a generator agent in full.
+
 1. `python estimate/build_clients.py --only {api}:{index}` (once; builds the 5-op client).
 2. `python estimate/emit_prompt.py {api} {index} --strict` -> hand the output to one fresh agent.
 3. Collect `estimate/work/{api}/{index}_code.ts`; record the agent's reported operation and
@@ -188,11 +212,12 @@ evaluation.analyze(<same dir>)                                                  
 4. Reject and re-run the task only for a **contract violation** (read `data/`, more than one
    call, executed the code, exceeded the repair budget). Never re-run because the answer
    looked wrong — that is the measurement.
-5. `python estimate/score_driver.py --apis {api}` when the batch is complete.
+5. `python estimate/score_driver.py --apis {api} --population 228` when the batch is
+   complete. The `--population` flag matters: the driver's default FPC is still N = 395.
 
 ### One agent per task
 
 Each task gets a **fresh** agent with no memory of any other task. Two tasks on the same API
 share nothing: not a conversation, not a scratch directory, not a summary of "how this API
 works". Otherwise task *k* is scored on knowledge earned from tasks 1..*k*-1, which is not
-what a single-shot completion does, and the sample stops being 78 independent draws.
+what a single-shot completion does, and the sample stops being 68 independent draws.

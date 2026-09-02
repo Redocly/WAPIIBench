@@ -3,7 +3,9 @@
 
 Given a task identifier (api + index) this emits, and only ever emits:
   1. the natural-language task instruction,
-  2. the starter code the arm defines (evaluation.SETUPS['sdk-invocation']),
+  2. the starter code the arm defines (evaluation.SETUPS['sdk-invocation']), with its
+     `{task}` and `{auth_setup}` placeholders rendered the way
+     `sdk_repair_arm.assemble_prompt()` renders them (see `_auth_setup`),
   3. the path to that task's FILTERED GENERATED CLIENT (5 operations),
   4. the path to the .ts artifact the generator must write.
 
@@ -42,6 +44,7 @@ import sys
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATASET_DIR = os.path.join(REPO_ROOT, "data", "synthetic")
+sys.path.insert(0, os.path.join(REPO_ROOT, "wapiibench"))
 
 EVALUATION_PY = os.path.join(REPO_ROOT, "wapiibench", "evaluation.py")
 STARTER_SETUP = "sdk-invocation"
@@ -71,6 +74,32 @@ def harness_starter(setup: str = STARTER_SETUP) -> str:
     raise KeyError("no SETUPS assignment found in evaluation.py")
 
 
+def _auth_setup(client_dir: str) -> str:
+    """Render the starter's `{auth_setup}` placeholder exactly as the arm renders it.
+
+    NECESSARY, not cosmetic. `evaluation.SETUPS['sdk-invocation']` contains an
+    `{auth_setup}` line, and `sdk_repair_arm.assemble_prompt()` substitutes it (line 798)
+    with `auth_setup_for(client_dir)` before the starter ever reaches a model. This emitter
+    reads the starter as raw text out of evaluation.py, so it has to do the same
+    substitution or the generator is handed a literal `{auth_setup}` line -- not valid
+    TypeScript, so `tsc` rejects the artifact on round 1 and the agent either burns repair
+    budget on it or deletes it, dropping the `Authorization` header that every expected
+    config in this dataset requires (see score_driver.py's AUTH_DIAGNOSTIC).
+
+    STILL BLINDED: `auth_setup_for()` derives the line from the generated client's own
+    `OPERATIONS[...].security` entry, i.e. from the API description. It never reads a task,
+    a dataset file or an expected config -- see its docstring, "GATED ON THE SPEC, NOT ON
+    THE ANSWER". Import of `sdk_repair_arm` is cheap: its module scope is stdlib-only.
+
+    Returns "" when the client has not been generated yet (non-strict emission) or when the
+    operation declares no security, which is also what the arm does.
+    """
+    if not os.path.isfile(os.path.join(client_dir, "client.ts")):
+        return ""
+    import sdk_repair_arm as arm            # stdlib-only at module scope; no GPU stack
+    return arm.auth_setup_for(client_dir)
+
+
 def _load_task_text(api: str, index: int) -> str:
     """Return ONLY the instruction string for a task. Nothing else leaves this function."""
     path = os.path.join(DATASET_DIR, api, "test_data_final.json")
@@ -94,11 +123,14 @@ def emit(api: str, index: int, work_root: str, strict: bool = False) -> dict[str
         raise FileNotFoundError(
             f"no generated client at {client_dir}; run estimate/build_clients.py first")
 
+    starter = (harness_starter()
+               .replace("{task}", task_text)
+               .replace("{auth_setup}", _auth_setup(client_dir)))
     return {
         "api": api,
         "index": index,
         "task": task_text,
-        "starter_code": harness_starter().replace("{task}", task_text),
+        "starter_code": starter,
         "starter_setup": STARTER_SETUP,
         "client_dir": client_dir,
         "client_entrypoint": os.path.join(client_dir, "client.ts"),
