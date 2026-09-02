@@ -20,7 +20,7 @@
   "excluded_apis": {
     "asana": {
       "tasks": 167,
-      "reason": "openapi_utils.parse_spec never completes within the run budget (167 synthetic tasks, therefore unscoreable)"
+      "reason": "openapi_utils.parse_spec does not complete (timed out at 300 s, and again at 900 s) -- 167 synthetic tasks, therefore unscoreable"
     }
   },
   "dataset_population_total": 395,

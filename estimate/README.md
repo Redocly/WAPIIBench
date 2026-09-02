@@ -14,7 +14,8 @@ it can never go stale against a concurrently edited file).
 
 | File | Role |
 |---|---|
-| `check_parse_support.py` | which specs the SCORING path can parse; writes `parse_support.json`. |
+| `check_parse_support.py` | which specs the SCORING path can parse — the evidence for the population change. |
+| `parse_support.json` | its output: per API, parses / ParserError / timed out, with timings. |
 | `sampling_frame.py` | **superseded** — the original frame over all 395 tasks. Seed `20260902`. |
 | `sample.json` / `sample_meta.json` | its output: 78 `{api, index}` identifiers. Kept for the record. |
 | `sampling_frame_parseable.py` | **the operative frame** — n and allocation over the PARSEABLE APIs only (N = 228). Same seed, same conventions. |
@@ -61,9 +62,9 @@ stratum. Measured with the harness's own parser (`estimate/check_parse_support.p
 | `slack` | parses |
 | `google_calendar_v3` | parses |
 | `google_sheet_v4` | parses |
-| `asana` | **never completes** within the run budget |
-| `github_v3` | **ParserError** |
-| `npm_registry` | **ParserError** |
+| `asana` | **does not complete** — timed out at the 300 s budget `parse_support.json` records, and again in a separate 900 s run |
+| `github_v3` | **ParserError** — `Required list has not defined properties: ['encoding', 'content']` (22.7 s) |
+| `npm_registry` | **ParserError** — `Required list has not defined properties: ['upadted']` (0.9 s) |
 
 `asana` alone is 167 of the 395 synthetic tasks and was 33 of the original 78-task sample.
 Keeping the old frame and simply discarding the unscoreable draws would leave ~45 scored

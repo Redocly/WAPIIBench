@@ -74,23 +74,35 @@ def main() -> None:
     parser.add_argument("--out", default=OUT)
     args = parser.parse_args()
 
-    rows = []
+    def flush(rows: list[dict]) -> dict:
+        """Write what we have after EVERY API.
+
+        Not belt-and-braces: parsing asana costs enough memory that the checker itself has
+        been killed mid-run, and a checker that loses five good results to the sixth API's
+        crash is useless. Written incrementally, so the file always reflects the APIs
+        actually checked.
+        """
+        result = {"parser": "openapi_utils.parse_spec (openapi3-parser), as called by "
+                            "evaluation.compare()",
+                  "timeout_seconds": args.timeout,
+                  "checked": [r["api"] for r in rows],
+                  "parseable": sorted(r["api"] for r in rows if r.get("ok")),
+                  "unparseable": sorted(r["api"] for r in rows if not r.get("ok")),
+                  "detail": rows}
+        with open(args.out, "w") as file:
+            json.dump(result, file, indent=2)
+        return result
+
+    rows: list[dict] = []
+    result = flush(rows)
     for api in args.apis:
         row = check(api, args.timeout)
         rows.append(row)
+        result = flush(rows)
         status = "PARSES" if row.get("ok") else f"FAILS ({row.get('error')})"
         print(f"{api:<20} {status:<22} {row.get('seconds')}s", flush=True)
 
-    parseable = sorted(r["api"] for r in rows if r.get("ok"))
-    result = {"parser": "openapi_utils.parse_spec (openapi3-parser), as called by "
-                        "evaluation.compare()",
-              "timeout_seconds": args.timeout,
-              "parseable": parseable,
-              "unparseable": sorted(r["api"] for r in rows if not r.get("ok")),
-              "detail": rows}
-    with open(args.out, "w") as file:
-        json.dump(result, file, indent=2)
-    print(f"parseable: {parseable}")
+    print(f"parseable: {result['parseable']}")
     print(f"wrote {args.out}")
 
 

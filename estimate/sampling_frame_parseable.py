@@ -18,7 +18,7 @@ Measured with the harness's own parser (see `estimate/parse_support.json`):
     slack               parses
     google_calendar_v3  parses
     google_sheet_v4     parses
-    asana               NEVER COMPLETES (no result inside the run budget)
+    asana               DOES NOT COMPLETE (timed out at 300 s, and again at 900 s)
     github_v3           ParserError
     npm_registry        ParserError
 
@@ -105,8 +105,8 @@ RANDOM_SEED = 20260902          # same seed convention as sampling_frame.py
 # estimate/check_parse_support.py, whose output is estimate/parse_support.json.
 PARSEABLE_APIS = ("slack", "google_calendar_v3", "google_sheet_v4")
 EXCLUDED_APIS = {
-    "asana": "openapi_utils.parse_spec never completes within the run budget "
-             "(167 synthetic tasks, therefore unscoreable)",
+    "asana": "openapi_utils.parse_spec does not complete (timed out at 300 s, and again "
+             "at 900 s) -- 167 synthetic tasks, therefore unscoreable",
 }
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

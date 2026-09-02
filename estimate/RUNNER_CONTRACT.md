@@ -33,8 +33,11 @@ instruction and the two paths filled in. It receives:
 It receives **nothing else**. In particular it is not given, and must not obtain:
 the dataset file or its path, the expected request, any spec file, the operation whitelist as a
 list, another task's prompt, another task's artifact, this contract's section 5, or any
-aggregate result. (`_surface.txt` sits in the client directory and is a plain extract of
-`client.ts`'s own `OPERATIONS` block, so reading it reveals nothing `client.ts` does not.)
+aggregate result. (`_surface.txt` sits in the client directory. It is the arm's own
+how-to-call-this-client header plus a verbatim extract of `client.ts`'s `OPERATIONS` / `Ops`
+declarations -- checked: every non-header line appears verbatim in `client.ts` -- and it is
+what `sdk_repair_arm.assemble_prompt()` feeds the model as `{surface}` in a real run. So
+reading it reveals nothing `client.ts` does not.)
 
 ### Why five operations, not one
 

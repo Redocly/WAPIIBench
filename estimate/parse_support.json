@@ -1,0 +1,71 @@
+{
+  "parser": "openapi_utils.parse_spec (openapi3-parser), as called by evaluation.compare()",
+  "timeout_seconds": 300,
+  "checked": [
+    "slack",
+    "google_calendar_v3",
+    "google_sheet_v4",
+    "asana",
+    "github_v3",
+    "npm_registry"
+  ],
+  "parseable": [
+    "google_calendar_v3",
+    "google_sheet_v4",
+    "slack"
+  ],
+  "unparseable": [
+    "asana",
+    "github_v3",
+    "npm_registry"
+  ],
+  "detail": [
+    {
+      "api": "slack",
+      "seconds": 5.9,
+      "spec_bytes": 728585,
+      "ok": true,
+      "paths": 174
+    },
+    {
+      "api": "google_calendar_v3",
+      "seconds": 1.4,
+      "spec_bytes": 144457,
+      "ok": true,
+      "paths": 22
+    },
+    {
+      "api": "google_sheet_v4",
+      "seconds": 9.9,
+      "spec_bytes": 285287,
+      "ok": true,
+      "paths": 16
+    },
+    {
+      "api": "asana",
+      "ok": false,
+      "error": "Timeout",
+      "message": "openapi_utils.parse_spec did not return within 300s",
+      "seconds": 300,
+      "spec_bytes": 469371
+    },
+    {
+      "api": "github_v3",
+      "seconds": 22.7,
+      "spec_bytes": 3037710,
+      "ok": false,
+      "error": "ParserError",
+      "message": "OpenAPI validation error: (\"Required list has not defined properties: ['content', 'encoding']\", <unset>, (), None, (), <unset>, <unset>, <unset>, (), None)",
+      "traceback_tail": "openapi_parser/resolver.py\", line 39, in resolve\n    raise ParserError(f\"OpenAPI validation error: {error}\")\nopenapi_parser.errors.ParserError: OpenAPI validation error: (\"Required list has not defined properties: ['content', 'encoding']\", <unset>, (), None, (), <unset>, <unset>, <unset>, (), None)\n"
+    },
+    {
+      "api": "npm_registry",
+      "seconds": 0.9,
+      "spec_bytes": 96227,
+      "ok": false,
+      "error": "ParserError",
+      "message": "OpenAPI validation error: (\"Required list has not defined properties: ['upadted']\", <unset>, (), None, (), <unset>, <unset>, <unset>, (), None)",
+      "traceback_tail": "st-packages/openapi_parser/resolver.py\", line 39, in resolve\n    raise ParserError(f\"OpenAPI validation error: {error}\")\nopenapi_parser.errors.ParserError: OpenAPI validation error: (\"Required list has not defined properties: ['upadted']\", <unset>, (), None, (), <unset>, <unset>, <unset>, (), None)\n"
+    }
+  ]
+}
