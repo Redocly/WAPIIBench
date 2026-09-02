@@ -224,23 +224,149 @@ USE_ZOD = True            # zod REQUEST validation is on (see the note below).
 
 
 # --------------------------------------------------------------------------------------- #
-# Step 1 — spec filtering
+# Step 1 — operation selection (retrieval) and spec filtering
 # --------------------------------------------------------------------------------------- #
 
-def select_operation_ids(spec_file: str, task: str) -> list[str]:
-    """Choose which operationId(s) the task's client should expose.
+WHITELIST_SIZE = 5   # = the paper's RAG `num_chunks`; see select_operation_ids().
 
-    THIS IS THE ARM'S RETRIEVAL STEP AND IS STILL UNBOUND. It must come from the RAG
-    retriever (or another model-visible signal) — NOT from the task's expected config, which
-    is ground truth and would leak the answer into the generated client.
+# The retrieval stand-in and its precomputed whitelists live in `estimate/`, outside the
+# importable `wapiibench/` package, so they are loaded by path rather than by `import`.
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RETRIEVAL_STANDIN = os.path.join(REPO_ROOT, "estimate", "retrieval_standin.py")
+PRECOMPUTED_WHITELISTS = os.path.join(REPO_ROOT, "estimate", "whitelists.json")
 
-    The offline verification harness passes `operation_ids` to filter_spec() explicitly, so
-    the non-model half can be exercised without this binding.
+_retrieval_module = None
+_retriever_cache: dict[str, object] = {}
+_precomputed_cache: dict[str, dict] | None = None
+
+
+def _load_retrieval_standin():
+    """Import `estimate/retrieval_standin.py` by path (it is not on sys.path)."""
+    global _retrieval_module
+    if _retrieval_module is None:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("wapii_retrieval_standin", RETRIEVAL_STANDIN)
+        if spec is None or spec.loader is None:
+            raise ImportError(f"cannot load the retrieval stand-in from {RETRIEVAL_STANDIN}")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        _retrieval_module = module
+    return _retrieval_module
+
+
+def _precomputed_whitelists() -> dict[str, dict]:
+    """`estimate/whitelists.json`, indexed by "<api>/<index>".
+
+    These were built OFFLINE by `retrieval_standin.build_whitelists()` for the 78-task
+    stratified sample, so a scored run reproduces exactly the candidate sets the estimate
+    used. Reused rather than recomputed for reproducibility only — the ranking function is
+    the same one `_retrieve_operation_ids()` runs live.
     """
-    # TODO(bind): reuse wapiibench.rag.retriever.Retriever to rank operations for `task`
-    # and return the top-k operationIds.
-    raise NotImplementedError(
-        "TODO(bind): bind select_operation_ids to rag.retriever (must not read task['config'])")
+    global _precomputed_cache
+    if _precomputed_cache is None:
+        table: dict[str, dict] = {}
+        if os.path.isfile(PRECOMPUTED_WHITELISTS):
+            with open(PRECOMPUTED_WHITELISTS, "r") as file:
+                payload = json.load(file)
+            for entry in payload.get("tasks", []):
+                table[f"{entry['api']}/{entry['index']}"] = entry
+        _precomputed_cache = table
+    return _precomputed_cache
+
+
+def _task_position(api: str, task: str) -> int | None:
+    """Position of a task in its per-API dataset file, matched on the task TEXT.
+
+    READS ONLY THE `task` FIELD. `whitelists.json` is keyed by (api, dataset index) while
+    `select_operation_ids()` receives the task text, so the two have to be joined somehow;
+    this joins them on the instruction string. The expected config (`task['config']`) is
+    never touched here, and must not be: the whitelist is what the model gets to see, so
+    deriving it from ground truth would make the endpoint metrics circular.
+    """
+    dataset = os.path.join(REPO_ROOT, "data", "synthetic", api, "test_data_final.json")
+    if not os.path.isfile(dataset):
+        return None
+    with open(dataset, "r") as file:
+        texts = [entry.get("task") for entry in json.load(file)]   # the `task` field ONLY
+    try:
+        return texts.index(task)
+    except ValueError:
+        return None
+
+
+def _retrieve_operation_ids(api: str, task: str, size: int) -> list[str]:
+    """Top-`size` operationIds for `task` from the BM25 stand-in retriever.
+
+    DECLARED DEVIATION from the paper, which retrieves with `all-MiniLM-L6-v2` embeddings
+    plus a CrossEncoder reranker (`wapiibench/rag/retriever.py`); those weights are
+    downloaded from huggingface.co, which network policy blocks in this environment. The
+    stand-in is lexical (BM25 over each operation's path, method, operationId, tags, summary,
+    description, parameter names and request-body property names) and measured on the 78-task
+    sample at top-1 0.795 / top-5 0.987 against the paper's 0.757 / 0.952 — inflated, because
+    the synthetic tasks were generated FROM these specs, so lexical overlap is unusually
+    high. See estimate/README.md and estimate/retrieval_standin.py.
+
+    The task TEXT is the only input. No expected config, no ground truth.
+    """
+    standin = _load_retrieval_standin()
+    retriever = _retriever_cache.get(api)
+    if retriever is None:
+        retriever = standin.Retriever(api)
+        _retriever_cache[api] = retriever
+    return retriever.rank(task)[:size]
+
+
+def select_operation_ids(spec_file: str, task: str, size: int = WHITELIST_SIZE) -> list[str]:
+    """Choose which operationIds the task's client is generated from — THE ARM'S RETRIEVAL STEP.
+
+    Bound to the BM25 retrieval stand-in (`estimate/retrieval_standin.py`), NOT to the task's
+    expected config: filtering the client down to the answer would hand the model the endpoint
+    for free and make the url/method verdicts correct by construction. Nothing in this
+    function or its helpers reads `task['config']`; the argument is the instruction string,
+    so the ground truth is not even in scope.
+
+    Two paths, in order:
+      1. a PRECOMPUTED whitelist from `estimate/whitelists.json` when one exists for this task
+         (matched by api + the task's position in its dataset file, joined on the task text),
+         so a scored run reproduces the estimate's candidate sets exactly;
+      2. otherwise the retriever is run LIVE and its top-`size` is used.
+
+    GROUND-TRUTH GUARANTEE, AND WHERE IT DOES AND DOES NOT APPLY (a stated limitation of the
+    estimate, not a trick — kept visible here on purpose):
+    `retrieval_standin.build_whitelists()` guarantees the ground-truth operation is in the
+    precomputed whitelist: when the retriever's top-5 missed it (1 of 78 sampled tasks) the
+    ground truth was SUBSTITUTED in and the four best distractors kept. That is a favourable
+    bias — on such a task the model is handed a candidate set a real end-to-end pipeline
+    would not have produced — so every substitution is logged at WARNING here and recorded
+    per task in `whitelists.json` (`ground_truth_substituted`). Path 2 CANNOT offer that
+    guarantee, because checking it means reading the expected config; a live whitelist is
+    therefore the retriever's honest top-`size` and may simply not contain the right
+    operation, in which case the task is unsolvable and scores wrong. That asymmetry is
+    logged too.
+
+    :param spec_file: the API's spec path; its basename identifies the API.
+    :param task: the task's natural-language instruction. The ONLY task input.
+    :return: `size` operationIds (fewer only if the spec has fewer).
+    """
+    api = os.path.splitext(os.path.basename(spec_file))[0]
+
+    position = _task_position(api, task)
+    entry = _precomputed_whitelists().get(f"{api}/{position}") if position is not None else None
+    if entry is not None:
+        if entry.get("ground_truth_substituted"):
+            logger.warning(
+                "%s[%s]: precomputed whitelist has the GROUND-TRUTH OPERATION SUBSTITUTED IN "
+                "(the stand-in retriever missed it); favourable bias, see whitelists.json",
+                api, position)
+        operation_ids = list(entry["operation_ids"])[:size]
+        logger.info("%s[%s]: whitelist from estimate/whitelists.json: %s",
+                    api, position, operation_ids)
+        return operation_ids
+
+    operation_ids = _retrieve_operation_ids(api, task, size)
+    logger.info("%s: whitelist retrieved live (BM25 stand-in, no ground-truth guarantee): %s",
+                api, operation_ids)
+    return operation_ids
 
 
 def filter_spec(spec_file: str, api: str, task: str, out_path: str,
@@ -294,6 +420,189 @@ def filter_spec(spec_file: str, api: str, task: str, out_path: str,
     with open(out_path, "w") as file:
         json.dump(config, file, indent=2)
     return out_path
+
+
+# --------------------------------------------------------------------------------------- #
+# Step 1b — the SPEC-DECLARED parameter types the capture shim coerces with
+# --------------------------------------------------------------------------------------- #
+#
+# WHY THIS EXISTS (the scoring handicap it removes):
+# `mock.js` reads `config.params` straight off the axios config object, so an axios answer is
+# logged with the JavaScript type the model wrote: `{ params: { limit: 100 } }` -> the NUMBER
+# 100. A generated fetch client has no such object — every parameter is serialized into the
+# URL — so `capture_shim.js` can only recover the STRING "100", and `_compare_configs`
+# (`actual_value == expected_value`) then scores a perfectly correct SDK answer
+# INCORRECT_VALUE. Measured: 51 of 395 synthetic tasks (43 int, 6 bool, 2 list, 1 float) and
+# 2 of 28 real-world tasks have a non-string expected query value.
+#
+# THE FIX AND ITS ONE HARD RULE: the shim coerces each captured query value back to the type
+# THE SPEC DECLARES FOR THAT PARAMETER. The type source is this table, built here from the
+# OpenAPI description's `parameters[].schema.type` and nothing else. It is NOT derived from
+# the task's expected config and NOT from any dataset file — reading the ground truth to
+# decide a type would make the benchmark circular (a wrong value would be coerced into
+# whatever shape makes it compare equal). `param_types_from_spec()` takes a spec path and an
+# operationId whitelist; it has no way to reach a task, which is the point.
+#
+# `evaluation.py` is untouched: the comparison still requires exact equality, and the dataset
+# still holds its original typed values. Both of the other candidate fixes (loosening
+# `_compare_configs`, or normalizing the dataset to strings) would rescore every arm the
+# paper published, including the axios baselines.
+
+PARAM_TYPES_NAME = "wapii_param_types.json"
+PARAM_TYPES_SOURCE = "openapi:parameters[].schema.type"
+
+
+def _deref(node: object, root: dict, depth: int = 0) -> object:
+    """Resolve local ($ref -> #/...) references, one hop at a time, bounded."""
+    while isinstance(node, dict) and "$ref" in node and depth < 8:
+        ref = node["$ref"]
+        if not isinstance(ref, str) or not ref.startswith("#/"):
+            return node
+        target: object = root
+        for part in ref[2:].split("/"):
+            part = part.replace("~1", "/").replace("~0", "~")
+            if not isinstance(target, dict) or part not in target:
+                return node
+            target = target[part]
+        node, depth = target, depth + 1
+    return node
+
+
+def _declared_type(schema: object, root: dict) -> tuple[str | None, str | None]:
+    """The type a parameter's schema DECLARES, or (None, reason) when it declares none.
+
+    Deliberately conservative — every "reason" below means the shim leaves the captured
+    string exactly as it is and records why:
+      * no schema at all (a `content`-negotiated parameter);
+      * no `type` keyword, and no `oneOf`/`anyOf`/`allOf` whose branches agree on one type;
+      * an OpenAPI 3.1 type UNION, unless it is a single type plus `null` (nullable), which
+        resolves to that type;
+      * `object`, whose wire form depends on `style`/`explode` in ways a captured string
+        cannot be reversed through.
+    """
+    schema = _deref(schema, root)
+    if not isinstance(schema, dict):
+        return None, "parameter declares no schema (content-negotiated or schema-less)"
+
+    declared = schema.get("type")
+    if isinstance(declared, list):
+        non_null = [t for t in declared if t != "null"]
+        if len(non_null) != 1:
+            return None, f"unresolvable type union {declared!r}"
+        declared = non_null[0]
+
+    if declared is None:
+        branches = schema.get("oneOf") or schema.get("anyOf") or schema.get("allOf")
+        if not isinstance(branches, list) or not branches:
+            return None, "schema declares no type"
+        types = set()
+        for branch in branches:
+            branch = _deref(branch, root)
+            if isinstance(branch, dict) and isinstance(branch.get("type"), str):
+                types.add(branch["type"])
+        types.discard("null")
+        if len(types) != 1:
+            return None, f"unresolvable composed schema (branch types {sorted(types)!r})"
+        declared = types.pop()
+
+    if not isinstance(declared, str):
+        return None, f"unrecognized type {declared!r}"
+    if declared == "object":
+        return None, "object-valued parameter (serialization not reversible from the URL)"
+    return declared, None
+
+
+def _param_entry(param: dict, root: dict) -> dict:
+    """One parameter's spec-declared type plus its serialization hints."""
+    declared, reason = _declared_type(param.get("schema"), root)
+    style = param.get("style") or ("form" if param.get("in") == "query" else "simple")
+    explode = param.get("explode")
+    if explode is None:
+        explode = style == "form"          # the OpenAPI default for `form`
+    entry: dict[str, object] = {"declared_type": declared, "style": style,
+                                "explode": bool(explode)}
+    if declared == "array":
+        items_type, items_reason = _declared_type(
+            (_deref(param.get("schema"), root) or {}).get("items"), root)
+        entry["items_declared_type"] = items_type
+        if items_reason:
+            entry["items_unresolved_reason"] = items_reason
+    if reason:
+        entry["unresolved_reason"] = reason
+    return entry
+
+
+def param_types_from_spec(spec_file: str, operation_ids: list[str] | None = None) -> dict:
+    """Build the spec-declared parameter-type table the capture shim coerces with.
+
+    SPEC-DRIVEN BY CONSTRUCTION: the only inputs are the OpenAPI file and (optionally) the
+    operationId whitelist the client was generated from. No dataset, no expected config.
+
+    :param operation_ids: restrict the table to these operationIds (the task's whitelist).
+                          ``None`` includes every operation in the spec.
+    :return: ``{"source", "spec", "operations": [{operation_id, method, path, servers,
+             query: {name: entry}, path_params: {name: entry}}]}``
+    """
+    import yaml   # lazy: keeps module-scope imports stdlib-only (see the module docstring)
+
+    with open(spec_file, "r") as file:
+        root = yaml.safe_load(file)
+
+    wanted = set(operation_ids) if operation_ids else None
+    default_servers = [s.get("url", "") for s in (root.get("servers") or []) if isinstance(s, dict)]
+    methods = ("get", "put", "post", "delete", "options", "head", "patch", "trace")
+
+    operations = []
+    for path, path_item in (root.get("paths") or {}).items():
+        path_item = _deref(path_item or {}, root)
+        if not isinstance(path_item, dict):
+            continue
+        shared = path_item.get("parameters") or []
+        for method in methods:
+            operation = path_item.get(method)
+            if not isinstance(operation, dict):
+                continue
+            operation_id = operation.get("operationId")
+            if wanted is not None and operation_id not in wanted:
+                continue
+            servers = [s.get("url", "") for s in (operation.get("servers") or [])
+                       if isinstance(s, dict)] or default_servers
+            # Operation-level parameters override path-level ones with the same (name, in).
+            merged: dict[tuple[str, str], dict] = {}
+            for param in list(shared) + list(operation.get("parameters") or []):
+                param = _deref(param, root)
+                if not isinstance(param, dict) or not param.get("name"):
+                    continue
+                merged[(param["name"], param.get("in", ""))] = param
+            record = {"operation_id": operation_id, "method": method, "path": path,
+                      "servers": servers, "query": {}, "path_params": {}}
+            for (name, location), param in merged.items():
+                if location == "query":
+                    record["query"][name] = _param_entry(param, root)
+                elif location == "path":
+                    record["path_params"][name] = _param_entry(param, root)
+            operations.append(record)
+
+    return {"source": PARAM_TYPES_SOURCE,
+            "spec": os.path.abspath(spec_file),
+            "note": "Declared parameter types, read from the OpenAPI description ONLY. "
+                    "Never from a task, its expected config, or any dataset file.",
+            "operations": operations}
+
+
+def write_param_types(spec_file: str, client_dir: str,
+                      operation_ids: list[str] | None = None) -> str:
+    """Write `param_types_from_spec()` next to the generated client, where the shim finds it.
+
+    `capture_shim.js` runs with `cwd` set to the client dir (see execute_sdk_repair), so it
+    reads this file by its fixed name. If it is absent the shim coerces NOTHING and says so
+    in the captured config's `_wapii_coercion` block.
+    """
+    os.makedirs(client_dir, exist_ok=True)
+    path = os.path.join(client_dir, PARAM_TYPES_NAME)
+    with open(path, "w") as file:
+        json.dump(param_types_from_spec(spec_file, operation_ids), file, indent=2)
+    return path
 
 
 # --------------------------------------------------------------------------------------- #
@@ -658,11 +967,18 @@ def generate_sdk_repair(model_name: str, setup: str, setting: str, prompt_file: 
         spec_file = os.path.join("openapi", "real_world_specs", f"{task['api']}.yaml")
 
         client_dir = os.path.join(output_dir, f"{index:04d}_client")
+        # The whitelist is selected here rather than inside filter_spec() so that the same
+        # list can also drive the parameter-type table below, and so that it is logged.
+        operation_ids = select_operation_ids(spec_file, task["task"])
         redocly_config = filter_spec(spec_file, task["api"], task["task"],
-                                     os.path.join(client_dir, "redocly.yaml"))
+                                     os.path.join(client_dir, "redocly.yaml"),
+                                     operation_ids=operation_ids)
         _entry, surface = generate_client(redocly_config, client_dir)
         write_tsconfig(client_dir)
         write_task_globals(client_dir, task)
+        # Spec-declared parameter types for the capture shim's coercion pass. Built from the
+        # spec and the whitelist only -- `task` is not passed and must not be.
+        write_param_types(spec_file, client_dir, operation_ids=operation_ids)
         auth_setup = auth_setup_for(client_dir)
 
         code, attempts, diagnostics, tokens = repair_loop(
@@ -764,6 +1080,26 @@ def execute_sdk_repair(code_dir: str, node: str, test_data_file: str | None = No
         if not os.path.isdir(client_dir):
             _fail()  # no generated client for this task -> nonexecutable
             continue
+
+        # The shim coerces captured query values back to their SPEC-DECLARED types and reads
+        # those types from wapii_param_types.json in the client dir. It is normally written
+        # when the client is generated; a client built before this pass existed (or by a
+        # driver that does not call write_param_types) has none, in which case write it now
+        # if the task tells us which API it belongs to. Without it the shim coerces nothing
+        # and records that in the config's `_wapii_coercion` block -- i.e. the old
+        # everything-is-a-string behaviour, never a crash.
+        param_types_file = os.path.join(client_dir, PARAM_TYPES_NAME)
+        task_api = (test_data[int(index)].get("api") if test_data else None)
+        if not os.path.isfile(param_types_file) and task_api:
+            spec_file = os.path.join(REPO_ROOT, "openapi", "real_world_specs", f"{task_api}.yaml")
+            if os.path.isfile(spec_file):
+                write_param_types(spec_file, client_dir)
+            else:
+                logger.warning("no spec for api %r: captured query values stay strings", task_api)
+        elif not os.path.isfile(param_types_file):
+            logger.warning(
+                "%s: no %s beside the client, so captured query values stay strings and a "
+                "non-string expected value cannot match", client_dir, PARAM_TYPES_NAME)
 
         # Place the candidate next to client.ts so `./client` resolves under tsc and node.
         exec_ts = os.path.join(client_dir, "_exec_code.ts")

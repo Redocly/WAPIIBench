@@ -10,6 +10,12 @@ measuring the wrong thing.
 
 Each case also carries deliberately broken variants so the negative controls are checked too:
   * `wrong_value`   — a correct-shaped call with one wrong parameter value (must score wrong)
+  * `wrong_typed_value` — a wrong value of the RIGHT DECLARED TYPE (a wrong integer, a
+                      flipped boolean, a wrong array item). These are the controls for the
+                      shim's spec-driven type coercion: coercion must restore the type
+                      without ever restoring correctness, so each of these must still score
+                      wrong AFTER coercion. If one of them turns `correct`, the coercion is
+                      hiding real errors and the fix is invalid.
   * `invalid_value` — a value tsc accepts but the spec forbids (must be rejected by zod)
   * `bad_code`      — a bad method name + a wrong-typed argument (must fail `tsc`, feeding the
                       repair loop)
@@ -89,6 +95,12 @@ CASES = [
         "wrong_value": """client.sheets_spreadsheets_get({
   path: { spreadsheetId: '<spreadsheetId>' }, query: { includeGridData: false } });
 """,
+        # Right declared type (boolean), wrong value: expected `true`, sent `false`. With
+        # coercion the captured value is the BOOLEAN false, so this can only score correct if
+        # coercion is doing something it must never do.
+        "wrong_typed_value": """client.sheets_spreadsheets_get({
+  path: { spreadsheetId: '<spreadsheetId>' }, query: { includeGridData: false } });
+""",
     },
     {
         "name": "google_sheet_v4/sheets.spreadsheets.create (POST, JSON body, zod request schema)",
@@ -130,6 +142,10 @@ CASES = [
         "operation_ids": ["admin_apps_approved_list"],
         "correct": "client.admin_apps_approved_list({ query: { team_id: 'T12345678', limit: 100 } });\n",
         "wrong_value": "client.admin_apps_approved_list({ query: { team_id: 'T00000000', limit: 100 } });\n",
+        # Right declared type (integer), wrong value: expected limit 100, sent 42. Everything
+        # else is correct, so this isolates the coerced value.
+        "wrong_typed_value":
+            "client.admin_apps_approved_list({ query: { team_id: 'T12345678', limit: 42 } });\n",
     },
     {
         "name": "youtube_data_v3/youtube.search.list (REAL WORLD, query params + definitions)",
@@ -150,10 +166,15 @@ CASES = [
         "wrong_value": """client.youtube_search_list({ query: {
   part: ['snippet'], key: 'AIzaSyAPs3iCpnQcI6vMxCWR2JdZa1mcSTkemfU', q: 'not-the-term' } });
 """,
+        # Right declared type (array of string, style form + explode), wrong item: expected
+        # part "snippet", sent "channel". Exercises the array branch of the coercion.
+        "wrong_typed_value": """client.youtube_search_list({ query: {
+  part: ['channel'], key: 'AIzaSyAPs3iCpnQcI6vMxCWR2JdZa1mcSTkemfU', q: searchTerm } });
+""",
     },
 ]
 
-VARIANTS = ("correct", "wrong_value", "invalid_value")
+VARIANTS = ("correct", "wrong_value", "wrong_typed_value", "invalid_value")
 
 
 class StubModel:
@@ -227,13 +248,17 @@ def build_case_dir(case: dict, variant: str, root: str, redocly: str) -> str | N
     client_dir = os.path.join(code_dir, f"{case['pos']:04d}_client")
     os.makedirs(client_dir, exist_ok=True)
 
+    spec_file = os.path.join("openapi", "real_world_specs", f"{case['api']}.yaml")
     config = arm.filter_spec(
-        os.path.join("openapi", "real_world_specs", f"{case['api']}.yaml"),
-        case["api"], task["task"], os.path.join(client_dir, "redocly.yaml"),
+        spec_file, case["api"], task["task"], os.path.join(client_dir, "redocly.yaml"),
         operation_ids=case["operation_ids"])
     arm.generate_client(config, client_dir, redocly_bin=redocly)
     arm.write_tsconfig(client_dir)
     arm.write_task_globals(client_dir, task)
+    # The spec-declared parameter types the capture shim coerces query values with. Built
+    # from the SPEC and the operationId whitelist only: the task and its expected config are
+    # deliberately not passed (see sdk_repair_arm.param_types_from_spec).
+    arm.write_param_types(spec_file, client_dir, operation_ids=case["operation_ids"])
 
     node_modules = os.environ.get("WAPII_NODE_MODULES")
     if node_modules and not os.path.exists(os.path.join(client_dir, "node_modules")):

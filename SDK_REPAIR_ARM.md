@@ -19,10 +19,11 @@ originally written against. Sections that changed are marked **UPDATED 2026-09-0
 | File | Change |
 |------|--------|
 | `wapiibench/sdk_repair_arm.py` | **new** — the arm: filter spec → generate-client → prompt → generate → tsc → repair loop → execute. Stdlib-only at import scope; heavy repo imports are lazy. |
-| `wapiibench/capture_shim.js` | **new** — request capture at the `fetch` layer, injected AS the client's `fetch` option. Emits the same `{index}_config.json` shape as `mock.js`. |
+| `wapiibench/capture_shim.js` | **new** — request capture at the `fetch` layer, injected AS the client's `fetch` option. Emits the same `{index}_config.json` shape as `mock.js`, plus a spec-driven coercion pass that puts the declared type back on captured query values (`coerceParamsFromSpecDeclaredTypes`) and an `_wapii_coercion` audit key. |
 | `resources/sdk_code_generation_prompt.md` | **new** — SDK prompt template (the default one literally says "write a single call to Axios"). Adds `{{surface}}` and `{{error_feedback}}` placeholders. |
 | `wapiibench/evaluation.py` | **edited** (4 additive edits) — `SETTINGS` += `'sdk-repair'`; `SETUPS` += `sdk-invocation`/`sdk-createclient`; early dispatch in `generate()`; `.ts` branch in `execute()`. |
-| `wapiibench/sdk_repair_verify.py` | **new** — offline verification of the non-model half: hand-written ideal SDK answers pushed through `generate_client -> tsc -> capture -> compare -> analyze`, plus wrong-value and invalid-value negative controls. No model involved. |
+| `wapiibench/sdk_repair_verify.py` | **new** — offline verification of the non-model half: hand-written ideal SDK answers pushed through `generate_client -> tsc -> capture -> compare -> analyze`, plus wrong-value, wrong-value-of-the-right-declared-type and invalid-value negative controls. No model involved. |
+| `estimate/` | **new (a parallel agent's work, committed unchanged)** — the blinded agent-as-generator estimate: sampling frame, the BM25 retrieval stand-in and its precomputed whitelists, per-task client builder, blinded prompt emitter, leakage scan, scoring driver. `select_operation_ids` now reads `estimate/retrieval_standin.py` and `estimate/whitelists.json`. |
 
 Scoring is **reused unchanged**: `compare()` / `_compare_configs()` / `_add_path_params()` /
 `analyze()` / `analyze_all()` all consume the same `{index}_config.json`.
@@ -177,7 +178,10 @@ export REDOCLY_TELEMETRY=off      # generate_client() also sets this for its sub
 `zod` is a real runtime dependency of the generated `*.zod.ts`, and the langchain/chromadb/
 sentence-transformers group is **not optional** despite what the README says: `evaluation.py`
 imports `rag.retriever` at module scope, so `import evaluation` fails without them even for a
-run that uses no RAG.
+run that uses no RAG. `pyyaml` is now load-bearing for the arm itself as well: both
+`select_operation_ids` (through `estimate/retrieval_standin.py`) and
+`param_types_from_spec()` read the spec with `yaml.safe_load` — lazily, so module-scope
+imports stay stdlib-only.
 
 Pair the SDK setup with the SDK setting:
 
@@ -200,12 +204,39 @@ PYTHONPATH=wapiibench python3 wapiibench/sdk_repair_verify.py \
 
 ## Remaining blockers to a first run
 
-1. **Retrieval binding (`select_operation_ids`)** — still `NotImplementedError`. The arm needs
-   the whitelist of operationIds per task to come from `rag.retriever`, **not** from the
-   task's expected config, which is ground truth: filtering the client by the answer would
-   hand the model the endpoint for free and invalidate the endpoint metrics. This is the one
-   remaining functional gap; `sdk_repair_verify.py` passes the whitelist explicitly so the
-   rest of the pipeline can be exercised without it.
+1. ~~**Retrieval binding (`select_operation_ids`)**~~ — **DONE 2026-09-02, with a declared
+   deviation.** `select_operation_ids(spec_file, task)` now returns a **five**-operation
+   whitelist (five = the paper's RAG `num_chunks`; one operation would hand the model the
+   endpoint, since the synthetic set has exactly one task per operation) and it is driven by
+   the task's instruction TEXT only — never by `task['config']`, which is ground truth:
+   filtering the client by the answer would hand the model the endpoint for free and
+   invalidate the endpoint metrics. Two paths, in this order:
+   * a **precomputed** whitelist from `estimate/whitelists.json` when one exists for the task
+     (78-task stratified sample), matched on api + the task's position in its dataset file,
+     joined on the task text — reused so a scored run reproduces the estimate's candidate
+     sets exactly;
+   * otherwise the retriever runs **live** and its top five is used.
+
+   **DEVIATION FROM THE PAPER (do not report this as the paper's retriever).** The paper's
+   `rag.retriever` uses `all-MiniLM-L6-v2` embeddings plus a `sentence_transformers`
+   CrossEncoder reranker; those weights come from huggingface.co, which network policy blocks
+   in this environment. `estimate/retrieval_standin.py` is a pure-Python **BM25** over each
+   operation's path, method, operationId, tags, summary, description, parameter names and
+   request-body property names. Measured on the 78-task sample: **top-1 0.795, top-5 0.987**
+   vs. the paper's reported 0.757 / 0.952 — *inflated*, because these tasks were generated
+   from these specs, so lexical overlap is unusually favourable to a lexical retriever.
+
+   **The ground-truth guarantee, and where it stops.** `retrieval_standin.build_whitelists()`
+   guarantees the ground-truth operation is present in a **precomputed** whitelist: where the
+   stand-in's top five missed it (**1 of 78** tasks, slack #52, true rank 6) the ground truth
+   was substituted in and the four best distractors kept. That behaviour is kept, and it is a
+   *favourable bias* — on such a task the model gets a candidate set a real end-to-end
+   pipeline would not have produced — so `select_operation_ids` logs every substitution at
+   WARNING and `whitelists.json` records it per task (`ground_truth_substituted`). The **live**
+   path cannot offer that guarantee, because checking it means reading the expected config; a
+   live whitelist is the retriever's honest top five and may simply not contain the right
+   operation, in which case the task is unsolvable and scores wrong. That asymmetry is logged
+   too. Both facts are limitations of the estimate, stated here rather than hidden.
 2. **Specs without `operationId`** — `filter-in` on `operationId` cannot select them
    (10 of 28 real-world tasks). Needs a different filter property for those APIs.
 3. **API keys / GPU** — unchanged: OpenAI (GPT tiers), Google/OpenRouter (Gemini); Anthropic
@@ -224,34 +255,108 @@ PYTHONPATH=wapiibench python3 wapiibench/sdk_repair_verify.py \
 Two consequences are **not** neutral between the axios arms and this one, and both were
 measured on real captured output, not reasoned about:
 
-### 1. Query and path parameter values arrive as strings, and the expected values are typed
+### 1. Query parameter values arrive as strings while the expected values are typed — **FIXED 2026-09-02, spec-driven coercion in the shim**
 
 `mock.js` reads `config.params` **off the axios config object**, and only folds the URL's
 query string in when one is present. An axios answer therefore preserves the JavaScript type
 the model wrote: `axios.get(url, { params: { limit: 50 } })` is logged as the **number** `50`.
 
 A generated fetch client has no such object: it serializes every parameter into the URL, so
-`capture_shim.js` can only recover **strings** — `"50"`. `_compare_configs` compares with
-`actual_value == expected_value`, so a perfectly correct SDK answer scores
+`capture_shim.js` could only recover **strings** — `"50"`. `_compare_configs` compares with
+`actual_value == expected_value`, so a perfectly correct SDK answer scored
 `Verdict.INCORRECT_VALUE`, and because `_analyze_sample` requires
 `arguments_correct_value == arguments_all` for a `correct` sample verdict, **the whole task
-scores wrong.**
+scored wrong.**
 
-Scope, counted over the datasets:
+Scope, counted over the datasets (per-API files, not the combined `all` file):
 
-| dataset | tasks with a non-string query/path value | value types |
+| dataset | tasks with a non-string query value | value types |
 |---|---|---|
 | synthetic (395) | **51 (12.9%)** | 43 int, 6 bool, 2 list, 1 float |
-| real-world (28) | **2 (7.1%)** | 2 int |
+| real-world (28) | **2 (7.1%)** | 2 int (both `frankerfacez_v1 / page`) |
 
-This is a **structural ~13% handicap on the synthetic set** that has nothing to do with model
-quality. It is left unfixed here deliberately: the candidate fixes each have a cost, and the
-choice belongs to whoever runs the comparison.
-  * coercing captured strings back to numbers/booleans in `capture_shim.js` would make the SDK
-    arm score a deliberately string-typed `"50"` as if the model had written `50`;
-  * comparing loosely (`str(expected) == str(actual)`) in `_compare_configs` changes scoring
-    for **every** arm, including all published results;
-  * normalizing the dataset's expected values to strings likewise re-scores every arm.
+Non-string **`path_params`**: **0 of 395 and 0 of 28.** There is nothing to fix there, and
+nothing is attempted — see "what is deliberately left alone" below.
+
+#### The fix
+
+The capture shim now puts the type back **using the type the OpenAPI description declares for
+that parameter**:
+
+* `sdk_repair_arm.param_types_from_spec(spec_file, operation_ids)` reads the spec's
+  `parameters[].schema.type` (resolving local `$ref`s, merging path-level and
+  operation-level parameters) and emits a table of declared query/path types plus each
+  parameter's `style`/`explode`. Its only inputs are **a spec path and the operationId
+  whitelist** — it cannot reach a task, let alone `task['config']`, and that is the point:
+  coercing towards the *expected* value instead of towards the *spec* would reshape a wrong
+  value into a matching one and the benchmark would be scoring itself.
+* `write_param_types()` drops that table beside the generated client as
+  `wapii_param_types.json`. It is written by `generate_sdk_repair()` at client-generation
+  time, by `sdk_repair_verify.build_case_dir()`, and, as a fallback, by
+  `execute_sdk_repair()` for a client built before this existed (when the task record names
+  its API).
+* `capture_shim.coerceParamsFromSpecDeclaredTypes()` runs after the existing mock.js-parity
+  normalization. It matches the captured `method` + query-stripped URL against the table's
+  `servers + path` templates (ties broken towards the most literal path, the same rule the
+  Python side uses), then rewrites `config.params` per the declared types.
+
+What it coerces, and nothing else:
+
+| declared type | captured `"…"` becomes |
+|---|---|
+| `integer` | a number, only when the text matches `^[+-]?\d+$` and is a safe integer |
+| `number` | a number, only when `Number()` of it is finite |
+| `boolean` | `true` / `false`, for exactly the texts `true` and `false` |
+| `array` | rebuilt from the **query string**, not from the params object — repeated keys for `explode` (the `form` default), else split on `,` / space / `\|` per `style` — then each item coerced by its declared item type |
+| `string` | left exactly as captured |
+
+**Left as the captured string, with the reason recorded** in the config's `_wapii_coercion`
+block (`coerced` / `left_as_string` / `skipped`, a key outside `evaluation.FIELD_KEYS`, so
+scoring ignores it):
+
+* the parameter is not declared for the matched operation;
+* the parameter has no `schema` at all (a `content`-negotiated parameter);
+* the schema has no `type` keyword and no `oneOf`/`anyOf`/`allOf` whose branches agree on one
+  type (a single type plus `null` **is** resolved, to that type);
+* an OpenAPI 3.1 type union that is not "one type plus null";
+* `type: object` — its wire form depends on `style`/`explode` in ways a captured string
+  cannot be reversed through;
+* the declared type is numeric or boolean but the captured text is not a literal of it
+  (e.g. `limit=notanumber` stays `"notanumber"`);
+* the value is already non-string because the mock.js empty-value rule turned `?flag` into
+  boolean `true`;
+* the captured method + URL matched no operation in the table, or the table is missing
+  entirely (then **nothing** is coerced — the old all-strings behaviour, never a crash).
+
+#### What is deliberately left alone
+
+* **`evaluation.py` and the dataset.** The comparison still demands exact equality and the
+  expected values keep their original types. The two rejected candidates —
+  `str(expected) == str(actual)` in `_compare_configs`, or normalizing the dataset to strings
+  — would rescore **every** arm, including the axios baselines the paper published.
+* **Request bodies.** A JSON body is already parsed by `JSON.parse` and carries real types; a
+  urlencoded body is string-typed on **both** sides of the comparison (mock.js parses it the
+  same way for the axios arms), so coercing it would introduce a *new* asymmetry.
+* **`path_params`.** `evaluation._add_path_params` re-derives that key by regexing the URL —
+  for the expected config too — so both sides are strings by construction; writing a typed
+  value there would be overwritten in the normal case and would compare against a string in
+  the abnormal one. The declared path types and the values extracted from the URL *are*
+  reported under `_wapii_coercion.path_values` with `applied: false`, so the omission is
+  visible rather than silent.
+* **The `X-Redocly-Client` header**, still suppressed by `clientHeader: false` in the starter
+  (section 2 below), not by touching `SPECIAL_KEYS`.
+
+#### Proven both ways (see the verification table below)
+
+* The two known-good answers that used to fail now score `correct`:
+  `google_sheet_v4 / sheets.spreadsheets.get` (`includeGridData` `"true"` -> `true`) and
+  `slack / admin_apps_approved_list` (`limit` `"100"` -> `100`).
+* Wrong values of the **right declared type** still score `wrong`: a wrong integer
+  (`limit: 42` against an expected `100`), a flipped boolean (`includeGridData: false`
+  against an expected `true`), and a wrong array item (`part: ['channel']` against an
+  expected `snippet`). These are the new `wrong_typed_value` variants in
+  `sdk_repair_verify.py`; if coercion ever turned one of them `correct` it would be hiding
+  real errors, and the fix would be invalid.
 
 ### 2. The client's own header is scored as a model-authored argument
 
@@ -331,42 +436,70 @@ Driver: `wapiibench/sdk_repair_verify.py`. For each case the ideal SDK invocatio
 `generate_client -> tsc -> capture_shim -> compare -> analyze` path. Asana is absent because
 its spec cannot be parsed for scoring (above).
 
-| # | API | operation | shape | variant | verdict |
-|---|---|---|---|---|---|
-| 1 | google_calendar_v3 | `calendar.calendars.insert` | POST, JSON body | correct | **correct** |
-| 2 | google_calendar_v3 | `calendar.calendars.insert` | POST, JSON body | wrong value | wrong |
-| 3 | google_calendar_v3 | `calendar.calendars.get` | GET, path param | correct | **correct** |
-| 4 | google_sheet_v4 | `sheets.spreadsheets.create` | POST, JSON body | correct | **correct** |
-| 5 | google_sheet_v4 | `sheets.spreadsheets.create` | POST, JSON body | wrong value | wrong |
-| 6 | google_sheet_v4 | `sheets.spreadsheets.create` | POST, JSON body | zod-invalid | nonexecutable |
-| 7 | google_sheet_v4 | `sheets.spreadsheets.get` | GET, path + bool query | correct | **wrong — see below** |
-| 8 | google_sheet_v4 | `sheets.spreadsheets.get` | GET, path + bool query | wrong value | wrong |
-| 9 | slack | `admin_apps_approve` | POST, urlencoded body | correct | **correct** |
-| 10 | slack | `admin_apps_approve` | POST, urlencoded body | wrong value | wrong |
-| 11 | slack | `admin_apps_approved_list` | GET, int query | correct | **wrong — see below** |
-| 12 | slack | `admin_apps_approved_list` | GET, int query | wrong value | wrong |
-| 13 | youtube_data_v3 (REAL WORLD) | `youtube.search.list` | GET, query + injected variable | correct | **correct** |
-| 14 | youtube_data_v3 (REAL WORLD) | `youtube.search.list` | GET, query + injected variable | wrong value | wrong |
+**RE-RUN 2026-09-02 after the spec-driven coercion fix**, with the run before the fix kept for
+comparison. The "before" column is the run recorded in the previous revision of this document
+and reproduced byte-for-byte on the re-run; "after" is the same driver with
+`coerceParamsFromSpecDeclaredTypes` active. Rows 15-17 are new negative controls added with
+the fix (`wrong_typed_value`: a wrong value of the RIGHT declared type).
+
+| # | API | operation | shape | variant | before | after |
+|---|---|---|---|---|---|---|
+| 1 | google_calendar_v3 | `calendar.calendars.insert` | POST, JSON body | correct | **correct** | **correct** |
+| 2 | google_calendar_v3 | `calendar.calendars.insert` | POST, JSON body | wrong value | wrong | wrong |
+| 3 | google_calendar_v3 | `calendar.calendars.get` | GET, path param | correct | **correct** | **correct** |
+| 4 | google_sheet_v4 | `sheets.spreadsheets.create` | POST, JSON body | correct | **correct** | **correct** |
+| 5 | google_sheet_v4 | `sheets.spreadsheets.create` | POST, JSON body | wrong value | wrong | wrong |
+| 6 | google_sheet_v4 | `sheets.spreadsheets.create` | POST, JSON body | zod-invalid | nonexecutable | nonexecutable |
+| 7 | google_sheet_v4 | `sheets.spreadsheets.get` | GET, path + bool query | correct | **wrong** (string bias) | **correct** ✅ |
+| 8 | google_sheet_v4 | `sheets.spreadsheets.get` | GET, path + bool query | wrong value | wrong | wrong |
+| 9 | slack | `admin_apps_approve` | POST, urlencoded body | correct | **correct** | **correct** |
+| 10 | slack | `admin_apps_approve` | POST, urlencoded body | wrong value | wrong | wrong |
+| 11 | slack | `admin_apps_approved_list` | GET, int query | correct | **wrong** (string bias) | **correct** ✅ |
+| 12 | slack | `admin_apps_approved_list` | GET, int query | wrong value | wrong | wrong |
+| 13 | youtube_data_v3 (REAL WORLD) | `youtube.search.list` | GET, query + injected variable | correct | **correct** | **correct** |
+| 14 | youtube_data_v3 (REAL WORLD) | `youtube.search.list` | GET, query + injected variable | wrong value | wrong | wrong |
+| 15 | google_sheet_v4 | `sheets.spreadsheets.get` | GET, bool query | **wrong value, right type** (`false` vs expected `true`) | (new) | wrong ✅ |
+| 16 | slack | `admin_apps_approved_list` | GET, int query | **wrong value, right type** (`42` vs expected `100`) | (new) | wrong ✅ |
+| 17 | youtube_data_v3 (REAL WORLD) | `youtube.search.list` | GET, array query | **wrong item, right type** (`['channel']` vs expected `snippet`) | (new) | wrong ✅ |
+
+Captured values after the fix, for the rows that moved:
+
+| # | captured `params` | `_wapii_coercion.coerced` | expected |
+|---|---|---|---|
+| 7 | `{"includeGridData": true}` | `includeGridData` boolean | `true` |
+| 11 | `{"limit": 100, "team_id": "T12345678"}` | `limit` integer | `100` |
+| 15 | `{"includeGridData": false}` | `includeGridData` boolean | `true` -> `INCORRECT_VALUE` |
+| 16 | `{"limit": 42, "team_id": "T12345678"}` | `limit` integer | `100` -> `INCORRECT_VALUE` |
+| 17 | `{"part": ["channel"], …}` | `part` array of string | `"snippet"` -> `INCORRECT_VALUE` |
 
 Item by item:
 
-- **Filtered client contains only the whitelisted operation** — 14/14. Every generated
-  `OPERATIONS` map held exactly the one whitelisted operationId.
-- **Compiles under strict `tsc`** — 14/14 clean, including the zod-invalid case (which is the
+- **Filtered client contains only the whitelisted operation** — 17/17. Every generated
+  `OPERATIONS` map held exactly the one whitelisted operationId (the driver whitelists one
+  operation per case; the five-operation whitelist that a real run uses is exercised
+  separately, below).
+- **Compiles under strict `tsc`** — 17/17 clean, including the zod-invalid case (which is the
   point: `rowCount: 10.5` is a valid `number` to TypeScript).
-- **Shim captures the request and writes the config file** — 13/13 that reached the network
-  layer. The 14th is the zod-invalid case, which correctly never got there.
-- **Comparison scores a hand-written correct answer as correct** — **5 of 7 correct answers
-  scored `correct`; 2 scored `wrong`.** Both failures are the string-coercion bias, not the
-  answer:
-  - #7 captured `params.includeGridData = "true"`, expected `true` (boolean);
-  - #11 captured `params.limit = "100"`, expected `100` (integer).
-  Everything else about both requests matched — url, method, headers, other params. See
-  "Scoring: where the harness is unfair to SDK-shaped answers" above; this is the 12.9% of
-  synthetic tasks with a non-string query/path value, and it is a property of the harness, not
-  of the arm or the model.
-- **A deliberately wrong parameter value scores incorrect** — 7/7 wrong-value variants scored
-  `wrong` (never `correct`, never `illegal`).
+- **Shim captures the request and writes the config file** — 16/16 that reached the network
+  layer. The 17th is the zod-invalid case, which correctly never got there.
+- **Comparison scores a hand-written correct answer as correct** — **7 of 7 after the fix**
+  (5 of 7 before it). The two that used to fail did so purely on the string bias:
+  - #7 captured `params.includeGridData = "true"` where `true` (boolean) was expected;
+  - #11 captured `params.limit = "100"` where `100` (integer) was expected.
+  Everything else about both requests already matched — url, method, headers, other params.
+  Both now capture the coerced type and score `correct`.
+- **A deliberately wrong parameter value still scores incorrect** — 6/6 `wrong_value` variants
+  scored `wrong` (never `correct`, never `illegal`), unchanged by the fix.
+- **A wrong value of the RIGHT declared type still scores incorrect** — 3/3 (#15-17): a wrong
+  integer, a flipped boolean and a wrong array item, each with `INCORRECT_VALUE` on exactly
+  the coerced parameter and `CORRECT` on the rest. This is the control that matters: coercion
+  restores the *type* and never the *correctness*. Had any of these turned `correct`, the fix
+  would be hiding real errors and would have to be reverted.
+- **No other verdict moved.** Of the 14 pre-existing case-variants, exactly the two named
+  above changed, both from `wrong` to `correct`; the other 12 are identical before and after,
+  including the real-world case whose `part` value is now captured as `["snippet"]` and still
+  compares equal to the expected `"snippet"` (`_compare_configs` unwraps single-element lists
+  on both sides for non-`data` fields).
 - **An invalid value is rejected by zod request validation** — yes, #6. Both the valid and the
   invalid body typecheck cleanly; the invalid one throws before any network call:
   ```
@@ -378,6 +511,28 @@ Item by item:
   (`error_verdict: runtime_error`). NOTE: a zod rejection is therefore **indistinguishable in
   the results from any other runtime error** — the arm's own OPEN DECISION about a dedicated
   verdict applies here.
+
+### Operation selection, end to end, without the expected config
+
+`select_operation_ids` is bound (blocker 1 above), so the whole selection -> client ->
+answer -> score path was run without any ground truth on the selection side. Two tasks,
+neither in the 78-task precomputed sample, so both went through the **live** BM25 path:
+
+| task | retrieved whitelist (5) | operations in the generated client | captured | verdict |
+|---|---|---|---|---|
+| `slack[1]` | `admin_apps_approved_list`, `admin_inviteRequests_approved_list`, `admin_apps_restricted_list`, `admin_apps_requests_list`, `admin_apps_approve` | all 5 | `limit` coerced to integer `100` | **correct** |
+| `google_sheet_v4[1]` | `sheets.spreadsheets.get`, `sheets.spreadsheets.getByDataFilter`, `sheets.spreadsheets.batchUpdate`, `sheets.spreadsheets.values.batchGetByDataFilter`, `sheets.spreadsheets.values.batchClearByDataFilter` | all 5 | `includeGridData` coerced to boolean `true` | **correct** |
+
+The whitelist came from `filter_spec()`'s default path (`operation_ids=None` ->
+`select_operation_ids(spec_file, task['task'])`), the ideal answer was hand-written against
+the resulting **five**-operation client, and scoring ran through the harness unchanged. This
+also confirms the `matchStrategy: "any"` fix on a real multi-operation whitelist: all five
+operations reached `OPERATIONS`. The precomputed path was exercised separately
+(`google_calendar_v3[2]` -> the whitelist in `estimate/whitelists.json`; `slack[52]` -> the
+one substituted whitelist, which logs its WARNING as designed).
+
+**Still no language model.** Selection, generation of the client and scoring all run; the
+*answer* was hand-written in both rows above.
 
 ### The typecheck-repair loop
 
@@ -431,13 +586,27 @@ Driven by a stub model that replays canned completions (`sdk_repair_verify.StubM
 
 ### Not verified — be aware
 
-- **No model has ever run through this arm.** `select_operation_ids` is still
-  `NotImplementedError`, so `generate_sdk_repair` cannot run end to end; everything above
-  exercises the pipeline with hand-written answers and a stub model.
+- **No model has ever run through this arm.** `select_operation_ids` is now bound, so
+  `generate_sdk_repair` has no blocking gap left, but every answer scored so far was
+  hand-written or came from a canned stub; a real `ModelWrapper` call has never been made in
+  this arm (that needs an API key or a GPU — blocker 3).
 - **No Asana, `github_v3` or `npm_registry` task was scored**, because their specs do not
   parse. That is 42% of the synthetic set.
-- **Only 14 case-variants across 4 APIs were scored**, not a full run, and the two failures
-  found are the ones a small sample can find. A full run may surface more.
+- **Only 17 case-variants across 4 APIs were scored**, plus the 2 end-to-end selection
+  tasks — not a full run. A full run may surface more.
+- **The coercion was exercised on integer, boolean and array-of-string parameters only.**
+  `number` (float) and array-of-integer/boolean paths are implemented and unit-tested at the
+  JS level but no dataset task in the verified set uses them; the 1 float and 2 list expected
+  values in the synthetic set were not among the scored cases.
+- **`estimate/build_clients.py` does not call `write_param_types`**, so clients already built
+  under `estimate/work/` carry no type table. `execute_sdk_repair` writes one at execute time
+  only when the task record names its API (`task['api']`), which the per-API synthetic files
+  do not; rebuild those clients, or add the one-line call, before reading coercion-sensitive
+  numbers out of the estimate. Uncoerced runs are not silently wrong — the captured config's
+  `_wapii_coercion.skipped` says so — but they are the old 12.9% handicap.
+- **The BM25 retrieval stand-in is not the paper's retriever** (blocker 1). Any number
+  produced with it must carry that deviation, and the one ground-truth substitution in the
+  precomputed whitelists is a favourable bias.
 - **`--args-style` was never exercised.** `--help` documents `flat` as the default while
   `ClientConfig` documents `grouped`; the emitted `Ops` is grouped (`{ path, query, body }`)
   and the arm uses what is emitted, but the flag itself is untested.
