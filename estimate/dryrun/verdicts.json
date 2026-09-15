@@ -65,7 +65,7 @@
     },
     {
       "api": "slack",
-      "index": 0,
+      "index": 3,
       "sample_verdict": "correct",
       "error_verdict": null,
       "url_verdict": "correct",

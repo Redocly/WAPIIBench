@@ -219,6 +219,7 @@ conditions beyond "typed client vs. description text".
     arms rather than independently drawn — which is what makes a task-by-task comparison
     legitimate, and also means neither arm's absolute rate is a WAPIIBench rate.
 13. **Pre-flight evidence differs in kind.** The treatment has `dryrun/` (three hand-written
-    placeholder artifacts); the control has `verification.json` (shim/coercion plumbing, 4
-    derived cases over 2 unsampled tasks) and `score_driver_smoke.json` (the same 2 answers
-    end to end). Neither is a measurement, and they are not the same check.
+    placeholder artifacts, over 3 unsampled tasks — `estimate/run_dryrun.py` enforces that the
+    same way `verify_control.py` does); the control has `verification.json` (shim/coercion
+    plumbing, 4 derived cases over 2 unsampled tasks) and `score_driver_smoke.json` (the same 2
+    answers end to end). Neither is a measurement, and they are not the same check.
