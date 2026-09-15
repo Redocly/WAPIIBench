@@ -1,0 +1,1164 @@
+{
+  "output_mode": "split",
+  "runtime": "module",
+  "n": 68,
+  "failed": 0,
+  "tasks": [
+    {
+      "api": "google_calendar_v3",
+      "index": 1,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0001_client/client.ts",
+      "client_bytes": 12502,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.acl.delete",
+        "calendar.calendarList.delete",
+        "calendar.calendars.delete",
+        "calendar.calendars.insert",
+        "calendar.events.delete"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 5,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0005_client/client.ts",
+      "client_bytes": 14047,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.acl.delete",
+        "calendar.acl.get",
+        "calendar.acl.insert",
+        "calendar.acl.list",
+        "calendar.acl.update"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 14,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0014_client/client.ts",
+      "client_bytes": 19501,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.events.import",
+        "calendar.events.insert",
+        "calendar.events.patch",
+        "calendar.events.quickAdd",
+        "calendar.events.update"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 15,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0015_client/client.ts",
+      "client_bytes": 19820,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.events.get",
+        "calendar.events.import",
+        "calendar.events.insert",
+        "calendar.events.patch",
+        "calendar.events.update"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 17,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0017_client/client.ts",
+      "client_bytes": 22298,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.acl.watch",
+        "calendar.channels.stop",
+        "calendar.events.move",
+        "calendar.events.watch",
+        "calendar.settings.watch"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 19,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0019_client/client.ts",
+      "client_bytes": 17498,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.events.delete",
+        "calendar.events.get",
+        "calendar.events.instances",
+        "calendar.events.move",
+        "calendar.events.quickAdd"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 21,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0021_client/client.ts",
+      "client_bytes": 19475,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.events.delete",
+        "calendar.events.import",
+        "calendar.events.insert",
+        "calendar.events.patch",
+        "calendar.events.update"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 22,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0022_client/client.ts",
+      "client_bytes": 18696,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.calendars.clear",
+        "calendar.calendars.delete",
+        "calendar.events.instances",
+        "calendar.events.patch",
+        "calendar.events.update"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 23,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0023_client/client.ts",
+      "client_bytes": 17498,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.events.delete",
+        "calendar.events.get",
+        "calendar.events.instances",
+        "calendar.events.move",
+        "calendar.events.quickAdd"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 32,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0032_client/client.ts",
+      "client_bytes": 13953,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.calendarList.insert",
+        "calendar.calendarList.patch",
+        "calendar.calendarList.update",
+        "calendar.settings.get",
+        "calendar.settings.list"
+      ]
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 34,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_calendar_v3/0034_client/client.ts",
+      "client_bytes": 13494,
+      "schemas_bytes": 45611,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calendar.calendars.clear",
+        "calendar.calendars.delete",
+        "calendar.settings.get",
+        "calendar.settings.list",
+        "calendar.settings.watch"
+      ]
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 4,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_sheet_v4/0004_client/client.ts",
+      "client_bytes": 19265,
+      "schemas_bytes": 190913,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "sheets.spreadsheets.developerMetadata.get",
+        "sheets.spreadsheets.sheets.copyTo",
+        "sheets.spreadsheets.values.batchGet",
+        "sheets.spreadsheets.values.clear",
+        "sheets.spreadsheets.values.get"
+      ]
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 8,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_sheet_v4/0008_client/client.ts",
+      "client_bytes": 18804,
+      "schemas_bytes": 190913,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.batchClear",
+        "sheets.spreadsheets.values.batchClearByDataFilter",
+        "sheets.spreadsheets.values.clear",
+        "sheets.spreadsheets.values.update"
+      ]
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 13,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_sheet_v4/0013_client/client.ts",
+      "client_bytes": 20123,
+      "schemas_bytes": 190913,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.values.append",
+        "sheets.spreadsheets.values.batchUpdate",
+        "sheets.spreadsheets.values.batchUpdateByDataFilter",
+        "sheets.spreadsheets.values.update"
+      ]
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 14,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_sheet_v4/0014_client/client.ts",
+      "client_bytes": 18715,
+      "schemas_bytes": 190913,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.getByDataFilter",
+        "sheets.spreadsheets.values.batchUpdate",
+        "sheets.spreadsheets.values.batchUpdateByDataFilter",
+        "sheets.spreadsheets.values.update"
+      ]
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 16,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/google_sheet_v4/0016_client/client.ts",
+      "client_bytes": 18646,
+      "schemas_bytes": 190913,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "sheets.spreadsheets.batchUpdate",
+        "sheets.spreadsheets.get",
+        "sheets.spreadsheets.getByDataFilter",
+        "sheets.spreadsheets.values.append",
+        "sheets.spreadsheets.values.batchGetByDataFilter"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 0,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0000_client/client.ts",
+      "client_bytes": 6641,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_apps_approve",
+        "admin_apps_approved_list",
+        "admin_apps_restrict",
+        "admin_inviteRequests_approve",
+        "apps_uninstall"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 8,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0008_client/client.ts",
+      "client_bytes": 6305,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_delete",
+        "chat_delete",
+        "chat_deleteScheduledMessage",
+        "files_comments_delete",
+        "files_delete"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 9,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0009_client/client.ts",
+      "client_bytes": 6620,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_disconnectShared",
+        "admin_conversations_setTeams",
+        "admin_teams_settings_setDefaultChannels",
+        "admin_users_assign",
+        "files_sharedPublicURL"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 14,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0014_client/client.ts",
+      "client_bytes": 6074,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_rename",
+        "admin_emoji_rename",
+        "calls_participants_add",
+        "conversations_rename",
+        "reactions_add"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 16,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0016_client/client.ts",
+      "client_bytes": 7374,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_listChannels",
+        "admin_usergroups_removeChannels"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 20,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0020_client/client.ts",
+      "client_bytes": 6977,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_disconnectShared",
+        "admin_conversations_setTeams",
+        "admin_teams_settings_setDefaultChannels",
+        "files_sharedPublicURL",
+        "migration_exchange"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 21,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0021_client/client.ts",
+      "client_bytes": 7333,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_convertToPrivate",
+        "admin_conversations_unarchive",
+        "admin_usergroups_addChannels",
+        "admin_usergroups_listChannels",
+        "conversations_unarchive"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 25,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0025_client/client.ts",
+      "client_bytes": 5087,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_emoji_add",
+        "admin_emoji_list",
+        "admin_emoji_remove",
+        "admin_emoji_rename",
+        "emoji_list"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 27,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0027_client/client.ts",
+      "client_bytes": 7619,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_apps_approve",
+        "admin_inviteRequests_approve",
+        "admin_inviteRequests_approved_list",
+        "admin_inviteRequests_deny",
+        "admin_inviteRequests_list"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 36,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0036_client/client.ts",
+      "client_bytes": 6445,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_teams_settings_info",
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon",
+        "admin_teams_settings_setName",
+        "calls_info"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 41,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0041_client/client.ts",
+      "client_bytes": 6031,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_teams_settings_setDescription",
+        "admin_teams_settings_setIcon",
+        "admin_teams_settings_setName",
+        "api_test",
+        "auth_test"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 43,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0043_client/client.ts",
+      "client_bytes": 7285,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_restrictAccess_addGroup",
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_addTeams",
+        "admin_usergroups_listChannels"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 45,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0045_client/client.ts",
+      "client_bytes": 7506,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_restrictAccess_listGroups",
+        "admin_conversations_restrictAccess_removeGroup",
+        "admin_usergroups_addChannels",
+        "admin_usergroups_listChannels",
+        "admin_usergroups_removeChannels"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 46,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0046_client/client.ts",
+      "client_bytes": 6645,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_users_assign",
+        "admin_users_setAdmin",
+        "admin_users_setOwner",
+        "admin_users_setRegular",
+        "migration_exchange"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 50,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0050_client/client.ts",
+      "client_bytes": 7470,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_users_session_invalidate",
+        "admin_users_session_reset",
+        "dnd_endDnd",
+        "rtm_connect",
+        "team_integrationLogs"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 52,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0052_client/client.ts",
+      "client_bytes": 6542,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_users_assign",
+        "admin_users_list",
+        "admin_users_remove",
+        "admin_users_setAdmin",
+        "admin_users_setOwner"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 54,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0054_client/client.ts",
+      "client_bytes": 6523,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_teams_owners_list",
+        "admin_users_remove",
+        "admin_users_setAdmin",
+        "admin_users_setOwner",
+        "admin_users_setRegular"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 55,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0055_client/client.ts",
+      "client_bytes": 6598,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_users_list",
+        "admin_users_remove",
+        "admin_users_setAdmin",
+        "admin_users_setOwner",
+        "admin_users_setRegular"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 57,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0057_client/client.ts",
+      "client_bytes": 9717,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "apps_event_authorizations_list",
+        "conversations_history",
+        "files_info",
+        "reactions_list",
+        "stars_list"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 61,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0061_client/client.ts",
+      "client_bytes": 7581,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "apps_permissions_request",
+        "apps_permissions_resources_list",
+        "apps_permissions_scopes_list",
+        "apps_permissions_users_list",
+        "apps_permissions_users_request"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 64,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0064_client/client.ts",
+      "client_bytes": 6936,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_apps_approve",
+        "apps_uninstall",
+        "oauth_access",
+        "oauth_token",
+        "oauth_v2_access"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 76,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0076_client/client.ts",
+      "client_bytes": 7541,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "chat_getPermalink",
+        "chat_meMessage",
+        "chat_postMessage",
+        "chat_unfurl",
+        "conversations_replies"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 79,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0079_client/client.ts",
+      "client_bytes": 6822,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "chat_deleteScheduledMessage",
+        "chat_meMessage",
+        "chat_postMessage",
+        "chat_scheduleMessage",
+        "conversations_close"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 80,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0080_client/client.ts",
+      "client_bytes": 8070,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "chat_deleteScheduledMessage",
+        "chat_getPermalink",
+        "chat_meMessage",
+        "chat_scheduleMessage",
+        "chat_scheduledMessages_list"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 84,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0084_client/client.ts",
+      "client_bytes": 7391,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_archive",
+        "admin_conversations_delete",
+        "admin_conversations_getConversationPrefs",
+        "admin_conversations_setConversationPrefs",
+        "conversations_archive"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 87,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0087_client/client.ts",
+      "client_bytes": 9389,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_getConversationPrefs",
+        "conversations_close",
+        "conversations_history",
+        "conversations_open",
+        "conversations_replies"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 92,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0092_client/client.ts",
+      "client_bytes": 7393,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_archive",
+        "admin_conversations_delete",
+        "admin_conversations_getConversationPrefs",
+        "admin_conversations_setConversationPrefs",
+        "conversations_leave"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 96,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0096_client/client.ts",
+      "client_bytes": 6547,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "chat_deleteScheduledMessage",
+        "conversations_close",
+        "conversations_open",
+        "dialog_open",
+        "views_open"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 98,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0098_client/client.ts",
+      "client_bytes": 8112,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "chat_getPermalink",
+        "chat_meMessage",
+        "chat_postMessage",
+        "chat_scheduleMessage",
+        "conversations_replies"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 100,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0100_client/client.ts",
+      "client_bytes": 6833,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_setConversationPrefs",
+        "admin_conversations_setTeams",
+        "admin_teams_settings_setDefaultChannels",
+        "conversations_setPurpose",
+        "conversations_setTopic"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 103,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0103_client/client.ts",
+      "client_bytes": 5258,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "dnd_endDnd",
+        "dnd_endSnooze",
+        "dnd_info",
+        "dnd_setSnooze",
+        "dnd_teamInfo"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 104,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0104_client/client.ts",
+      "client_bytes": 5266,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "calls_end",
+        "dnd_endDnd",
+        "dnd_endSnooze",
+        "dnd_info",
+        "dnd_setSnooze"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 107,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0107_client/client.ts",
+      "client_bytes": 5465,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "dnd_endDnd",
+        "dnd_info",
+        "dnd_setSnooze",
+        "dnd_teamInfo",
+        "users_getPresence"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 108,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0108_client/client.ts",
+      "client_bytes": 6911,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_emoji_list",
+        "admin_inviteRequests_list",
+        "admin_teams_admins_list",
+        "admin_teams_owners_list",
+        "emoji_list"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 120,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0120_client/client.ts",
+      "client_bytes": 6085,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "files_comments_delete",
+        "files_remote_remove",
+        "files_revokePublicURL",
+        "files_sharedPublicURL",
+        "usergroups_enable"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 121,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0121_client/client.ts",
+      "client_bytes": 5562,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "files_delete",
+        "files_remote_add",
+        "files_remote_share",
+        "files_remote_update",
+        "files_upload"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 126,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0126_client/client.ts",
+      "client_bytes": 5916,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "pins_add",
+        "pins_list",
+        "pins_remove",
+        "reactions_add",
+        "reactions_get"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 128,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0128_client/client.ts",
+      "client_bytes": 5513,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "pins_add",
+        "pins_list",
+        "pins_remove",
+        "reactions_remove",
+        "stars_remove"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 131,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0131_client/client.ts",
+      "client_bytes": 8195,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "reactions_add",
+        "reactions_get",
+        "reactions_list",
+        "usergroups_users_list",
+        "users_list"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 134,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0134_client/client.ts",
+      "client_bytes": 5730,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "reminders_add",
+        "reminders_complete",
+        "reminders_delete",
+        "reminders_info",
+        "reminders_list"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 143,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0143_client/client.ts",
+      "client_bytes": 7752,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_conversations_restrictAccess_listGroups",
+        "team_accessLogs",
+        "team_billableInfo",
+        "team_info",
+        "team_integrationLogs"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 144,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0144_client/client.ts",
+      "client_bytes": 7279,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "dnd_info",
+        "team_accessLogs",
+        "team_billableInfo",
+        "team_info",
+        "team_integrationLogs"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 148,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0148_client/client.ts",
+      "client_bytes": 6468,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "usergroups_create",
+        "usergroups_enable",
+        "usergroups_update",
+        "usergroups_users_list",
+        "usergroups_users_update"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 152,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0152_client/client.ts",
+      "client_bytes": 6182,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_emoji_rename",
+        "usergroups_create",
+        "usergroups_update",
+        "usergroups_users_list",
+        "usergroups_users_update"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 156,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0156_client/client.ts",
+      "client_bytes": 7569,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "users_conversations",
+        "users_deletePhoto",
+        "users_profile_get",
+        "users_profile_set",
+        "users_setPhoto"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 157,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0157_client/client.ts",
+      "client_bytes": 6681,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "rtm_connect",
+        "users_getPresence",
+        "users_info",
+        "users_profile_get",
+        "users_setPresence"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 161,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0161_client/client.ts",
+      "client_bytes": 5987,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_users_invite",
+        "users_getPresence",
+        "users_identity",
+        "users_lookupByEmail",
+        "users_profile_get"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 163,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0163_client/client.ts",
+      "client_bytes": 6258,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "chat_update",
+        "dnd_info",
+        "dnd_teamInfo",
+        "users_profile_get",
+        "users_profile_set"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 165,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0165_client/client.ts",
+      "client_bytes": 5800,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "files_remote_add",
+        "files_remote_update",
+        "users_deletePhoto",
+        "users_profile_set",
+        "users_setPhoto"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 169,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0169_client/client.ts",
+      "client_bytes": 7424,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "apps_permissions_users_request",
+        "views_open",
+        "views_publish",
+        "views_push",
+        "views_update"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 172,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0172_client/client.ts",
+      "client_bytes": 8013,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "api_test",
+        "chat_deleteScheduledMessage",
+        "workflows_stepCompleted",
+        "workflows_stepFailed",
+        "workflows_updateStep"
+      ]
+    },
+    {
+      "api": "slack",
+      "index": 173,
+      "ok": true,
+      "client": "/home/claude/wapiibench/split/work/slack/0173_client/client.ts",
+      "client_bytes": 7964,
+      "schemas_bytes": 13697,
+      "has_schemas_file": true,
+      "has_runtime_dir": true,
+      "operations": [
+        "admin_emoji_rename",
+        "chat_update",
+        "workflows_stepCompleted",
+        "workflows_stepFailed",
+        "workflows_updateStep"
+      ]
+    }
+  ]
+}

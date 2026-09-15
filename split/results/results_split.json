@@ -1,0 +1,1837 @@
+{
+  "summary": {
+    "n_scored": 68,
+    "population": 228,
+    "counts": {
+      "correct": 55,
+      "wrong": 6,
+      "illegal": 7,
+      "nonexecutable": 0
+    },
+    "correctness_rate": {
+      "p": 0.8088235294117647,
+      "low": 0.7147217612805821,
+      "high": 0.8698988833168058,
+      "half_width": 0.07758856101811189,
+      "fpc": 0.839550960322227,
+      "method": "wilson+fpc",
+      "n": 68,
+      "successes": 55
+    },
+    "endpoint_rate": {
+      "p": 0.9264705882352942,
+      "low": 0.849500049799225,
+      "high": 0.9578332213114537,
+      "half_width": 0.05416658575611432,
+      "fpc": 0.839550960322227,
+      "method": "wilson+fpc",
+      "n": 68,
+      "successes": 63
+    },
+    "DIAGNOSTIC_correctness_ignoring_auth_header": {
+      "p": 0.8235294117647058,
+      "low": 0.7308094167566767,
+      "high": 0.8816503061548725,
+      "half_width": 0.07542044469909796,
+      "fpc": 0.839550960322227,
+      "method": "wilson+fpc",
+      "n": 68,
+      "successes": 56
+    },
+    "auth_only_failures": 1
+  },
+  "tasks": [
+    {
+      "api": "google_calendar_v3",
+      "index": 1,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 14,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 15,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 17,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 19,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 21,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 22,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 23,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 32,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 34,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_calendar_v3",
+      "index": 5,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 13,
+      "sample_verdict": "illegal",
+      "error_verdict": null,
+      "url_verdict": "wrong",
+      "method_verdict": "wrong",
+      "endpoint_verdict": "wrong",
+      "verdict_ignoring_auth": "illegal",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 14,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 16,
+      "sample_verdict": "illegal",
+      "error_verdict": null,
+      "url_verdict": "wrong",
+      "method_verdict": "wrong",
+      "endpoint_verdict": "wrong",
+      "verdict_ignoring_auth": "illegal",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 4,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "google_sheet_v4",
+      "index": 8,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 0,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 100,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 103,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 104,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 107,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 108,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 120,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 121,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 126,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 128,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 131,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 134,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 14,
+      "sample_verdict": "illegal",
+      "error_verdict": null,
+      "url_verdict": "wrong",
+      "method_verdict": "correct",
+      "endpoint_verdict": "wrong",
+      "verdict_ignoring_auth": "illegal",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 143,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 144,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 148,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 152,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 156,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 157,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 16,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 161,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 163,
+      "sample_verdict": "wrong",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "wrong",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 165,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 169,
+      "sample_verdict": "wrong",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "wrong",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 172,
+      "sample_verdict": "wrong",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "wrong",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 173,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 20,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 21,
+      "sample_verdict": "illegal",
+      "error_verdict": null,
+      "url_verdict": "wrong",
+      "method_verdict": "correct",
+      "endpoint_verdict": "wrong",
+      "verdict_ignoring_auth": "illegal",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 25,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 27,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 36,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 41,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 43,
+      "sample_verdict": "illegal",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "illegal",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 45,
+      "sample_verdict": "illegal",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "illegal",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 46,
+      "sample_verdict": "wrong",
+      "error_verdict": null,
+      "url_verdict": "wrong",
+      "method_verdict": "correct",
+      "endpoint_verdict": "wrong",
+      "verdict_ignoring_auth": "wrong",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 50,
+      "sample_verdict": "wrong",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "wrong",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 52,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 54,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 55,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 57,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 61,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 64,
+      "sample_verdict": "wrong",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": true
+    },
+    {
+      "api": "slack",
+      "index": 76,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 79,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 8,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 80,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 84,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 87,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 9,
+      "sample_verdict": "illegal",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "illegal",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 92,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 96,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    },
+    {
+      "api": "slack",
+      "index": 98,
+      "sample_verdict": "correct",
+      "error_verdict": null,
+      "url_verdict": "correct",
+      "method_verdict": "correct",
+      "endpoint_verdict": "correct",
+      "verdict_ignoring_auth": "correct",
+      "auth_only_failure": false
+    }
+  ],
+  "per_api": {
+    "google_calendar_v3": {
+      "argument_name_mean_jaccard_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_jaccard_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_precision_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_precision_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_recall_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_recall_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_precision_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_precision_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_recall_wrt_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_recall_wrt_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_all_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_all_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_correct_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_correct_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_all_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_all_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_correct_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_correct_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_all_executable": {
+        "all": 37,
+        "data": 11,
+        "headers": 11,
+        "params": 1,
+        "path_params": 14
+      },
+      "arguments_all_total": {
+        "all": 37,
+        "data": 11,
+        "headers": 11,
+        "params": 1,
+        "path_params": 14
+      },
+      "arguments_correct_name": {
+        "all": 37,
+        "data": 11,
+        "headers": 11,
+        "params": 1,
+        "path_params": 14
+      },
+      "arguments_correct_name_wrt_expected_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_name_wrt_expected_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_value": {
+        "all": 37,
+        "data": 11,
+        "headers": 11,
+        "params": 1,
+        "path_params": 14
+      },
+      "arguments_correct_value_wrt_expected_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_value_wrt_expected_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "params": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_expected_executable": {
+        "all": 37,
+        "data": 11,
+        "headers": 11,
+        "params": 1,
+        "path_params": 14
+      },
+      "arguments_expected_total": {
+        "all": 37,
+        "data": 11,
+        "headers": 11,
+        "params": 1,
+        "path_params": 14
+      },
+      "arguments_illegal": {},
+      "arguments_illegal_wrt_all_executable": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_illegal_wrt_all_total": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_missing_executable": {},
+      "arguments_missing_total": {},
+      "arguments_missing_wrt_expected_executable": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_missing_wrt_expected_total": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unexpected": {},
+      "arguments_unexpected_wrt_all_executable": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unexpected_wrt_all_total": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unnecessary": {},
+      "arguments_unnecessary_wrt_all_executable": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unnecessary_wrt_all_total": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "endpoints_correct": 11,
+      "endpoints_correct_wrt_executable": 1.0,
+      "endpoints_correct_wrt_total": 1.0,
+      "endpoints_illegal": 0,
+      "endpoints_illegal_wrt_executable": 0.0,
+      "endpoints_illegal_wrt_total": 0.0,
+      "endpoints_wrong": 0,
+      "endpoints_wrong_wrt_executable": 0.0,
+      "endpoints_wrong_wrt_total": 0.0,
+      "errors_incomplete_request": 0,
+      "errors_incomplete_request_wrt_errors": 0,
+      "errors_incomplete_request_wrt_samples": 0.0,
+      "errors_no_request": 0,
+      "errors_no_request_wrt_errors": 0,
+      "errors_no_request_wrt_samples": 0.0,
+      "errors_runtime_error": 0,
+      "errors_runtime_error_wrt_errors": 0,
+      "errors_runtime_error_wrt_samples": 0.0,
+      "errors_timeout": 0,
+      "errors_timeout_wrt_errors": 0,
+      "errors_timeout_wrt_samples": 0.0,
+      "errors_total": 0,
+      "errors_total_wrt_samples": 0.0,
+      "errors_unsatisfiable": 0,
+      "errors_unsatisfiable_wrt_errors": 0,
+      "errors_unsatisfiable_wrt_samples": 0.0,
+      "methods_correct": 11,
+      "methods_correct_wrt_executable": 1.0,
+      "methods_correct_wrt_total": 1.0,
+      "methods_illegal": 0,
+      "methods_illegal_wrt_executable": 0.0,
+      "methods_illegal_wrt_total": 0.0,
+      "methods_wrong": 0,
+      "methods_wrong_wrt_executable": 0.0,
+      "methods_wrong_wrt_total": 0.0,
+      "samples_correct": 11,
+      "samples_correct_wrt_executable": 1.0,
+      "samples_correct_wrt_total": 1.0,
+      "samples_executable": 11,
+      "samples_executable_wrt_total": 1.0,
+      "samples_illegal": 0,
+      "samples_illegal_wrt_executable": 0.0,
+      "samples_illegal_wrt_total": 0.0,
+      "samples_nonexecutable": 0,
+      "samples_total": 11,
+      "samples_wrong": 0,
+      "samples_wrong_wrt_executable": 0.0,
+      "samples_wrong_wrt_total": 0.0,
+      "urls_correct": 11,
+      "urls_correct_wrt_executable": 1.0,
+      "urls_correct_wrt_total": 1.0,
+      "urls_illegal": 0,
+      "urls_illegal_wrt_executable": 0.0,
+      "urls_illegal_wrt_total": 0.0,
+      "urls_wrong": 0,
+      "urls_wrong_wrt_executable": 0.0,
+      "urls_wrong_wrt_total": 0.0
+    },
+    "google_sheet_v4": {
+      "argument_name_mean_jaccard_wrt_executable": {
+        "all": 0.711111111111111,
+        "data": 0.5,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.9
+      },
+      "argument_name_mean_jaccard_wrt_total": {
+        "all": 0.711111111111111,
+        "data": 0.5,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.9
+      },
+      "argument_name_mean_precision_wrt_executable": {
+        "all": 0.7571428571428571,
+        "data": 0.6666666666666666,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.9
+      },
+      "argument_name_mean_precision_wrt_total": {
+        "all": 0.7571428571428571,
+        "data": 0.6666666666666666,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.9
+      },
+      "argument_name_mean_recall_wrt_executable": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_mean_recall_wrt_total": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_executable": {
+        "all": 0.5925925925925926,
+        "data": 0.36363636363636365,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.875
+      },
+      "argument_name_sum_jaccard_wrt_total": {
+        "all": 0.5925925925925926,
+        "data": 0.36363636363636365,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.875
+      },
+      "argument_name_sum_precision_wrt_executable": {
+        "all": 0.6956521739130435,
+        "data": 0.5714285714285714,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.875
+      },
+      "argument_name_sum_precision_wrt_total": {
+        "all": 0.6956521739130435,
+        "data": 0.5714285714285714,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.875
+      },
+      "argument_name_sum_recall_wrt_executable": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_name_sum_recall_wrt_total": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_all_executable": {
+        "all": 0.711111111111111,
+        "data": 0.5,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.9
+      },
+      "argument_value_mean_accuracy_wrt_all_total": {
+        "all": 0.711111111111111,
+        "data": 0.5,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.9
+      },
+      "argument_value_mean_accuracy_wrt_correct_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_correct_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_executable": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_expected_total": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_all_executable": {
+        "all": 0.5925925925925926,
+        "data": 0.36363636363636365,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.875
+      },
+      "argument_value_sum_accuracy_wrt_all_total": {
+        "all": 0.5925925925925926,
+        "data": 0.36363636363636365,
+        "headers": 1.0,
+        "params": 0.0,
+        "path_params": 0.875
+      },
+      "argument_value_sum_accuracy_wrt_correct_executable": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_correct_total": {
+        "all": 1.0,
+        "data": 1.0,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_executable": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "argument_value_sum_accuracy_wrt_expected_total": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_all_executable": {
+        "all": 27,
+        "data": 11,
+        "headers": 5,
+        "params": 3,
+        "path_params": 8
+      },
+      "arguments_all_total": {
+        "all": 27,
+        "data": 11,
+        "headers": 5,
+        "params": 3,
+        "path_params": 8
+      },
+      "arguments_correct_name": {
+        "all": 16,
+        "data": 4,
+        "headers": 5,
+        "path_params": 7
+      },
+      "arguments_correct_name_wrt_expected_executable": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_name_wrt_expected_total": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_value": {
+        "all": 16,
+        "data": 4,
+        "headers": 5,
+        "path_params": 7
+      },
+      "arguments_correct_value_wrt_expected_executable": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_correct_value_wrt_expected_total": {
+        "all": 0.8,
+        "data": 0.5,
+        "headers": 1.0,
+        "path_params": 1.0
+      },
+      "arguments_expected_executable": {
+        "all": 20,
+        "data": 8,
+        "headers": 5,
+        "path_params": 7
+      },
+      "arguments_expected_total": {
+        "all": 20,
+        "data": 8,
+        "headers": 5,
+        "path_params": 7
+      },
+      "arguments_illegal": {
+        "all": 7,
+        "data": 3,
+        "params": 3,
+        "path_params": 1
+      },
+      "arguments_illegal_wrt_all_executable": {
+        "all": 0.25925925925925924,
+        "data": 0.2727272727272727,
+        "headers": 0.0,
+        "params": 1.0,
+        "path_params": 0.125
+      },
+      "arguments_illegal_wrt_all_total": {
+        "all": 0.25925925925925924,
+        "data": 0.2727272727272727,
+        "headers": 0.0,
+        "params": 1.0,
+        "path_params": 0.125
+      },
+      "arguments_missing_executable": {
+        "all": 4,
+        "data": 4
+      },
+      "arguments_missing_total": {
+        "all": 4,
+        "data": 4
+      },
+      "arguments_missing_wrt_expected_executable": {
+        "all": 0.2,
+        "data": 0.5,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_missing_wrt_expected_total": {
+        "all": 0.2,
+        "data": 0.5,
+        "headers": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unexpected": {
+        "all": 7,
+        "data": 3,
+        "params": 3,
+        "path_params": 1
+      },
+      "arguments_unexpected_wrt_all_executable": {
+        "all": 0.25925925925925924,
+        "data": 0.2727272727272727,
+        "headers": 0.0,
+        "params": 1.0,
+        "path_params": 0.125
+      },
+      "arguments_unexpected_wrt_all_total": {
+        "all": 0.25925925925925924,
+        "data": 0.2727272727272727,
+        "headers": 0.0,
+        "params": 1.0,
+        "path_params": 0.125
+      },
+      "arguments_unnecessary": {},
+      "arguments_unnecessary_wrt_all_executable": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "arguments_unnecessary_wrt_all_total": {
+        "all": 0.0,
+        "data": 0.0,
+        "headers": 0.0,
+        "params": 0.0,
+        "path_params": 0.0
+      },
+      "endpoints_correct": 3,
+      "endpoints_correct_wrt_executable": 0.6,
+      "endpoints_correct_wrt_total": 0.6,
+      "endpoints_illegal": 0,
+      "endpoints_illegal_wrt_executable": 0.0,
+      "endpoints_illegal_wrt_total": 0.0,
+      "endpoints_wrong": 2,
+      "endpoints_wrong_wrt_executable": 0.4,
+      "endpoints_wrong_wrt_total": 0.4,
+      "errors_incomplete_request": 0,
+      "errors_incomplete_request_wrt_errors": 0,
+      "errors_incomplete_request_wrt_samples": 0.0,
+      "errors_no_request": 0,
+      "errors_no_request_wrt_errors": 0,
+      "errors_no_request_wrt_samples": 0.0,
+      "errors_runtime_error": 0,
+      "errors_runtime_error_wrt_errors": 0,
+      "errors_runtime_error_wrt_samples": 0.0,
+      "errors_timeout": 0,
+      "errors_timeout_wrt_errors": 0,
+      "errors_timeout_wrt_samples": 0.0,
+      "errors_total": 0,
+      "errors_total_wrt_samples": 0.0,
+      "errors_unsatisfiable": 0,
+      "errors_unsatisfiable_wrt_errors": 0,
+      "errors_unsatisfiable_wrt_samples": 0.0,
+      "methods_correct": 3,
+      "methods_correct_wrt_executable": 0.6,
+      "methods_correct_wrt_total": 0.6,
+      "methods_illegal": 0,
+      "methods_illegal_wrt_executable": 0.0,
+      "methods_illegal_wrt_total": 0.0,
+      "methods_wrong": 2,
+      "methods_wrong_wrt_executable": 0.4,
+      "methods_wrong_wrt_total": 0.4,
+      "samples_correct": 3,
+      "samples_correct_wrt_executable": 0.6,
+      "samples_correct_wrt_total": 0.6,
+      "samples_executable": 5,
+      "samples_executable_wrt_total": 1.0,
+      "samples_illegal": 2,
+      "samples_illegal_wrt_executable": 0.4,
+      "samples_illegal_wrt_total": 0.4,
+      "samples_nonexecutable": 0,
+      "samples_total": 5,
+      "samples_wrong": 0,
+      "samples_wrong_wrt_executable": 0.0,
+      "samples_wrong_wrt_total": 0.0,
+      "urls_correct": 3,
+      "urls_correct_wrt_executable": 0.6,
+      "urls_correct_wrt_total": 0.6,
+      "urls_illegal": 0,
+      "urls_illegal_wrt_executable": 0.0,
+      "urls_illegal_wrt_total": 0.0,
+      "urls_wrong": 2,
+      "urls_wrong_wrt_executable": 0.4,
+      "urls_wrong_wrt_total": 0.4
+    },
+    "slack": {
+      "argument_name_mean_jaccard_wrt_executable": {
+        "all": 0.9365384615384614,
+        "data": 0.8709677419354838,
+        "headers": 0.9807692307692307,
+        "params": 1.0
+      },
+      "argument_name_mean_jaccard_wrt_total": {
+        "all": 0.9365384615384614,
+        "data": 0.8709677419354838,
+        "headers": 0.9807692307692307,
+        "params": 1.0
+      },
+      "argument_name_mean_precision_wrt_executable": {
+        "all": 0.9599358974358972,
+        "data": 0.9086021505376345,
+        "headers": 0.9807692307692307,
+        "params": 1.0
+      },
+      "argument_name_mean_precision_wrt_total": {
+        "all": 0.9599358974358972,
+        "data": 0.9086021505376345,
+        "headers": 0.9807692307692307,
+        "params": 1.0
+      },
+      "argument_name_mean_recall_wrt_executable": {
+        "all": 0.9586538461538461,
+        "data": 0.8924731182795699,
+        "headers": 1.0,
+        "params": 1.0
+      },
+      "argument_name_mean_recall_wrt_total": {
+        "all": 0.9586538461538461,
+        "data": 0.8924731182795699,
+        "headers": 1.0,
+        "params": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_executable": {
+        "all": 0.9064748201438849,
+        "data": 0.8125,
+        "headers": 0.9807692307692307,
+        "params": 1.0
+      },
+      "argument_name_sum_jaccard_wrt_total": {
+        "all": 0.9064748201438849,
+        "data": 0.8125,
+        "headers": 0.9807692307692307,
+        "params": 1.0
+      },
+      "argument_name_sum_precision_wrt_executable": {
+        "all": 0.9545454545454546,
+        "data": 0.9122807017543859,
+        "headers": 0.9807692307692307,
+        "params": 1.0
+      },
+      "argument_name_sum_precision_wrt_total": {
+        "all": 0.9545454545454546,
+        "data": 0.9122807017543859,
+        "headers": 0.9807692307692307,
+        "params": 1.0
+      },
+      "argument_name_sum_recall_wrt_executable": {
+        "all": 0.9473684210526315,
+        "data": 0.8813559322033898,
+        "headers": 1.0,
+        "params": 1.0
+      },
+      "argument_name_sum_recall_wrt_total": {
+        "all": 0.9473684210526315,
+        "data": 0.8813559322033898,
+        "headers": 1.0,
+        "params": 1.0
+      },
+      "argument_value_mean_accuracy_wrt_all_executable": {
+        "all": 0.9038461538461539,
+        "data": 0.8145161290322579,
+        "headers": 0.9807692307692307,
+        "params": 0.9230769230769231
+      },
+      "argument_value_mean_accuracy_wrt_all_total": {
+        "all": 0.9038461538461539,
+        "data": 0.8145161290322579,
+        "headers": 0.9807692307692307,
+        "params": 0.9230769230769231
+      },
+      "argument_value_mean_accuracy_wrt_correct_executable": {
+        "all": 0.9647435897435896,
+        "data": 0.9333333333333333,
+        "headers": 1.0,
+        "params": 0.9230769230769231
+      },
+      "argument_value_mean_accuracy_wrt_correct_total": {
+        "all": 0.9647435897435896,
+        "data": 0.9333333333333333,
+        "headers": 1.0,
+        "params": 0.9230769230769231
+      },
+      "argument_value_mean_accuracy_wrt_expected_executable": {
+        "all": 0.925,
+        "data": 0.8333333333333334,
+        "headers": 1.0,
+        "params": 0.9230769230769231
+      },
+      "argument_value_mean_accuracy_wrt_expected_total": {
+        "all": 0.925,
+        "data": 0.8333333333333334,
+        "headers": 1.0,
+        "params": 0.9230769230769231
+      },
+      "argument_value_sum_accuracy_wrt_all_executable": {
+        "all": 0.8705035971223022,
+        "data": 0.765625,
+        "headers": 0.9807692307692307,
+        "params": 0.9130434782608695
+      },
+      "argument_value_sum_accuracy_wrt_all_total": {
+        "all": 0.8705035971223022,
+        "data": 0.765625,
+        "headers": 0.9807692307692307,
+        "params": 0.9130434782608695
+      },
+      "argument_value_sum_accuracy_wrt_correct_executable": {
+        "all": 0.9603174603174603,
+        "data": 0.9423076923076923,
+        "headers": 1.0,
+        "params": 0.9130434782608695
+      },
+      "argument_value_sum_accuracy_wrt_correct_total": {
+        "all": 0.9603174603174603,
+        "data": 0.9423076923076923,
+        "headers": 1.0,
+        "params": 0.9130434782608695
+      },
+      "argument_value_sum_accuracy_wrt_expected_executable": {
+        "all": 0.9097744360902256,
+        "data": 0.8305084745762712,
+        "headers": 1.0,
+        "params": 0.9130434782608695
+      },
+      "argument_value_sum_accuracy_wrt_expected_total": {
+        "all": 0.9097744360902256,
+        "data": 0.8305084745762712,
+        "headers": 1.0,
+        "params": 0.9130434782608695
+      },
+      "arguments_all_executable": {
+        "all": 139,
+        "data": 64,
+        "headers": 52,
+        "params": 23
+      },
+      "arguments_all_total": {
+        "all": 139,
+        "data": 64,
+        "headers": 52,
+        "params": 23
+      },
+      "arguments_correct_name": {
+        "all": 126,
+        "data": 52,
+        "headers": 51,
+        "params": 23
+      },
+      "arguments_correct_name_wrt_expected_executable": {
+        "all": 0.9473684210526315,
+        "data": 0.8813559322033898,
+        "headers": 1.0,
+        "params": 1.0
+      },
+      "arguments_correct_name_wrt_expected_total": {
+        "all": 0.9473684210526315,
+        "data": 0.8813559322033898,
+        "headers": 1.0,
+        "params": 1.0
+      },
+      "arguments_correct_value": {
+        "all": 121,
+        "data": 49,
+        "headers": 51,
+        "params": 21
+      },
+      "arguments_correct_value_wrt_expected_executable": {
+        "all": 0.9097744360902256,
+        "data": 0.8305084745762712,
+        "headers": 1.0,
+        "params": 0.9130434782608695
+      },
+      "arguments_correct_value_wrt_expected_total": {
+        "all": 0.9097744360902256,
+        "data": 0.8305084745762712,
+        "headers": 1.0,
+        "params": 0.9130434782608695
+      },
+      "arguments_expected_executable": {
+        "all": 133,
+        "data": 59,
+        "headers": 51,
+        "params": 23
+      },
+      "arguments_expected_total": {
+        "all": 133,
+        "data": 59,
+        "headers": 51,
+        "params": 23
+      },
+      "arguments_illegal": {
+        "all": 5,
+        "data": 5
+      },
+      "arguments_illegal_wrt_all_executable": {
+        "all": 0.03597122302158273,
+        "data": 0.078125,
+        "headers": 0.0,
+        "params": 0.0
+      },
+      "arguments_illegal_wrt_all_total": {
+        "all": 0.03597122302158273,
+        "data": 0.078125,
+        "headers": 0.0,
+        "params": 0.0
+      },
+      "arguments_missing_executable": {
+        "all": 7,
+        "data": 7
+      },
+      "arguments_missing_total": {
+        "all": 7,
+        "data": 7
+      },
+      "arguments_missing_wrt_expected_executable": {
+        "all": 0.05263157894736842,
+        "data": 0.11864406779661017,
+        "headers": 0.0,
+        "params": 0.0
+      },
+      "arguments_missing_wrt_expected_total": {
+        "all": 0.05263157894736842,
+        "data": 0.11864406779661017,
+        "headers": 0.0,
+        "params": 0.0
+      },
+      "arguments_unexpected": {
+        "all": 6,
+        "data": 5,
+        "headers": 1
+      },
+      "arguments_unexpected_wrt_all_executable": {
+        "all": 0.04316546762589928,
+        "data": 0.078125,
+        "headers": 0.019230769230769232,
+        "params": 0.0
+      },
+      "arguments_unexpected_wrt_all_total": {
+        "all": 0.04316546762589928,
+        "data": 0.078125,
+        "headers": 0.019230769230769232,
+        "params": 0.0
+      },
+      "arguments_unnecessary": {
+        "all": 1,
+        "headers": 1
+      },
+      "arguments_unnecessary_wrt_all_executable": {
+        "all": 0.007194244604316547,
+        "data": 0.0,
+        "headers": 0.019230769230769232,
+        "params": 0.0
+      },
+      "arguments_unnecessary_wrt_all_total": {
+        "all": 0.007194244604316547,
+        "data": 0.0,
+        "headers": 0.019230769230769232,
+        "params": 0.0
+      },
+      "endpoints_correct": 49,
+      "endpoints_correct_wrt_executable": 0.9423076923076923,
+      "endpoints_correct_wrt_total": 0.9423076923076923,
+      "endpoints_illegal": 0,
+      "endpoints_illegal_wrt_executable": 0.0,
+      "endpoints_illegal_wrt_total": 0.0,
+      "endpoints_wrong": 3,
+      "endpoints_wrong_wrt_executable": 0.057692307692307696,
+      "endpoints_wrong_wrt_total": 0.057692307692307696,
+      "errors_incomplete_request": 0,
+      "errors_incomplete_request_wrt_errors": 0,
+      "errors_incomplete_request_wrt_samples": 0.0,
+      "errors_no_request": 0,
+      "errors_no_request_wrt_errors": 0,
+      "errors_no_request_wrt_samples": 0.0,
+      "errors_runtime_error": 0,
+      "errors_runtime_error_wrt_errors": 0,
+      "errors_runtime_error_wrt_samples": 0.0,
+      "errors_timeout": 0,
+      "errors_timeout_wrt_errors": 0,
+      "errors_timeout_wrt_samples": 0.0,
+      "errors_total": 0,
+      "errors_total_wrt_samples": 0.0,
+      "errors_unsatisfiable": 0,
+      "errors_unsatisfiable_wrt_errors": 0,
+      "errors_unsatisfiable_wrt_samples": 0.0,
+      "methods_correct": 52,
+      "methods_correct_wrt_executable": 1.0,
+      "methods_correct_wrt_total": 1.0,
+      "methods_illegal": 0,
+      "methods_illegal_wrt_executable": 0.0,
+      "methods_illegal_wrt_total": 0.0,
+      "methods_wrong": 0,
+      "methods_wrong_wrt_executable": 0.0,
+      "methods_wrong_wrt_total": 0.0,
+      "samples_correct": 41,
+      "samples_correct_wrt_executable": 0.7884615384615384,
+      "samples_correct_wrt_total": 0.7884615384615384,
+      "samples_executable": 52,
+      "samples_executable_wrt_total": 1.0,
+      "samples_illegal": 5,
+      "samples_illegal_wrt_executable": 0.09615384615384616,
+      "samples_illegal_wrt_total": 0.09615384615384616,
+      "samples_nonexecutable": 0,
+      "samples_total": 52,
+      "samples_wrong": 6,
+      "samples_wrong_wrt_executable": 0.11538461538461539,
+      "samples_wrong_wrt_total": 0.11538461538461539,
+      "urls_correct": 49,
+      "urls_correct_wrt_executable": 0.9423076923076923,
+      "urls_correct_wrt_total": 0.9423076923076923,
+      "urls_illegal": 0,
+      "urls_illegal_wrt_executable": 0.0,
+      "urls_illegal_wrt_total": 0.0,
+      "urls_wrong": 3,
+      "urls_wrong_wrt_executable": 0.057692307692307696,
+      "urls_wrong_wrt_total": 0.057692307692307696
+    }
+  }
+}

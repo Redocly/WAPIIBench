@@ -1,0 +1,3281 @@
+{
+  "measure": "bytes (exact) and cl100k PRETOKENS (strict lower bound on BPE tokens)",
+  "n": 68,
+  "missing": [],
+  "control_spec_pretokens": {
+    "n": 68,
+    "min": 2405,
+    "median": 4690.0,
+    "max": 47099,
+    "mean": 7486.7
+  },
+  "treatment_monolith_pretokens": {
+    "n": 68,
+    "min": 17688,
+    "median": 18002.0,
+    "max": 57279,
+    "mean": 22237.7
+  },
+  "split_client_pretokens": {
+    "n": 68,
+    "min": 1129,
+    "median": 1450.0,
+    "max": 5041,
+    "mean": 2039.4
+  },
+  "split_schemas_pretokens": {
+    "n": 68,
+    "min": 3386,
+    "median": 3386.0,
+    "max": 39577,
+    "mean": 7021.1
+  },
+  "split_client_plus_schemas_pretokens": {
+    "n": 68,
+    "min": 4515,
+    "median": 4836.0,
+    "max": 44078,
+    "mean": 9060.5
+  },
+  "ratio_monolith_over_spec": {
+    "n": 68,
+    "min": 1.209,
+    "median": 3.8635,
+    "max": 10.57,
+    "mean": 4.2
+  },
+  "ratio_split_client_over_spec": {
+    "n": 68,
+    "min": 0.088,
+    "median": 0.373,
+    "max": 1.164,
+    "mean": 0.4
+  },
+  "ratio_split_both_over_spec": {
+    "n": 68,
+    "min": 0.426,
+    "median": 1.3115,
+    "max": 5.796,
+    "mean": 1.4
+  },
+  "pruned_schemas_pretokens": {
+    "n": 68,
+    "min": 101,
+    "median": 580.0,
+    "max": 37610,
+    "mean": 3001.2
+  },
+  "pruned_both_pretokens": {
+    "n": 68,
+    "min": 1230,
+    "median": 2171.5,
+    "max": 41774,
+    "mean": 5040.6
+  },
+  "ratio_pruned_both_over_spec": {
+    "n": 68,
+    "min": 0.299,
+    "median": 0.4585,
+    "max": 1.293,
+    "mean": 0.6
+  },
+  "tasks_where_split_client_is_smaller_than_spec": 66,
+  "tasks": [
+    {
+      "task_id": "google_calendar_v3:0001",
+      "api": "google_calendar_v3",
+      "index": 1,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0001_spec/filtered_spec.yaml",
+        "bytes": 11840,
+        "pretokens": 2405,
+        "bytes_per_pretoken": 4.923
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0001_client/client.ts",
+        "bytes": 119594,
+        "pretokens": 25420,
+        "bytes_per_pretoken": 4.705
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0001_client/client.ts",
+        "bytes": 12502,
+        "pretokens": 2800,
+        "bytes_per_pretoken": 4.465
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0001_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 12207,
+      "ratio_monolith_over_spec": 10.57,
+      "ratio_split_client_over_spec": 1.164,
+      "ratio_split_both_over_spec": 5.076,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0001_client/client.ts",
+        "bytes": 12502,
+        "pretokens": 2800,
+        "bytes_per_pretoken": 4.465
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0001_client/client.schemas.ts",
+        "bytes": 1414,
+        "pretokens": 291,
+        "bytes_per_pretoken": 4.859
+      },
+      "pruned_both_pretokens": 3091,
+      "ratio_pruned_both_over_spec": 1.285
+    },
+    {
+      "task_id": "google_calendar_v3:0005",
+      "api": "google_calendar_v3",
+      "index": 5,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0005_spec/filtered_spec.yaml",
+        "bytes": 14500,
+        "pretokens": 2926,
+        "bytes_per_pretoken": 4.956
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0005_client/client.ts",
+        "bytes": 121135,
+        "pretokens": 25828,
+        "bytes_per_pretoken": 4.69
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0005_client/client.ts",
+        "bytes": 14047,
+        "pretokens": 3210,
+        "bytes_per_pretoken": 4.376
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0005_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 12617,
+      "ratio_monolith_over_spec": 8.827,
+      "ratio_split_client_over_spec": 1.097,
+      "ratio_split_both_over_spec": 4.312,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0005_client/client.ts",
+        "bytes": 14047,
+        "pretokens": 3210,
+        "bytes_per_pretoken": 4.376
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0005_client/client.schemas.ts",
+        "bytes": 2621,
+        "pretokens": 574,
+        "bytes_per_pretoken": 4.566
+      },
+      "pruned_both_pretokens": 3784,
+      "ratio_pruned_both_over_spec": 1.293
+    },
+    {
+      "task_id": "google_calendar_v3:0014",
+      "api": "google_calendar_v3",
+      "index": 14,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0014_spec/filtered_spec.yaml",
+        "bytes": 52330,
+        "pretokens": 10001,
+        "bytes_per_pretoken": 5.232
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0014_client/client.ts",
+        "bytes": 126596,
+        "pretokens": 26946,
+        "bytes_per_pretoken": 4.698
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0014_client/client.ts",
+        "bytes": 19501,
+        "pretokens": 4326,
+        "bytes_per_pretoken": 4.508
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0014_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 13733,
+      "ratio_monolith_over_spec": 2.694,
+      "ratio_split_client_over_spec": 0.433,
+      "ratio_split_both_over_spec": 1.373,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0014_client/client.ts",
+        "bytes": 19501,
+        "pretokens": 4326,
+        "bytes_per_pretoken": 4.508
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0014_client/client.schemas.ts",
+        "bytes": 28044,
+        "pretokens": 5726,
+        "bytes_per_pretoken": 4.898
+      },
+      "pruned_both_pretokens": 10052,
+      "ratio_pruned_both_over_spec": 1.005
+    },
+    {
+      "task_id": "google_calendar_v3:0015",
+      "api": "google_calendar_v3",
+      "index": 15,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0015_spec/filtered_spec.yaml",
+        "bytes": 52589,
+        "pretokens": 10053,
+        "bytes_per_pretoken": 5.231
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0015_client/client.ts",
+        "bytes": 126915,
+        "pretokens": 27052,
+        "bytes_per_pretoken": 4.692
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0015_client/client.ts",
+        "bytes": 19820,
+        "pretokens": 4432,
+        "bytes_per_pretoken": 4.472
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0015_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 13839,
+      "ratio_monolith_over_spec": 2.691,
+      "ratio_split_client_over_spec": 0.441,
+      "ratio_split_both_over_spec": 1.377,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0015_client/client.ts",
+        "bytes": 19820,
+        "pretokens": 4432,
+        "bytes_per_pretoken": 4.472
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0015_client/client.schemas.ts",
+        "bytes": 28044,
+        "pretokens": 5726,
+        "bytes_per_pretoken": 4.898
+      },
+      "pruned_both_pretokens": 10158,
+      "ratio_pruned_both_over_spec": 1.01
+    },
+    {
+      "task_id": "google_calendar_v3:0017",
+      "api": "google_calendar_v3",
+      "index": 17,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0017_spec/filtered_spec.yaml",
+        "bytes": 58293,
+        "pretokens": 11222,
+        "bytes_per_pretoken": 5.195
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0017_client/client.ts",
+        "bytes": 129384,
+        "pretokens": 27659,
+        "bytes_per_pretoken": 4.678
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0017_client/client.ts",
+        "bytes": 22298,
+        "pretokens": 5041,
+        "bytes_per_pretoken": 4.423
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0017_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 14448,
+      "ratio_monolith_over_spec": 2.465,
+      "ratio_split_client_over_spec": 0.449,
+      "ratio_split_both_over_spec": 1.287,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0017_client/client.ts",
+        "bytes": 22298,
+        "pretokens": 5041,
+        "bytes_per_pretoken": 4.423
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0017_client/client.schemas.ts",
+        "bytes": 29493,
+        "pretokens": 6017,
+        "bytes_per_pretoken": 4.902
+      },
+      "pruned_both_pretokens": 11058,
+      "ratio_pruned_both_over_spec": 0.985
+    },
+    {
+      "task_id": "google_calendar_v3:0019",
+      "api": "google_calendar_v3",
+      "index": 19,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0019_spec/filtered_spec.yaml",
+        "bytes": 53319,
+        "pretokens": 10275,
+        "bytes_per_pretoken": 5.189
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0019_client/client.ts",
+        "bytes": 124585,
+        "pretokens": 26668,
+        "bytes_per_pretoken": 4.672
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0019_client/client.ts",
+        "bytes": 17498,
+        "pretokens": 4050,
+        "bytes_per_pretoken": 4.32
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0019_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 13457,
+      "ratio_monolith_over_spec": 2.595,
+      "ratio_split_client_over_spec": 0.394,
+      "ratio_split_both_over_spec": 1.31,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0019_client/client.ts",
+        "bytes": 17498,
+        "pretokens": 4050,
+        "bytes_per_pretoken": 4.32
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0019_client/client.schemas.ts",
+        "bytes": 30139,
+        "pretokens": 6174,
+        "bytes_per_pretoken": 4.882
+      },
+      "pruned_both_pretokens": 10224,
+      "ratio_pruned_both_over_spec": 0.995
+    },
+    {
+      "task_id": "google_calendar_v3:0021",
+      "api": "google_calendar_v3",
+      "index": 21,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0021_spec/filtered_spec.yaml",
+        "bytes": 51768,
+        "pretokens": 9886,
+        "bytes_per_pretoken": 5.236
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0021_client/client.ts",
+        "bytes": 126570,
+        "pretokens": 26945,
+        "bytes_per_pretoken": 4.697
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0021_client/client.ts",
+        "bytes": 19475,
+        "pretokens": 4325,
+        "bytes_per_pretoken": 4.503
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0021_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 13732,
+      "ratio_monolith_over_spec": 2.726,
+      "ratio_split_client_over_spec": 0.437,
+      "ratio_split_both_over_spec": 1.389,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0021_client/client.ts",
+        "bytes": 19475,
+        "pretokens": 4325,
+        "bytes_per_pretoken": 4.503
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0021_client/client.schemas.ts",
+        "bytes": 28044,
+        "pretokens": 5726,
+        "bytes_per_pretoken": 4.898
+      },
+      "pruned_both_pretokens": 10051,
+      "ratio_pruned_both_over_spec": 1.017
+    },
+    {
+      "task_id": "google_calendar_v3:0022",
+      "api": "google_calendar_v3",
+      "index": 22,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0022_spec/filtered_spec.yaml",
+        "bytes": 53921,
+        "pretokens": 10349,
+        "bytes_per_pretoken": 5.21
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0022_client/client.ts",
+        "bytes": 125783,
+        "pretokens": 26809,
+        "bytes_per_pretoken": 4.692
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0022_client/client.ts",
+        "bytes": 18696,
+        "pretokens": 4191,
+        "bytes_per_pretoken": 4.461
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0022_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 13598,
+      "ratio_monolith_over_spec": 2.59,
+      "ratio_split_client_over_spec": 0.405,
+      "ratio_split_both_over_spec": 1.314,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0022_client/client.ts",
+        "bytes": 18696,
+        "pretokens": 4191,
+        "bytes_per_pretoken": 4.461
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0022_client/client.schemas.ts",
+        "bytes": 30139,
+        "pretokens": 6174,
+        "bytes_per_pretoken": 4.882
+      },
+      "pruned_both_pretokens": 10365,
+      "ratio_pruned_both_over_spec": 1.002
+    },
+    {
+      "task_id": "google_calendar_v3:0023",
+      "api": "google_calendar_v3",
+      "index": 23,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0023_spec/filtered_spec.yaml",
+        "bytes": 53319,
+        "pretokens": 10275,
+        "bytes_per_pretoken": 5.189
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0023_client/client.ts",
+        "bytes": 124585,
+        "pretokens": 26668,
+        "bytes_per_pretoken": 4.672
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0023_client/client.ts",
+        "bytes": 17498,
+        "pretokens": 4050,
+        "bytes_per_pretoken": 4.32
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0023_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 13457,
+      "ratio_monolith_over_spec": 2.595,
+      "ratio_split_client_over_spec": 0.394,
+      "ratio_split_both_over_spec": 1.31,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0023_client/client.ts",
+        "bytes": 17498,
+        "pretokens": 4050,
+        "bytes_per_pretoken": 4.32
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0023_client/client.schemas.ts",
+        "bytes": 30139,
+        "pretokens": 6174,
+        "bytes_per_pretoken": 4.882
+      },
+      "pruned_both_pretokens": 10224,
+      "ratio_pruned_both_over_spec": 0.995
+    },
+    {
+      "task_id": "google_calendar_v3:0032",
+      "api": "google_calendar_v3",
+      "index": 32,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0032_spec/filtered_spec.yaml",
+        "bytes": 20247,
+        "pretokens": 3940,
+        "bytes_per_pretoken": 5.139
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0032_client/client.ts",
+        "bytes": 121017,
+        "pretokens": 25681,
+        "bytes_per_pretoken": 4.712
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0032_client/client.ts",
+        "bytes": 13953,
+        "pretokens": 3065,
+        "bytes_per_pretoken": 4.552
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0032_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 12472,
+      "ratio_monolith_over_spec": 6.518,
+      "ratio_split_client_over_spec": 0.778,
+      "ratio_split_both_over_spec": 3.165,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0032_client/client.ts",
+        "bytes": 13953,
+        "pretokens": 3065,
+        "bytes_per_pretoken": 4.552
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0032_client/client.schemas.ts",
+        "bytes": 6671,
+        "pretokens": 1369,
+        "bytes_per_pretoken": 4.873
+      },
+      "pruned_both_pretokens": 4434,
+      "ratio_pruned_both_over_spec": 1.125
+    },
+    {
+      "task_id": "google_calendar_v3:0034",
+      "api": "google_calendar_v3",
+      "index": 34,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_calendar_v3/0034_spec/filtered_spec.yaml",
+        "bytes": 15619,
+        "pretokens": 3103,
+        "bytes_per_pretoken": 5.034
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_calendar_v3/0034_client/client.ts",
+        "bytes": 120568,
+        "pretokens": 25688,
+        "bytes_per_pretoken": 4.694
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0034_client/client.ts",
+        "bytes": 13494,
+        "pretokens": 3072,
+        "bytes_per_pretoken": 4.393
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_calendar_v3/0034_client/client.schemas.ts",
+        "bytes": 45611,
+        "pretokens": 9407,
+        "bytes_per_pretoken": 4.849
+      },
+      "split_client_plus_schemas_pretokens": 12479,
+      "ratio_monolith_over_spec": 8.278,
+      "ratio_split_client_over_spec": 0.99,
+      "ratio_split_both_over_spec": 4.022,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0034_client/client.ts",
+        "bytes": 13494,
+        "pretokens": 3072,
+        "bytes_per_pretoken": 4.393
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_calendar_v3/0034_client/client.schemas.ts",
+        "bytes": 2798,
+        "pretokens": 586,
+        "bytes_per_pretoken": 4.775
+      },
+      "pruned_both_pretokens": 3658,
+      "ratio_pruned_both_over_spec": 1.179
+    },
+    {
+      "task_id": "google_sheet_v4:0004",
+      "api": "google_sheet_v4",
+      "index": 4,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_sheet_v4/0004_spec/filtered_spec.yaml",
+        "bytes": 37174,
+        "pretokens": 7605,
+        "bytes_per_pretoken": 4.888
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0004_client/client.ts",
+        "bytes": 271525,
+        "pretokens": 57279,
+        "bytes_per_pretoken": 4.74
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0004_client/client.ts",
+        "bytes": 19265,
+        "pretokens": 4501,
+        "bytes_per_pretoken": 4.28
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0004_client/client.schemas.ts",
+        "bytes": 190913,
+        "pretokens": 39577,
+        "bytes_per_pretoken": 4.824
+      },
+      "split_client_plus_schemas_pretokens": 44078,
+      "ratio_monolith_over_spec": 7.532,
+      "ratio_split_client_over_spec": 0.592,
+      "ratio_split_both_over_spec": 5.796,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0004_client/client.ts",
+        "bytes": 19265,
+        "pretokens": 4501,
+        "bytes_per_pretoken": 4.28
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0004_client/client.schemas.ts",
+        "bytes": 16488,
+        "pretokens": 3641,
+        "bytes_per_pretoken": 4.528
+      },
+      "pruned_both_pretokens": 8142,
+      "ratio_pruned_both_over_spec": 1.071
+    },
+    {
+      "task_id": "google_sheet_v4:0008",
+      "api": "google_sheet_v4",
+      "index": 8,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_sheet_v4/0008_spec/filtered_spec.yaml",
+        "bytes": 179502,
+        "pretokens": 34218,
+        "bytes_per_pretoken": 5.246
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0008_client/client.ts",
+        "bytes": 271001,
+        "pretokens": 56999,
+        "bytes_per_pretoken": 4.754
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0008_client/client.ts",
+        "bytes": 18804,
+        "pretokens": 4225,
+        "bytes_per_pretoken": 4.451
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0008_client/client.schemas.ts",
+        "bytes": 190913,
+        "pretokens": 39577,
+        "bytes_per_pretoken": 4.824
+      },
+      "split_client_plus_schemas_pretokens": 43802,
+      "ratio_monolith_over_spec": 1.666,
+      "ratio_split_client_over_spec": 0.123,
+      "ratio_split_both_over_spec": 1.28,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0008_client/client.ts",
+        "bytes": 18804,
+        "pretokens": 4225,
+        "bytes_per_pretoken": 4.451
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0008_client/client.schemas.ts",
+        "bytes": 126606,
+        "pretokens": 26775,
+        "bytes_per_pretoken": 4.729
+      },
+      "pruned_both_pretokens": 31000,
+      "ratio_pruned_both_over_spec": 0.906
+    },
+    {
+      "task_id": "google_sheet_v4:0013",
+      "api": "google_sheet_v4",
+      "index": 13,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_sheet_v4/0013_spec/filtered_spec.yaml",
+        "bytes": 187307,
+        "pretokens": 35587,
+        "bytes_per_pretoken": 5.263
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0013_client/client.ts",
+        "bytes": 272335,
+        "pretokens": 57259,
+        "bytes_per_pretoken": 4.756
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0013_client/client.ts",
+        "bytes": 20123,
+        "pretokens": 4483,
+        "bytes_per_pretoken": 4.489
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0013_client/client.schemas.ts",
+        "bytes": 190913,
+        "pretokens": 39577,
+        "bytes_per_pretoken": 4.824
+      },
+      "split_client_plus_schemas_pretokens": 44060,
+      "ratio_monolith_over_spec": 1.609,
+      "ratio_split_client_over_spec": 0.126,
+      "ratio_split_both_over_spec": 1.238,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0013_client/client.ts",
+        "bytes": 20123,
+        "pretokens": 4483,
+        "bytes_per_pretoken": 4.489
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0013_client/client.schemas.ts",
+        "bytes": 131349,
+        "pretokens": 27700,
+        "bytes_per_pretoken": 4.742
+      },
+      "pruned_both_pretokens": 32183,
+      "ratio_pruned_both_over_spec": 0.904
+    },
+    {
+      "task_id": "google_sheet_v4:0014",
+      "api": "google_sheet_v4",
+      "index": 14,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_sheet_v4/0014_spec/filtered_spec.yaml",
+        "bytes": 185679,
+        "pretokens": 35250,
+        "bytes_per_pretoken": 5.267
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0014_client/client.ts",
+        "bytes": 270914,
+        "pretokens": 56929,
+        "bytes_per_pretoken": 4.759
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0014_client/client.ts",
+        "bytes": 18715,
+        "pretokens": 4153,
+        "bytes_per_pretoken": 4.506
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0014_client/client.schemas.ts",
+        "bytes": 190913,
+        "pretokens": 39577,
+        "bytes_per_pretoken": 4.824
+      },
+      "split_client_plus_schemas_pretokens": 43730,
+      "ratio_monolith_over_spec": 1.615,
+      "ratio_split_client_over_spec": 0.118,
+      "ratio_split_both_over_spec": 1.241,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0014_client/client.ts",
+        "bytes": 18715,
+        "pretokens": 4153,
+        "bytes_per_pretoken": 4.506
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0014_client/client.schemas.ts",
+        "bytes": 131242,
+        "pretokens": 27672,
+        "bytes_per_pretoken": 4.743
+      },
+      "pruned_both_pretokens": 31825,
+      "ratio_pruned_both_over_spec": 0.903
+    },
+    {
+      "task_id": "google_sheet_v4:0016",
+      "api": "google_sheet_v4",
+      "index": 16,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/google_sheet_v4/0016_spec/filtered_spec.yaml",
+        "bytes": 251224,
+        "pretokens": 47099,
+        "bytes_per_pretoken": 5.334
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/google_sheet_v4/0016_client/client.ts",
+        "bytes": 270841,
+        "pretokens": 56940,
+        "bytes_per_pretoken": 4.757
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0016_client/client.ts",
+        "bytes": 18646,
+        "pretokens": 4164,
+        "bytes_per_pretoken": 4.478
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/google_sheet_v4/0016_client/client.schemas.ts",
+        "bytes": 190913,
+        "pretokens": 39577,
+        "bytes_per_pretoken": 4.824
+      },
+      "split_client_plus_schemas_pretokens": 43741,
+      "ratio_monolith_over_spec": 1.209,
+      "ratio_split_client_over_spec": 0.088,
+      "ratio_split_both_over_spec": 0.929,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0016_client/client.ts",
+        "bytes": 18646,
+        "pretokens": 4164,
+        "bytes_per_pretoken": 4.478
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/google_sheet_v4/0016_client/client.schemas.ts",
+        "bytes": 180675,
+        "pretokens": 37610,
+        "bytes_per_pretoken": 4.804
+      },
+      "pruned_both_pretokens": 41774,
+      "ratio_pruned_both_over_spec": 0.887
+    },
+    {
+      "task_id": "slack:0000",
+      "api": "slack",
+      "index": 0,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0000_spec/filtered_spec.yaml",
+        "bytes": 19359,
+        "pretokens": 3540,
+        "bytes_per_pretoken": 5.469
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0000_client/client.ts",
+        "bytes": 81664,
+        "pretokens": 17975,
+        "bytes_per_pretoken": 4.543
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0000_client/client.ts",
+        "bytes": 6641,
+        "pretokens": 1416,
+        "bytes_per_pretoken": 4.69
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0000_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4802,
+      "ratio_monolith_over_spec": 5.078,
+      "ratio_split_client_over_spec": 0.4,
+      "ratio_split_both_over_spec": 1.356,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0000_client/client.ts",
+        "bytes": 6641,
+        "pretokens": 1416,
+        "bytes_per_pretoken": 4.69
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0000_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1517,
+      "ratio_pruned_both_over_spec": 0.429
+    },
+    {
+      "task_id": "slack:0008",
+      "api": "slack",
+      "index": 8,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0008_spec/filtered_spec.yaml",
+        "bytes": 20914,
+        "pretokens": 3490,
+        "bytes_per_pretoken": 5.993
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0008_client/client.ts",
+        "bytes": 81305,
+        "pretokens": 17816,
+        "bytes_per_pretoken": 4.564
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0008_client/client.ts",
+        "bytes": 6305,
+        "pretokens": 1263,
+        "bytes_per_pretoken": 4.992
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0008_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4649,
+      "ratio_monolith_over_spec": 5.105,
+      "ratio_split_client_over_spec": 0.362,
+      "ratio_split_both_over_spec": 1.332,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0008_client/client.ts",
+        "bytes": 6305,
+        "pretokens": 1263,
+        "bytes_per_pretoken": 4.992
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0008_client/client.schemas.ts",
+        "bytes": 590,
+        "pretokens": 145,
+        "bytes_per_pretoken": 4.069
+      },
+      "pruned_both_pretokens": 1408,
+      "ratio_pruned_both_over_spec": 0.403
+    },
+    {
+      "task_id": "slack:0009",
+      "api": "slack",
+      "index": 9,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0009_spec/filtered_spec.yaml",
+        "bytes": 24535,
+        "pretokens": 4399,
+        "bytes_per_pretoken": 5.577
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0009_client/client.ts",
+        "bytes": 81632,
+        "pretokens": 17802,
+        "bytes_per_pretoken": 4.586
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0009_client/client.ts",
+        "bytes": 6620,
+        "pretokens": 1246,
+        "bytes_per_pretoken": 5.313
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0009_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4632,
+      "ratio_monolith_over_spec": 4.047,
+      "ratio_split_client_over_spec": 0.283,
+      "ratio_split_both_over_spec": 1.053,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0009_client/client.ts",
+        "bytes": 6620,
+        "pretokens": 1246,
+        "bytes_per_pretoken": 5.313
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0009_client/client.schemas.ts",
+        "bytes": 3610,
+        "pretokens": 943,
+        "bytes_per_pretoken": 3.828
+      },
+      "pruned_both_pretokens": 2189,
+      "ratio_pruned_both_over_spec": 0.498
+    },
+    {
+      "task_id": "slack:0014",
+      "api": "slack",
+      "index": 14,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0014_spec/filtered_spec.yaml",
+        "bytes": 52442,
+        "pretokens": 9537,
+        "bytes_per_pretoken": 5.499
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0014_client/client.ts",
+        "bytes": 81078,
+        "pretokens": 17769,
+        "bytes_per_pretoken": 4.563
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0014_client/client.ts",
+        "bytes": 6074,
+        "pretokens": 1213,
+        "bytes_per_pretoken": 5.007
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0014_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4599,
+      "ratio_monolith_over_spec": 1.863,
+      "ratio_split_client_over_spec": 0.127,
+      "ratio_split_both_over_spec": 0.482,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0014_client/client.ts",
+        "bytes": 6074,
+        "pretokens": 1213,
+        "bytes_per_pretoken": 5.007
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0014_client/client.schemas.ts",
+        "bytes": 8653,
+        "pretokens": 2163,
+        "bytes_per_pretoken": 4.0
+      },
+      "pruned_both_pretokens": 3376,
+      "ratio_pruned_both_over_spec": 0.354
+    },
+    {
+      "task_id": "slack:0016",
+      "api": "slack",
+      "index": 16,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0016_spec/filtered_spec.yaml",
+        "bytes": 18474,
+        "pretokens": 3194,
+        "bytes_per_pretoken": 5.784
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0016_client/client.ts",
+        "bytes": 82397,
+        "pretokens": 17912,
+        "bytes_per_pretoken": 4.6
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0016_client/client.ts",
+        "bytes": 7374,
+        "pretokens": 1353,
+        "bytes_per_pretoken": 5.45
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0016_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4739,
+      "ratio_monolith_over_spec": 5.608,
+      "ratio_split_client_over_spec": 0.424,
+      "ratio_split_both_over_spec": 1.484,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0016_client/client.ts",
+        "bytes": 7374,
+        "pretokens": 1353,
+        "bytes_per_pretoken": 5.45
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0016_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1454,
+      "ratio_pruned_both_over_spec": 0.455
+    },
+    {
+      "task_id": "slack:0020",
+      "api": "slack",
+      "index": 20,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0020_spec/filtered_spec.yaml",
+        "bytes": 26176,
+        "pretokens": 4695,
+        "bytes_per_pretoken": 5.575
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0020_client/client.ts",
+        "bytes": 81978,
+        "pretokens": 17908,
+        "bytes_per_pretoken": 4.578
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0020_client/client.ts",
+        "bytes": 6977,
+        "pretokens": 1355,
+        "bytes_per_pretoken": 5.149
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0020_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4741,
+      "ratio_monolith_over_spec": 3.814,
+      "ratio_split_client_over_spec": 0.289,
+      "ratio_split_both_over_spec": 1.01,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0020_client/client.ts",
+        "bytes": 6977,
+        "pretokens": 1355,
+        "bytes_per_pretoken": 5.149
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0020_client/client.schemas.ts",
+        "bytes": 3610,
+        "pretokens": 943,
+        "bytes_per_pretoken": 3.828
+      },
+      "pruned_both_pretokens": 2298,
+      "ratio_pruned_both_over_spec": 0.489
+    },
+    {
+      "task_id": "slack:0021",
+      "api": "slack",
+      "index": 21,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0021_spec/filtered_spec.yaml",
+        "bytes": 19106,
+        "pretokens": 3215,
+        "bytes_per_pretoken": 5.943
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0021_client/client.ts",
+        "bytes": 82356,
+        "pretokens": 17934,
+        "bytes_per_pretoken": 4.592
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0021_client/client.ts",
+        "bytes": 7333,
+        "pretokens": 1375,
+        "bytes_per_pretoken": 5.333
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0021_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4761,
+      "ratio_monolith_over_spec": 5.578,
+      "ratio_split_client_over_spec": 0.428,
+      "ratio_split_both_over_spec": 1.481,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0021_client/client.ts",
+        "bytes": 7333,
+        "pretokens": 1375,
+        "bytes_per_pretoken": 5.333
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0021_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1476,
+      "ratio_pruned_both_over_spec": 0.459
+    },
+    {
+      "task_id": "slack:0025",
+      "api": "slack",
+      "index": 25,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0025_spec/filtered_spec.yaml",
+        "bytes": 17515,
+        "pretokens": 3145,
+        "bytes_per_pretoken": 5.569
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0025_client/client.ts",
+        "bytes": 80110,
+        "pretokens": 17688,
+        "bytes_per_pretoken": 4.529
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0025_client/client.ts",
+        "bytes": 5087,
+        "pretokens": 1129,
+        "bytes_per_pretoken": 4.506
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0025_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4515,
+      "ratio_monolith_over_spec": 5.624,
+      "ratio_split_client_over_spec": 0.359,
+      "ratio_split_both_over_spec": 1.436,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0025_client/client.ts",
+        "bytes": 5087,
+        "pretokens": 1129,
+        "bytes_per_pretoken": 4.506
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0025_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1230,
+      "ratio_pruned_both_over_spec": 0.391
+    },
+    {
+      "task_id": "slack:0027",
+      "api": "slack",
+      "index": 27,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0027_spec/filtered_spec.yaml",
+        "bytes": 16356,
+        "pretokens": 2888,
+        "bytes_per_pretoken": 5.663
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0027_client/client.ts",
+        "bytes": 82642,
+        "pretokens": 18103,
+        "bytes_per_pretoken": 4.565
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0027_client/client.ts",
+        "bytes": 7619,
+        "pretokens": 1544,
+        "bytes_per_pretoken": 4.935
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0027_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4930,
+      "ratio_monolith_over_spec": 6.268,
+      "ratio_split_client_over_spec": 0.535,
+      "ratio_split_both_over_spec": 1.707,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0027_client/client.ts",
+        "bytes": 7619,
+        "pretokens": 1544,
+        "bytes_per_pretoken": 4.935
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0027_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1645,
+      "ratio_pruned_both_over_spec": 0.57
+    },
+    {
+      "task_id": "slack:0036",
+      "api": "slack",
+      "index": 36,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0036_spec/filtered_spec.yaml",
+        "bytes": 16126,
+        "pretokens": 2803,
+        "bytes_per_pretoken": 5.753
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0036_client/client.ts",
+        "bytes": 81468,
+        "pretokens": 17875,
+        "bytes_per_pretoken": 4.558
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0036_client/client.ts",
+        "bytes": 6445,
+        "pretokens": 1316,
+        "bytes_per_pretoken": 4.897
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0036_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4702,
+      "ratio_monolith_over_spec": 6.377,
+      "ratio_split_client_over_spec": 0.469,
+      "ratio_split_both_over_spec": 1.677,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0036_client/client.ts",
+        "bytes": 6445,
+        "pretokens": 1316,
+        "bytes_per_pretoken": 4.897
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0036_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1417,
+      "ratio_pruned_both_over_spec": 0.506
+    },
+    {
+      "task_id": "slack:0041",
+      "api": "slack",
+      "index": 41,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0041_spec/filtered_spec.yaml",
+        "bytes": 17242,
+        "pretokens": 2998,
+        "bytes_per_pretoken": 5.751
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0041_client/client.ts",
+        "bytes": 81016,
+        "pretokens": 17809,
+        "bytes_per_pretoken": 4.549
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0041_client/client.ts",
+        "bytes": 6031,
+        "pretokens": 1261,
+        "bytes_per_pretoken": 4.783
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0041_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4647,
+      "ratio_monolith_over_spec": 5.94,
+      "ratio_split_client_over_spec": 0.421,
+      "ratio_split_both_over_spec": 1.55,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0041_client/client.ts",
+        "bytes": 6031,
+        "pretokens": 1261,
+        "bytes_per_pretoken": 4.783
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0041_client/client.schemas.ts",
+        "bytes": 664,
+        "pretokens": 171,
+        "bytes_per_pretoken": 3.883
+      },
+      "pruned_both_pretokens": 1432,
+      "ratio_pruned_both_over_spec": 0.478
+    },
+    {
+      "task_id": "slack:0043",
+      "api": "slack",
+      "index": 43,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0043_spec/filtered_spec.yaml",
+        "bytes": 18704,
+        "pretokens": 3230,
+        "bytes_per_pretoken": 5.791
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0043_client/client.ts",
+        "bytes": 82308,
+        "pretokens": 17912,
+        "bytes_per_pretoken": 4.595
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0043_client/client.ts",
+        "bytes": 7285,
+        "pretokens": 1353,
+        "bytes_per_pretoken": 5.384
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0043_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4739,
+      "ratio_monolith_over_spec": 5.546,
+      "ratio_split_client_over_spec": 0.419,
+      "ratio_split_both_over_spec": 1.467,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0043_client/client.ts",
+        "bytes": 7285,
+        "pretokens": 1353,
+        "bytes_per_pretoken": 5.384
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0043_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1454,
+      "ratio_pruned_both_over_spec": 0.45
+    },
+    {
+      "task_id": "slack:0045",
+      "api": "slack",
+      "index": 45,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0045_spec/filtered_spec.yaml",
+        "bytes": 18257,
+        "pretokens": 3174,
+        "bytes_per_pretoken": 5.752
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0045_client/client.ts",
+        "bytes": 82529,
+        "pretokens": 17958,
+        "bytes_per_pretoken": 4.596
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0045_client/client.ts",
+        "bytes": 7506,
+        "pretokens": 1399,
+        "bytes_per_pretoken": 5.365
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0045_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4785,
+      "ratio_monolith_over_spec": 5.658,
+      "ratio_split_client_over_spec": 0.441,
+      "ratio_split_both_over_spec": 1.508,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0045_client/client.ts",
+        "bytes": 7506,
+        "pretokens": 1399,
+        "bytes_per_pretoken": 5.365
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0045_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1500,
+      "ratio_pruned_both_over_spec": 0.473
+    },
+    {
+      "task_id": "slack:0046",
+      "api": "slack",
+      "index": 46,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0046_spec/filtered_spec.yaml",
+        "bytes": 19276,
+        "pretokens": 3405,
+        "bytes_per_pretoken": 5.661
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0046_client/client.ts",
+        "bytes": 81657,
+        "pretokens": 17966,
+        "bytes_per_pretoken": 4.545
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0046_client/client.ts",
+        "bytes": 6645,
+        "pretokens": 1410,
+        "bytes_per_pretoken": 4.713
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0046_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4796,
+      "ratio_monolith_over_spec": 5.276,
+      "ratio_split_client_over_spec": 0.414,
+      "ratio_split_both_over_spec": 1.409,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0046_client/client.ts",
+        "bytes": 6645,
+        "pretokens": 1410,
+        "bytes_per_pretoken": 4.713
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0046_client/client.schemas.ts",
+        "bytes": 518,
+        "pretokens": 124,
+        "bytes_per_pretoken": 4.177
+      },
+      "pruned_both_pretokens": 1534,
+      "ratio_pruned_both_over_spec": 0.451
+    },
+    {
+      "task_id": "slack:0050",
+      "api": "slack",
+      "index": 50,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0050_spec/filtered_spec.yaml",
+        "bytes": 22356,
+        "pretokens": 3819,
+        "bytes_per_pretoken": 5.854
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0050_client/client.ts",
+        "bytes": 82428,
+        "pretokens": 18171,
+        "bytes_per_pretoken": 4.536
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0050_client/client.ts",
+        "bytes": 7470,
+        "pretokens": 1629,
+        "bytes_per_pretoken": 4.586
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0050_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5015,
+      "ratio_monolith_over_spec": 4.758,
+      "ratio_split_client_over_spec": 0.427,
+      "ratio_split_both_over_spec": 1.313,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0050_client/client.ts",
+        "bytes": 7470,
+        "pretokens": 1629,
+        "bytes_per_pretoken": 4.586
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0050_client/client.schemas.ts",
+        "bytes": 892,
+        "pretokens": 232,
+        "bytes_per_pretoken": 3.845
+      },
+      "pruned_both_pretokens": 1861,
+      "ratio_pruned_both_over_spec": 0.487
+    },
+    {
+      "task_id": "slack:0052",
+      "api": "slack",
+      "index": 52,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0052_spec/filtered_spec.yaml",
+        "bytes": 17325,
+        "pretokens": 3071,
+        "bytes_per_pretoken": 5.641
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0052_client/client.ts",
+        "bytes": 81565,
+        "pretokens": 17962,
+        "bytes_per_pretoken": 4.541
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0052_client/client.ts",
+        "bytes": 6542,
+        "pretokens": 1403,
+        "bytes_per_pretoken": 4.663
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0052_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4789,
+      "ratio_monolith_over_spec": 5.849,
+      "ratio_split_client_over_spec": 0.457,
+      "ratio_split_both_over_spec": 1.559,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0052_client/client.ts",
+        "bytes": 6542,
+        "pretokens": 1403,
+        "bytes_per_pretoken": 4.663
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0052_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1504,
+      "ratio_pruned_both_over_spec": 0.49
+    },
+    {
+      "task_id": "slack:0054",
+      "api": "slack",
+      "index": 54,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0054_spec/filtered_spec.yaml",
+        "bytes": 16613,
+        "pretokens": 2959,
+        "bytes_per_pretoken": 5.614
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0054_client/client.ts",
+        "bytes": 81546,
+        "pretokens": 17944,
+        "bytes_per_pretoken": 4.544
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0054_client/client.ts",
+        "bytes": 6523,
+        "pretokens": 1385,
+        "bytes_per_pretoken": 4.71
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0054_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4771,
+      "ratio_monolith_over_spec": 6.064,
+      "ratio_split_client_over_spec": 0.468,
+      "ratio_split_both_over_spec": 1.612,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0054_client/client.ts",
+        "bytes": 6523,
+        "pretokens": 1385,
+        "bytes_per_pretoken": 4.71
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0054_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1486,
+      "ratio_pruned_both_over_spec": 0.502
+    },
+    {
+      "task_id": "slack:0055",
+      "api": "slack",
+      "index": 55,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0055_spec/filtered_spec.yaml",
+        "bytes": 16888,
+        "pretokens": 3002,
+        "bytes_per_pretoken": 5.626
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0055_client/client.ts",
+        "bytes": 81621,
+        "pretokens": 17962,
+        "bytes_per_pretoken": 4.544
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0055_client/client.ts",
+        "bytes": 6598,
+        "pretokens": 1403,
+        "bytes_per_pretoken": 4.703
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0055_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4789,
+      "ratio_monolith_over_spec": 5.983,
+      "ratio_split_client_over_spec": 0.467,
+      "ratio_split_both_over_spec": 1.595,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0055_client/client.ts",
+        "bytes": 6598,
+        "pretokens": 1403,
+        "bytes_per_pretoken": 4.703
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0055_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1504,
+      "ratio_pruned_both_over_spec": 0.501
+    },
+    {
+      "task_id": "slack:0057",
+      "api": "slack",
+      "index": 57,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0057_spec/filtered_spec.yaml",
+        "bytes": 49529,
+        "pretokens": 8774,
+        "bytes_per_pretoken": 5.645
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0057_client/client.ts",
+        "bytes": 84649,
+        "pretokens": 18722,
+        "bytes_per_pretoken": 4.521
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0057_client/client.ts",
+        "bytes": 9717,
+        "pretokens": 2183,
+        "bytes_per_pretoken": 4.451
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0057_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5569,
+      "ratio_monolith_over_spec": 2.134,
+      "ratio_split_client_over_spec": 0.249,
+      "ratio_split_both_over_spec": 0.635,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0057_client/client.ts",
+        "bytes": 9717,
+        "pretokens": 2183,
+        "bytes_per_pretoken": 4.451
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0057_client/client.schemas.ts",
+        "bytes": 7098,
+        "pretokens": 1796,
+        "bytes_per_pretoken": 3.952
+      },
+      "pruned_both_pretokens": 3979,
+      "ratio_pruned_both_over_spec": 0.453
+    },
+    {
+      "task_id": "slack:0061",
+      "api": "slack",
+      "index": 61,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0061_spec/filtered_spec.yaml",
+        "bytes": 22363,
+        "pretokens": 3781,
+        "bytes_per_pretoken": 5.915
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0061_client/client.ts",
+        "bytes": 82591,
+        "pretokens": 18177,
+        "bytes_per_pretoken": 4.544
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0061_client/client.ts",
+        "bytes": 7581,
+        "pretokens": 1621,
+        "bytes_per_pretoken": 4.677
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0061_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5007,
+      "ratio_monolith_over_spec": 4.807,
+      "ratio_split_client_over_spec": 0.429,
+      "ratio_split_both_over_spec": 1.324,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0061_client/client.ts",
+        "bytes": 7581,
+        "pretokens": 1621,
+        "bytes_per_pretoken": 4.677
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0061_client/client.schemas.ts",
+        "bytes": 484,
+        "pretokens": 108,
+        "bytes_per_pretoken": 4.481
+      },
+      "pruned_both_pretokens": 1729,
+      "ratio_pruned_both_over_spec": 0.457
+    },
+    {
+      "task_id": "slack:0064",
+      "api": "slack",
+      "index": 64,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0064_spec/filtered_spec.yaml",
+        "bytes": 18887,
+        "pretokens": 3366,
+        "bytes_per_pretoken": 5.611
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0064_client/client.ts",
+        "bytes": 81959,
+        "pretokens": 18149,
+        "bytes_per_pretoken": 4.516
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0064_client/client.ts",
+        "bytes": 6936,
+        "pretokens": 1590,
+        "bytes_per_pretoken": 4.362
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0064_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4976,
+      "ratio_monolith_over_spec": 5.392,
+      "ratio_split_client_over_spec": 0.472,
+      "ratio_split_both_over_spec": 1.478,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0064_client/client.ts",
+        "bytes": 6936,
+        "pretokens": 1590,
+        "bytes_per_pretoken": 4.362
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0064_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1691,
+      "ratio_pruned_both_over_spec": 0.502
+    },
+    {
+      "task_id": "slack:0076",
+      "api": "slack",
+      "index": 76,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0076_spec/filtered_spec.yaml",
+        "bytes": 45112,
+        "pretokens": 8096,
+        "bytes_per_pretoken": 5.572
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0076_client/client.ts",
+        "bytes": 82527,
+        "pretokens": 18180,
+        "bytes_per_pretoken": 4.539
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0076_client/client.ts",
+        "bytes": 7541,
+        "pretokens": 1630,
+        "bytes_per_pretoken": 4.626
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0076_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5016,
+      "ratio_monolith_over_spec": 2.246,
+      "ratio_split_client_over_spec": 0.201,
+      "ratio_split_both_over_spec": 0.62,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0076_client/client.ts",
+        "bytes": 7541,
+        "pretokens": 1630,
+        "bytes_per_pretoken": 4.626
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0076_client/client.schemas.ts",
+        "bytes": 6859,
+        "pretokens": 1743,
+        "bytes_per_pretoken": 3.935
+      },
+      "pruned_both_pretokens": 3373,
+      "ratio_pruned_both_over_spec": 0.417
+    },
+    {
+      "task_id": "slack:0079",
+      "api": "slack",
+      "index": 79,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0079_spec/filtered_spec.yaml",
+        "bytes": 42655,
+        "pretokens": 7674,
+        "bytes_per_pretoken": 5.558
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0079_client/client.ts",
+        "bytes": 81752,
+        "pretokens": 17908,
+        "bytes_per_pretoken": 4.565
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0079_client/client.ts",
+        "bytes": 6822,
+        "pretokens": 1373,
+        "bytes_per_pretoken": 4.969
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0079_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4759,
+      "ratio_monolith_over_spec": 2.334,
+      "ratio_split_client_over_spec": 0.179,
+      "ratio_split_both_over_spec": 0.62,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0079_client/client.ts",
+        "bytes": 6822,
+        "pretokens": 1373,
+        "bytes_per_pretoken": 4.969
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0079_client/client.schemas.ts",
+        "bytes": 6859,
+        "pretokens": 1743,
+        "bytes_per_pretoken": 3.935
+      },
+      "pruned_both_pretokens": 3116,
+      "ratio_pruned_both_over_spec": 0.406
+    },
+    {
+      "task_id": "slack:0080",
+      "api": "slack",
+      "index": 80,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0080_spec/filtered_spec.yaml",
+        "bytes": 30387,
+        "pretokens": 5167,
+        "bytes_per_pretoken": 5.881
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0080_client/client.ts",
+        "bytes": 82997,
+        "pretokens": 18225,
+        "bytes_per_pretoken": 4.554
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0080_client/client.ts",
+        "bytes": 8070,
+        "pretokens": 1691,
+        "bytes_per_pretoken": 4.772
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0080_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5077,
+      "ratio_monolith_over_spec": 3.527,
+      "ratio_split_client_over_spec": 0.327,
+      "ratio_split_both_over_spec": 0.983,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0080_client/client.ts",
+        "bytes": 8070,
+        "pretokens": 1691,
+        "bytes_per_pretoken": 4.772
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0080_client/client.schemas.ts",
+        "bytes": 1362,
+        "pretokens": 364,
+        "bytes_per_pretoken": 3.742
+      },
+      "pruned_both_pretokens": 2055,
+      "ratio_pruned_both_over_spec": 0.398
+    },
+    {
+      "task_id": "slack:0084",
+      "api": "slack",
+      "index": 84,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0084_spec/filtered_spec.yaml",
+        "bytes": 19570,
+        "pretokens": 3141,
+        "bytes_per_pretoken": 6.23
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0084_client/client.ts",
+        "bytes": 82414,
+        "pretokens": 17901,
+        "bytes_per_pretoken": 4.604
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0084_client/client.ts",
+        "bytes": 7391,
+        "pretokens": 1342,
+        "bytes_per_pretoken": 5.507
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0084_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4728,
+      "ratio_monolith_over_spec": 5.699,
+      "ratio_split_client_over_spec": 0.427,
+      "ratio_split_both_over_spec": 1.505,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0084_client/client.ts",
+        "bytes": 7391,
+        "pretokens": 1342,
+        "bytes_per_pretoken": 5.507
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0084_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1443,
+      "ratio_pruned_both_over_spec": 0.459
+    },
+    {
+      "task_id": "slack:0087",
+      "api": "slack",
+      "index": 87,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0087_spec/filtered_spec.yaml",
+        "bytes": 63169,
+        "pretokens": 11182,
+        "bytes_per_pretoken": 5.649
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0087_client/client.ts",
+        "bytes": 84398,
+        "pretokens": 18479,
+        "bytes_per_pretoken": 4.567
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0087_client/client.ts",
+        "bytes": 9389,
+        "pretokens": 1923,
+        "bytes_per_pretoken": 4.882
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0087_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5309,
+      "ratio_monolith_over_spec": 1.653,
+      "ratio_split_client_over_spec": 0.172,
+      "ratio_split_both_over_spec": 0.475,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0087_client/client.ts",
+        "bytes": 9389,
+        "pretokens": 1923,
+        "bytes_per_pretoken": 4.882
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0087_client/client.schemas.ts",
+        "bytes": 8653,
+        "pretokens": 2163,
+        "bytes_per_pretoken": 4.0
+      },
+      "pruned_both_pretokens": 4086,
+      "ratio_pruned_both_over_spec": 0.365
+    },
+    {
+      "task_id": "slack:0092",
+      "api": "slack",
+      "index": 92,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0092_spec/filtered_spec.yaml",
+        "bytes": 19681,
+        "pretokens": 3163,
+        "bytes_per_pretoken": 6.222
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0092_client/client.ts",
+        "bytes": 82416,
+        "pretokens": 17908,
+        "bytes_per_pretoken": 4.602
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0092_client/client.ts",
+        "bytes": 7393,
+        "pretokens": 1349,
+        "bytes_per_pretoken": 5.48
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0092_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4735,
+      "ratio_monolith_over_spec": 5.662,
+      "ratio_split_client_over_spec": 0.426,
+      "ratio_split_both_over_spec": 1.497,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0092_client/client.ts",
+        "bytes": 7393,
+        "pretokens": 1349,
+        "bytes_per_pretoken": 5.48
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0092_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1450,
+      "ratio_pruned_both_over_spec": 0.458
+    },
+    {
+      "task_id": "slack:0096",
+      "api": "slack",
+      "index": 96,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0096_spec/filtered_spec.yaml",
+        "bytes": 55373,
+        "pretokens": 9991,
+        "bytes_per_pretoken": 5.542
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0096_client/client.ts",
+        "bytes": 81570,
+        "pretokens": 17909,
+        "bytes_per_pretoken": 4.555
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0096_client/client.ts",
+        "bytes": 6547,
+        "pretokens": 1350,
+        "bytes_per_pretoken": 4.85
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0096_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4736,
+      "ratio_monolith_over_spec": 1.793,
+      "ratio_split_client_over_spec": 0.135,
+      "ratio_split_both_over_spec": 0.474,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0096_client/client.ts",
+        "bytes": 6547,
+        "pretokens": 1350,
+        "bytes_per_pretoken": 4.85
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0096_client/client.schemas.ts",
+        "bytes": 8653,
+        "pretokens": 2163,
+        "bytes_per_pretoken": 4.0
+      },
+      "pruned_both_pretokens": 3513,
+      "ratio_pruned_both_over_spec": 0.352
+    },
+    {
+      "task_id": "slack:0098",
+      "api": "slack",
+      "index": 98,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0098_spec/filtered_spec.yaml",
+        "bytes": 48683,
+        "pretokens": 8670,
+        "bytes_per_pretoken": 5.615
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0098_client/client.ts",
+        "bytes": 83042,
+        "pretokens": 18281,
+        "bytes_per_pretoken": 4.543
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0098_client/client.ts",
+        "bytes": 8112,
+        "pretokens": 1746,
+        "bytes_per_pretoken": 4.646
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0098_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5132,
+      "ratio_monolith_over_spec": 2.109,
+      "ratio_split_client_over_spec": 0.201,
+      "ratio_split_both_over_spec": 0.592,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0098_client/client.ts",
+        "bytes": 8112,
+        "pretokens": 1746,
+        "bytes_per_pretoken": 4.646
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0098_client/client.schemas.ts",
+        "bytes": 6859,
+        "pretokens": 1743,
+        "bytes_per_pretoken": 3.935
+      },
+      "pruned_both_pretokens": 3489,
+      "ratio_pruned_both_over_spec": 0.402
+    },
+    {
+      "task_id": "slack:0100",
+      "api": "slack",
+      "index": 100,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0100_spec/filtered_spec.yaml",
+        "bytes": 51302,
+        "pretokens": 9312,
+        "bytes_per_pretoken": 5.509
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0100_client/client.ts",
+        "bytes": 81837,
+        "pretokens": 17788,
+        "bytes_per_pretoken": 4.601
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0100_client/client.ts",
+        "bytes": 6833,
+        "pretokens": 1232,
+        "bytes_per_pretoken": 5.546
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0100_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4618,
+      "ratio_monolith_over_spec": 1.91,
+      "ratio_split_client_over_spec": 0.132,
+      "ratio_split_both_over_spec": 0.496,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0100_client/client.ts",
+        "bytes": 6833,
+        "pretokens": 1232,
+        "bytes_per_pretoken": 5.546
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0100_client/client.schemas.ts",
+        "bytes": 8653,
+        "pretokens": 2163,
+        "bytes_per_pretoken": 4.0
+      },
+      "pruned_both_pretokens": 3395,
+      "ratio_pruned_both_over_spec": 0.365
+    },
+    {
+      "task_id": "slack:0103",
+      "api": "slack",
+      "index": 103,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0103_spec/filtered_spec.yaml",
+        "bytes": 19393,
+        "pretokens": 3262,
+        "bytes_per_pretoken": 5.945
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0103_client/client.ts",
+        "bytes": 80281,
+        "pretokens": 17739,
+        "bytes_per_pretoken": 4.526
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0103_client/client.ts",
+        "bytes": 5258,
+        "pretokens": 1180,
+        "bytes_per_pretoken": 4.456
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0103_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4566,
+      "ratio_monolith_over_spec": 5.438,
+      "ratio_split_client_over_spec": 0.362,
+      "ratio_split_both_over_spec": 1.4,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0103_client/client.ts",
+        "bytes": 5258,
+        "pretokens": 1180,
+        "bytes_per_pretoken": 4.456
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0103_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1281,
+      "ratio_pruned_both_over_spec": 0.393
+    },
+    {
+      "task_id": "slack:0104",
+      "api": "slack",
+      "index": 104,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0104_spec/filtered_spec.yaml",
+        "bytes": 19360,
+        "pretokens": 3237,
+        "bytes_per_pretoken": 5.981
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0104_client/client.ts",
+        "bytes": 80289,
+        "pretokens": 17735,
+        "bytes_per_pretoken": 4.527
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0104_client/client.ts",
+        "bytes": 5266,
+        "pretokens": 1176,
+        "bytes_per_pretoken": 4.478
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0104_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4562,
+      "ratio_monolith_over_spec": 5.479,
+      "ratio_split_client_over_spec": 0.363,
+      "ratio_split_both_over_spec": 1.409,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0104_client/client.ts",
+        "bytes": 5266,
+        "pretokens": 1176,
+        "bytes_per_pretoken": 4.478
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0104_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1277,
+      "ratio_pruned_both_over_spec": 0.395
+    },
+    {
+      "task_id": "slack:0107",
+      "api": "slack",
+      "index": 107,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0107_spec/filtered_spec.yaml",
+        "bytes": 18800,
+        "pretokens": 3194,
+        "bytes_per_pretoken": 5.886
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0107_client/client.ts",
+        "bytes": 80488,
+        "pretokens": 17781,
+        "bytes_per_pretoken": 4.527
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0107_client/client.ts",
+        "bytes": 5465,
+        "pretokens": 1222,
+        "bytes_per_pretoken": 4.472
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0107_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4608,
+      "ratio_monolith_over_spec": 5.567,
+      "ratio_split_client_over_spec": 0.383,
+      "ratio_split_both_over_spec": 1.443,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0107_client/client.ts",
+        "bytes": 5465,
+        "pretokens": 1222,
+        "bytes_per_pretoken": 4.472
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0107_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1323,
+      "ratio_pruned_both_over_spec": 0.414
+    },
+    {
+      "task_id": "slack:0108",
+      "api": "slack",
+      "index": 108,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0108_spec/filtered_spec.yaml",
+        "bytes": 17670,
+        "pretokens": 3286,
+        "bytes_per_pretoken": 5.377
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0108_client/client.ts",
+        "bytes": 81934,
+        "pretokens": 18132,
+        "bytes_per_pretoken": 4.519
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0108_client/client.ts",
+        "bytes": 6911,
+        "pretokens": 1573,
+        "bytes_per_pretoken": 4.394
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0108_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4959,
+      "ratio_monolith_over_spec": 5.518,
+      "ratio_split_client_over_spec": 0.479,
+      "ratio_split_both_over_spec": 1.509,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0108_client/client.ts",
+        "bytes": 6911,
+        "pretokens": 1573,
+        "bytes_per_pretoken": 4.394
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0108_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1674,
+      "ratio_pruned_both_over_spec": 0.509
+    },
+    {
+      "task_id": "slack:0120",
+      "api": "slack",
+      "index": 120,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0120_spec/filtered_spec.yaml",
+        "bytes": 27164,
+        "pretokens": 4872,
+        "bytes_per_pretoken": 5.576
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0120_client/client.ts",
+        "bytes": 81083,
+        "pretokens": 17765,
+        "bytes_per_pretoken": 4.564
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0120_client/client.ts",
+        "bytes": 6085,
+        "pretokens": 1212,
+        "bytes_per_pretoken": 5.021
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0120_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4598,
+      "ratio_monolith_over_spec": 3.646,
+      "ratio_split_client_over_spec": 0.249,
+      "ratio_split_both_over_spec": 0.944,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0120_client/client.ts",
+        "bytes": 6085,
+        "pretokens": 1212,
+        "bytes_per_pretoken": 5.021
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0120_client/client.schemas.ts",
+        "bytes": 4327,
+        "pretokens": 1118,
+        "bytes_per_pretoken": 3.87
+      },
+      "pruned_both_pretokens": 2330,
+      "ratio_pruned_both_over_spec": 0.478
+    },
+    {
+      "task_id": "slack:0121",
+      "api": "slack",
+      "index": 121,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0121_spec/filtered_spec.yaml",
+        "bytes": 27418,
+        "pretokens": 4928,
+        "bytes_per_pretoken": 5.564
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0121_client/client.ts",
+        "bytes": 80574,
+        "pretokens": 17767,
+        "bytes_per_pretoken": 4.535
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0121_client/client.ts",
+        "bytes": 5562,
+        "pretokens": 1211,
+        "bytes_per_pretoken": 4.593
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0121_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4597,
+      "ratio_monolith_over_spec": 3.605,
+      "ratio_split_client_over_spec": 0.246,
+      "ratio_split_both_over_spec": 0.933,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0121_client/client.ts",
+        "bytes": 5562,
+        "pretokens": 1211,
+        "bytes_per_pretoken": 4.593
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0121_client/client.schemas.ts",
+        "bytes": 3610,
+        "pretokens": 943,
+        "bytes_per_pretoken": 3.828
+      },
+      "pruned_both_pretokens": 2154,
+      "ratio_pruned_both_over_spec": 0.437
+    },
+    {
+      "task_id": "slack:0126",
+      "api": "slack",
+      "index": 126,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0126_spec/filtered_spec.yaml",
+        "bytes": 38582,
+        "pretokens": 6969,
+        "bytes_per_pretoken": 5.536
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0126_client/client.ts",
+        "bytes": 80939,
+        "pretokens": 17879,
+        "bytes_per_pretoken": 4.527
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0126_client/client.ts",
+        "bytes": 5916,
+        "pretokens": 1320,
+        "bytes_per_pretoken": 4.482
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0126_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4706,
+      "ratio_monolith_over_spec": 2.566,
+      "ratio_split_client_over_spec": 0.189,
+      "ratio_split_both_over_spec": 0.675,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0126_client/client.ts",
+        "bytes": 5916,
+        "pretokens": 1320,
+        "bytes_per_pretoken": 4.482
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0126_client/client.schemas.ts",
+        "bytes": 6859,
+        "pretokens": 1743,
+        "bytes_per_pretoken": 3.935
+      },
+      "pruned_both_pretokens": 3063,
+      "ratio_pruned_both_over_spec": 0.44
+    },
+    {
+      "task_id": "slack:0128",
+      "api": "slack",
+      "index": 128,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0128_spec/filtered_spec.yaml",
+        "bytes": 36796,
+        "pretokens": 6667,
+        "bytes_per_pretoken": 5.519
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0128_client/client.ts",
+        "bytes": 80536,
+        "pretokens": 17756,
+        "bytes_per_pretoken": 4.536
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0128_client/client.ts",
+        "bytes": 5513,
+        "pretokens": 1197,
+        "bytes_per_pretoken": 4.606
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0128_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4583,
+      "ratio_monolith_over_spec": 2.663,
+      "ratio_split_client_over_spec": 0.18,
+      "ratio_split_both_over_spec": 0.687,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0128_client/client.ts",
+        "bytes": 5513,
+        "pretokens": 1197,
+        "bytes_per_pretoken": 4.606
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0128_client/client.schemas.ts",
+        "bytes": 6859,
+        "pretokens": 1743,
+        "bytes_per_pretoken": 3.935
+      },
+      "pruned_both_pretokens": 2940,
+      "ratio_pruned_both_over_spec": 0.441
+    },
+    {
+      "task_id": "slack:0131",
+      "api": "slack",
+      "index": 131,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0131_spec/filtered_spec.yaml",
+        "bytes": 57941,
+        "pretokens": 10678,
+        "bytes_per_pretoken": 5.426
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0131_client/client.ts",
+        "bytes": 83156,
+        "pretokens": 18386,
+        "bytes_per_pretoken": 4.523
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0131_client/client.ts",
+        "bytes": 8195,
+        "pretokens": 1841,
+        "bytes_per_pretoken": 4.451
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0131_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5227,
+      "ratio_monolith_over_spec": 1.722,
+      "ratio_split_client_over_spec": 0.172,
+      "ratio_split_both_over_spec": 0.49,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0131_client/client.ts",
+        "bytes": 8195,
+        "pretokens": 1841,
+        "bytes_per_pretoken": 4.451
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0131_client/client.schemas.ts",
+        "bytes": 9603,
+        "pretokens": 2418,
+        "bytes_per_pretoken": 3.971
+      },
+      "pruned_both_pretokens": 4259,
+      "ratio_pruned_both_over_spec": 0.399
+    },
+    {
+      "task_id": "slack:0134",
+      "api": "slack",
+      "index": 134,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0134_spec/filtered_spec.yaml",
+        "bytes": 20974,
+        "pretokens": 3514,
+        "bytes_per_pretoken": 5.969
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0134_client/client.ts",
+        "bytes": 80738,
+        "pretokens": 17748,
+        "bytes_per_pretoken": 4.549
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0134_client/client.ts",
+        "bytes": 5730,
+        "pretokens": 1192,
+        "bytes_per_pretoken": 4.807
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0134_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4578,
+      "ratio_monolith_over_spec": 5.051,
+      "ratio_split_client_over_spec": 0.339,
+      "ratio_split_both_over_spec": 1.303,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0134_client/client.ts",
+        "bytes": 5730,
+        "pretokens": 1192,
+        "bytes_per_pretoken": 4.807
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0134_client/client.schemas.ts",
+        "bytes": 797,
+        "pretokens": 197,
+        "bytes_per_pretoken": 4.046
+      },
+      "pruned_both_pretokens": 1389,
+      "ratio_pruned_both_over_spec": 0.395
+    },
+    {
+      "task_id": "slack:0143",
+      "api": "slack",
+      "index": 143,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0143_spec/filtered_spec.yaml",
+        "bytes": 28188,
+        "pretokens": 4971,
+        "bytes_per_pretoken": 5.67
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0143_client/client.ts",
+        "bytes": 82710,
+        "pretokens": 18246,
+        "bytes_per_pretoken": 4.533
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0143_client/client.ts",
+        "bytes": 7752,
+        "pretokens": 1704,
+        "bytes_per_pretoken": 4.549
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0143_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5090,
+      "ratio_monolith_over_spec": 3.67,
+      "ratio_split_client_over_spec": 0.343,
+      "ratio_split_both_over_spec": 1.024,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0143_client/client.ts",
+        "bytes": 7752,
+        "pretokens": 1704,
+        "bytes_per_pretoken": 4.549
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0143_client/client.schemas.ts",
+        "bytes": 2520,
+        "pretokens": 613,
+        "bytes_per_pretoken": 4.111
+      },
+      "pruned_both_pretokens": 2317,
+      "ratio_pruned_both_over_spec": 0.466
+    },
+    {
+      "task_id": "slack:0144",
+      "api": "slack",
+      "index": 144,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0144_spec/filtered_spec.yaml",
+        "bytes": 28995,
+        "pretokens": 5086,
+        "bytes_per_pretoken": 5.701
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0144_client/client.ts",
+        "bytes": 82237,
+        "pretokens": 18218,
+        "bytes_per_pretoken": 4.514
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0144_client/client.ts",
+        "bytes": 7279,
+        "pretokens": 1676,
+        "bytes_per_pretoken": 4.343
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0144_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5062,
+      "ratio_monolith_over_spec": 3.582,
+      "ratio_split_client_over_spec": 0.33,
+      "ratio_split_both_over_spec": 0.995,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0144_client/client.ts",
+        "bytes": 7279,
+        "pretokens": 1676,
+        "bytes_per_pretoken": 4.343
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0144_client/client.schemas.ts",
+        "bytes": 2520,
+        "pretokens": 613,
+        "bytes_per_pretoken": 4.111
+      },
+      "pruned_both_pretokens": 2289,
+      "ratio_pruned_both_over_spec": 0.45
+    },
+    {
+      "task_id": "slack:0148",
+      "api": "slack",
+      "index": 148,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0148_spec/filtered_spec.yaml",
+        "bytes": 27571,
+        "pretokens": 4685,
+        "bytes_per_pretoken": 5.885
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0148_client/client.ts",
+        "bytes": 81463,
+        "pretokens": 17863,
+        "bytes_per_pretoken": 4.56
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0148_client/client.ts",
+        "bytes": 6468,
+        "pretokens": 1311,
+        "bytes_per_pretoken": 4.934
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0148_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4697,
+      "ratio_monolith_over_spec": 3.813,
+      "ratio_split_client_over_spec": 0.28,
+      "ratio_split_both_over_spec": 1.003,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0148_client/client.ts",
+        "bytes": 6468,
+        "pretokens": 1311,
+        "bytes_per_pretoken": 4.934
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0148_client/client.schemas.ts",
+        "bytes": 1462,
+        "pretokens": 371,
+        "bytes_per_pretoken": 3.941
+      },
+      "pruned_both_pretokens": 1682,
+      "ratio_pruned_both_over_spec": 0.359
+    },
+    {
+      "task_id": "slack:0152",
+      "api": "slack",
+      "index": 152,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0152_spec/filtered_spec.yaml",
+        "bytes": 26568,
+        "pretokens": 4554,
+        "bytes_per_pretoken": 5.834
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0152_client/client.ts",
+        "bytes": 81177,
+        "pretokens": 17818,
+        "bytes_per_pretoken": 4.556
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0152_client/client.ts",
+        "bytes": 6182,
+        "pretokens": 1266,
+        "bytes_per_pretoken": 4.883
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0152_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4652,
+      "ratio_monolith_over_spec": 3.913,
+      "ratio_split_client_over_spec": 0.278,
+      "ratio_split_both_over_spec": 1.022,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0152_client/client.ts",
+        "bytes": 6182,
+        "pretokens": 1266,
+        "bytes_per_pretoken": 4.883
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0152_client/client.schemas.ts",
+        "bytes": 1462,
+        "pretokens": 371,
+        "bytes_per_pretoken": 3.941
+      },
+      "pruned_both_pretokens": 1637,
+      "ratio_pruned_both_over_spec": 0.359
+    },
+    {
+      "task_id": "slack:0156",
+      "api": "slack",
+      "index": 156,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0156_spec/filtered_spec.yaml",
+        "bytes": 64383,
+        "pretokens": 11812,
+        "bytes_per_pretoken": 5.451
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0156_client/client.ts",
+        "bytes": 82554,
+        "pretokens": 18198,
+        "bytes_per_pretoken": 4.536
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0156_client/client.ts",
+        "bytes": 7569,
+        "pretokens": 1646,
+        "bytes_per_pretoken": 4.598
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0156_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5032,
+      "ratio_monolith_over_spec": 1.541,
+      "ratio_split_client_over_spec": 0.139,
+      "ratio_split_both_over_spec": 0.426,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0156_client/client.ts",
+        "bytes": 7569,
+        "pretokens": 1646,
+        "bytes_per_pretoken": 4.598
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0156_client/client.schemas.ts",
+        "bytes": 10142,
+        "pretokens": 2523,
+        "bytes_per_pretoken": 4.02
+      },
+      "pruned_both_pretokens": 4169,
+      "ratio_pruned_both_over_spec": 0.353
+    },
+    {
+      "task_id": "slack:0157",
+      "api": "slack",
+      "index": 157,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0157_spec/filtered_spec.yaml",
+        "bytes": 34467,
+        "pretokens": 6328,
+        "bytes_per_pretoken": 5.447
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0157_client/client.ts",
+        "bytes": 81649,
+        "pretokens": 18029,
+        "bytes_per_pretoken": 4.529
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0157_client/client.ts",
+        "bytes": 6681,
+        "pretokens": 1484,
+        "bytes_per_pretoken": 4.502
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0157_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4870,
+      "ratio_monolith_over_spec": 2.849,
+      "ratio_split_client_over_spec": 0.235,
+      "ratio_split_both_over_spec": 0.77,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0157_client/client.ts",
+        "bytes": 6681,
+        "pretokens": 1484,
+        "bytes_per_pretoken": 4.502
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0157_client/client.schemas.ts",
+        "bytes": 3289,
+        "pretokens": 824,
+        "bytes_per_pretoken": 3.992
+      },
+      "pruned_both_pretokens": 2308,
+      "ratio_pruned_both_over_spec": 0.365
+    },
+    {
+      "task_id": "slack:0161",
+      "api": "slack",
+      "index": 161,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0161_spec/filtered_spec.yaml",
+        "bytes": 40425,
+        "pretokens": 7083,
+        "bytes_per_pretoken": 5.707
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0161_client/client.ts",
+        "bytes": 80980,
+        "pretokens": 17848,
+        "bytes_per_pretoken": 4.537
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0161_client/client.ts",
+        "bytes": 5987,
+        "pretokens": 1296,
+        "bytes_per_pretoken": 4.62
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0161_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4682,
+      "ratio_monolith_over_spec": 2.52,
+      "ratio_split_client_over_spec": 0.183,
+      "ratio_split_both_over_spec": 0.661,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0161_client/client.ts",
+        "bytes": 5987,
+        "pretokens": 1296,
+        "bytes_per_pretoken": 4.62
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0161_client/client.schemas.ts",
+        "bytes": 3289,
+        "pretokens": 824,
+        "bytes_per_pretoken": 3.992
+      },
+      "pruned_both_pretokens": 2120,
+      "ratio_pruned_both_over_spec": 0.299
+    },
+    {
+      "task_id": "slack:0163",
+      "api": "slack",
+      "index": 163,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0163_spec/filtered_spec.yaml",
+        "bytes": 29627,
+        "pretokens": 5323,
+        "bytes_per_pretoken": 5.566
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0163_client/client.ts",
+        "bytes": 81262,
+        "pretokens": 17956,
+        "bytes_per_pretoken": 4.526
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0163_client/client.ts",
+        "bytes": 6258,
+        "pretokens": 1401,
+        "bytes_per_pretoken": 4.467
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0163_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4787,
+      "ratio_monolith_over_spec": 3.373,
+      "ratio_split_client_over_spec": 0.263,
+      "ratio_split_both_over_spec": 0.899,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0163_client/client.ts",
+        "bytes": 6258,
+        "pretokens": 1401,
+        "bytes_per_pretoken": 4.467
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0163_client/client.schemas.ts",
+        "bytes": 2087,
+        "pretokens": 508,
+        "bytes_per_pretoken": 4.108
+      },
+      "pruned_both_pretokens": 1909,
+      "ratio_pruned_both_over_spec": 0.359
+    },
+    {
+      "task_id": "slack:0165",
+      "api": "slack",
+      "index": 165,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0165_spec/filtered_spec.yaml",
+        "bytes": 27105,
+        "pretokens": 4714,
+        "bytes_per_pretoken": 5.75
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0165_client/client.ts",
+        "bytes": 80804,
+        "pretokens": 17791,
+        "bytes_per_pretoken": 4.542
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0165_client/client.ts",
+        "bytes": 5800,
+        "pretokens": 1236,
+        "bytes_per_pretoken": 4.693
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0165_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 4622,
+      "ratio_monolith_over_spec": 3.774,
+      "ratio_split_client_over_spec": 0.262,
+      "ratio_split_both_over_spec": 0.98,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0165_client/client.ts",
+        "bytes": 5800,
+        "pretokens": 1236,
+        "bytes_per_pretoken": 4.693
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0165_client/client.schemas.ts",
+        "bytes": 2087,
+        "pretokens": 508,
+        "bytes_per_pretoken": 4.108
+      },
+      "pruned_both_pretokens": 1744,
+      "ratio_pruned_both_over_spec": 0.37
+    },
+    {
+      "task_id": "slack:0169",
+      "api": "slack",
+      "index": 169,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0169_spec/filtered_spec.yaml",
+        "bytes": 22235,
+        "pretokens": 3930,
+        "bytes_per_pretoken": 5.658
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0169_client/client.ts",
+        "bytes": 82447,
+        "pretokens": 18253,
+        "bytes_per_pretoken": 4.517
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0169_client/client.ts",
+        "bytes": 7424,
+        "pretokens": 1694,
+        "bytes_per_pretoken": 4.383
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0169_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5080,
+      "ratio_monolith_over_spec": 4.645,
+      "ratio_split_client_over_spec": 0.431,
+      "ratio_split_both_over_spec": 1.293,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0169_client/client.ts",
+        "bytes": 7424,
+        "pretokens": 1694,
+        "bytes_per_pretoken": 4.383
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0169_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1795,
+      "ratio_pruned_both_over_spec": 0.457
+    },
+    {
+      "task_id": "slack:0172",
+      "api": "slack",
+      "index": 172,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0172_spec/filtered_spec.yaml",
+        "bytes": 18460,
+        "pretokens": 3218,
+        "bytes_per_pretoken": 5.736
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0172_client/client.ts",
+        "bytes": 83036,
+        "pretokens": 18189,
+        "bytes_per_pretoken": 4.565
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0172_client/client.ts",
+        "bytes": 8013,
+        "pretokens": 1630,
+        "bytes_per_pretoken": 4.916
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0172_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5016,
+      "ratio_monolith_over_spec": 5.652,
+      "ratio_split_client_over_spec": 0.507,
+      "ratio_split_both_over_spec": 1.559,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0172_client/client.ts",
+        "bytes": 8013,
+        "pretokens": 1630,
+        "bytes_per_pretoken": 4.916
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0172_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1731,
+      "ratio_pruned_both_over_spec": 0.538
+    },
+    {
+      "task_id": "slack:0173",
+      "api": "slack",
+      "index": 173,
+      "control_spec": {
+        "path": "/home/claude/wapiibench/control/work/slack/0173_spec/filtered_spec.yaml",
+        "bytes": 21437,
+        "pretokens": 3712,
+        "bytes_per_pretoken": 5.775
+      },
+      "treatment_monolith": {
+        "path": "/home/claude/wapiibench/estimate/work/slack/0173_client/client.ts",
+        "bytes": 82987,
+        "pretokens": 18201,
+        "bytes_per_pretoken": 4.559
+      },
+      "split_client": {
+        "path": "/home/claude/wapiibench/split/work/slack/0173_client/client.ts",
+        "bytes": 7964,
+        "pretokens": 1642,
+        "bytes_per_pretoken": 4.85
+      },
+      "split_schemas": {
+        "path": "/home/claude/wapiibench/split/work/slack/0173_client/client.schemas.ts",
+        "bytes": 13697,
+        "pretokens": 3386,
+        "bytes_per_pretoken": 4.045
+      },
+      "split_client_plus_schemas_pretokens": 5028,
+      "ratio_monolith_over_spec": 4.903,
+      "ratio_split_client_over_spec": 0.442,
+      "ratio_split_both_over_spec": 1.355,
+      "pruned_client": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0173_client/client.ts",
+        "bytes": 7964,
+        "pretokens": 1642,
+        "bytes_per_pretoken": 4.85
+      },
+      "pruned_schemas": {
+        "path": "/home/claude/wapiibench/split/work_pruned/slack/0173_client/client.schemas.ts",
+        "bytes": 447,
+        "pretokens": 101,
+        "bytes_per_pretoken": 4.426
+      },
+      "pruned_both_pretokens": 1743,
+      "ratio_pruned_both_over_spec": 0.47
+    }
+  ]
+}
